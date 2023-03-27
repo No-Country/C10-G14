@@ -8,7 +8,7 @@
 		<version>3.0.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.c10-g14</groupId>
+	<groupId>com.G10-G14</groupId>
 	<artifactId>WorldFit</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>WorldFit</name>
