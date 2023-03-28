@@ -39,7 +39,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private List<Role> role;
 
-
     public User(String name, String profileImg) {
         this.name = name;
         this.profileImg = profileImg;
