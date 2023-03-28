@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,8 +21,7 @@ public class Payment {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "PAYMENT_ID")
-    @Enumerated(EnumType.STRING)
-    Long idUser;
+    List<User> idUser;
     @Column(name = "AMOUNT")
     Double amount;
     @Column(name = "PAYMENT_DATE")
