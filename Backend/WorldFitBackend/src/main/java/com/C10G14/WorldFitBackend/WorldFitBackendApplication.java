@@ -1,13 +1,13 @@
-package com.G10G14.WorldFit;
+package com.C10G14.WorldFitBackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WorldFitApplication {
+public class WorldFitBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WorldFitApplication.class, args);
+		SpringApplication.run(WorldFitBackendApplication.class, args);
 	}
 
 }
