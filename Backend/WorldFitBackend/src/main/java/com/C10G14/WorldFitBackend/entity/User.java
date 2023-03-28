@@ -21,6 +21,9 @@ public class User {
     @Column(name = "PROFILE_IMAGE")
     private String profileImg;
 
+    @Column
+    private String email;
+
 
 
 
