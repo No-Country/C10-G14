@@ -3,6 +3,7 @@ package com.C10G14.WorldFitBackend.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "Exercises")
+@NoArgsConstructor
 public class Exercise {
 
     @Id
