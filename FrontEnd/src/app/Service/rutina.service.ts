@@ -10,6 +10,6 @@ export class RutinaService {
   constructor(private http:HttpClient) { }
 
   obtenerDatos():Observable<any>{
-    return this.http.get('./assets/Datos/Plan.json');
+    return this.http.get('./assets/Datos/Plan.Json');
   }
 }

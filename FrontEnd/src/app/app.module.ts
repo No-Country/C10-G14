@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RutinaComponent } from './Components/rutina/rutina.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EjercicioComponent } from './Components/ejercicio/ejercicio.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './Shared/shared/shared.module';
 
@@ -12,7 +11,7 @@ import { SharedModule } from './Shared/shared/shared.module';
   declarations: [
     AppComponent,
     RutinaComponent,
-    EjercicioComponent
+    
   ],
   imports: [
     BrowserModule,
