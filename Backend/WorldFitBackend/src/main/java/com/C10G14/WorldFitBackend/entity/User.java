@@ -1,7 +1,9 @@
 package com.C10G14.WorldFitBackend.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.ZoneId;
@@ -13,6 +15,8 @@ import java.util.List;
 @Setter
 @Table(name = "Users")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
