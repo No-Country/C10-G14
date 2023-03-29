@@ -19,9 +19,9 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "PAYMENT_ID")
-    List<User> idUser;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
     @Column(name = "AMOUNT")
     Double amount;
     @Column(name = "PAYMENT_DATE")
