@@ -2,20 +2,21 @@
 
 Application to manage flow of activities in a gym. The main features it includes are user registration and login, role-based access to resources, custom routines built with predetermined exercises, integrated payment system, and management and visualization tools for administrators.
 
-## The Team
+## Meet the Team
 #### At the front end:
-  - Soledad
-  - Facundo
-  - Juan
-  - Rene
+  - <a href=""> Soledad <a>
+  - <a href=""> Facundo <a>
+  - <a href="https://github.com/jcda23"> Juan <a>
+  - <a href=""> Rene <a>
+  
 #### At the back end:
-  - Diego
-  - Gabriel
-  - Emiliano
+  - <a href="https://github.com/DiegoHaczek"> Diego <a>
+  - <a href="https://github.com/gabrielalfredoboaglio"> Gabriel <a>
+  - <a href="https://github.com/EmilianoEscobedo"> Emiliano <a>
 
 ## GIT STANDARDS
 
-#### FORMAT
+### FORMAT
 - Always create the branch from develop
 - The branch name format is: `name of who is working`.
 - The pull request title format is: `{jiraTicket#}: {jiraTitle}`.
