@@ -36,6 +36,11 @@ public class Routine {
         this.exercises= new HashSet<>();
     }
 
+    public Routine(String title) {
+        this.title = title;
+        this.exercises= new HashSet<>();
+    }
+
     public void addExercise(Exercise exercise, int quantity, int repetitions, int series){
         Exercise_Routine exercise_routine = new Exercise_Routine(exercise,this,quantity,series,repetitions);
         exercises.add(exercise_routine);

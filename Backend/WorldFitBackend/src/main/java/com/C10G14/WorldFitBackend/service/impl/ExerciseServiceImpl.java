@@ -1,9 +1,10 @@
 package com.C10G14.WorldFitBackend.service.impl;
 
 import com.C10G14.WorldFitBackend.dto.ExerciseDto;
+import com.C10G14.WorldFitBackend.entity.Exercise;
+import com.C10G14.WorldFitBackend.mapper.ExerciseDtoMaper;
 import com.C10G14.WorldFitBackend.repository.ExerciseRepository;
 import com.C10G14.WorldFitBackend.service.ExerciseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +13,11 @@ import java.util.List;
 public class ExerciseServiceImpl implements ExerciseService {
 
     private ExerciseRepository exerciseRepository;
+    private ExerciseDtoMaper exerciseDtoMaper;
 
-    @Autowired
-    public ExerciseServiceImpl(ExerciseRepository exerciseRepository) {
+    public ExerciseServiceImpl(ExerciseRepository exerciseRepository, ExerciseDtoMaper exerciseDtoMaper) {
         this.exerciseRepository = exerciseRepository;
+        this.exerciseDtoMaper = exerciseDtoMaper;
     }
 
     @Override
@@ -30,7 +32,9 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public ExerciseDto createExercise(ExerciseDto exerciseDto) {
-        return null;
+        Exercise exercise = exerciseDtoMaper.DtoToEntity(exerciseDto);
+        Exercise newExercise = exerciseRepository.save(exercise);
+        return exerciseDtoMaper.EntityToDto(newExercise);
     }
 
     @Override

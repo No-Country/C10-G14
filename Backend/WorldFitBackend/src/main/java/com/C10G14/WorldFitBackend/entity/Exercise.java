@@ -40,6 +40,12 @@ public class Exercise {
     )
     private Set<Exercise_Routine> routines;
 
+    public Exercise(String title, String media, Unit unit) {
+        this.title = title;
+        this.media = media;
+        this.unit = unit;
+        this.routines = new HashSet<>();
+    }
     public Exercise(Long id, String title, String media, Unit unit) {
         this.id = id;
         this.title = title;
