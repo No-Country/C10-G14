@@ -33,7 +33,7 @@ public class CustomOidcUserService extends OidcUserService {
         GoogleUserInfo googleUserInfo = new GoogleUserInfo(oidcUser.getAttributes());
         System.out.println(oidcUser.getAttributes());
         // see what other data from userRequest or oidcUser you need
-
+// see what other data from userRequest or oidcUser you need
         Optional<User> userOptional = userRepository.findByEmail(googleUserInfo.getEmail());
         if (userOptional.isEmpty()) {
             User user = new User();
