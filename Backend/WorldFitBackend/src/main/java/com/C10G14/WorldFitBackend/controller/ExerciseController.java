@@ -1,5 +1,6 @@
 package com.C10G14.WorldFitBackend.controller;
 
+import com.C10G14.WorldFitBackend.dto.ExerciseDto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
 import com.C10G14.WorldFitBackend.service.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +18,26 @@ public class ExerciseController {
     private ExerciseService exerciseService;
 
     @GetMapping("")
-    public ResponseEntity<List<Exercise>> getAllExercises() {
-        List<Exercise> exercises = exerciseService.getAllExercises();
+    public ResponseEntity<List<ExerciseDto>> getAllExercises() {
+        List<ExerciseDto> exercises = exerciseService.getAllExercises();
         return new ResponseEntity<>(exercises, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Exercise> getExerciseById(@PathVariable Long id) {
-        Exercise exercise = exerciseService.getExerciseById(id);
+    public ResponseEntity<ExerciseDto> getExerciseById(@PathVariable Long id) {
+        ExerciseDto exercise = exerciseService.getExerciseById(id);
         return new ResponseEntity<>(exercise, HttpStatus.OK);
     }
 
     @PostMapping("")
-    public ResponseEntity<Exercise> createExercise(@RequestBody Exercise exercise) {
-        Exercise createdExercise = exerciseService.createExercise(exercise);
+    public ResponseEntity<ExerciseDto> createExercise(@RequestBody ExerciseDto exercise) {
+        ExerciseDto createdExercise = exerciseService.createExercise(exercise);
         return new ResponseEntity<>(createdExercise, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Exercise> updateExercise(@PathVariable Long id, @RequestBody Exercise exercise) {
-        Exercise updatedExercise = exerciseService.updateExercise(id, exercise);
+    public ResponseEntity<ExerciseDto> updateExercise(@PathVariable Long id, @RequestBody ExerciseDto exercise) {
+        ExerciseDto updatedExercise = exerciseService.updateExercise(id, exercise);
         return new ResponseEntity<>(updatedExercise, HttpStatus.OK);
     }
 
