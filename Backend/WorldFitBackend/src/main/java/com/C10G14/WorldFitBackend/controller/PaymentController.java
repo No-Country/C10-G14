@@ -1,3 +1,4 @@
+package com.C10G14.WorldFitBackend.controller;
 
 import com.C10G14.WorldFitBackend.dto.PaymentDto;
 import com.C10G14.WorldFitBackend.entity.Payment;

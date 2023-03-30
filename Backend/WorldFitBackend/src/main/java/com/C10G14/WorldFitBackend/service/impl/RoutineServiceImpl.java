@@ -1,9 +1,10 @@
 package com.C10G14.WorldFitBackend.service.impl;
 
 import com.C10G14.WorldFitBackend.dto.RoutineDto;
+import com.C10G14.WorldFitBackend.entity.Routine;
+import com.C10G14.WorldFitBackend.mapper.RoutineDtoMaper;
 import com.C10G14.WorldFitBackend.repository.RoutineRepository;
 import com.C10G14.WorldFitBackend.service.RoutineService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +13,11 @@ import java.util.List;
 public class RoutineServiceImpl implements RoutineService {
 
     private RoutineRepository routineRepository;
+    private RoutineDtoMaper routineDtoMaper;
 
-    @Autowired
-    public RoutineServiceImpl(RoutineRepository routineRepository) {
+    public RoutineServiceImpl(RoutineRepository routineRepository, RoutineDtoMaper routineDtoMaper) {
         this.routineRepository = routineRepository;
+        this.routineDtoMaper = routineDtoMaper;
     }
 
     @Override
@@ -30,7 +32,9 @@ public class RoutineServiceImpl implements RoutineService {
 
     @Override
     public RoutineDto createRoutine(RoutineDto routineDto) {
-        return null;
+        Routine routine = routineDtoMaper.DtoToEntity(routineDto);
+        Routine newRoutine = routineRepository.save(routine);
+        return routineDtoMaper.EntityToDto(newRoutine);
     }
 
     @Override
