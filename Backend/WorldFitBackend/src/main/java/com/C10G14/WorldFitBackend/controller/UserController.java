@@ -1,5 +1,6 @@
 package com.C10G14.WorldFitBackend.controller;
 
+import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,25 +18,25 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-        User user = userService.getUserById(userId);
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
+        UserDto user = userService.getUserById(userId);
         return ResponseEntity.ok(user);
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User newUser = userService.createUser(user);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user) {
+        UserDto newUser = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User user) {
-        User updatedUser = userService.updateUser(userId, user);
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long userId, @RequestBody UserDto user) {
+        UserDto updatedUser = userService.updateUser(userId, user);
         return ResponseEntity.ok(updatedUser);
     }
 

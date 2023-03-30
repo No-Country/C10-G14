@@ -1,4 +1,5 @@
 
+import com.C10G14.WorldFitBackend.dto.PaymentDto;
 import com.C10G14.WorldFitBackend.entity.Payment;
 import com.C10G14.WorldFitBackend.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +15,20 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("")
-    public ResponseEntity<Payment> addPayment(@RequestBody Payment payment) {
-        Payment newPayment = paymentService.addPayment(payment);
+    public ResponseEntity<PaymentDto> addPayment(@RequestBody PaymentDto payment) {
+        PaymentDto newPayment = paymentService.createPayment(payment);
         return new ResponseEntity<>(newPayment, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Payment> getPaymentById(@PathVariable("id") Long id) {
-        Payment payment = paymentService.getPaymentById(id);
+    public ResponseEntity<PaymentDto> getPaymentById(@PathVariable("id") Long id) {
+        PaymentDto payment = paymentService.getPaymentById(id);
         return new ResponseEntity<>(payment, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Payment> updatePayment(@PathVariable("id") Long id, @RequestBody Payment payment) {
-        Payment updatedPayment = paymentService.updatePayment(id, payment);
+    public ResponseEntity<PaymentDto> updatePayment(@PathVariable("id") Long id, @RequestBody PaymentDto payment) {
+        PaymentDto updatedPayment = paymentService.updatePayment(id, payment);
         return new ResponseEntity<>(updatedPayment, HttpStatus.OK);
     }
 
