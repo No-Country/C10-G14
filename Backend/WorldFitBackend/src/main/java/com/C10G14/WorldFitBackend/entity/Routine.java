@@ -13,7 +13,6 @@ import java.util.Set;
 @Setter
 @Table(name = "Routines")
 @Entity
-
 public class Routine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
