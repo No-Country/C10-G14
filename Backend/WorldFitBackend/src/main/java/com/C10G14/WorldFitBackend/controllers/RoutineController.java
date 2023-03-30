@@ -46,6 +46,3 @@ public class RoutineController {
         routineService.deleteRoutine(id);
         return ResponseEntity.ok().build();
     }
-}
-
-
