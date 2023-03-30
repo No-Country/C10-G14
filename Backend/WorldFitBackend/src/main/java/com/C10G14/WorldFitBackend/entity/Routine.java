@@ -3,7 +3,6 @@ package com.C10G14.WorldFitBackend.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
@@ -14,8 +13,6 @@ import java.util.Set;
 @Setter
 @Table(name = "Routines")
 @Entity
-@NoArgsConstructor
-
 public class Routine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
