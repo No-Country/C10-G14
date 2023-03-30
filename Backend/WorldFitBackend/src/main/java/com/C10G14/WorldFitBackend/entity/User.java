@@ -23,9 +23,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    //@NotBlank
     @Column(name = "NAME")
     private String name;
+
+    @Column(name = "EMAIL")
+    private String email;
 
     @Column(name = "PROFILE_IMAGE")
     private String profileImg;
@@ -33,15 +35,15 @@ public class User {
     @Column(name = "CLIENT_SINCE")
     private String clientSince;
 
-    @PrePersist
-    protected void onCreate() {
-        this.clientSince = ZonedDateTime.now(ZoneId.of("GMT-3")).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-    }
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "ROLE_ID")
     @Enumerated(EnumType.STRING)
     private List<Role> role;
+
+    @PrePersist
+    protected void onCreate() {
+        this.clientSince = ZonedDateTime.now(ZoneId.of("GMT-3")).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    }
 
     public User(String name, String profileImg) {
         this.name = name;
