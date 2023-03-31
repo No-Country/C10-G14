@@ -5,25 +5,21 @@ import { AppComponent } from './app.component';
 import { RutinaComponent } from './Components/rutina/rutina.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedModule } from './Shared/shared/shared.module';
+import { SharedModule } from './Shared/shared.module';
 import { InicioComponent } from './Components/inicio/inicio.component';
+import { LoginComponent } from './auth/pages/login/login.component';
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    RutinaComponent,
-    InicioComponent,
-    
-  ],
+  declarations: [AppComponent, RutinaComponent, InicioComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     SharedModule,
-    HttpClientModule
-
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
