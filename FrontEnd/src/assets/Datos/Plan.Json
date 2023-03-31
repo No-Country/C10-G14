@@ -1,58 +1,100 @@
 {"usuario1": {
-    "id":1,
-    "name": "Manolito",
-    "profileImg": "https://someImage.com",
-    "clientSince":"2023-02-17T19:36:12.390241983",
-    "routines":
-    [
-      {"title":"Lunes",
-        "id": 1,
-        "exercises":[
-          {
-            "id":1,
-            "title": "Press con mancuernas",
-            "description": "lorem ipsum dolor sit amet",
-            "media": "https://someMedia.com",
-            "unit": "kg",
-            "quantity":5,
-            "repetitions":10,
-            "series": 3
-        },
-          {
-            "id": 2,
-            "title": "Bicicleta fija",
-            "description": "lorem ipsum dolor sit amet",
-            "media": "https://someMedia.com",
-            "unit": "kms",
-            "quantity": 5,
-            "repetitions": 1,
-            "series": 1
-        }]
-      },
-      {"title":"Martes",
-      "id": 2,
+  "id":1,
+  "name": "Manolito",
+  "profileImg": "https://someImage.com",
+  "clientSince":"2023-02-17T19:36:12.390241983",
+  "routines":
+  [
+    {"title":"Lunes",
+      "id": 1,
       "exercises":[
         {
           "id":1,
-          "title": "Press con mancuernas",
+          "title": "Abdominales",
           "description": "lorem ipsum dolor sit amet",
           "media": "https://someMedia.com",
           "unit": "kg",
           "quantity":5,
           "repetitions":10,
-          "series": 3
+          "numeroSeries": 8,
+          "series": [{},{},{},{},{},{},{},{}]
+          
+      },
+      {
+        "id":1,
+        "title": "Sentadillas",
+        "description": "lorem ipsum dolor sit amet",
+        "media": "https://someMedia.com",
+        "unit": "kg",
+        "quantity":5,
+        "repetitions":10,
+        "numeroSeries": 5,
+        "series": [{},{},{},{},{}]
         },
         {
-          "id": 3,
-          "title": "Bicicleta fija",
+          "id": 2,
+          "title": "Flexiones",
           "description": "lorem ipsum dolor sit amet",
           "media": "https://someMedia.com",
           "unit": "kms",
           "quantity": 5,
-          "repetitions": 1,
-          "series": 1
-        }]
-      }
-    ]
-  }
-  }
+          "repetitions":10,
+          "numeroSeries": 3,
+          "series": [{},{},{}]
+      }]
+    },
+    {"title":"Martes",
+    "id": 2,
+    "exercises":[
+      {
+        "id":1,
+        "title": "Press con mancuernas",
+        "description": "lorem ipsum dolor sit amet",
+        "media": "https://someMedia.com",
+        "unit": "kg",
+        "quantity":5,
+        "repetitions":10,
+        "numeroSeries": 2,
+        "series": [{},{}]
+      },
+      {
+        "id": 3,
+        "title": "Bicicleta fija",
+        "description": "lorem ipsum dolor sit amet",
+        "media": "https://someMedia.com",
+        "unit": "kms",
+        "quantity": 5,
+        "repetitions": 1,
+        "numeroSeries": 3,
+        "series": [{},{},{}]
+      }]
+    },
+    {"title":"Viernes",
+    "id": 3,
+    "exercises":[
+      {
+        "id":1,
+        "title": "Press con mancuernas",
+        "description": "lorem ipsum dolor sit amet",
+        "media": "https://someMedia.com",
+        "unit": "kg",
+        "quantity":5,
+        "repetitions":10,
+        "numeroSeries": 2,
+        "series": [{},{}]
+      },
+      {
+        "id": 3,
+        "title": "Bicicleta fija",
+        "description": "lorem ipsum dolor sit amet",
+        "media": "https://someMedia.com",
+        "unit": "kms",
+        "quantity": 5,
+        "repetitions": 1,
+        "numeroSeries": 3,
+        "series": [{},{},{}]
+      }]
+    }
+  ]
+}
+}
