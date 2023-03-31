@@ -1,7 +1,30 @@
+
+
 .example-section {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    height: 60px;
-  }
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+.tarjetas-ejercicios {
+  margin-left: -0.7em;
+  margin-right:-0.7em;
   
+}
+
+.acordion-cabecera {
+  background-color: #303030;
+  color: #fff;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 1em;
+  border: 1px solid #FFC107;
+}
+
+.acordion-cabecera:hover {
+  background-color: #e20202;
+  color: #fff;  
+} 

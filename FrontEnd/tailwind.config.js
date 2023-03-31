@@ -14,6 +14,7 @@ module.exports = {
         "first-yellow": "#F9C22E",
         "error-color": "#E01A4F",
         "placeholde-color": "#808080",
+        
       },
     },
   },

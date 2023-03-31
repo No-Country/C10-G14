@@ -6,11 +6,13 @@ import { RutinaComponent } from './Components/rutina/rutina.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './Shared/shared/shared.module';
+import { InicioComponent } from './Components/inicio/inicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RutinaComponent,
+    InicioComponent,
     
   ],
   imports: [

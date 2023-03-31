@@ -7,26 +7,26 @@ import { RutinaService } from 'src/app/Service/rutina.service';
   styleUrls: ['./rutina.component.css']
 })
 export class RutinaComponent implements OnInit  {
-  miRutina:any;
+  rutinasLista:any;
   series:any;
-  numero:number | undefined;
+  ejerciciosLista:any;
+  panelOpenState = false;
   
-constructor(private datosRutina: RutinaService) { 
-  
-
-   }
+constructor(private datosRutina: RutinaService) { }
   ngOnInit(): void {
     this.datosRutina.obtenerDatos().subscribe(data =>{
       console.log(data);
-      this.miRutina=data;
-     console.log(this.miRutina)
+      this.rutinasLista = data.usuario1.routines;      
+      console.log(this.rutinasLista)
+      
     });
     //this.numero = this.miRutina.dia1[0].series;
-   // console.log(this.numero);
+    
     this.series =  [...Array(8)];
     
-   
-
   }
-
-}  
+ 
+  getRutina(rutina:any){
+    this.ejerciciosLista =  rutina;
+  }
+}
