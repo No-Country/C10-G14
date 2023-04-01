@@ -13,7 +13,7 @@ public class Exercise_RoutineDto {
     private long id;
     private String title;
     private String media;
-    private Unit unit;
+    private String unit;
     private int quantity;
     private int series;
     private int repetitions;
@@ -23,7 +23,7 @@ public class Exercise_RoutineDto {
         this.id = exercise.getId();
         this.title = exercise.getTitle();
         this.media = exercise.getMedia();
-        this.unit = exercise.getUnit();
+        this.unit = exercise.getUnit().getName().toString();
         this.quantity = quantity;
         this.series = series;
         this.repetitions = repetitions;

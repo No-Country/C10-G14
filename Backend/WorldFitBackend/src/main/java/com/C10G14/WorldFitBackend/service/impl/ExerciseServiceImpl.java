@@ -8,33 +8,36 @@ import com.C10G14.WorldFitBackend.service.ExerciseService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ExerciseServiceImpl implements ExerciseService {
 
     private ExerciseRepository exerciseRepository;
-    private ExerciseDtoMaper exerciseDtoMaper;
+    private ExerciseDtoMaper DtoMaper;
 
     public ExerciseServiceImpl(ExerciseRepository exerciseRepository, ExerciseDtoMaper exerciseDtoMaper) {
         this.exerciseRepository = exerciseRepository;
-        this.exerciseDtoMaper = exerciseDtoMaper;
+        this.DtoMaper = exerciseDtoMaper;
     }
 
     @Override
     public List<ExerciseDto> getAllExercises() {
-        return null;
+        List<Exercise> exercises = exerciseRepository.findAll();
+        return exercises.stream().map(e -> DtoMaper.EntityToDto(e)).collect(Collectors.toList());
     }
 
     @Override
     public ExerciseDto getExerciseById(Long id) {
-        return null;
+        Exercise exercise = exerciseRepository.findById(id).orElseThrow(()-> new RuntimeException());
+        return DtoMaper.EntityToDto(exercise);
     }
 
     @Override
     public ExerciseDto createExercise(ExerciseDto exerciseDto) {
-        Exercise exercise = exerciseDtoMaper.DtoToEntity(exerciseDto);
+        Exercise exercise = DtoMaper.DtoToEntity(exerciseDto);
         Exercise newExercise = exerciseRepository.save(exercise);
-        return exerciseDtoMaper.EntityToDto(newExercise);
+        return DtoMaper.EntityToDto(newExercise);
     }
 
     @Override
