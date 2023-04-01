@@ -22,6 +22,9 @@ public class Unit {
     public Unit() {
     }
 
+    public Unit(String name){this.name = EUnit.valueOf(name);
+    }
+
     public Unit(EUnit name) {
         this.name = name;
     }
