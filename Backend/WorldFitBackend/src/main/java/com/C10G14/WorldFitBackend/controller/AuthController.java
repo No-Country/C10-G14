@@ -1,18 +1,24 @@
-package security.jwt.auth;
+package com.C10G14.WorldFitBackend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import security.jwt.auth.service.AuthServiceImpl;
+import com.C10G14.WorldFitBackend.security.jwt.auth.AuthenticationRequest;
+import com.C10G14.WorldFitBackend.security.jwt.auth.AuthenticationResponse;
+import com.C10G14.WorldFitBackend.security.jwt.auth.RegisterRequest;
+import com.C10G14.WorldFitBackend.security.jwt.service.AuthServiceImpl;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
-    private AuthServiceImpl authService;
+    @Autowired
+    AuthServiceImpl authService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> registerUser(@RequestBody
@@ -22,7 +28,7 @@ public class AuthController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticateUser(@RequestBody
-                                                                      AuthenticationRequest request) {
+                                                                   AuthenticationRequest request) {
         return ResponseEntity.ok(authService.authenticate(request));
     }
 
