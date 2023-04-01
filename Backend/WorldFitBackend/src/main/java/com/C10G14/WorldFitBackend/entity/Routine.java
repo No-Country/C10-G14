@@ -25,7 +25,7 @@ public class Routine {
     @JsonManagedReference
     @OneToMany(
             mappedBy = "routine",
-            cascade = CascadeType.MERGE,
+            cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     private Set<Exercise_Routine> exercises;
@@ -46,6 +46,21 @@ public class Routine {
         exercises.add(exercise_routine);
         exercise.getRoutines().add(exercise_routine);
     }
+
+    public void removeExercise(Exercise exercise) {
+        exercises.removeIf(e -> e.getRoutine().equals(this) && e.getExercise().equals(exercise));
+    }
+
+    public void updateExercise(Exercise exercise, int quantity,int repetitions, int series) {
+        exercises.stream()
+                .filter(e -> e.getRoutine().equals(this)
+                        && e.getExercise().equals(exercise))
+                .findFirst()
+                .ifPresent(e -> {e.setRepetitions(repetitions);
+                e.setSeries(series);
+                e.setQuantity(quantity);});
+    }
+
 
     @Override
     public String toString() {

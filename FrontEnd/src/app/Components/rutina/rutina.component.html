@@ -1,8 +1,27 @@
-<p>rutina works!</p>
-<section class="example-section" >
-   <h1>{{miRutina.usuario1.routines[0] }} </h1>
-   <div *ngFor="let checkbox of series;"> 
- 
-    </div>    
-   
-</section>
+<mat-accordion > 
+  <mat-expansion-panel class="bg-dark"  *ngFor="let rutina of rutinasLista">
+    <mat-expansion-panel-header class="acordion-cabecera">
+      {{rutina.title}}      
+    </mat-expansion-panel-header>  
+    <div class="tarjetas-ejercicios">
+      <div class="card tarjetas-ejercicios mb-4" *ngFor="let ejercicio of rutina.exercises">
+        <div class="card-header ps-3 p-1">
+        <h3 class="m-0">{{ejercicio.title}}</h3> 
+        <h4 class="mb-0"> SERIES: {{ejercicio.numeroSeries}} X {{ejercicio.repetitions}} {{ejercicio.unit}} </h4> 
+        </div>
+        <div class="card-body pb-0 pt-0">
+          <h5 class="card-title mb-0 ">        
+           
+            
+          </h5>
+          <mat-checkbox *ngFor="let check of ejercicio.series" class="example-margin"></mat-checkbox>      
+          
+        </div>
+      </div>
+    </div> 
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+
+
