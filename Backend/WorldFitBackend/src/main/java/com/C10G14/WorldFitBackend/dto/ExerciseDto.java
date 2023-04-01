@@ -11,11 +11,13 @@ import lombok.NoArgsConstructor;
 public class ExerciseDto {
     private long id;
     private String title;
+    private String description;
     private String media;
     private String unit;
 
-    public ExerciseDto(String title, String media, String unit) {
+    public ExerciseDto(String title, String description, String media, String unit) {
         this.title = title;
+        this.description = description;
         this.media = media;
         this.unit = unit;
     }

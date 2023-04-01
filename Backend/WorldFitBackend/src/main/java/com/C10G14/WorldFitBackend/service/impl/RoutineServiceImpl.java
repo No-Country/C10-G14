@@ -60,7 +60,7 @@ public class RoutineServiceImpl implements RoutineService {
         Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new RuntimeException());
         Exercise exercise = exerciseRepository.findById(e.getExerciseId()).orElseThrow(()-> new ArithmeticException());
 
-        routine.addExercise(exercise,e.getQuantity(),e.getRepetitions(),e.getSeries());
+        routine.addExercise(exercise,e.getQuantity(),e.getSeries(),e.getRepetitions());
         Routine updatedRoutine = routineRepository.save(routine);
 
         return DtoMaper.EntityToDto(updatedRoutine);
@@ -71,7 +71,7 @@ public class RoutineServiceImpl implements RoutineService {
         Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new RuntimeException());
         Exercise exercise = exerciseRepository.findById(e.getExerciseId()).orElseThrow(()-> new RuntimeException());
 
-        routine.updateExercise(exercise,e.getQuantity(),e.getRepetitions(),e.getSeries());
+        routine.updateExercise(exercise,e.getQuantity(),e.getSeries(),e.getRepetitions());
         Routine updatedRoutine = routineRepository.save(routine);
 
         return DtoMaper.EntityToDto(updatedRoutine);

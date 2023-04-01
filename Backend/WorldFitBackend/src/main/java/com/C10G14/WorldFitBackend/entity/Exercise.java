@@ -23,6 +23,9 @@ public class Exercise {
     @Column(name = "TITLE")
     private String title;
 
+    @Column(name = "DESCRIPTION")
+    private String description;
+
     @Column(name = "MEDIA")
     private String media;
 
@@ -41,8 +44,9 @@ public class Exercise {
     )
     private Set<Exercise_Routine> routines;
 
-    public Exercise(String title, String media, Unit unit) {
+    public Exercise(String title, String description, String media, Unit unit) {
         this.title = title;
+        this.description = description;
         this.media = media;
         this.unit = unit;
         this.routines = new HashSet<>();

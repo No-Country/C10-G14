@@ -29,6 +29,15 @@ public class ExerciseController {
         return new ResponseEntity<>(exercise, HttpStatus.OK);
     }
 
+    /*
+    Body Ej:
+    {
+    "title" : "Press Banca",
+    "description" : "descripcion del ejercicio",
+    "media" : "url imagen",
+    "unit" : "kg"
+    }
+    */
     @PostMapping("")
     public ResponseEntity<ExerciseDto> createExercise(@RequestBody ExerciseDto exercise) {
         ExerciseDto createdExercise = exerciseService.createExercise(exercise);
