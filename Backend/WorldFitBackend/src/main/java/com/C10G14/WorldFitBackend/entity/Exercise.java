@@ -27,7 +27,8 @@ public class Exercise {
     private String media;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER,
+               cascade = CascadeType.ALL)
     @JoinColumn(name = "EXERCISE_UNIT")
     @Enumerated(EnumType.STRING)
     private Unit unit;
