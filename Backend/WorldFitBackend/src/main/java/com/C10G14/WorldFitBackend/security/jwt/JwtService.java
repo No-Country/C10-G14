@@ -1,22 +1,19 @@
-package security.jwt;
+package com.C10G14.WorldFitBackend.security.jwt;
 
-import com.C10G14.WorldFitBackend.entity.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.Authentication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.security.Key;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -25,10 +22,14 @@ public class JwtService {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
 
-    private static final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.RS256);
+    private static final String SECRET_KEY = "5266556A586E3272357538782F413F4428472D4B6150645367566B5970337336763979244226452948404D6251655468576D5A7134743777217A25432A462D4A";
 
     private static final Long jwtExpirationMs = 28800000L;
 
+    private Key getSignInKey(){
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
     public String generateToken(UserDetails userDetails
                                 ) {
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
@@ -44,7 +45,7 @@ public class JwtService {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(key)
+                .signWith(getSignInKey())
                 .compact();
     }
 
@@ -60,7 +61,7 @@ public class JwtService {
     private Claims extractAllClaims (String token){
         return Jwts
                 .parserBuilder()
-                .setSigningKey(key)
+                .setSigningKey(getSignInKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();

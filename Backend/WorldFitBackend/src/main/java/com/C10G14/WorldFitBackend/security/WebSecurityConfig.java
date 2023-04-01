@@ -1,4 +1,6 @@
-package security;
+package com.C10G14.WorldFitBackend.security;
+import com.C10G14.WorldFitBackend.security.jwt.JwtAuthenticationFilter;
+import com.C10G14.WorldFitBackend.security.oauth2.JwtToUserConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +15,6 @@ import org.springframework.security.oauth2.server.resource.web.access.BearerToke
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
-import security.jwt.JwtAuthenticationFilter;
-import security.oauth2.JwtToUserConverter;
 
 
 import java.util.*;
@@ -28,8 +28,10 @@ public class WebSecurityConfig {
     @Autowired
     JwtToUserConverter jwtToUserConverter;
 
-    private final JwtAuthenticationFilter jwtAuthFilter;
-    private final AuthenticationProvider authenticationProvider;
+    @Autowired
+    JwtAuthenticationFilter jwtAuthFilter;
+    @Autowired
+    AuthenticationProvider authenticationProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

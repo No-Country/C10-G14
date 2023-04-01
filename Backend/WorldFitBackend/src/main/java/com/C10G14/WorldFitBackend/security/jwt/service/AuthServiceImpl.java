@@ -1,19 +1,21 @@
-package security.jwt.auth.service;
+package com.C10G14.WorldFitBackend.security.jwt.service;
 
+import com.C10G14.WorldFitBackend.enumeration.ERole;
+import com.C10G14.WorldFitBackend.security.jwt.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import security.jwt.auth.AuthenticationRequest;
-import security.jwt.auth.AuthenticationResponse;
-import security.jwt.auth.RegisterRequest;
+import com.C10G14.WorldFitBackend.security.jwt.auth.AuthenticationRequest;
+import com.C10G14.WorldFitBackend.security.jwt.auth.AuthenticationResponse;
+import com.C10G14.WorldFitBackend.security.jwt.auth.RegisterRequest;
 import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import security.jwt.JwtService;
+import com.C10G14.WorldFitBackend.security.jwt.JwtService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +29,20 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private RoleRepository roleRepository;
+
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public PasswordEncoder passwordEncoder;
 
     @Autowired
     private JwtService jwtService;
 
-    private final AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
         List<Role> roles = new ArrayList<Role>();
-        Role userRole = roleRepository.findByName("USER")
+        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                 .orElseThrow(()-> new RuntimeException("Role USER not found"));
         roles.add(userRole);
 

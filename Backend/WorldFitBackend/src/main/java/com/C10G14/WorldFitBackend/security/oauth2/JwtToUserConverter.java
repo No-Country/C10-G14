@@ -1,4 +1,4 @@
-package security.oauth2;
+package com.C10G14.WorldFitBackend.security.oauth2;
 
 
 import com.C10G14.WorldFitBackend.entity.User;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtToUserConverter implements Converter<Jwt, UsernamePasswordAuthenticationToken> {
 
-    @Autowired
+
     private User user;
 
     @Override

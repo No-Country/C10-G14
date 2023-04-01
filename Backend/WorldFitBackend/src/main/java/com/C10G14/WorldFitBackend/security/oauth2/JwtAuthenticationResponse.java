@@ -1,4 +1,4 @@
-package security.oauth2;
+package com.C10G14.WorldFitBackend.security.oauth2;
 
 public class JwtAuthenticationResponse {
     private String accessToken;

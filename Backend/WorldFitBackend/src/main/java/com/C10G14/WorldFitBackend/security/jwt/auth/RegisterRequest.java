@@ -1,4 +1,4 @@
-package security.jwt.auth;
+package com.C10G14.WorldFitBackend.security.jwt.auth;
 
 import lombok.*;
 
