@@ -1,4 +1,4 @@
-package security;
+package security.oauth2;
 
 public class JwtAuthenticationResponse {
     private String accessToken;

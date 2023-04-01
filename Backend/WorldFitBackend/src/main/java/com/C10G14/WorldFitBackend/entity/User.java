@@ -15,17 +15,19 @@ import java.util.List;
 
 @Getter
 @Setter
-@Table(name = "Users")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@RequiredArgsConstructor
-public class User implements UserDetails {
+@Table(name = "Users")
+public class User  implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "USERNAME")
-    private String username;
+    @Column(name = "EMAIL")
+    private String email;
 
     @Column(name = "PASSWORD")
     private String password;
@@ -54,6 +56,16 @@ public class User implements UserDetails {
             authorities.add(new SimpleGrantedAuthority(role.getName().name()));
         }
         return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     @Override

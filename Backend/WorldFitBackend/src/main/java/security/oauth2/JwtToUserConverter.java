@@ -1,4 +1,4 @@
-package security;
+package security.oauth2;
 
 
 import com.C10G14.WorldFitBackend.entity.User;
