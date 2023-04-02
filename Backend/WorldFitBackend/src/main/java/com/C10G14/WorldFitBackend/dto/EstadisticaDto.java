@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EstadisticasDto {
+public class EstadisticaDto {
 
     private Long id;
     private String fecha;
