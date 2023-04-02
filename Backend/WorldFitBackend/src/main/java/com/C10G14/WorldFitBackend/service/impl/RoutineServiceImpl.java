@@ -36,7 +36,8 @@ public class RoutineServiceImpl implements RoutineService {
 
     @Override
     public RoutineDto getRoutineById(long id) {
-        return null;
+        Routine routine = routineRepository.findById(id).orElseThrow(()-> new RuntimeException("Routine not found"));
+        return DtoMaper.EntityToDto(routine);
     }
 
     @Override
@@ -48,17 +49,23 @@ public class RoutineServiceImpl implements RoutineService {
 
     @Override
     public RoutineDto updateRoutine(long id, RoutineDto routineDto) {
-        return null;
+        Routine routine = routineRepository.findById(id).orElseThrow(()-> new RuntimeException("Routine not found"));
+
+        routine.setTitle(routineDto.getTitle());
+        Routine updatedRoutine = routineRepository.save(routine);
+
+        return DtoMaper.EntityToDto(updatedRoutine);
     }
 
     @Override
     public void deleteRoutine(long id) {
-
+        Routine routine = routineRepository.findById(id).orElseThrow(()-> new RuntimeException("Routine not found"));
+        routineRepository.delete(routine);
     }
 
     public RoutineDto addExercise(long routineId, Exercise_RoutineRequestDto e) {
-        Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new RuntimeException());
-        Exercise exercise = exerciseRepository.findById(e.getExerciseId()).orElseThrow(()-> new ArithmeticException());
+        Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new RuntimeException("Routine not found"));
+        Exercise exercise = exerciseRepository.findById(e.getExerciseId()).orElseThrow(()-> new RuntimeException("Exercise not found"));
 
         routine.addExercise(exercise,e.getQuantity(),e.getSeries(),e.getRepetitions());
         Routine updatedRoutine = routineRepository.save(routine);
@@ -68,8 +75,8 @@ public class RoutineServiceImpl implements RoutineService {
 
     @Override
     public RoutineDto updateExercise(long routineId, Exercise_RoutineRequestDto e) {
-        Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new RuntimeException());
-        Exercise exercise = exerciseRepository.findById(e.getExerciseId()).orElseThrow(()-> new RuntimeException());
+        Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new RuntimeException("Routine not found"));
+        Exercise exercise = exerciseRepository.findById(e.getExerciseId()).orElseThrow(()-> new RuntimeException("Exercise not found"));
 
         routine.updateExercise(exercise,e.getQuantity(),e.getSeries(),e.getRepetitions());
         Routine updatedRoutine = routineRepository.save(routine);
@@ -79,8 +86,8 @@ public class RoutineServiceImpl implements RoutineService {
 
     @Override
     public RoutineDto removeExercise(long routineId, long exerciseId) {
-        Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new RuntimeException());
-        Exercise exercise = exerciseRepository.findById(exerciseId).orElseThrow(()-> new RuntimeException());
+        Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new RuntimeException("Routine not found"));
+        Exercise exercise = exerciseRepository.findById(exerciseId).orElseThrow(()-> new RuntimeException("Exercise not found"));
 
         routine.removeExercise(exercise);
         Routine updatedRoutine = routineRepository.save(routine);

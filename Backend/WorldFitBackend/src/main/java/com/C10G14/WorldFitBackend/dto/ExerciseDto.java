@@ -1,6 +1,7 @@
 package com.C10G14.WorldFitBackend.dto;
 
 import com.C10G14.WorldFitBackend.entity.Unit;
+import com.C10G14.WorldFitBackend.enumeration.EUnit;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,9 @@ public class ExerciseDto {
         this.description = description;
         this.media = media;
         this.unit = unit;
+    }
+
+    public EUnit unitToEUnit (){
+        return (this.unit.equals("kms"))? EUnit.kms : EUnit.kg;
     }
 }

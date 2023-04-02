@@ -4,10 +4,17 @@ import com.C10G14.WorldFitBackend.dto.ExerciseDto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
 import com.C10G14.WorldFitBackend.entity.Unit;
 import com.C10G14.WorldFitBackend.enumeration.EUnit;
+import com.C10G14.WorldFitBackend.repository.UnitRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ExerciseDtoMaper{
+
+    private UnitRepository unitRepository;
+
+    public ExerciseDtoMaper(UnitRepository unitRepository) {
+        this.unitRepository = unitRepository;
+    }
 
     public ExerciseDto EntityToDto (Exercise exercise) {
         return new ExerciseDto(
@@ -24,7 +31,7 @@ public class ExerciseDtoMaper{
                 exerciseDto.getTitle(),
                 exerciseDto.getDescription(),
                 exerciseDto.getMedia(),
-                new Unit(EUnit.valueOf(exerciseDto.getUnit()))// todo: cambiar implementacion
+                unitRepository.findByName(exerciseDto.unitToEUnit()).orElseThrow(()-> new RuntimeException("Unit not Found"))
         );
     }
 

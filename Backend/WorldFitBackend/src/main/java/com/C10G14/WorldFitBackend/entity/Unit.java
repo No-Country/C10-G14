@@ -26,7 +26,6 @@ public class Unit {
         this.name = EUnit.valueOf(name);
         this.id = (name.equals("kms")? 1 : 2);
     }
-
     public Unit(EUnit name) {
         this.name = name;
     }
