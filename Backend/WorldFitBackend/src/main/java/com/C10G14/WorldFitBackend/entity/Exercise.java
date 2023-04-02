@@ -31,7 +31,7 @@ public class Exercise {
 
 
     @ManyToOne(fetch = FetchType.EAGER,
-               cascade = CascadeType.ALL)
+               cascade = CascadeType.PERSIST)
     @JoinColumn(name = "EXERCISE_UNIT")
     @Enumerated(EnumType.STRING)
     private Unit unit;
