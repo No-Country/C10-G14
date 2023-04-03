@@ -1,5 +1,8 @@
 package com.C10G14.WorldFitBackend.security.jwt;
 
+import com.C10G14.WorldFitBackend.security.oauth2.OAuthJwtAuthenticationConverter;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -27,6 +31,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    OAuthJwtAuthenticationConverter jwtToUserConverter;
+
 //    private static final Logger logger = LoggerFactory.getLogger(JwtAuthorizationFilter.class);
 
     @Override
@@ -38,13 +45,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
+        String isOauth = null;
+//        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
         jwt = authHeader.substring(7);
         userEmail =  jwtService.extractUsername(jwt);
+        try{
+            DecodedJWT OauthJwt = JWT.decode(jwt);
+            isOauth = OauthJwt.getKeyId();
+            System.out.println(isOauth);
+            UsernamePasswordAuthenticationToken oauthToken = (UsernamePasswordAuthenticationToken) jwtToUserConverter.convert((Jwt) OauthJwt);
+            oauthToken.setDetails(
+                    new WebAuthenticationDetailsSource().buildDetails(request)
+            );
+            SecurityContextHolder.getContext().setAuthentication(oauthToken);
+        } catch (Exception e)
+        {
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
+            System.out.println("ENTRE");
             UserDetails user = this.userDetailsService.loadUserByUsername(userEmail);
             if (jwtService.isTokenValid(jwt, user)){
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
@@ -57,6 +77,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 );
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
+        }
         }
         filterChain.doFilter(request, response);
     }

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtToUserConverter implements Converter<Jwt, UsernamePasswordAuthenticationToken> {
 
-
     private User user;
 
     @Override

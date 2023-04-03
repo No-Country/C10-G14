@@ -1,14 +1,14 @@
-package com.C10G14.WorldFitBackend.security.jwt.service;
+package com.C10G14.WorldFitBackend.service.impl;
 
 import com.C10G14.WorldFitBackend.enumeration.ERole;
-import com.C10G14.WorldFitBackend.security.jwt.service.AuthService;
+import com.C10G14.WorldFitBackend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.C10G14.WorldFitBackend.security.jwt.auth.AuthenticationRequest;
-import com.C10G14.WorldFitBackend.security.jwt.auth.AuthenticationResponse;
-import com.C10G14.WorldFitBackend.security.jwt.auth.RegisterRequest;
+import com.C10G14.WorldFitBackend.dto.AuthenticationRequestDto;
+import com.C10G14.WorldFitBackend.dto.AuthenticationResponseDto;
+import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
 import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
@@ -31,16 +31,18 @@ public class AuthServiceImpl implements AuthService {
     private RoleRepository roleRepository;
 
     @Autowired
-    public PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private JwtService jwtService;
-
     @Autowired
     private AuthenticationManager authenticationManager;
 
+
+
+
     @Override
-    public AuthenticationResponse register(RegisterRequest request) {
+    public AuthenticationResponseDto register(RegisterRequestDto request) {
         List<Role> roles = new ArrayList<Role>();
         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                 .orElseThrow(()-> new RuntimeException("Role USER not found"));
@@ -54,13 +56,13 @@ public class AuthServiceImpl implements AuthService {
                 .build();
         userrepository.save(newUser);
         String jwtToken = jwtService.generateToken(newUser);
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+        AuthenticationResponseDto authResponse = new AuthenticationResponseDto();
+        authResponse.setToken(jwtToken);
+        return authResponse ;
     }
 
     @Override
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponseDto authenticate(AuthenticationRequestDto request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -70,8 +72,8 @@ public class AuthServiceImpl implements AuthService {
         User user = userrepository.findByEmail(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("User already authenticated"));
         String jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+        AuthenticationResponseDto authResponse = new AuthenticationResponseDto();
+        authResponse.setToken(jwtToken);
+        return authResponse;
     }
 }
