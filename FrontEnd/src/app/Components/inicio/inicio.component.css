@@ -1,4 +1,15 @@
 .example-spacer {
     flex: 1 1 auto;
   }
-  
+
+
+.mat-tab-label {
+  font-family: 'Comfortaa' !important;
+  font-size: 3em;
+}
+
+
+.fondo-rutina {
+    height: 100vh;
+    background-color: #FFC107 !important;
+  }

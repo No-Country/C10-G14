@@ -1,19 +1,19 @@
 
-  
     <p>
-        <mat-toolbar color="primary">
+        <mat-toolbar color="accent">
             <span>WorldFit</span>
         <span class="example-spacer"></span>
+       
+
         
-       <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+       <button mat-icon-button class="example-icon"  matTooltip="Info about the action" aria-label="Example icon-button with menu icon">
         <mat-icon>exit_to_app</mat-icon>
       </button>
-    <span>Cerrar Session</span>
      
       </mat-toolbar>
       </p>
     <mat-tab-group >
-        <mat-tab label="Mis rutinas"> <app-rutina></app-rutina> </mat-tab>
+        <mat-tab label="Mis rutinas" ><div class="fondo-rutina"><app-rutina></app-rutina></div>  </mat-tab>
         <mat-tab label="Mi Perfil"> Content 2 </mat-tab>
       </mat-tab-group>
   
