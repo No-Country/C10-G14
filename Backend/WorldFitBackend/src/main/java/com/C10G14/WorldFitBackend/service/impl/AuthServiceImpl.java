@@ -6,6 +6,7 @@ import com.C10G14.WorldFitBackend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.C10G14.WorldFitBackend.dto.AuthenticationRequestDto;
 import com.C10G14.WorldFitBackend.dto.AuthenticationResponseDto;
@@ -56,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
                 )
         );
         User user = userrepository.findByEmail(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("Error: Username not found"));
         String jwtToken = jwtService.generateToken(user);
         AuthenticationResponseDto authResponse = new AuthenticationResponseDto();
         authResponse.setToken(jwtToken);

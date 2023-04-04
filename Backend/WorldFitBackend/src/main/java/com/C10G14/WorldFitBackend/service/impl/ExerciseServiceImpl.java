@@ -2,6 +2,7 @@ package com.C10G14.WorldFitBackend.service.impl;
 
 import com.C10G14.WorldFitBackend.dto.ExerciseDto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
+import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.mapper.ExerciseDtoMaper;
 import com.C10G14.WorldFitBackend.repository.ExerciseRepository;
 import com.C10G14.WorldFitBackend.repository.UnitRepository;
@@ -32,7 +33,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public ExerciseDto getExerciseById(Long id) {
-        Exercise exercise = exerciseRepository.findById(id).orElseThrow(()-> new RuntimeException("Exercise not found"));
+        Exercise exercise = exerciseRepository.findById(id).orElseThrow(()-> new NotFoundException("Exercise not found"));
         return DtoMaper.EntityToDto(exercise);
     }
 
@@ -45,18 +46,18 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public ExerciseDto updateExercise(Long id, ExerciseDto exerciseDto) {
-        Exercise exercise = exerciseRepository.findById(id).orElseThrow(() -> new RuntimeException("Exercise not found"));
+        Exercise exercise = exerciseRepository.findById(id).orElseThrow(() -> new NotFoundException("Exercise not found"));
         exercise.setTitle(exerciseDto.getTitle());
         exercise.setDescription(exercise.getDescription());
         exercise.setMedia(exercise.getMedia());
-        exercise.setUnit(unitRepository.findByName(exerciseDto.unitToEUnit()).orElseThrow(() -> new RuntimeException("Unit not found")));
+        exercise.setUnit(unitRepository.findByName(exerciseDto.unitToEUnit()).orElseThrow(() -> new NotFoundException("Unit not found")));
         Exercise updatedExercise = exerciseRepository.save(exercise);
         return DtoMaper.EntityToDto(updatedExercise);
     }
 
     @Override
     public void deleteExercise(Long id) {
-        Exercise exercise = exerciseRepository.findById(id).orElseThrow(()-> new RuntimeException("Exercise not found"));
+        Exercise exercise = exerciseRepository.findById(id).orElseThrow(()-> new NotFoundException("Exercise not found"));
         exerciseRepository.delete(exercise);
     }
 }
