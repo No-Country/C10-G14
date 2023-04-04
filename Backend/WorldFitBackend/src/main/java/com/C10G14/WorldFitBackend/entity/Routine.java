@@ -12,10 +12,9 @@ import java.util.Set;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "Routines")
 @Entity
-@NoArgsConstructor
-
 public class Routine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
