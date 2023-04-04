@@ -1,5 +1,6 @@
 package com.C10G14.WorldFitBackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -50,10 +52,27 @@ public class User  implements UserDetails{
     @Column(name = "AGE")
     private String age;
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Set<Routine> routines;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "ROLE_ID")
     @Enumerated(EnumType.STRING)
     private List<Role> role;
+
+    public void addRoutine(Routine routine) {
+        routines.add(routine);
+        routine.setUser(this);
+    }
+
+    public void removeRoutine(Routine routine) {
+        routines.remove(routine);
+        routine.setUser(null);
+    }
+
     @PrePersist
     protected void onCreate() {
         this.clientSince = ZonedDateTime.now(ZoneId.of("GMT-3")).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
@@ -69,6 +88,7 @@ public class User  implements UserDetails{
         return authorities;
     }
 
+    // USER DETAILS
     @Override
     public String getPassword() {
         return password;
