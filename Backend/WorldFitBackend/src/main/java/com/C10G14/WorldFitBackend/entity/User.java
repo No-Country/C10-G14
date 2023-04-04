@@ -38,11 +38,22 @@ public class User  implements UserDetails{
     @Column(name = "CLIENT_SINCE")
     private String clientSince;
 
+    @Column(name = "WEIGHT")
+    private String weight;
+
+    @Column(name = "HEIGHT")
+    private String height;
+
+    @Column(name = "SEX")
+    private String sex;
+
+    @Column(name = "AGE")
+    private String age;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "ROLE_ID")
     @Enumerated(EnumType.STRING)
     private List<Role> role;
-
     @PrePersist
     protected void onCreate() {
         this.clientSince = ZonedDateTime.now(ZoneId.of("GMT-3")).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
