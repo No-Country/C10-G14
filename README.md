@@ -4,10 +4,9 @@ Application to manage flow of activities in a gym. The main features it includes
 
 ## Meet the Team
 #### At the front end:
-  - <a href=""> Soledad <a>
-  - <a href=""> Facundo <a>
+  - <a href="https://github.com/solmicielo"> Soledad <a>
+  - <a href="https://github.com/FacuIbars"> Facundo <a>
   - <a href="https://github.com/jcda23"> Juan <a>
-  - <a href=""> Rene <a>
   
 #### At the back end:
   - <a href="https://github.com/DiegoHaczek"> Diego <a>
@@ -18,9 +17,12 @@ Application to manage flow of activities in a gym. The main features it includes
 
 ### FORMAT
 - Always create the branch from develop
-- The branch name format is: `name of who is working`.
-- The pull request title format is: `{jiraTicket#}: {jiraTitle}`.
-- The commits format is: `{jiraTicket#}: {commitDescription}`. Small commits are a nice to have.
+- The branch name format is: `feature/{jiraTicket#}`.
+  - I.e: `feature/SP2-WF70`<br><br>
+- The pull request title format is: `{jiraTicket#}: {jiraTitle}`. 
+  - I.e: `SP2-WF70: Agregar a entidad usuario PESO, ALTURA, SEXO y EDAD`.<br><br>
+- The commits format is: `{jiraTicket#}: {commitDescription}`, Small commits are a nice to have. <br>
+  - I.e: `SP2-WF70: Construido authDtoMapper`.<br><br>
 - The pull request has to contain only the changes related to the scope defined in the ticket.
 - Pull request should always be from your current branch to develop.
 
