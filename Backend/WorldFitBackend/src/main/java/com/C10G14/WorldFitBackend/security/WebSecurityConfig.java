@@ -1,6 +1,7 @@
 package com.C10G14.WorldFitBackend.security;
 import com.C10G14.WorldFitBackend.security.jwt.JwtAuthenticationFilter;
 import com.C10G14.WorldFitBackend.security.oauth2.JwtToUserConverter;
+import com.C10G14.WorldFitBackend.security.oauth2.OAuthJwtAuthenticationConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.jwt.JwtDecoders;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationEntryPoint;
 import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.web.SecurityFilterChain;
@@ -26,7 +29,7 @@ import java.util.*;
 public class WebSecurityConfig {
 
     @Autowired
-    JwtToUserConverter jwtToUserConverter;
+    OAuthJwtAuthenticationConverter jwtToUserConverter;
 
     @Autowired
     JwtAuthenticationFilter jwtAuthFilter;
@@ -46,16 +49,17 @@ public class WebSecurityConfig {
                 })
                 .and()
                 .authorizeHttpRequests()
-                        .requestMatchers("/api/v1/auth/*").permitAll()
-                        .requestMatchers("/v3/api-docs/**").permitAll()
-                        .requestMatchers("/swagger-ui/**").permitAll()
-                        .anyRequest().authenticated()
+                .requestMatchers("/api/v1/auth/*").permitAll()
+                .requestMatchers("/v3/api-docs/**").permitAll()
+                .requestMatchers("/swagger-ui/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .oauth2ResourceServer((oauth2) ->
-                        oauth2.jwt((jwt) -> jwt.jwtAuthenticationConverter(jwtToUserConverter))
-                )
+                .oauth2ResourceServer().jwt()
+                .jwtAuthenticationConverter(jwtToUserConverter)
+                .and()
+                .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling((exceptions) -> exceptions
@@ -65,5 +69,4 @@ public class WebSecurityConfig {
 
         return http.build();
     }
-
 }
