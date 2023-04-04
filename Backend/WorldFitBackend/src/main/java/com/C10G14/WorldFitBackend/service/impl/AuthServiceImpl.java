@@ -1,10 +1,12 @@
 package com.C10G14.WorldFitBackend.service.impl;
 
 import com.C10G14.WorldFitBackend.enumeration.ERole;
+import com.C10G14.WorldFitBackend.mapper.AuthDtoMapper;
 import com.C10G14.WorldFitBackend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.C10G14.WorldFitBackend.dto.AuthenticationRequestDto;
 import com.C10G14.WorldFitBackend.dto.AuthenticationResponseDto;
@@ -28,32 +30,17 @@ public class AuthServiceImpl implements AuthService {
     private UserRepository userrepository;
 
     @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private JwtService jwtService;
+    
     @Autowired
     private AuthenticationManager authenticationManager;
-
-
-
+    
+    @Autowired
+    private AuthDtoMapper authMapper;
 
     @Override
     public AuthenticationResponseDto register(RegisterRequestDto request) {
-        List<Role> roles = new ArrayList<Role>();
-        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                .orElseThrow(()-> new RuntimeException("Role USER not found"));
-        roles.add(userRole);
-
-        User newUser = User.builder()
-                .email(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .profileImg(request.getProfilePicture())
-                .role(roles)
-                .build();
+        User newUser = authMapper.requestToEntity(request);
         userrepository.save(newUser);
         String jwtToken = jwtService.generateToken(newUser);
         AuthenticationResponseDto authResponse = new AuthenticationResponseDto();
@@ -70,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
                 )
         );
         User user = userrepository.findByEmail(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("User already authenticated"));
+                .orElseThrow(() -> new UsernameNotFoundException("Error: Username not found"));
         String jwtToken = jwtService.generateToken(user);
         AuthenticationResponseDto authResponse = new AuthenticationResponseDto();
         authResponse.setToken(jwtToken);

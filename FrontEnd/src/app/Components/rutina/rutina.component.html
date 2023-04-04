@@ -1,18 +1,24 @@
-<mat-accordion > 
-  <mat-expansion-panel class="bg-dark"  *ngFor="let rutina of rutinasLista">
+<mat-accordion  > 
+  <mat-expansion-panel   *ngFor="let rutina of rutinasLista">
     <mat-expansion-panel-header class="acordion-cabecera">
       {{rutina.title}}      
     </mat-expansion-panel-header>  
     <div class="tarjetas-ejercicios">
-      <div class="card tarjetas-ejercicios mb-4" *ngFor="let ejercicio of rutina.exercises">
+      <div class="card  mb-4 mt-3" *ngFor="let ejercicio of rutina.exercises">
         <div class="card-header ps-3 p-1">
-        <h3 class="m-0">{{ejercicio.title}}</h3> 
-        <h4 class="mb-0"> SERIES: {{ejercicio.numeroSeries}} X {{ejercicio.repetitions}} {{ejercicio.unit}} </h4> 
+        <h3 class="mt-1">{{ejercicio.title}}</h3> 
+        <div class="d-flex justify-content">
+          <h4 class="mt-1 me-3 " > 
+            Series: {{ejercicio.numeroSeries}} X {{ejercicio.repetitions}}           
+          </h4>
+          <h4 class="mt-1">|</h4> 
+          <h4 class="mb-0 ms-3 mt-1">{{ejercicio.type}} {{ejercicio.quantity}} {{ejercicio.unit}}</h4>   
         </div>
-        <div class="card-body pb-0 pt-0">
-          <h5 class="card-title mb-0 ">        
-           
-            
+        
+        </div>
+        <div class="card-body p-0 ">
+          <h5 class="card-title mb-0 ">      
+          
           </h5>
           <mat-checkbox *ngFor="let check of ejercicio.series" class="example-margin"></mat-checkbox>      
           

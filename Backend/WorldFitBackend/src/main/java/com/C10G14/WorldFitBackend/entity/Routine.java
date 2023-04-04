@@ -32,10 +32,25 @@ public class Routine {
     )
     private Set<Exercise_Routine> exercises;
 
-    public Routine(Long id, String title) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "ID", nullable = false)
+    private User user;
+
+    public Routine(Long id, String title, User user) {
         this.id = id;
         this.title = title;
-        this.exercises= new HashSet<>();
+        this.user = user;
+        this.exercises = new HashSet<>();
+    }
+
+    public Routine(String title, User user) {
+        this.title = title;
+        this.user = user;
+        this.exercises = new HashSet<>();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Routine(String title) {
@@ -61,16 +76,6 @@ public class Routine {
                 .ifPresent(e -> {e.setRepetitions(repetitions);
                 e.setSeries(series);
                 e.setQuantity(quantity);});
-    }
-
-
-    @Override
-    public String toString() {
-        return "Routine{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", exercises=" + exercises +
-                '}';
     }
 }
 
