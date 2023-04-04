@@ -1,5 +1,8 @@
 package com.C10G14.WorldFitBackend.controller;
 
+import com.C10G14.WorldFitBackend.dto.ExerciseDto;
+import com.C10G14.WorldFitBackend.dto.Exercise_RoutineDto;
+import com.C10G14.WorldFitBackend.dto.Exercise_RoutineRequestDto;
 import com.C10G14.WorldFitBackend.dto.RoutineDto;
 import com.C10G14.WorldFitBackend.entity.Routine;
 import com.C10G14.WorldFitBackend.service.RoutineService;
@@ -8,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.HTML;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/routines")
@@ -46,4 +51,44 @@ public class RoutineController {
     public ResponseEntity<Void> deleteRoutine(@PathVariable Long id) {
         routineService.deleteRoutine(id);
         return ResponseEntity.ok().build();
-    }}
+    }
+
+        /*
+       Body Ej (POST, PUT):
+       {
+       "exerciseId" : 1,
+       "quantity" : 10,
+       "series" : 5,
+       "repetitions" : 5
+       }
+        */
+    @PostMapping("/{id}/exercises")
+    public ResponseEntity<RoutineDto> addExercise(@PathVariable("id") long routineId,
+                                                  @RequestBody Exercise_RoutineRequestDto exercise) {
+        RoutineDto updatedRoutine = routineService.addExercise(routineId,exercise);
+        return new ResponseEntity<>(updatedRoutine, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/exercises")
+    public ResponseEntity<RoutineDto> updateExercise(@PathVariable("id") long routineId,
+                                                  @RequestBody Exercise_RoutineRequestDto exercise) {
+        RoutineDto updatedRoutine = routineService.updateExercise(routineId,exercise);
+        return new ResponseEntity<>(updatedRoutine, HttpStatus.OK);
+    }
+
+    /*
+    Body Ej:
+    {
+    "exerciseId" : 1
+    }
+     */
+    @DeleteMapping("/{id}/exercises")
+    public ResponseEntity<RoutineDto> removeExercise(@PathVariable("id") long routineId,
+                                                  @RequestBody Map <String,Long> exerciseId) {
+        RoutineDto updatedRoutine = routineService.removeExercise(routineId,exerciseId.get("exerciseId"));
+        return new ResponseEntity<>(updatedRoutine, HttpStatus.OK);
+    }
+
+
+
+}

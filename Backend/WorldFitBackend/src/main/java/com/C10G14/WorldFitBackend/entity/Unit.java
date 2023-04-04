@@ -4,6 +4,7 @@ import com.C10G14.WorldFitBackend.enumeration.EUnit;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.context.annotation.Bean;
 
 @Getter
 @Setter
@@ -21,7 +22,10 @@ public class Unit {
 
     public Unit() {
     }
-
+    public Unit(String name){
+        this.name = EUnit.valueOf(name);
+        this.id = (name.equals("kms")? 1 : 2);
+    }
     public Unit(EUnit name) {
         this.name = name;
     }

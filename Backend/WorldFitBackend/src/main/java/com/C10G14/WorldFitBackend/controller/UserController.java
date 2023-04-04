@@ -1,7 +1,6 @@
 package com.C10G14.WorldFitBackend.controller;
 
 import com.C10G14.WorldFitBackend.dto.UserDto;
-import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

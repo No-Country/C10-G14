@@ -6,12 +6,13 @@
     <div class="tarjetas-ejercicios">
       <div class="card  mb-4 mt-3" *ngFor="let ejercicio of rutina.exercises">
         <div class="card-header ps-3 p-1">
-        <h3 class="m-0">{{ejercicio.title}}</h3> 
+        <h3 class="mt-1">{{ejercicio.title}}</h3> 
         <div class="d-flex justify-content">
-          <h4 class="mb-0 me-3 " > 
-            Series: {{ejercicio.numeroSeries}}  X {{ejercicio.repetitions}}           
-           </h4> |
-           <h4 class="mb-0 ms-3">{{ejercicio.type}} {{ejercicio.quantity}} {{ejercicio.unit}}</h4>   
+          <h4 class="mt-1 me-3 " > 
+            Series: {{ejercicio.numeroSeries}} X {{ejercicio.repetitions}}           
+          </h4>
+          <h4 class="mt-1">|</h4> 
+          <h4 class="mb-0 ms-3 mt-1">{{ejercicio.type}} {{ejercicio.quantity}} {{ejercicio.unit}}</h4>   
         </div>
         
         </div>
