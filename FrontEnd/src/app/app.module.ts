@@ -8,10 +8,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './Shared/shared.module';
 import { InicioComponent } from './Components/inicio/inicio.component';
 import { LoginComponent } from './auth/pages/login/login.component';
+import { VerClientesComponent } from './Components/ver-clientes/ver-clientes.component';
+import { EditarRutinasComponent } from './Components/editar-rutinas/editar-rutinas.component';
+import { EditarEjercicioComponent } from './Components/editar-ejercicio/editar-ejercicio.component';
 
 
 @NgModule({
-  declarations: [AppComponent, RutinaComponent, InicioComponent],
+  declarations: [AppComponent, RutinaComponent, InicioComponent, VerClientesComponent, EditarRutinasComponent, EditarEjercicioComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
