@@ -2,10 +2,14 @@
 .mat-mdc-form-field + .mat-mdc-form-field {
   margin-left: 8px;
 }
-.tarjetas-ejercicios h3,h4 {
-  
+.tarjetas-ejercicios {
+  border: none;
+
+}
+.tarjetas-ejercicios h3,h4 {  
   font-family: 'Comfortaa';
   font-weight: 500;
+  font-size: 1em;
   
 }
 
@@ -14,7 +18,7 @@
 
 }
 .mat-expansion-panel {
-  background-color: #FFC107;
+  background-color: #FFD740;
 }
 
 
@@ -33,7 +37,7 @@
   background-color: #303030;
   color: #fff !important;
   font-family: 'Comfortaa';  
-  font-size: 1.2em;
+  font-size: 1em;
   text-transform: uppercase;
   border: 1px solid #FFC107;
   
