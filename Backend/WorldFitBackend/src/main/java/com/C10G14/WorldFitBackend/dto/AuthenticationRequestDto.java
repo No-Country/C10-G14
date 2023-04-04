@@ -1,11 +1,11 @@
-package com.C10G14.WorldFitBackend.security.jwt.auth;
+package com.C10G14.WorldFitBackend.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AuthenticationRequest {
+public class AuthenticationRequestDto {
     String username;
     String password;
 }

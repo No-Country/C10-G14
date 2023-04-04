@@ -3,7 +3,6 @@ package com.C10G14.WorldFitBackend.security;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -22,8 +21,9 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService(){
+
         return username -> repository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not foud"));
+                .orElseThrow(() -> new UsernameNotFoundException(username + " User not foud"));
     }
 
     @Bean
