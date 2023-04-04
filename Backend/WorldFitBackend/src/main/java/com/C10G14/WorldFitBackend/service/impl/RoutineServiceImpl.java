@@ -5,7 +5,7 @@ import com.C10G14.WorldFitBackend.dto.RoutineDto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
 import com.C10G14.WorldFitBackend.entity.Routine;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
-import com.C10G14.WorldFitBackend.mapper.RoutineDtoMaper;
+import com.C10G14.WorldFitBackend.mapper.RoutineDtoMapper;
 import com.C10G14.WorldFitBackend.repository.ExerciseRepository;
 import com.C10G14.WorldFitBackend.repository.RoutineRepository;
 import com.C10G14.WorldFitBackend.service.RoutineService;
@@ -20,10 +20,10 @@ public class RoutineServiceImpl implements RoutineService {
 
     private RoutineRepository routineRepository;
     private ExerciseRepository exerciseRepository;
-    private RoutineDtoMaper DtoMaper;
+    private RoutineDtoMapper DtoMaper;
 
     @Autowired
-    public RoutineServiceImpl(RoutineRepository routineRepository, ExerciseRepository exerciseRepository, RoutineDtoMaper dtoMaper) {
+    public RoutineServiceImpl(RoutineRepository routineRepository, ExerciseRepository exerciseRepository, RoutineDtoMapper dtoMaper) {
         this.routineRepository = routineRepository;
         this.exerciseRepository = exerciseRepository;
         this.DtoMaper = dtoMaper;

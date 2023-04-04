@@ -2,17 +2,15 @@ package com.C10G14.WorldFitBackend.mapper;
 
 import com.C10G14.WorldFitBackend.dto.ExerciseDto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
-import com.C10G14.WorldFitBackend.entity.Unit;
-import com.C10G14.WorldFitBackend.enumeration.EUnit;
 import com.C10G14.WorldFitBackend.repository.UnitRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ExerciseDtoMaper{
+public class ExerciseDtoMapper {
 
     private UnitRepository unitRepository;
 
-    public ExerciseDtoMaper(UnitRepository unitRepository) {
+    public ExerciseDtoMapper(UnitRepository unitRepository) {
         this.unitRepository = unitRepository;
     }
 

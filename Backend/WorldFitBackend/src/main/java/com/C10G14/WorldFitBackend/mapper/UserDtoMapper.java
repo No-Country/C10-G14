@@ -20,7 +20,7 @@ import java.util.*;
 public class UserDtoMapper {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
 
@@ -48,7 +48,7 @@ public class UserDtoMapper {
         return dto;
     }
 
-    public User dtoToEntity(UserDto dto) throws JsonMappingException, JsonProcessingException {
+    public User dtoToEntity(UserDto dto) throws JsonProcessingException {
         User user = new User();
         user.setEmail(dto.getEmail());
         user.setAge(dto.getAge());
