@@ -3,7 +3,7 @@ package com.C10G14.WorldFitBackend.service.impl;
 import com.C10G14.WorldFitBackend.dto.ExerciseDto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
-import com.C10G14.WorldFitBackend.mapper.ExerciseDtoMaper;
+import com.C10G14.WorldFitBackend.mapper.ExerciseDtoMapper;
 import com.C10G14.WorldFitBackend.repository.ExerciseRepository;
 import com.C10G14.WorldFitBackend.repository.UnitRepository;
 import com.C10G14.WorldFitBackend.service.ExerciseService;
@@ -17,9 +17,9 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     private ExerciseRepository exerciseRepository;
     private UnitRepository unitRepository;
-    private ExerciseDtoMaper DtoMaper;
+    private ExerciseDtoMapper DtoMaper;
 
-    public ExerciseServiceImpl(ExerciseRepository exerciseRepository, UnitRepository unitRepository, ExerciseDtoMaper dtoMaper) {
+    public ExerciseServiceImpl(ExerciseRepository exerciseRepository, UnitRepository unitRepository, ExerciseDtoMapper dtoMaper) {
         this.exerciseRepository = exerciseRepository;
         this.unitRepository = unitRepository;
         DtoMaper = dtoMaper;
