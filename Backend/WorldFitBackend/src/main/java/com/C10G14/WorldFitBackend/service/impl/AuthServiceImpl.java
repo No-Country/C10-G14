@@ -30,9 +30,10 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private JwtService jwtService;
+    
     @Autowired
     private AuthenticationManager authenticationManager;
-
+    
     @Autowired
     private AuthDtoMapper authMapper;
 
