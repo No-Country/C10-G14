@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/routine")
+@RequestMapping("/routines")
 @RequiredArgsConstructor
 public class RoutineController {
 

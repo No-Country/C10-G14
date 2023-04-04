@@ -8,6 +8,6 @@ import lombok.Data;
 public class Exercise_RoutineRequestDto {
     private Long exerciseId;
     private int quantity;
-    private int series;
     private int repetitions;
+    private int series;
 }
