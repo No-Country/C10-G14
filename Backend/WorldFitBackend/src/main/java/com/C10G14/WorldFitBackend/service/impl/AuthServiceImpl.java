@@ -1,26 +1,19 @@
 package com.C10G14.WorldFitBackend.service.impl;
-
-import com.C10G14.WorldFitBackend.enumeration.ERole;
 import com.C10G14.WorldFitBackend.mapper.AuthDtoMapper;
+
 import com.C10G14.WorldFitBackend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import com.C10G14.WorldFitBackend.dto.AuthenticationRequestDto;
 import com.C10G14.WorldFitBackend.dto.AuthenticationResponseDto;
 import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
-import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.User;
-import com.C10G14.WorldFitBackend.repository.RoleRepository;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.C10G14.WorldFitBackend.security.jwt.JwtService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
