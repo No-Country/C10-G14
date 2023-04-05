@@ -19,5 +19,5 @@ public class UserDto {
     private String height;
     private String sex;
     private String age;
-    private List<String> routines;
+    private List<RoutineResponseDto> routines;
 }

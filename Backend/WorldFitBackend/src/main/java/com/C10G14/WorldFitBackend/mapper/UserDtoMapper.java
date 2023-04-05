@@ -1,5 +1,6 @@
 package com.C10G14.WorldFitBackend.mapper;
 
+import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
 import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.Routine;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class UserDtoMapper {
@@ -23,14 +25,14 @@ public class UserDtoMapper {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private RoutineDtoMapper routineMapper;
 
     public UserDto entityToDto (User user) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        List<String> routineJsonList = new ArrayList<>();
-        for (Routine routine : user.getRoutines()) {
-            String routineJson = mapper.writeValueAsString(routine);
-            routineJsonList.add(routineJson);
-        }
+
+        List <RoutineResponseDto> routines = user.getRoutines().stream().map(
+                (e) -> routineMapper.EntityToDto(e)
+        ).toList();
 
         List<String> strRoles = new ArrayList<>();
         for (Role role : user.getRole()){
@@ -45,7 +47,7 @@ public class UserDtoMapper {
         dto.setHeight(user.getHeight());
         dto.setProfileImg(user.getProfileImg());
         dto.setWeight(user.getWeight());
-        dto.setRoutines(routineJsonList);
+        dto.setRoutines(routines);
         return dto;
     }
 
@@ -65,13 +67,15 @@ public class UserDtoMapper {
         }
         user.setRole(roles);
 
-        Set<Routine> routines = new HashSet<>();
+        /*Set<Routine> routines = new HashSet<>();
         ObjectMapper mapper = new ObjectMapper();
         for (String routineJson : dto.getRoutines()) {
             Routine routine = mapper.readValue(routineJson, Routine.class);
             routines.add(routine);
         }
-        user.setRoutines(routines);
+        user.setRoutines(routines);*/
+
+        user.setRoutines(new HashSet<>());
 
         return user;
     }
