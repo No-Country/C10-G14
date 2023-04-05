@@ -11,4 +11,5 @@ public interface EstadisticaService {
     Estadistica buscarPorId(Long id);
     void eliminarPorId(Long id);
 
+
 }

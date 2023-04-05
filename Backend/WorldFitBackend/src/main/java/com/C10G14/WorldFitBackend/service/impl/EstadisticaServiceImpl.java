@@ -33,5 +33,9 @@ public class EstadisticaServiceImpl implements EstadisticaService {
     public void eliminarPorId(Long id) {
         estadisticaRepository.deleteById(id);
     }
-}
+
+
+
+    }
+
 

@@ -12,4 +12,5 @@ public class RegisterRequestDto {
     private String height;
     private String sex;
     private String age;
+    private String username;
 }

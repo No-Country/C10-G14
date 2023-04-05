@@ -40,11 +40,11 @@ public class UserDtoMapper {
         UserDto dto = new UserDto();
         dto.setEmail(user.getEmail());
         dto.setAge(user.getAge());
-        dto.setRoles(strRoles);
+        dto.setRoles((Set<String>) strRoles);
         dto.setHeight(user.getHeight());
         dto.setProfileImg(user.getProfileImg());
         dto.setWeight(user.getWeight());
-        dto.setRoutines(routineJsonList);
+        dto.setRoutines((Set<String>) routineJsonList);
         return dto;
     }
 

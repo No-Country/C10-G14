@@ -1,17 +1,14 @@
 package com.C10G14.WorldFitBackend.controller;
 
-import com.C10G14.WorldFitBackend.dto.ExerciseDto;
-import com.C10G14.WorldFitBackend.dto.Exercise_RoutineDto;
 import com.C10G14.WorldFitBackend.dto.Exercise_RoutineRequestDto;
 import com.C10G14.WorldFitBackend.dto.RoutineDto;
-import com.C10G14.WorldFitBackend.entity.Routine;
+
 import com.C10G14.WorldFitBackend.service.RoutineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.HTML;
 import java.util.List;
 import java.util.Map;
 
