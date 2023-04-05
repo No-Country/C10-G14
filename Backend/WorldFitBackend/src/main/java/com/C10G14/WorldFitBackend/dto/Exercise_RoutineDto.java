@@ -1,14 +1,10 @@
 package com.C10G14.WorldFitBackend.dto;
 
 import com.C10G14.WorldFitBackend.entity.Exercise;
-import com.C10G14.WorldFitBackend.entity.Exercise_Routine;
-import com.C10G14.WorldFitBackend.entity.Unit;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Data
@@ -17,13 +13,16 @@ public class Exercise_RoutineDto {
 
     private long id;
     private String title;
+
+
     private String description;
     private String media;
+    private String type;
     private String unit;
     private int quantity;
     private int repetitions;
     private int seriesNumber;
-     private List series;
+    private List series;
     //private int[][] series;
 
 
@@ -33,12 +32,22 @@ public class Exercise_RoutineDto {
         this.title = exercise.getTitle();
         this.description = exercise.getDescription();
         this.media = exercise.getMedia();
-        this.unit = exercise.getUnit().getName().toString();
+        String unitName = "";
+        if (exercise.getUnit() != null) {
+            unitName = exercise.getUnit().getName().toString();
+        }
+        if (unitName.equals("None")) {
+            unitName = "";
+        }
+        this.unit = unitName;
+
+        this.type = (this.unit.equals("Km")) ? "Distancia" :
+                (this.unit.equals("Kg")) ? "Peso" : "";
         this.quantity = quantity;
         this.repetitions = repetitions;
         this.seriesNumber = seriesNumber;
         this.series = new ArrayList<>();
-        for (int i = 0; i<seriesNumber; i++) {
+        for (int i = 0; i < seriesNumber; i++) {
             series.add(new Object());
         }
     }
@@ -55,4 +64,11 @@ public class Exercise_RoutineDto {
                 ", repetitions=" + repetitions +
                 '}';
     }
+    public void setName(String name) {
+        this.title = name;
+    }
+
 }
+
+
+

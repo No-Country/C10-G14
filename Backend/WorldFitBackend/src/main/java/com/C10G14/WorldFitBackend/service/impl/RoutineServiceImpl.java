@@ -1,7 +1,8 @@
 package com.C10G14.WorldFitBackend.service.impl;
 
 import com.C10G14.WorldFitBackend.dto.Exercise_RoutineRequestDto;
-import com.C10G14.WorldFitBackend.dto.RoutineDto;
+import com.C10G14.WorldFitBackend.dto.RoutineRequestDto;
+import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
 import com.C10G14.WorldFitBackend.entity.Routine;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
@@ -30,26 +31,26 @@ public class RoutineServiceImpl implements RoutineService {
     }
 
     @Override
-    public List<RoutineDto> getAllRoutines() {
+    public List<RoutineResponseDto> getAllRoutines() {
         List<Routine> routines = routineRepository.findAll();
         return routines.stream().map(e -> DtoMaper.EntityToDto(e)).collect(Collectors.toList());
     }
 
     @Override
-    public RoutineDto getRoutineById(long id) {
+    public RoutineResponseDto getRoutineById(long id) {
         Routine routine = routineRepository.findById(id).orElseThrow(()-> new NotFoundException("Routine not found"));
         return DtoMaper.EntityToDto(routine);
     }
 
     @Override
-    public RoutineDto createRoutine(RoutineDto routineDto) {
+    public RoutineResponseDto createRoutine(RoutineRequestDto routineDto) {
         Routine routine = DtoMaper.DtoToEntity(routineDto);
         Routine newRoutine = routineRepository.save(routine);
         return DtoMaper.EntityToDto(newRoutine);
     }
 
     @Override
-    public RoutineDto updateRoutine(long id, RoutineDto routineDto) {
+    public RoutineResponseDto updateRoutine(long id, RoutineRequestDto routineDto) {
         Routine routine = routineRepository.findById(id).orElseThrow(()-> new NotFoundException("Routine not found"));
 
         routine.setTitle(routineDto.getTitle());
@@ -64,7 +65,7 @@ public class RoutineServiceImpl implements RoutineService {
         routineRepository.delete(routine);
     }
 
-    public RoutineDto addExercise(long routineId, Exercise_RoutineRequestDto e) {
+    public RoutineResponseDto addExercise(long routineId, Exercise_RoutineRequestDto e) {
         Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new NotFoundException("Routine not found"));
         Exercise exercise = exerciseRepository.findById(e.getExerciseId()).orElseThrow(()-> new NotFoundException("Exercise not found"));
 
@@ -75,7 +76,7 @@ public class RoutineServiceImpl implements RoutineService {
     }
 
     @Override
-    public RoutineDto updateExercise(long routineId, Exercise_RoutineRequestDto e) {
+    public RoutineResponseDto updateExercise(long routineId, Exercise_RoutineRequestDto e) {
         Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new NotFoundException("Routine not found"));
         Exercise exercise = exerciseRepository.findById(e.getExerciseId()).orElseThrow(()-> new NotFoundException("Exercise not found"));
 
@@ -86,7 +87,7 @@ public class RoutineServiceImpl implements RoutineService {
     }
 
     @Override
-    public RoutineDto removeExercise(long routineId, long exerciseId) {
+    public RoutineResponseDto removeExercise(long routineId, long exerciseId) {
         Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new NotFoundException("Routine not found"));
         Exercise exercise = exerciseRepository.findById(exerciseId).orElseThrow(()-> new NotFoundException("Exercise not found"));
 
@@ -97,4 +98,6 @@ public class RoutineServiceImpl implements RoutineService {
 
         return DtoMaper.EntityToDto(updatedRoutine);
     }
+
+
 }

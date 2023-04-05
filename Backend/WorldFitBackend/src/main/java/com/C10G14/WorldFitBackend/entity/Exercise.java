@@ -68,4 +68,7 @@ public class Exercise {
                 ", unit=" + unit +
                 '}';
     }
+
+    public void setName(String sentadillas) {
+    }
 }
