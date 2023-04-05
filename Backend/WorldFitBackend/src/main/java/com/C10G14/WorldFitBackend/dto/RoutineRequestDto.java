@@ -14,4 +14,7 @@ public class RoutineRequestDto {
     private String title;
     private Set<Exercise_RoutineDto> exercises;
 
+
+
+
 }
