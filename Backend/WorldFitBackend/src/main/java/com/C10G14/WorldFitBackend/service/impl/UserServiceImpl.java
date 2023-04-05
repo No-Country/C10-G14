@@ -73,9 +73,6 @@ public class UserServiceImpl implements UserService {
         if (userDto.getHeight() != null && !userDto.getHeight().isEmpty()) {
             user.setHeight(userDto.getHeight());
         }
-        if (userDto.getHeight() != null && !userDto.getHeight().isEmpty()) {
-            user.setHeight(userDto.getHeight());
-        }
         userRepository.save(user);
         return mapper.entityToDto(user);
     }
