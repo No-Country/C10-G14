@@ -79,7 +79,7 @@
     "exercises":[
       {
         "id":1,
-        "title": "Press con mancuernas",
+        "title": "Sentadillas",
         "description": "lorem ipsum dolor sit amet",
         "media": "https://someMedia.com",
         "type": "Peso",
@@ -91,7 +91,7 @@
       },
       {
         "id": 3,
-        "title": "Bicicleta ",
+        "title": "Saltar la Soga ",
         "description": "lorem ipsum dolor sit amet",
         "media": "https://someMedia.com",
         "type": "Distancia",

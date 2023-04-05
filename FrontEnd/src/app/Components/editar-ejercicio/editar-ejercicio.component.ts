@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,6 +13,7 @@ import { RutinaService } from 'src/app/Services/rutina.service';
 })
 
 export class EditarEjercicioComponent {
+  @Input() dataIdRutinas:number = 0;
   displayedColumns: string[] = ['title', 'numeroSeries', 'repetition', 'quantity', 'unit','type' , 'acciones'];
   dataSource = new MatTableDataSource<Rutina>();
   
@@ -22,7 +23,8 @@ export class EditarEjercicioComponent {
   constructor(private datosRutina:RutinaService) { }
 
   ngOnInit(): void {
-    this.obtenerRutinas(2);
+    this.obtenerRutinas(this.dataIdRutinas);
+    console.log(this.dataIdRutinas);
     
   }
   obtenerRutinas(idRutina: number) {
@@ -30,7 +32,7 @@ export class EditarEjercicioComponent {
     
     this.datosRutina.obtenerDatos().subscribe(data => {
       this.dataSource = data.usuario1.routines[idRutina].exercises;
-      console.log(this.dataSource);
+      // console.log(this.dataSource);
     })
   }
 }

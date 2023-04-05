@@ -1,6 +1,5 @@
 <mat-tab-group>
-  <mat-tab *ngFor="let rutina of rutinasLista" [label]="rutina.title"> 
-    
-  
+  <mat-tab   *ngFor="let rutina of rutinasLista" [label]="rutina.title" > 
+  <app-editar-ejercicio [dataIdRutinas]="rutina.id-1"></app-editar-ejercicio>
   </mat-tab>
- 
+

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Rutina } from 'src/app/Interface/rutina';
@@ -32,7 +32,7 @@ export class EditarRutinasComponent implements OnInit  {
     
     this.datosRutina.obtenerDatos().subscribe(data => {
       this.dataSource = data.usuario1.routines[idRutina].exercises;
-      console.log(this.dataSource);
+      // console.log(this.dataSource);
     })
   }
   
