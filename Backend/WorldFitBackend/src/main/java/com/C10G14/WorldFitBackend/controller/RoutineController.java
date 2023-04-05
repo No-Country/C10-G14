@@ -32,13 +32,6 @@ public class RoutineController {
         return ResponseEntity.ok(routine);
     }
 
-    /*
-    Body ej:
-    {
-    "title" : "jueves",
-    "userId" : 1
-    }
-     */
     @PostMapping
     public ResponseEntity<RoutineResponseDto> createRoutine(@RequestBody RoutineRequestDto routine) {
         RoutineResponseDto createdRoutine = routineService.createRoutine(routine);
