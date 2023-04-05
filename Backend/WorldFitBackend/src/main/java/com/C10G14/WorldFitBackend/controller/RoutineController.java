@@ -93,7 +93,4 @@ public class RoutineController {
         RoutineResponseDto updatedRoutine = routineService.removeExercise(routineId,exerciseId.get("exerciseId"));
         return new ResponseEntity<>(updatedRoutine, HttpStatus.OK);
     }
-
-
-
 }
