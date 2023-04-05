@@ -91,11 +91,12 @@ public class RoutineServiceImpl implements RoutineService {
         Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new NotFoundException("Routine not found"));
         Exercise exercise = exerciseRepository.findById(exerciseId).orElseThrow(()-> new NotFoundException("Exercise not found"));
 
+        routineRepository.removeExercise(routineId,exerciseId);
+
         routine.removeExercise(exercise);
         Routine updatedRoutine = routineRepository.save(routine);
 
-        System.out.println(updatedRoutine);
-
         return DtoMaper.EntityToDto(updatedRoutine);
     }
+
 }
