@@ -39,6 +39,7 @@ public class UserDtoMapper {
 
         UserDto dto = new UserDto();
         dto.setEmail(user.getEmail());
+        dto.setClientSince(user.getClientSince());
         dto.setAge(user.getAge());
         dto.setRoles(strRoles);
         dto.setHeight(user.getHeight());
@@ -74,6 +75,16 @@ public class UserDtoMapper {
 
         return user;
     }
+
+    public List<UserDto> usersToDtoList(List<User> users) throws JsonProcessingException {
+        List <UserDto> usersDto = new ArrayList<>();
+        for (User user : users) {
+            usersDto.add(entityToDto(user));
+        }
+        return usersDto;
+    }
+
+
 
 
 
