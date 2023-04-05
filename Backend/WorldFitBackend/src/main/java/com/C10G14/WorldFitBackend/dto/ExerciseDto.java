@@ -24,6 +24,12 @@ public class ExerciseDto {
     }
 
     public EUnit unitToEUnit (){
-        return (this.unit.equals("kms"))? EUnit.kms : EUnit.kg;
+        return (this.unit.equals("Kg"))? EUnit.Kg :
+                 (this.unit.equals("Km") ? EUnit.Km :
+                 (this.unit.equals("Minutos") ? EUnit.Minutos :
+                  (this.unit.equals("") ? EUnit.None : null
+                  )
+                 )
+                );
     }
 }
