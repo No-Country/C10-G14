@@ -1,6 +1,7 @@
 package com.C10G14.WorldFitBackend.mapper;
 
 import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
+import com.C10G14.WorldFitBackend.dto.SimpleUserDto;
 import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.Routine;
@@ -48,6 +49,20 @@ public class UserDtoMapper {
         dto.setProfileImg(user.getProfileImg());
         dto.setWeight(user.getWeight());
         dto.setRoutines(routines);
+        return dto;
+    }
+
+    public SimpleUserDto entityToSimpleDto (User user) throws JsonProcessingException {
+        List <RoutineResponseDto> routines = user.getRoutines().stream().map(
+                (e) -> routineMapper.EntityToDto(e)
+        ).toList();
+
+        SimpleUserDto dto = new SimpleUserDto();
+        dto.setEmail(user.getEmail());
+        dto.setClientSince(user.getClientSince());
+        dto.setProfileImg(user.getProfileImg());
+        dto.setRoutines(routines);
+
         return dto;
     }
 

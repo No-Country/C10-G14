@@ -1,5 +1,6 @@
 package com.C10G14.WorldFitBackend.service.impl;
 
+import com.C10G14.WorldFitBackend.dto.SimpleUserDto;
 import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.Routine;
@@ -44,6 +45,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserById(Long id) throws JsonProcessingException {
         return mapper.entityToDto(userRepository.findById(id).orElseThrow(() -> new NotFoundException("Error: user not found")));
+    }
+
+    @Transactional
+    @Override
+    public SimpleUserDto getSimpleUserById(Long id) throws JsonProcessingException {
+        return mapper.entityToSimpleDto(userRepository.findById(id).orElseThrow(() -> new NotFoundException("Error: user not found")));
     }
 
     @Transactional
