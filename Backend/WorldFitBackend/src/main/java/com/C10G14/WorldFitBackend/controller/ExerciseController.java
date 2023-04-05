@@ -1,9 +1,7 @@
 package com.C10G14.WorldFitBackend.controller;
 
 import com.C10G14.WorldFitBackend.dto.ExerciseDto;
-import com.C10G14.WorldFitBackend.entity.Exercise;
 import com.C10G14.WorldFitBackend.service.ExerciseService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

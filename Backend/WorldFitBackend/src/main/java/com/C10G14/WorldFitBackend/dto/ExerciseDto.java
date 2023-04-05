@@ -1,14 +1,10 @@
 package com.C10G14.WorldFitBackend.dto;
 
-import com.C10G14.WorldFitBackend.entity.Unit;
 import com.C10G14.WorldFitBackend.enumeration.EUnit;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Objects;
 
 @Data
 @AllArgsConstructor
