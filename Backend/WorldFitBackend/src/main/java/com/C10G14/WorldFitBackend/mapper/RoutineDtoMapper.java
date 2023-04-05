@@ -2,15 +2,15 @@ package com.C10G14.WorldFitBackend.mapper;
 
 import com.C10G14.WorldFitBackend.dto.Exercise_RoutineDto;
 import com.C10G14.WorldFitBackend.dto.RoutineDto;
-import com.C10G14.WorldFitBackend.entity.Exercise_Routine;
 import com.C10G14.WorldFitBackend.entity.Routine;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
-public class RoutineDtoMaper {
+@Component
+public class RoutineDtoMapper {
 
     public RoutineDto EntityToDto (Routine routine) {
         // Routine tiene una lista de Exercise_Routine
