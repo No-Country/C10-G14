@@ -5,6 +5,7 @@ import com.C10G14.WorldFitBackend.dto.RoutineRequestDto;
 import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
 import com.C10G14.WorldFitBackend.entity.Routine;
+import com.C10G14.WorldFitBackend.exception.AlreadyExistException;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.mapper.RoutineDtoMapper;
 import com.C10G14.WorldFitBackend.repository.ExerciseRepository;

@@ -15,4 +15,6 @@ public interface RoutineRepository extends JpaRepository<Routine, Long> {
             nativeQuery=true)
     void removeExercise(@Param("rId") long routineId,@Param("eId") long exerciseId);
 
+    Boolean existsByTitleAndUser_Id(String title, Long userId);
+
 }

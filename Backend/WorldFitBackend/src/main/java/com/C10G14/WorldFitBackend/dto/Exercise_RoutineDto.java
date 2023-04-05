@@ -38,7 +38,8 @@ public class Exercise_RoutineDto {
         if (unitName.equals("None")){unitName = "";};
         this.unit = unitName;
         this.type = (this.unit.equals("Km"))? "Distancia" :
-                    (this.unit.equals("Kg"))? "Peso" : "" ;
+                    (this.unit.equals("Kg"))? "Peso" :
+                    (this.unit.equals("Minutos"))? "Tiempo" : "";
         this.quantity = quantity;
         this.repetitions = repetitions;
         this.seriesNumber = seriesNumber;
