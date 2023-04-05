@@ -27,7 +27,7 @@ public class Routine {
     @JsonManagedReference
     @OneToMany(
             mappedBy = "routine",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             orphanRemoval = true
     )
     private Set<Exercise_Routine> exercises;
