@@ -46,9 +46,9 @@ public class RoutineController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRoutine(@PathVariable Long id) {
+    public ResponseEntity<String> deleteRoutine(@PathVariable Long id) {
         routineService.deleteRoutine(id);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>("Routine successfully deleted",HttpStatus.OK);
     }
 
         /*

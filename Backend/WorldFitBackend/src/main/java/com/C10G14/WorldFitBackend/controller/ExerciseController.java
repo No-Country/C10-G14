@@ -1,7 +1,6 @@
 package com.C10G14.WorldFitBackend.controller;
 
 import com.C10G14.WorldFitBackend.dto.ExerciseDto;
-import com.C10G14.WorldFitBackend.entity.Exercise;
 import com.C10G14.WorldFitBackend.service.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,8 +50,8 @@ public class ExerciseController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteExercise(@PathVariable Long id) {
+    public ResponseEntity<String> deleteExercise(@PathVariable Long id) {
         exerciseService.deleteExercise(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("Exercise successfully deleted", HttpStatus.OK);
     }
 }

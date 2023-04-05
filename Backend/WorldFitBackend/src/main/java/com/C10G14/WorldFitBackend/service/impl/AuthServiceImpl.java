@@ -52,11 +52,11 @@ public class AuthServiceImpl implements AuthService {
     public AuthenticationResponseDto authenticate(AuthenticationRequestDto request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
+                        request.getEmail(),
                         request.getPassword()
                 )
         );
-        User user = userrepository.findByEmail(request.getUsername())
+        User user = userrepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("Error: Username not found"));
         String jwtToken = jwtService.generateToken(user);
         AuthenticationResponseDto authResponse = new AuthenticationResponseDto();
