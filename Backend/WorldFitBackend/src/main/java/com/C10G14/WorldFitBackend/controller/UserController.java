@@ -1,5 +1,6 @@
 package com.C10G14.WorldFitBackend.controller;
 
+import com.C10G14.WorldFitBackend.dto.SimpleUserDto;
 import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -43,6 +44,14 @@ public class UserController {
         UserDto newUser = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @GetMapping("/routine/{userId}")
+    public ResponseEntity<SimpleUserDto> getUserRoutines(@PathVariable Long userId) throws JsonProcessingException{
+        SimpleUserDto user = userService.getSimpleUserById(userId);
+        return ResponseEntity.ok(user);
+    }
+
 
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PostMapping("/routine/{userId}/{routineId}")
