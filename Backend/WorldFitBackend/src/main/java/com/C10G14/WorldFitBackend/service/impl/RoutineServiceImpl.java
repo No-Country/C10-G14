@@ -32,6 +32,13 @@ public class RoutineServiceImpl implements RoutineService {
     }
 
     @Override
+    public RoutineResponseDto createRoutine(RoutineRequestDto routineDto) {
+        Routine routine = DtoMaper.DtoToEntity(routineDto);
+        Routine newRoutine = routineRepository.save(routine);
+        return DtoMaper.EntityToDto(newRoutine);
+    }
+
+    @Override
     public List<RoutineResponseDto> getAllRoutines() {
         List<Routine> routines = routineRepository.findAll();
         return routines.stream().map(e -> DtoMaper.EntityToDto(e)).collect(Collectors.toList());
@@ -41,13 +48,6 @@ public class RoutineServiceImpl implements RoutineService {
     public RoutineResponseDto getRoutineById(long id) {
         Routine routine = routineRepository.findById(id).orElseThrow(()-> new NotFoundException("Routine not found"));
         return DtoMaper.EntityToDto(routine);
-    }
-
-    @Override
-    public RoutineResponseDto createRoutine(RoutineRequestDto routineDto) {
-        Routine routine = DtoMaper.DtoToEntity(routineDto);
-        Routine newRoutine = routineRepository.save(routine);
-        return DtoMaper.EntityToDto(newRoutine);
     }
 
     @Override

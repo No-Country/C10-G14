@@ -43,7 +43,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     public ExerciseDto createExercise(ExerciseDto exerciseDto) {
         Exercise exercise = DtoMaper.DtoToEntity(exerciseDto);
         if(exerciseRepository.existsByTitle(exerciseDto.getTitle())){
-            throw new AlreadyExistException("An exercise with that title already exists: " + exerciseDto.getTitle());
+            throw new AlreadyExistException("Error: An exercise with that title already exists: " + exerciseDto.getTitle());
         }
         Exercise newExercise = exerciseRepository.save(exercise);
         return DtoMaper.EntityToDto(newExercise);
