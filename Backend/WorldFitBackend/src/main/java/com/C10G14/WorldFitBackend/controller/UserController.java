@@ -1,5 +1,6 @@
 package com.C10G14.WorldFitBackend.controller;
 
+import com.C10G14.WorldFitBackend.dto.SimpleUserDto;
 import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -94,7 +95,6 @@ public class UserController {
         UserDto newUser = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
-
 
     @Operation(summary = "Update an existing user")
     @ApiResponses(value = {
