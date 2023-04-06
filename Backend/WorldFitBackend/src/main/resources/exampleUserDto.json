@@ -1,6 +1,7 @@
 {"usuario1": {
   "id":1,
   "name": "Manolito",
+  "role": "Customer",
   "profileImg": "https://someImage.com",
   "clientSince":"2023-02-17T19:36:12.390241983",
   "routines":

@@ -19,6 +19,7 @@ public class Exercise_RoutineDto {
     private String title;
     private String description;
     private String media;
+    private String type;
     private String unit;
     private int quantity;
     private int repetitions;
@@ -33,7 +34,12 @@ public class Exercise_RoutineDto {
         this.title = exercise.getTitle();
         this.description = exercise.getDescription();
         this.media = exercise.getMedia();
-        this.unit = exercise.getUnit().getName().toString();
+        String unitName = exercise.getUnit().getName().toString();
+        if (unitName.equals("None")){unitName = "";};
+        this.unit = unitName;
+        this.type = (this.unit.equals("Km"))? "Distancia" :
+                    (this.unit.equals("Kg"))? "Peso" :
+                    (this.unit.equals("Minutos"))? "Tiempo" : "";
         this.quantity = quantity;
         this.repetitions = repetitions;
         this.seriesNumber = seriesNumber;

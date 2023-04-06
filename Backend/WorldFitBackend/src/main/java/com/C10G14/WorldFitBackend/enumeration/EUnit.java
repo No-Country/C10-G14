@@ -1,8 +1,9 @@
 package com.C10G14.WorldFitBackend.enumeration;
 
 public enum EUnit {
-    kms,
-    kg,
-
+    Km,
+    Kg,
+    Minutos,
+    None
 
 }

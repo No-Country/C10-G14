@@ -2,8 +2,10 @@ package com.C10G14.WorldFitBackend.service.impl;
 
 import com.C10G14.WorldFitBackend.dto.ExerciseDto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
+import com.C10G14.WorldFitBackend.exception.AlreadyExistException;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
-import com.C10G14.WorldFitBackend.mapper.ExerciseDtoMaper;
+import com.C10G14.WorldFitBackend.exception.SqlConstraintException;
+import com.C10G14.WorldFitBackend.mapper.ExerciseDtoMapper;
 import com.C10G14.WorldFitBackend.repository.ExerciseRepository;
 import com.C10G14.WorldFitBackend.repository.UnitRepository;
 import com.C10G14.WorldFitBackend.service.ExerciseService;
@@ -17,9 +19,9 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     private ExerciseRepository exerciseRepository;
     private UnitRepository unitRepository;
-    private ExerciseDtoMaper DtoMaper;
+    private ExerciseDtoMapper DtoMaper;
 
-    public ExerciseServiceImpl(ExerciseRepository exerciseRepository, UnitRepository unitRepository, ExerciseDtoMaper dtoMaper) {
+    public ExerciseServiceImpl(ExerciseRepository exerciseRepository, UnitRepository unitRepository, ExerciseDtoMapper dtoMaper) {
         this.exerciseRepository = exerciseRepository;
         this.unitRepository = unitRepository;
         DtoMaper = dtoMaper;
@@ -40,6 +42,9 @@ public class ExerciseServiceImpl implements ExerciseService {
     @Override
     public ExerciseDto createExercise(ExerciseDto exerciseDto) {
         Exercise exercise = DtoMaper.DtoToEntity(exerciseDto);
+        if(exerciseRepository.existsByTitle(exerciseDto.getTitle())){
+            throw new AlreadyExistException("Error: An exercise with that title already exists: " + exerciseDto.getTitle());
+        }
         Exercise newExercise = exerciseRepository.save(exercise);
         return DtoMaper.EntityToDto(newExercise);
     }
@@ -47,17 +52,23 @@ public class ExerciseServiceImpl implements ExerciseService {
     @Override
     public ExerciseDto updateExercise(Long id, ExerciseDto exerciseDto) {
         Exercise exercise = exerciseRepository.findById(id).orElseThrow(() -> new NotFoundException("Exercise not found"));
-        exercise.setTitle(exerciseDto.getTitle());
-        exercise.setDescription(exercise.getDescription());
-        exercise.setMedia(exercise.getMedia());
-        exercise.setUnit(unitRepository.findByName(exerciseDto.unitToEUnit()).orElseThrow(() -> new NotFoundException("Unit not found")));
-        Exercise updatedExercise = exerciseRepository.save(exercise);
-        return DtoMaper.EntityToDto(updatedExercise);
+        Exercise updatedExercise = DtoMaper.DtoToEntity(exerciseDto);
+        updatedExercise.setId(exercise.getId());
+        try {
+            exerciseRepository.save(updatedExercise);
+            return DtoMaper.EntityToDto(updatedExercise);
+        }catch (Exception e){
+            throw new AlreadyExistException("An exercise with that title already exists: " + exerciseDto.getTitle());
+        }
     }
 
     @Override
     public void deleteExercise(Long id) {
         Exercise exercise = exerciseRepository.findById(id).orElseThrow(()-> new NotFoundException("Exercise not found"));
-        exerciseRepository.delete(exercise);
+        try {
+            exerciseRepository.delete(exercise);
+        }catch(Exception e){
+            throw new SqlConstraintException("Integrity issue: the exercise is contained by routines");
+        }
     }
 }

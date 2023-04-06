@@ -22,16 +22,13 @@ public class Unit {
 
     public Unit() {
     }
-    public Unit(String name){
-        this.name = EUnit.valueOf(name);
-        this.id = (name.equals("kms")? 1 : 2);
-    }
     public Unit(EUnit name) {
         this.name = name;
     }
 
+
     @Override
     public String toString() {
-        return "" + name + "";
+        return (this.name == EUnit.None) ? "" : "" + name + "";
     }
 }
