@@ -46,14 +46,17 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public ExerciseDto updateExercise(Long id, ExerciseDto exerciseDto) {
-        Exercise exercise = exerciseRepository.findById(id).orElseThrow(() -> new NotFoundException("Exercise not found"));
+        Exercise exercise = exerciseRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Exercise not found"));
         exercise.setTitle(exerciseDto.getTitle());
-        exercise.setDescription(exercise.getDescription());
-        exercise.setMedia(exercise.getMedia());
-        exercise.setUnit(unitRepository.findByName(exerciseDto.unitToEUnit()).orElseThrow(() -> new NotFoundException("Unit not found")));
+        exercise.setDescription(exerciseDto.getDescription());
+        exercise.setMedia(exerciseDto.getMedia());
+        exercise.setUnit(unitRepository.findByName(exerciseDto.unitToEUnit())
+                .orElseThrow(() -> new NotFoundException("Unit not found")));
         Exercise updatedExercise = exerciseRepository.save(exercise);
         return DtoMaper.EntityToDto(updatedExercise);
     }
+
 
     @Override
     public void deleteExercise(Long id) {

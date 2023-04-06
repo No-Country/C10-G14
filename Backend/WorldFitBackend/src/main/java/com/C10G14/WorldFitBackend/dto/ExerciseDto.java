@@ -23,13 +23,18 @@ public class ExerciseDto {
         this.unit = unit;
     }
 
-    public EUnit unitToEUnit (){
-        return (this.unit.equals("Kg"))? EUnit.Kg :
-                 (this.unit.equals("Km") ? EUnit.Km :
-                 (this.unit.equals("Minutos") ? EUnit.Minutos :
-                  (this.unit.equals("") ? EUnit.None : null
-                  )
-                 )
-                );
+    public EUnit unitToEUnit() {
+        switch (this.unit) {
+            case "Kg":
+                return EUnit.Kg;
+            case "Km":
+                return EUnit.Km;
+            case "Minutos":
+                return EUnit.Minutos;
+            default:
+                return EUnit.None;
+        }
+
+
     }
 }
