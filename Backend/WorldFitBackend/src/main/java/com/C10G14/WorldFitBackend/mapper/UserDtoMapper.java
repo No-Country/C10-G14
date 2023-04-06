@@ -35,21 +35,18 @@ public class UserDtoMapper {
                 (e) -> routineMapper.EntityToDto(e)
         ).toList();
 
-        List<String> strRoles = new ArrayList<>();
-        for (Role role : user.getRole()){
-            strRoles.add(role.getName().name());
-        }
+        List <String> strRoles = user.getRole().stream().map(
+                (r)-> r.getName().name()).toList();
 
-        UserDto dto = new UserDto();
-        dto.setEmail(user.getEmail());
-        dto.setClientSince(user.getClientSince());
-        dto.setAge(user.getAge());
-        dto.setRoles(strRoles);
-        dto.setHeight(user.getHeight());
-        dto.setProfileImg(user.getProfileImg());
-        dto.setWeight(user.getWeight());
-        dto.setRoutines(routines);
-        return dto;
+        return new UserDto(user.getEmail(),
+                user.getClientSince(),
+                strRoles,
+                user.getProfileImg(),
+                user.getWeight(),
+                user.getHeight(),
+                user.getSex(),
+                user.getAge(),
+                routines);
     }
 
     public SimpleUserDto entityToSimpleDto (User user) throws JsonProcessingException {
@@ -57,13 +54,10 @@ public class UserDtoMapper {
                 (e) -> routineMapper.EntityToDto(e)
         ).toList();
 
-        SimpleUserDto dto = new SimpleUserDto();
-        dto.setEmail(user.getEmail());
-        dto.setClientSince(user.getClientSince());
-        dto.setProfileImg(user.getProfileImg());
-        dto.setRoutines(routines);
-
-        return dto;
+        return new SimpleUserDto(user.getEmail(),
+                user.getClientSince(),
+                user.getProfileImg(),
+                routines);
     }
 
     public User dtoToEntity(UserDto dto) throws JsonProcessingException {
@@ -74,21 +68,10 @@ public class UserDtoMapper {
         user.setProfileImg(dto.getProfileImg());
         user.setWeight(dto.getWeight());
 
-        List<Role> roles = new ArrayList<>();
-        for (String roleName : dto.getRoles()) {
-            Role role = roleRepository.findByName(ERole.valueOf(roleName.toUpperCase()))
-                    .orElseThrow(() -> new NotFoundException("Error: Role not found: " + roleName));
-            roles.add(role);
-        }
-        user.setRole(roles);
-
-        /*Set<Routine> routines = new HashSet<>();
-        ObjectMapper mapper = new ObjectMapper();
-        for (String routineJson : dto.getRoutines()) {
-            Routine routine = mapper.readValue(routineJson, Routine.class);
-            routines.add(routine);
-        }
-        user.setRoutines(routines);*/
+        user.setRole(dto.getRoles().stream().map(
+                (r) -> roleRepository.findByName(ERole.valueOf(r.toUpperCase()))
+                        .orElseThrow(() -> new NotFoundException("Error: Role not found: " + r))
+        ).toList());
 
         user.setRoutines(new HashSet<>());
 

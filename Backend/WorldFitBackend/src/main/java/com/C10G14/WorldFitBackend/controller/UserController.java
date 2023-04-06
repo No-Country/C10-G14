@@ -51,7 +51,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "Error: Role does not exist",
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
-    @GetMapping("/{role}")
+    @GetMapping("/role/{role}")
     public List<UserDto> getByRole(@PathVariable String role) throws JsonProcessingException {
         return userService.getByRole(role);
     }
@@ -132,23 +132,6 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    @Operation(summary = "Delete a routine from a User")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "A user with a deleted routine",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserController.class)) }),
-            @ApiResponse(responseCode = "401", description = "Unauthorized",
-                    content = @Content),
-            @ApiResponse(responseCode = "403", description = "Forbidden",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "Error: Routine does not exist in this user",
-                    content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
-    @DeleteMapping("/{userId}/routine/{routine}")
-    public ResponseEntity<UserDto> deleteRoutine(@PathVariable Long userId, @PathVariable Long routineId) throws JsonProcessingException {
-        UserDto updatedUser = userService.deleteRoutine(userId, routineId);
-        return ResponseEntity.ok(updatedUser);
-    }
 
     @Operation(summary = "Delete a user")
     @ApiResponses(value = {
