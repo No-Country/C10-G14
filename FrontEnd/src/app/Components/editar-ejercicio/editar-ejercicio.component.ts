@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Rutina } from 'src/app/Interface/rutina';
 import { ClienteService } from 'src/app/Services/cliente.service';
 import { RutinaService } from 'src/app/Services/rutina.service';
+import { RutinasComponent } from '../forms/rutinas/rutinas.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-editar-ejercicio',
@@ -20,11 +22,12 @@ export class EditarEjercicioComponent {
   
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private datosRutina:RutinaService) { }
+  constructor(private datosRutina:RutinaService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.obtenerRutinas(this.dataIdRutinas);
-    console.log(this.dataIdRutinas);
+    
     
   }
   obtenerRutinas(idRutina: number) {
@@ -35,4 +38,13 @@ export class EditarEjercicioComponent {
       // console.log(this.dataSource);
     })
   }
+  openDialog() {
+    const dialogRef = this.dialog.open(RutinasComponent,{
+      width: '100vw',
+      disableClose: true
+    });
+
+    
+  }
 }
+

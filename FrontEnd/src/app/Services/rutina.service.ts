@@ -12,4 +12,5 @@ export class RutinaService {
   obtenerDatos():Observable<any>{
     return this.http.get('./assets/Datos/Plan.Json');
   }
+  
 }

@@ -11,10 +11,10 @@ import { LoginComponent } from './auth/pages/login/login.component';
 import { VerClientesComponent } from './Components/ver-clientes/ver-clientes.component';
 import { EditarRutinasComponent } from './Components/editar-rutinas/editar-rutinas.component';
 import { EditarEjercicioComponent } from './Components/editar-ejercicio/editar-ejercicio.component';
-
+import { RutinasComponent } from './Components/forms/rutinas/rutinas.component';
 
 @NgModule({
-  declarations: [AppComponent, RutinaComponent, InicioComponent, VerClientesComponent, EditarRutinasComponent, EditarEjercicioComponent],
+  declarations: [AppComponent, RutinaComponent, InicioComponent, VerClientesComponent, EditarRutinasComponent, EditarEjercicioComponent, RutinasComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
