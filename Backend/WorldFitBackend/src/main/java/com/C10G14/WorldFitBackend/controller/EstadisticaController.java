@@ -3,6 +3,11 @@ package com.C10G14.WorldFitBackend.controller;
 import com.C10G14.WorldFitBackend.dto.EstadisticaDto;
 import com.C10G14.WorldFitBackend.entity.Estadistica;
 import com.C10G14.WorldFitBackend.service.EstadisticaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +21,11 @@ public class EstadisticaController {
     @Autowired
     private EstadisticaService estadisticaService;
 
+    @Operation(summary = "Create new statistic")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "A new statistic",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EstadisticaService.class)) })})
     @PostMapping
     public Estadistica guardarEstadistica(@RequestBody EstadisticaDto estadisticaDto) {
         Estadistica estadistica = new Estadistica();
@@ -27,18 +37,31 @@ public class EstadisticaController {
         return estadisticaService.guardar(estadistica);
     }
 
-
-
+    @Operation(summary = "Get all statistics")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "A list of statistics",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EstadisticaService.class)) })})
     @GetMapping
     public List<Estadistica> buscarTodasLasEstadisticas() {
         return estadisticaService.buscarTodas();
     }
 
+    @Operation(summary = "Get a statistic by Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "A statistic",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EstadisticaService.class)) })})
     @GetMapping("/{id}")
     public Estadistica buscarEstadisticaPorId(@PathVariable Long id) {
         return estadisticaService.buscarPorId(id);
     }
 
+    @Operation(summary = "Delete a statistic")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EstadisticaService.class)) })})
     @DeleteMapping("/{id}")
     public void eliminarEstadisticaPorId(@PathVariable Long id) {
         estadisticaService.eliminarPorId(id);

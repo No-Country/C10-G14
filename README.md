@@ -29,7 +29,7 @@ Application to manage flow of activities in a gym. The main features it includes
 
 ### BRANCHES
 In the current repository you will see three diferent branches
-- `master` -> this branch is only for productive versions, it has official release history.
+- `main` -> this branch is only for productive versions, it has official release history.
 - `develop` -> this branch serves as an integration branch for features. All features must start from this branch and after it's finished it gets merged back into develop.
 
 For understanding more about git and how to work with different branches, I recommend to read about Gitflow workflow. [Here](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) you have a little explanation that can serve as introduction.
