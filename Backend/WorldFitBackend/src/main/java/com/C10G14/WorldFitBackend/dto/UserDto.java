@@ -1,15 +1,14 @@
 package com.C10G14.WorldFitBackend.dto;
 
-import com.C10G14.WorldFitBackend.entity.Role;
-import com.C10G14.WorldFitBackend.entity.Routine;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class UserDto {
     private String email;
     private String clientSince;

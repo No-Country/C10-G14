@@ -90,20 +90,14 @@ public class UserServiceImpl implements UserService {
                 orElseThrow(()-> new NotFoundException("Error: User not found"));
         if (user.getRole().contains(roleRepository.findByName(ERole.ROLE_ADMIN).get()))
             throw new ForbiddenException("Error: Cant change admin role");
-        Map<String, ERole> roleMap = Map.of(
-                "user", ERole.ROLE_USER,
-                "couch", ERole.ROLE_COUCH,
-                "customer", ERole.ROLE_CUSTOMER,
-                "admin", ERole.ROLE_ADMIN);
-        ERole roleName = roleMap.get(requestRole);
+
+        ERole roleName = Role.RoletoERole(requestRole);
         if (roleName == null) {
             throw new NotFoundException("Error: Role not found");
         }
         Role role = roleRepository.findByName(roleName)
                 .orElseThrow(() -> new RuntimeException("Error: Role not found."));
-        List<Role> roles = new ArrayList<>();
-        roles.add(role);
-        user.setRole(roles);
+        user.getRole().add(role);
 
         userRepository.save(user);
         return mapper.entityToDto(user);
@@ -112,44 +106,13 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public List<UserDto> getByRole(String requestRole) throws JsonProcessingException {
-        Map<String, ERole> roleMap = Map.of(
-                "user", ERole.ROLE_USER,
-                "couch", ERole.ROLE_COUCH,
-                "customer", ERole.ROLE_CUSTOMER,
-                "admin", ERole.ROLE_ADMIN);
-        ERole roleName = roleMap.get(requestRole);
+        ERole roleName = Role.RoletoERole(requestRole);
         if (roleName == null) {
             throw new NotFoundException("Error: Role not found");
         }
         Role role = roleRepository.findByName(roleName)
                 .orElseThrow(() -> new RuntimeException("Error: Role not found."));
         return mapper.usersToDtoList(userRepository.findByRole(role).orElseThrow(() -> new RuntimeException("Error retrieving role " + requestRole)));
-    }
-
-    @Transactional
-    @Override
-    public UserDto addRoutine(Long id, Long routineId) throws JsonProcessingException {
-        User user = userRepository.findById(id).orElseThrow(()-> new NotFoundException("Error: User not found "));
-        Routine routine = routineRepository.findById(routineId).orElseThrow(() -> new NotFoundException("Error: Routine not found"));
-        Set<Routine> userRoutines = user.getRoutines();
-        userRoutines.add(routine);
-        userRepository.save(user);
-        return mapper.entityToDto(user);
-    }
-
-    @Transactional
-    @Override
-    public UserDto deleteRoutine(Long id, Long routineId) throws JsonProcessingException {
-        User user = userRepository.findById(id).orElseThrow(()-> new NotFoundException("Error: User not found "));
-        Routine routine = routineRepository.findById(routineId).orElseThrow(() -> new NotFoundException("Error: Routine not found"));
-        Set<Routine> userRoutines = user.getRoutines();
-        if (!userRoutines.contains(routine)){
-            throw new NotFoundException("Error: Routine Id not found in user " + user.getEmail());
-        }else{
-            userRoutines.remove(routine);
-            userRepository.save(user);
-        }
-        return mapper.entityToDto(user);
     }
 
     @Transactional
