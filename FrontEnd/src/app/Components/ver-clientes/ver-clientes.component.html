@@ -1,5 +1,6 @@
+<app-navbar></app-navbar>
 <div class="title">
-    <h1>Listado de Clientes</h1>
+    <h1>Listado de Clientes dfdfdf</h1>
 </div>
 
 
@@ -7,7 +8,7 @@
         <mat-form-field >
             <mat-label>Filtro</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input autocomplete="off">
-          </mat-form-field>
+        </mat-form-field>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z0" matSort>
     
             <ng-container matColumnDef="nombre">
@@ -40,8 +41,8 @@
                 </th>
                 <td mat-cell *matCellDef="let element"> 
                     <mat-icon routerLink="/vercliente/{{ element.id }}" matTooltip="Agregar rutina" class="search" fontIcon="add"></mat-icon> 
-                    <mat-icon routerLink="/editarcliente/{{ element.id }}" matTooltip="Editar rutinas" class="edit" fontIcon="edit"></mat-icon>    
-                       
+                    <mat-icon routerLink="/editar-rutinas" matTooltip="Editar rutinas" class="edit" fontIcon="edit"></mat-icon>    
+                    
                 </td>
             </ng-container>
     
