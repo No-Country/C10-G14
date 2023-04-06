@@ -1,5 +1,10 @@
 package com.C10G14.WorldFitBackend.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +26,15 @@ public class AuthController {
     @Autowired
     private AuthServiceImpl authService;
 
+    @Operation(summary = "Register a new user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "JWT token returned",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AuthController.class)) }),
+            @ApiResponse(responseCode = "400", description = "Error: Email is required",
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "Error: Password is required",
+                    content = @Content)})
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody
                                                                   RegisterRequestDto request) {
@@ -28,6 +42,15 @@ public class AuthController {
         return new ResponseEntity<>(registerResponse, HttpStatus.OK);
     }
 
+    @Operation(summary = "Authenticate a user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "JWT token returned",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AuthController.class)) }),
+            @ApiResponse(responseCode = "400", description = "Error: Email is required",
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "Error: Password is required",
+                    content = @Content)})
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponseDto> authenticateUser(@RequestBody
                                                                       AuthenticationRequestDto request) {
