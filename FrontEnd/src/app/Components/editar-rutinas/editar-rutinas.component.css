@@ -1,5 +1,63 @@
+body {
+  background-color: black;
+}
+
+
 .example-input-label,
 .example-add-tab-button,
 .example-delete-tab-button {
   margin: 8px;
+}
+
+.header-perfil{  
+  height: 140px;
+}
+
+.images-perfil {
+  width: 175px;
+  height: 175px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  left: 11%;
+  top: 5%;
+  z-index: 1900;  
+}
+
+.card-peso {  
+  border-left:solid 2px #fff;
+  
+  
+}
+
+@media (max-width: 768px) { 
+  .images-perfil {   
+    left: 25%;    
+    top: 15%;
+      
+  }
+  .header-perfil{  
+    height: 160px;
+  }
+  .card-peso {  
+    border: none;
+    
+  }
+}
+
+@media (max-width: 500px) { 
+  .images-perfil {  
+    top: 11%;
+    
+  }
+ 
+}
+
+.mat-mdc-card{
+  box-shadow: none;
+}
+
+.mat-mdc-card{
+  box-shadow: none;
 }
