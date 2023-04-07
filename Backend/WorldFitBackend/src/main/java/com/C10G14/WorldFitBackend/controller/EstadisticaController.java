@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -26,6 +27,7 @@ public class EstadisticaController {
             @ApiResponse(responseCode = "200", description = "A new statistic",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = EstadisticaService.class)) })})
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Estadistica guardarEstadistica(@RequestBody EstadisticaDto estadisticaDto) {
         Estadistica estadistica = new Estadistica();
@@ -43,6 +45,7 @@ public class EstadisticaController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = EstadisticaService.class)) })})
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Estadistica> buscarTodasLasEstadisticas() {
         return estadisticaService.buscarTodas();
     }
@@ -52,6 +55,7 @@ public class EstadisticaController {
             @ApiResponse(responseCode = "200", description = "A statistic",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = EstadisticaService.class)) })})
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public Estadistica buscarEstadisticaPorId(@PathVariable Long id) {
         return estadisticaService.buscarPorId(id);
@@ -62,6 +66,7 @@ public class EstadisticaController {
             @ApiResponse(responseCode = "200",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = EstadisticaService.class)) })})
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public void eliminarEstadisticaPorId(@PathVariable Long id) {
         estadisticaService.eliminarPorId(id);

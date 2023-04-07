@@ -1,6 +1,5 @@
 package com.C10G14.WorldFitBackend.service;
 
-import com.C10G14.WorldFitBackend.dto.Exercise_RoutineDto;
 import com.C10G14.WorldFitBackend.dto.SimpleUserDto;
 import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.entity.User;
