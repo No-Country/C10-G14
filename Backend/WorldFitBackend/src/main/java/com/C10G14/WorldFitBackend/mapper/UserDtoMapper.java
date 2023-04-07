@@ -21,13 +21,10 @@ import java.util.stream.Collectors;
 
 @Component
 public class UserDtoMapper {
-
     @Autowired
-    private UserRepository userRepository;
+    RoleRepository roleRepository;
     @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private RoutineDtoMapper routineMapper;
+    RoutineDtoMapper routineMapper;
 
     public UserDto entityToDto (User user) throws JsonProcessingException {
 

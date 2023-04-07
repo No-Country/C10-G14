@@ -68,9 +68,9 @@ public class UserServiceImpl implements UserService {
         if (userDto.getProfileImg() != null && !userDto.getProfileImg().isEmpty()) {
             user.setProfileImg(user.getProfileImg());
         }
-        if (userDto.getAge() != null && !userDto.getAge().isEmpty()) {
-            user.setAge(userDto.getAge());
-        }
+       // if (userDto.getAge() != null && !userDto.getAge().isEmpty()) {
+       //    user.setAge(userDto.getAge());
+       // }
         if (userDto.getSex() != null && !userDto.getSex().isEmpty()) {
             user.setSex(userDto.getSex());
         }

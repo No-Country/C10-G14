@@ -10,6 +10,7 @@ import com.C10G14.WorldFitBackend.mapper.ExerciseDtoMapper;
 import com.C10G14.WorldFitBackend.repository.ExerciseRepository;
 import com.C10G14.WorldFitBackend.repository.UnitRepository;
 import com.C10G14.WorldFitBackend.service.ExerciseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,15 +19,12 @@ import java.util.stream.Collectors;
 @Service
 public class ExerciseServiceImpl implements ExerciseService {
 
+    @Autowired
     private ExerciseRepository exerciseRepository;
+    @Autowired
     private UnitRepository unitRepository;
+    @Autowired
     private ExerciseDtoMapper DtoMaper;
-
-    public ExerciseServiceImpl(ExerciseRepository exerciseRepository, UnitRepository unitRepository, ExerciseDtoMapper dtoMaper) {
-        this.exerciseRepository = exerciseRepository;
-        this.unitRepository = unitRepository;
-        DtoMaper = dtoMaper;
-    }
 
     @Override
     public List<ExerciseResponseDto> getAllExercises() {
@@ -42,10 +40,10 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public ExerciseResponseDto createExercise(ExerciseRequestDto exerciseDto) {
-        Exercise exercise = DtoMaper.DtoToEntity(exerciseDto);
         if(exerciseRepository.existsByTitle(exerciseDto.getTitle())){
             throw new AlreadyExistException("Error: An exercise with that title already exists: " + exerciseDto.getTitle());
         }
+        Exercise exercise = DtoMaper.DtoToEntity(exerciseDto);
         Exercise newExercise = exerciseRepository.save(exercise);
         return DtoMaper.EntityToDto(newExercise);
     }

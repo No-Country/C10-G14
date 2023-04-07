@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class RoutineController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PostMapping
-    public ResponseEntity<RoutineResponseDto> createRoutine(@RequestBody RoutineRequestDto routine) {
+    public ResponseEntity<RoutineResponseDto> createRoutine(@RequestBody @Valid RoutineRequestDto routine) {
         RoutineResponseDto createdRoutine = routineService.createRoutine(routine);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdRoutine);
     }
@@ -89,7 +90,8 @@ public class RoutineController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PutMapping("/{id}")
-    public ResponseEntity<RoutineResponseDto> updateRoutine(@PathVariable Long id, @RequestBody RoutineRequestDto routine) {
+    public ResponseEntity<RoutineResponseDto> updateRoutine(@PathVariable Long id,
+                                                            @RequestBody @Valid RoutineRequestDto routine) {
         RoutineResponseDto updatedRoutine = routineService.updateRoutine(id, routine);
         return ResponseEntity.ok(updatedRoutine);
     }
@@ -126,7 +128,7 @@ public class RoutineController {
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PostMapping("/{id}/exercises")
     public ResponseEntity<RoutineResponseDto> addExercise(@PathVariable("id") long routineId,
-                                                  @RequestBody Exercise_RoutineRequestDto exercise) {
+                                                  @RequestBody @Valid Exercise_RoutineRequestDto exercise) {
         RoutineResponseDto updatedRoutine = routineService.addExercise(routineId,exercise);
         return new ResponseEntity<>(updatedRoutine, HttpStatus.OK);
     }
@@ -145,7 +147,7 @@ public class RoutineController {
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PutMapping("/{id}/exercises")
     public ResponseEntity<RoutineResponseDto> updateExercise(@PathVariable("id") long routineId,
-                                                  @RequestBody Exercise_RoutineRequestDto exercise) {
+                                                  @RequestBody @Valid Exercise_RoutineRequestDto exercise) {
         RoutineResponseDto updatedRoutine = routineService.updateExercise(routineId,exercise);
         return new ResponseEntity<>(updatedRoutine, HttpStatus.OK);
     }

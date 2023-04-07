@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,7 @@ public class AuthController {
             @ApiResponse(responseCode = "400", description = "Error: Password is required",
                     content = @Content)})
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody
+    public ResponseEntity<?> registerUser(@RequestBody @Valid
                                                                   RegisterRequestDto request) {
         AuthenticationResponseDto registerResponse = authService.register(request);
         return new ResponseEntity<>(registerResponse, HttpStatus.OK);
