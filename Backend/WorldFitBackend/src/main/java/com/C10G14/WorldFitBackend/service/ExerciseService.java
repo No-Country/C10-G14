@@ -1,16 +1,17 @@
 package com.C10G14.WorldFitBackend.service;
 
-import com.C10G14.WorldFitBackend.dto.ExerciseDto;
+import com.C10G14.WorldFitBackend.dto.ExerciseRequestDto;
+import com.C10G14.WorldFitBackend.dto.ExerciseResponseDto;
 
 import java.util.List;
 
 public interface ExerciseService {
-    List<ExerciseDto> getAllExercises();
+    List<ExerciseResponseDto> getAllExercises();
 
-    ExerciseDto getExerciseById (Long id);
+    ExerciseResponseDto getExerciseById (Long id);
 
-    ExerciseDto createExercise (ExerciseDto exerciseDto);
+    ExerciseResponseDto createExercise (ExerciseRequestDto exerciseDto);
 
-    ExerciseDto updateExercise (Long id, ExerciseDto exerciseDto);
+    ExerciseResponseDto updateExercise (Long id, ExerciseRequestDto exerciseDto);
     void deleteExercise (Long id);
 }

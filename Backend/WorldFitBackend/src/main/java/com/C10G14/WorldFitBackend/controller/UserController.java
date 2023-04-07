@@ -150,5 +150,23 @@ public class UserController {
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }
+
+    @Operation(summary = "Get user and its routines")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserController.class)) }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized",
+                    content = @Content),
+            @ApiResponse(responseCode = "403", description = "Forbidden",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Error: User not found",
+                    content = @Content),})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @GetMapping("/routine/{userId}")
+    public ResponseEntity<SimpleUserDto> getUserRoutines(@PathVariable Long userId) throws JsonProcessingException{
+        SimpleUserDto user = userService.getSimpleUserById(userId);
+        return ResponseEntity.ok(user);
+    }
 }
 

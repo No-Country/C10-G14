@@ -1,6 +1,7 @@
 package com.C10G14.WorldFitBackend.controller;
 
-import com.C10G14.WorldFitBackend.dto.ExerciseDto;
+import com.C10G14.WorldFitBackend.dto.ExerciseRequestDto;
+import com.C10G14.WorldFitBackend.dto.ExerciseResponseDto;
 import com.C10G14.WorldFitBackend.service.ExerciseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -29,8 +30,8 @@ public class ExerciseController {
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content)})
     @GetMapping("")
-    public ResponseEntity<List<ExerciseDto>> getAllExercises() {
-        List<ExerciseDto> exercises = exerciseService.getAllExercises();
+    public ResponseEntity<List<ExerciseResponseDto>> getAllExercises() {
+        List<ExerciseResponseDto> exercises = exerciseService.getAllExercises();
         return new ResponseEntity<>(exercises, HttpStatus.OK);
     }
 
@@ -46,8 +47,8 @@ public class ExerciseController {
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
     @GetMapping("/{id}")
-    public ResponseEntity<ExerciseDto> getExerciseById(@PathVariable Long id) {
-        ExerciseDto exercise = exerciseService.getExerciseById(id);
+    public ResponseEntity<ExerciseResponseDto> getExerciseById(@PathVariable Long id) {
+        ExerciseResponseDto exercise = exerciseService.getExerciseById(id);
         return new ResponseEntity<>(exercise, HttpStatus.OK);
     }
 
@@ -65,8 +66,8 @@ public class ExerciseController {
             @ApiResponse(responseCode = "409", description = "Error: An exercise with that title already exists",
                     content = @Content)})
     @PostMapping("")
-    public ResponseEntity<ExerciseDto> createExercise(@RequestBody ExerciseDto exercise) {
-        ExerciseDto createdExercise = exerciseService.createExercise(exercise);
+    public ResponseEntity<ExerciseResponseDto> createExercise(@RequestBody ExerciseRequestDto exercise) {
+        ExerciseResponseDto createdExercise = exerciseService.createExercise(exercise);
         return new ResponseEntity<>(createdExercise, HttpStatus.CREATED);
     }
 
@@ -82,8 +83,8 @@ public class ExerciseController {
             @ApiResponse(responseCode = "409", description = "Error: An exercise with that title already exists",
                     content = @Content)})
     @PutMapping("/{id}")
-    public ResponseEntity<ExerciseDto> updateExercise(@PathVariable Long id, @RequestBody ExerciseDto exercise) {
-        ExerciseDto updatedExercise = exerciseService.updateExercise(id, exercise);
+    public ResponseEntity<ExerciseResponseDto> updateExercise(@PathVariable Long id, @RequestBody ExerciseRequestDto exercise) {
+        ExerciseResponseDto updatedExercise = exerciseService.updateExercise(id, exercise);
         return new ResponseEntity<>(updatedExercise, HttpStatus.OK);
     }
 
