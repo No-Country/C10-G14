@@ -1,8 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url(//db.onlinewebfonts.com/c/066ce24dae3730ed6c648b09efaea93a?family=Acumin+Variable+Concept);
-@import url(//db.onlinewebfonts.com/c/e91a5bc5cc14152657a36e9549621ad2?family=DISPLAYED);
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap");
 
 :root {
   --primary-color: #ffc107;
@@ -14,13 +13,12 @@
   --text-white: #ffffff;
   --border-color: #303030;
   --form-error-color: #2ef8a0;
-  --font: "Acumin Variable Concept", sans-serif;
-  --font-displayed: "DISPLAYED", sans-serif;
+  --font: "Comfortaa";
 }
 
 html {
   box-sizing: border-box;
-  font-family: var(--font);
+  font-family: "Comfortaa";
   font-size: 16px;
   scroll-behavior: smooth;
   height: 100%;
