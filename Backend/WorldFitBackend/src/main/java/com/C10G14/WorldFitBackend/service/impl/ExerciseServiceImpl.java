@@ -1,6 +1,7 @@
 package com.C10G14.WorldFitBackend.service.impl;
 
-import com.C10G14.WorldFitBackend.dto.ExerciseDto;
+import com.C10G14.WorldFitBackend.dto.ExerciseRequestDto;
+import com.C10G14.WorldFitBackend.dto.ExerciseResponseDto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
 import com.C10G14.WorldFitBackend.exception.AlreadyExistException;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
@@ -28,19 +29,19 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public List<ExerciseDto> getAllExercises() {
+    public List<ExerciseResponseDto> getAllExercises() {
         List<Exercise> exercises = exerciseRepository.findAll();
         return exercises.stream().map(e -> DtoMaper.EntityToDto(e)).collect(Collectors.toList());
     }
 
     @Override
-    public ExerciseDto getExerciseById(Long id) {
+    public ExerciseResponseDto getExerciseById(Long id) {
         Exercise exercise = exerciseRepository.findById(id).orElseThrow(()-> new NotFoundException("Exercise not found"));
         return DtoMaper.EntityToDto(exercise);
     }
 
     @Override
-    public ExerciseDto createExercise(ExerciseDto exerciseDto) {
+    public ExerciseResponseDto createExercise(ExerciseRequestDto exerciseDto) {
         Exercise exercise = DtoMaper.DtoToEntity(exerciseDto);
         if(exerciseRepository.existsByTitle(exerciseDto.getTitle())){
             throw new AlreadyExistException("Error: An exercise with that title already exists: " + exerciseDto.getTitle());
@@ -50,7 +51,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public ExerciseDto updateExercise(Long id, ExerciseDto exerciseDto) {
+    public ExerciseResponseDto updateExercise(Long id, ExerciseRequestDto exerciseDto) {
         Exercise exercise = exerciseRepository.findById(id).orElseThrow(() -> new NotFoundException("Exercise not found"));
         Exercise updatedExercise = DtoMaper.DtoToEntity(exerciseDto);
         updatedExercise.setId(exercise.getId());

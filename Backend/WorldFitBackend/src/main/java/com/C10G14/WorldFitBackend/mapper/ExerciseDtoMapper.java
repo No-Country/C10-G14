@@ -1,6 +1,7 @@
 package com.C10G14.WorldFitBackend.mapper;
 
-import com.C10G14.WorldFitBackend.dto.ExerciseDto;
+import com.C10G14.WorldFitBackend.dto.ExerciseRequestDto;
+import com.C10G14.WorldFitBackend.dto.ExerciseResponseDto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
 import com.C10G14.WorldFitBackend.exception.AlreadyExistException;
 import com.C10G14.WorldFitBackend.exception.CantBeEmptyException;
@@ -22,8 +23,8 @@ public class ExerciseDtoMapper {
         this.exerciseRepository = exerciseRepository;
     }
 
-    public ExerciseDto EntityToDto (Exercise exercise) {
-        return new ExerciseDto(
+    public ExerciseResponseDto EntityToDto (Exercise exercise) {
+        return new ExerciseResponseDto(
                 exercise.getId(),
                 exercise.getTitle(),
                 exercise.getDescription(),
@@ -32,7 +33,7 @@ public class ExerciseDtoMapper {
         );
     }
 
-    public Exercise DtoToEntity (ExerciseDto exerciseDto) {
+    public Exercise DtoToEntity (ExerciseRequestDto exerciseDto) {
         if (Objects.equals(exerciseDto.getTitle(),"")
             || exerciseDto.getTitle() == null){
             throw new CantBeEmptyException("Title is required");
@@ -42,7 +43,8 @@ public class ExerciseDtoMapper {
                 exerciseDto.getTitle(),
                 exerciseDto.getDescription(),
                 exerciseDto.getMedia(),
-                unitRepository.findByName(exerciseDto.unitToEUnit()).orElseThrow(()-> new NotFoundException("Unit must be either: 'Km', 'Kg' or null"))
+                unitRepository.findByName(exerciseDto.unitToEUnit())
+                        .orElseThrow(()-> new NotFoundException("Unit must be either: 'Km', 'Kg' or null"))
         );
     }
 

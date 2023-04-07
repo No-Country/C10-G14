@@ -9,14 +9,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExerciseDto {
+public class ExerciseResponseDto {
     private long id;
     private String title;
     private String description;
     private String media;
     private String unit;
 
-    public ExerciseDto(String title, String description, String media, String unit) {
+    public ExerciseResponseDto(String title, String description, String media, String unit) {
         this.title = title;
         this.description = description;
         this.media = media;
