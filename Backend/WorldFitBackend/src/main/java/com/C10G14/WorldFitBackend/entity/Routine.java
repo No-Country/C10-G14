@@ -12,10 +12,9 @@ import java.util.Set;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "Routines")
 @Entity
-@NoArgsConstructor
-
 public class Routine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,10 +32,25 @@ public class Routine {
     )
     private Set<Exercise_Routine> exercises;
 
-    public Routine(Long id, String title) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "ID", nullable = false)
+    private User user;
+
+    public Routine(Long id, String title, User user) {
         this.id = id;
         this.title = title;
-        this.exercises= new HashSet<>();
+        this.user = user;
+        this.exercises = new HashSet<>();
+    }
+
+    public Routine(String title, User user) {
+        this.title = title;
+        this.user = user;
+        this.exercises = new HashSet<>();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Routine(String title) {
@@ -50,13 +64,18 @@ public class Routine {
         exercise.getRoutines().add(exercise_routine);
     }
 
-    @Override
-    public String toString() {
-        return "Routine{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", exercises=" + exercises +
-                '}';
+    public void removeExercise(Exercise exercise) {
+        exercises.removeIf(e -> e.getRoutine().equals(this) && e.getExercise().equals(exercise));
+    }
+
+    public void updateExercise(Exercise exercise, int quantity,int repetitions, int series) {
+        exercises.stream()
+                .filter(e -> e.getRoutine().equals(this)
+                        && e.getExercise().equals(exercise))
+                .findFirst()
+                .ifPresent(e -> {e.setRepetitions(repetitions);
+                e.setSeries(series);
+                e.setQuantity(quantity);});
     }
 }
 

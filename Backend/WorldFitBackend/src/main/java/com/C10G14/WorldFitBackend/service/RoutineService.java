@@ -1,17 +1,24 @@
 package com.C10G14.WorldFitBackend.service;
 
-import com.C10G14.WorldFitBackend.dto.RoutineDto;
+import com.C10G14.WorldFitBackend.dto.Exercise_RoutineRequestDto;
+import com.C10G14.WorldFitBackend.dto.RoutineRequestDto;
+import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
 
 import java.util.List;
 
 public interface RoutineService {
 
-    List<RoutineDto> getAllRoutines();
+    List<RoutineResponseDto> getAllRoutines();
 
-    RoutineDto getRoutineById (Long id);
+    RoutineResponseDto getRoutineById (long id);
 
-    RoutineDto createRoutine (RoutineDto routineDto);
+    RoutineResponseDto createRoutine (RoutineRequestDto routineDto);
 
-    RoutineDto updateRoutine (Long id, RoutineDto routineDto);
-    void deleteRoutine (Long id);
+    RoutineResponseDto updateRoutine (long id, RoutineRequestDto routineDto);
+    void deleteRoutine (long id);
+    RoutineResponseDto addExercise(long routineId, Exercise_RoutineRequestDto exerciseId);
+
+    RoutineResponseDto updateExercise(long routineId, Exercise_RoutineRequestDto exercise);
+
+    RoutineResponseDto removeExercise(long routineId, long exerciseId);
 }

@@ -9,6 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+
+
         "primary-color": "#ffc107",
         "secondary-color": "#ffd740",
         "bg-first": "#212529",
@@ -21,6 +23,7 @@ module.exports = {
         wth: "#ffffff",
         "error-color": "#ff0000",
         "border-color": "#303030",
+
       },
     },
   },
