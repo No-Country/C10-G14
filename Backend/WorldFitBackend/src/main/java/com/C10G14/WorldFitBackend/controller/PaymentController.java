@@ -1,7 +1,6 @@
 package com.C10G14.WorldFitBackend.controller;
 
 import com.C10G14.WorldFitBackend.dto.PaymentDto;
-import com.C10G14.WorldFitBackend.entity.Payment;
 import com.C10G14.WorldFitBackend.service.PaymentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,7 +20,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
 
-    @Operation(summary = "add a new payment")
+    @Operation(summary = "Add a new payment")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "A new payment",
                     content = { @Content(mediaType = "application/json",
@@ -53,7 +52,7 @@ public class PaymentController {
         return new ResponseEntity<>(payment, HttpStatus.OK);
     }
 
-    @Operation(summary = "Update a existing payment")
+    @Operation(summary = "Update an existing payment")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "A updated payment",
                     content = { @Content(mediaType = "application/json",

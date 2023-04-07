@@ -3,7 +3,6 @@ package com.C10G14.WorldFitBackend.service.impl;
 import com.C10G14.WorldFitBackend.dto.SimpleUserDto;
 import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.entity.Role;
-import com.C10G14.WorldFitBackend.entity.Routine;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.enumeration.ERole;
 import com.C10G14.WorldFitBackend.exception.ForbiddenException;
@@ -18,10 +17,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
 
 @Service
 public class UserServiceImpl implements UserService {

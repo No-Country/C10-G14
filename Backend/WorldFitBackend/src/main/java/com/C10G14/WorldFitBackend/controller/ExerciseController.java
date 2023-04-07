@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class ExerciseController {
                             schema = @Schema(implementation = ExerciseController.class)) }),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @GetMapping("")
     public ResponseEntity<List<ExerciseResponseDto>> getAllExercises() {
         List<ExerciseResponseDto> exercises = exerciseService.getAllExercises();
@@ -46,6 +48,7 @@ public class ExerciseController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @GetMapping("/{id}")
     public ResponseEntity<ExerciseResponseDto> getExerciseById(@PathVariable Long id) {
         ExerciseResponseDto exercise = exerciseService.getExerciseById(id);
@@ -65,6 +68,7 @@ public class ExerciseController {
                     content = @Content),
             @ApiResponse(responseCode = "409", description = "Error: An exercise with that title already exists",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PostMapping("")
     public ResponseEntity<ExerciseResponseDto> createExercise(@RequestBody ExerciseRequestDto exercise) {
         ExerciseResponseDto createdExercise = exerciseService.createExercise(exercise);
@@ -82,6 +86,7 @@ public class ExerciseController {
                     content = @Content),
             @ApiResponse(responseCode = "409", description = "Error: An exercise with that title already exists",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PutMapping("/{id}")
     public ResponseEntity<ExerciseResponseDto> updateExercise(@PathVariable Long id, @RequestBody ExerciseRequestDto exercise) {
         ExerciseResponseDto updatedExercise = exerciseService.updateExercise(id, exercise);
@@ -99,6 +104,7 @@ public class ExerciseController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteExercise(@PathVariable Long id) {
         exerciseService.deleteExercise(id);

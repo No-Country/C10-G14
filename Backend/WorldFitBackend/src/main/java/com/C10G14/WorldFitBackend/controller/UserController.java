@@ -56,7 +56,7 @@ public class UserController {
         return userService.getByRole(role);
     }
 
-    @Operation(summary = "Get one user by Id")
+    @Operation(summary = "Get user complete information by Id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "A user",
                     content = { @Content(mediaType = "application/json",
@@ -114,7 +114,7 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    @Operation(summary = "Update the role of a user")
+    @Operation(summary = "Update the role of an user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "A user with updated roles",
                     content = { @Content(mediaType = "application/json",
@@ -133,7 +133,7 @@ public class UserController {
     }
 
 
-    @Operation(summary = "Delete a user")
+    @Operation(summary = "Delete an user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     content = { @Content(mediaType = "application/json",
@@ -155,7 +155,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserController.class)) }),
+                            schema = @Schema(implementation = SimpleUserDto.class)) }),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",

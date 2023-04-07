@@ -42,7 +42,7 @@ public class AuthController {
         return new ResponseEntity<>(registerResponse, HttpStatus.OK);
     }
 
-    @Operation(summary = "Authenticate a user")
+    @Operation(summary = "Authenticate an user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "JWT token returned",
                     content = { @Content(mediaType = "application/json",

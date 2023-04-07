@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PostMapping
     public ResponseEntity<RoutineResponseDto> createRoutine(@RequestBody RoutineRequestDto routine) {
         RoutineResponseDto createdRoutine = routineService.createRoutine(routine);
@@ -49,6 +51,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @GetMapping
     public ResponseEntity<List<RoutineResponseDto>> getAllRoutines() {
         List<RoutineResponseDto> routines = routineService.getAllRoutines();
@@ -66,6 +69,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: Routine don't exist",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @GetMapping("/{id}")
     public ResponseEntity<RoutineResponseDto> getRoutineById(@PathVariable Long id) {
         RoutineResponseDto routine = routineService.getRoutineById(id);
@@ -83,9 +87,9 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: Routine don't exist",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PutMapping("/{id}")
     public ResponseEntity<RoutineResponseDto> updateRoutine(@PathVariable Long id, @RequestBody RoutineRequestDto routine) {
-        //routine.setId(id);
         RoutineResponseDto updatedRoutine = routineService.updateRoutine(id, routine);
         return ResponseEntity.ok(updatedRoutine);
     }
@@ -101,6 +105,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: Routine don't exist",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteRoutine(@PathVariable Long id) {
         routineService.deleteRoutine(id);
@@ -118,6 +123,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PostMapping("/{id}/exercises")
     public ResponseEntity<RoutineResponseDto> addExercise(@PathVariable("id") long routineId,
                                                   @RequestBody Exercise_RoutineRequestDto exercise) {
@@ -125,7 +131,7 @@ public class RoutineController {
         return new ResponseEntity<>(updatedRoutine, HttpStatus.OK);
     }
 
-    @Operation(summary = "Update a exercise in a existing routine")
+    @Operation(summary = "Update an exercise in an existing routine")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "A routine with a updated exercise",
                     content = { @Content(mediaType = "application/json",
@@ -136,6 +142,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PutMapping("/{id}/exercises")
     public ResponseEntity<RoutineResponseDto> updateExercise(@PathVariable("id") long routineId,
                                                   @RequestBody Exercise_RoutineRequestDto exercise) {
@@ -143,7 +150,7 @@ public class RoutineController {
         return new ResponseEntity<>(updatedRoutine, HttpStatus.OK);
     }
 
-    @Operation(summary = "Remove a exercise from a existing routine")
+    @Operation(summary = "Remove an exercise from an existing routine")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "A routine without the removed exercise",
                     content = { @Content(mediaType = "application/json",
@@ -154,6 +161,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @DeleteMapping("/{id}/exercises")
     public ResponseEntity<RoutineResponseDto> removeExercise(@PathVariable("id") long routineId,
                                                   @RequestBody Map <String,Long> exerciseId) {
