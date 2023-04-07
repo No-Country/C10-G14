@@ -6,6 +6,7 @@ import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
 import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.enumeration.ERole;
+import com.C10G14.WorldFitBackend.exception.InputNotValidException;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,14 @@ public class AuthDtoMapper {
             || registerRequestDto.getPassword() == null){
             throw new CantBeEmptyException("Error: Email and password are required");
         }
+        /*
+        if (!registerRequestDto.getEmail().matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
+            throw new InputNotValidException("Email direction isn't valid");
+        }*/
+        /*if (!registerRequestDto.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[.@#$%^&+=])(?=\\S+$).{8,20}$")) {
+            throw new InputNotValidException("Password must contain: at least 8 characters,1 digit, 1 upper case and 1 lower case letter and 1 special character");
+        }*/
+
         if (userRepository.existsByEmail(registerRequestDto.getEmail())){
             throw new AlreadyExistException("Error: Email already taken");
         }
