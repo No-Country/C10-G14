@@ -12,6 +12,7 @@ import { VerClientesComponent } from './Components/ver-clientes/ver-clientes.com
 import { EditarRutinasComponent } from './Components/editar-rutinas/editar-rutinas.component';
 import { EditarEjercicioComponent } from './Components/editar-ejercicio/editar-ejercicio.component';
 import { RutinasComponent } from './Components/forms/rutinas/rutinas.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent, RutinaComponent, InicioComponent, VerClientesComponent, EditarRutinasComponent, EditarEjercicioComponent, RutinasComponent],

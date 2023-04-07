@@ -21,8 +21,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 @NgModule({
   declarations: [],
+  
   imports: [
     CommonModule,
     MatCheckboxModule,

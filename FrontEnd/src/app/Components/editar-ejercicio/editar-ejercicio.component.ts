@@ -3,7 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Rutina } from 'src/app/Interface/rutina';
-import { ClienteService } from 'src/app/Services/cliente.service';
 import { RutinaService } from 'src/app/Services/rutina.service';
 import { RutinasComponent } from '../forms/rutinas/rutinas.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -38,13 +37,16 @@ export class EditarEjercicioComponent {
       // console.log(this.dataSource);
     })
   }
-  openDialog() {
-    const dialogRef = this.dialog.open(RutinasComponent,{
-      width: '100vw',
-      disableClose: true
+  openDialog(): void {
+    const dialogRef = this.dialog.open(RutinasComponent, {
+      
     });
 
-    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
   }
 }
 
+    
