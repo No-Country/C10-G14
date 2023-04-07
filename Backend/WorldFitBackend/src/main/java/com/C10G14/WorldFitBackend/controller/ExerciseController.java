@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,7 +71,7 @@ public class ExerciseController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PostMapping("")
-    public ResponseEntity<ExerciseResponseDto> createExercise(@RequestBody ExerciseRequestDto exercise) {
+    public ResponseEntity<ExerciseResponseDto> createExercise(@RequestBody @Valid ExerciseRequestDto exercise) {
         ExerciseResponseDto createdExercise = exerciseService.createExercise(exercise);
         return new ResponseEntity<>(createdExercise, HttpStatus.CREATED);
     }
@@ -88,7 +89,7 @@ public class ExerciseController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PutMapping("/{id}")
-    public ResponseEntity<ExerciseResponseDto> updateExercise(@PathVariable Long id, @RequestBody ExerciseRequestDto exercise) {
+    public ResponseEntity<ExerciseResponseDto> updateExercise(@PathVariable Long id, @RequestBody @Valid ExerciseRequestDto exercise) {
         ExerciseResponseDto updatedExercise = exerciseService.updateExercise(id, exercise);
         return new ResponseEntity<>(updatedExercise, HttpStatus.OK);
     }

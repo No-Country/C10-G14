@@ -23,27 +23,8 @@ public class AuthDtoMapper {
     RoleRepository roleRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
-    @Autowired
-    private UserRepository userRepository;
 
     public User requestToEntity(RegisterRequestDto registerRequestDto){
-        if (Objects.equals(registerRequestDto.getEmail(), "")
-            || Objects.equals(registerRequestDto.getPassword(), "")
-            || registerRequestDto.getEmail() == null
-            || registerRequestDto.getPassword() == null){
-            throw new CantBeEmptyException("Error: Email and password are required");
-        }
-        /*
-        if (!registerRequestDto.getEmail().matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
-            throw new InputNotValidException("Email direction isn't valid");
-        }*/
-        /*if (!registerRequestDto.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[.@#$%^&+=])(?=\\S+$).{8,20}$")) {
-            throw new InputNotValidException("Password must contain: at least 8 characters,1 digit, 1 upper case and 1 lower case letter and 1 special character");
-        }*/
-
-        if (userRepository.existsByEmail(registerRequestDto.getEmail())){
-            throw new AlreadyExistException("Error: Email already taken");
-        }
         List<Role> roles = new ArrayList<Role>();
         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                 .orElseThrow(()-> new RuntimeException("Role USER not found"));

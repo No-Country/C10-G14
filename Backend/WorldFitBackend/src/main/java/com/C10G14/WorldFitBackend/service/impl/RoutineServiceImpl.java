@@ -20,19 +20,18 @@ import java.util.stream.Collectors;
 @Service
 public class RoutineServiceImpl implements RoutineService {
 
-    private RoutineRepository routineRepository;
-    private ExerciseRepository exerciseRepository;
-    private RoutineDtoMapper DtoMaper;
-
     @Autowired
-    public RoutineServiceImpl(RoutineRepository routineRepository, ExerciseRepository exerciseRepository, RoutineDtoMapper dtoMaper) {
-        this.routineRepository = routineRepository;
-        this.exerciseRepository = exerciseRepository;
-        this.DtoMaper = dtoMaper;
-    }
+    private RoutineRepository routineRepository;
+    @Autowired
+    private ExerciseRepository exerciseRepository;
+    @Autowired
+    private RoutineDtoMapper DtoMaper;
 
     @Override
     public RoutineResponseDto createRoutine(RoutineRequestDto routineDto) {
+        if(routineRepository.existsByTitleAndUser_Id(routineDto.getTitle(), routineDto.getUserId())){
+            throw new AlreadyExistException("The User already has routine with that name: " + routineDto.getTitle());
+        };
         Routine routine = DtoMaper.DtoToEntity(routineDto);
         Routine newRoutine = routineRepository.save(routine);
         return DtoMaper.EntityToDto(newRoutine);
@@ -53,10 +52,8 @@ public class RoutineServiceImpl implements RoutineService {
     @Override
     public RoutineResponseDto updateRoutine(long id, RoutineRequestDto routineDto) {
         Routine routine = routineRepository.findById(id).orElseThrow(()-> new NotFoundException("Routine not found"));
-
         routine.setTitle(routineDto.getTitle());
         Routine updatedRoutine = routineRepository.save(routine);
-
         return DtoMaper.EntityToDto(updatedRoutine);
     }
 

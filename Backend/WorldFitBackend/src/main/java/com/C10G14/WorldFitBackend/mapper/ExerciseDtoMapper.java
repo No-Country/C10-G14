@@ -8,6 +8,7 @@ import com.C10G14.WorldFitBackend.exception.CantBeEmptyException;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.repository.ExerciseRepository;
 import com.C10G14.WorldFitBackend.repository.UnitRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -15,13 +16,8 @@ import java.util.Objects;
 @Service
 public class ExerciseDtoMapper {
 
+     @Autowired
      UnitRepository unitRepository;
-     ExerciseRepository exerciseRepository;
-
-    public ExerciseDtoMapper(UnitRepository unitRepository, ExerciseRepository exerciseRepository) {
-        this.unitRepository = unitRepository;
-        this.exerciseRepository = exerciseRepository;
-    }
 
     public ExerciseResponseDto EntityToDto (Exercise exercise) {
         return new ExerciseResponseDto(
@@ -34,10 +30,6 @@ public class ExerciseDtoMapper {
     }
 
     public Exercise DtoToEntity (ExerciseRequestDto exerciseDto) {
-        if (Objects.equals(exerciseDto.getTitle(),"")
-            || exerciseDto.getTitle() == null){
-            throw new CantBeEmptyException("Title is required");
-        }
 
         return new Exercise(
                 exerciseDto.getTitle(),

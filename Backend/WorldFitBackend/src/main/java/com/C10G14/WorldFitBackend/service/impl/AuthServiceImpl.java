@@ -1,6 +1,7 @@
 package com.C10G14.WorldFitBackend.service.impl;
 
 import com.C10G14.WorldFitBackend.enumeration.ERole;
+import com.C10G14.WorldFitBackend.exception.AlreadyExistException;
 import com.C10G14.WorldFitBackend.mapper.AuthDtoMapper;
 import com.C10G14.WorldFitBackend.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -37,9 +38,14 @@ public class AuthServiceImpl implements AuthService {
     
     @Autowired
     private AuthDtoMapper authMapper;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public AuthenticationResponseDto register(RegisterRequestDto request) {
+        if (userRepository.existsByEmail(request.getEmail())){
+            throw new AlreadyExistException("Error: Email already taken");
+        }
         User newUser = authMapper.requestToEntity(request);
         userrepository.save(newUser);
         String jwtToken = jwtService.generateToken(newUser);
