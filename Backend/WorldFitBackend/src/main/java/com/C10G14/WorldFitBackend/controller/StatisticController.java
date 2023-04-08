@@ -1,8 +1,11 @@
 package com.C10G14.WorldFitBackend.controller;
 
-import com.C10G14.WorldFitBackend.dto.EstadisticaDto;
-import com.C10G14.WorldFitBackend.entity.Estadistica;
-import com.C10G14.WorldFitBackend.service.EstadisticaService;
+import com.C10G14.WorldFitBackend.dto.StatisticDto;
+import com.C10G14.WorldFitBackend.dto.statisticDto;
+import com.C10G14.WorldFitBackend.entity.Statistic;
+import com.C10G14.WorldFitBackend.entity.statistic;
+import com.C10G14.WorldFitBackend.service.StatisticService;
+import com.C10G14.WorldFitBackend.service.statisticService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -16,59 +19,53 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/estadisticas")
-public class EstadisticaController {
+@RequestMapping("/statistics")
+public class StatisticController {
 
     @Autowired
-    private EstadisticaService estadisticaService;
+    private StatisticService statisticService;
 
     @Operation(summary = "Create new statistic")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "A new statistic",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = EstadisticaService.class)) })})
+                            schema = @Schema(implementation = StatisticController.class)) })})
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public Estadistica guardarEstadistica(@RequestBody EstadisticaDto estadisticaDto) {
-        Estadistica estadistica = new Estadistica();
-        // mapear datos de estadisticasDto a estadistica
-        estadistica.setFecha(LocalDate.parse(estadisticaDto.getFecha()));
-        estadistica.setTotalIngresos(estadisticaDto.getTotalIngresos());
-        estadistica.setTotalEgresos(estadisticaDto.getTotalEgresos());
-        // ...
-        return estadisticaService.guardar(estadistica);
+    public Statistic saveStatistic(@RequestBody StatisticDto statisticDto) {
+        return statisticService.save();
     }
 
     @Operation(summary = "Get all statistics")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "A list of statistics",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = EstadisticaService.class)) })})
+                            schema = @Schema(implementation = StatisticController.class)) })})
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public List<Estadistica> buscarTodasLasEstadisticas() {
-        return estadisticaService.buscarTodas();
+    public List<Statistic> searchAllLasstatistics() {
+        return statisticService.getAll();
     }
 
     @Operation(summary = "Get a statistic by Id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "A statistic",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = EstadisticaService.class)) })})
+                            schema = @Schema(implementation = StatisticController.class)) })})
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
-    public Estadistica buscarEstadisticaPorId(@PathVariable Long id) {
-        return estadisticaService.buscarPorId(id);
+    public Statistic searchtatisticById(@PathVariable Long id) {
+        return statisticService.getById(id);
     }
 
     @Operation(summary = "Delete a statistic")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = EstadisticaService.class)) })})
+                            schema = @Schema(implementation = StatisticController.class)) })})
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public void eliminarEstadisticaPorId(@PathVariable Long id) {
-        estadisticaService.eliminarPorId(id);
+    public void deleteStatisticById(@PathVariable Long id) {
+        statisticService.deleteById(id);
     }
 }
