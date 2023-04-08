@@ -17,9 +17,9 @@ public class UserDto {
     private String clientSince;
     private List<String> roles;
     private String profileImg;
-    private String weight;
-    private String height;
+    private Double weight;
+    private Double height;
     private String sex;
-    private int age;
+    private Integer age;
     private List<RoutineResponseDto> routines;
 }

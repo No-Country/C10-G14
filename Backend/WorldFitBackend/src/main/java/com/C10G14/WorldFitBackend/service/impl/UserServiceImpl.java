@@ -5,7 +5,9 @@ import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.enumeration.ERole;
+import com.C10G14.WorldFitBackend.enumeration.ESex;
 import com.C10G14.WorldFitBackend.exception.ForbiddenException;
+import com.C10G14.WorldFitBackend.exception.InputNotValidException;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.mapper.UserDtoMapper;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
@@ -14,6 +16,7 @@ import com.C10G14.WorldFitBackend.repository.UserRepository;
 import com.C10G14.WorldFitBackend.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.InvalidPropertyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,13 +71,20 @@ public class UserServiceImpl implements UserService {
         if (userDto.getProfileImg() != null && !userDto.getProfileImg().isEmpty()) {
             user.setProfileImg(user.getProfileImg());
         }
-       // if (userDto.getAge() != null && !userDto.getAge().isEmpty()) {
-       //    user.setAge(userDto.getAge());
-       // }
-        if (userDto.getSex() != null && !userDto.getSex().isEmpty()) {
-            user.setSex(userDto.getSex());
+        if (userDto.getAge() != null) {
+           user.setAge(userDto.getAge());
         }
-        if (userDto.getHeight() != null && !userDto.getHeight().isEmpty()) {
+        if (userDto.getSex() != null && !userDto.getSex().isEmpty()) {
+            if (userDto.getSex().equals("male"))
+                user.setSex(ESex.MALE);
+            else if (userDto.getSex().equals("female"))
+                user.setSex(ESex.FEMALE);
+            else throw new InputNotValidException("Invalid gender, must be male or female");
+        }
+        if (userDto.getWeight() != null) {
+            user.setWeight(userDto.getWeight());
+        }
+        if (userDto.getHeight() != null) {
             user.setHeight(userDto.getHeight());
         }
         userRepository.save(user);
