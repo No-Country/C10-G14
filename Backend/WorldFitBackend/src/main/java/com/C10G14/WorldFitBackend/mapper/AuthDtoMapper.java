@@ -6,6 +6,7 @@ import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
 import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.enumeration.ERole;
+import com.C10G14.WorldFitBackend.exception.InputNotValidException;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +23,8 @@ public class AuthDtoMapper {
     RoleRepository roleRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
-    @Autowired
-    private UserRepository userRepository;
 
     public User requestToEntity(RegisterRequestDto registerRequestDto){
-        if (Objects.equals(registerRequestDto.getEmail(), "")
-            || Objects.equals(registerRequestDto.getPassword(), "")
-            || registerRequestDto.getEmail() == null
-            || registerRequestDto.getPassword() == null){
-            throw new CantBeEmptyException("Error: Email and password are required");
-        }
-        if (userRepository.existsByEmail(registerRequestDto.getEmail())){
-            throw new AlreadyExistException("Error: Email already taken");
-        }
         List<Role> roles = new ArrayList<Role>();
         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                 .orElseThrow(()-> new RuntimeException("Role USER not found"));

@@ -3,7 +3,6 @@ package com.C10G14.WorldFitBackend.service;
 import com.C10G14.WorldFitBackend.dto.Exercise_RoutineRequestDto;
 import com.C10G14.WorldFitBackend.dto.RoutineRequestDto;
 import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
-import com.C10G14.WorldFitBackend.entity.Routine;
 
 import java.util.List;
 
@@ -22,6 +21,4 @@ public interface RoutineService {
     RoutineResponseDto updateExercise(long routineId, Exercise_RoutineRequestDto exercise);
 
     RoutineResponseDto removeExercise(long routineId, long exerciseId);
-
-
 }

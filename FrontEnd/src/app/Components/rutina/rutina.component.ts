@@ -15,9 +15,9 @@ export class RutinaComponent implements OnInit  {
 constructor(private datosRutina: RutinaService) { }
   ngOnInit(): void {
     this.datosRutina.obtenerDatos().subscribe((data) => {
-      console.log(data);
+     
       this.rutinasLista = data.usuario1.routines;      
-      console.log(this.rutinasLista)
+     
       
     });
     //this.numero = this.miRutina.dia1[0].series;

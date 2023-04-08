@@ -1,0 +1,35 @@
+<div class="conteiner bg-dark ">
+  <div class="header-perfil bg-warning pt-3">
+    <img src="./assets/img/Logo-seccion-editar-rutinas.png" class="img-fluid mx-auto d-block col-8 col-md-4 mt-2  " alt="...">
+    <button class="position-absolute top-0 end-0 mt-1 me-1 mt-sm-3 me-sm-4" mat-mini-fab matTooltip="Cerrar" color="warn" aria-label="Example fab with a heart icon">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+  <div class="col-md-3 images-perfil ">
+    <img src="./assets/img/foto-3.png" class="img-fluid rounded-start" alt="...">
+  </div>
+  <mat-card class="pt-5 mt-5 pt-md-0 mt-md-0 mb-4 bg-dark text-white">
+    <mat-card-content class=" ps-0 p-md-0 pt-3 ">    
+      <div class="row g-0 justify-content-end">
+        <div class="col-md-3"></div>      
+        <div class="col-md-5">
+          <div class="card-body pt-3 ps-4 ps-md-0 ">
+            <h2 class="card-title fs-4 ">Nombre del Cliente</h2>
+            <p class="card-text fs-4">Sexo: Femenino</p>
+            <p class="card-text fs-5"><small class="">Edad: 32 años</small></p>
+          </div>
+        </div>
+        <div class="card-peso mt-4 mt-md-0 col-md-3 text-center fs-3 ">
+          <div class="h-50 bg-white text-dark align-middle p-2">PESO: 58 Kg</div>
+          <div class="h-50 bg-dark  align-middle p-2">IMC: 22</div>
+        </div>
+      </div>
+    
+    </mat-card-content>
+  </mat-card>
+</div>
+
+  <mat-tab-group>
+    <mat-tab   *ngFor="let rutina of rutinasLista" [label]="rutina.title" > 
+    <app-editar-ejercicio [dataIdRutinas]="rutina.id-1"></app-editar-ejercicio>
+    </mat-tab>

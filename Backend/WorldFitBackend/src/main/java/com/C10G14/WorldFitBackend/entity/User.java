@@ -2,6 +2,8 @@ package com.C10G14.WorldFitBackend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,7 +29,6 @@ public class User  implements UserDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-
     @Column(name = "EMAIL")
     private String email;
 
@@ -50,7 +51,7 @@ public class User  implements UserDetails{
     private String sex;
 
     @Column(name = "AGE")
-    private String age;
+    private int age;
 
     @JsonBackReference
     @OneToMany(mappedBy = "user",

@@ -20,7 +20,8 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "TITLE")
+    @Column(name = "TITLE",
+            unique = true)
     private String title;
 
     @Column(name = "DESCRIPTION")
@@ -38,9 +39,9 @@ public class Exercise {
 
     @JsonBackReference
     @OneToMany(
-            mappedBy = "exercise",
-            cascade = CascadeType.MERGE,
-            orphanRemoval = true
+            mappedBy = "exercise"
+            //,cascade = CascadeType.MERGE,
+           // orphanRemoval = true
     )
     private Set<Exercise_Routine> routines;
 

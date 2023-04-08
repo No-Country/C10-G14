@@ -1,5 +1,7 @@
 package com.C10G14.WorldFitBackend.mapper;
 
+import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
+import com.C10G14.WorldFitBackend.dto.SimpleUserDto;
 import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.Routine;
@@ -15,37 +17,44 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class UserDtoMapper {
-
     @Autowired
-    private UserRepository userRepository;
+    RoleRepository roleRepository;
     @Autowired
-    private RoleRepository roleRepository;
+    RoutineDtoMapper routineMapper;
 
     public UserDto entityToDto (User user) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        List<String> routineJsonList = new ArrayList<>();
-        for (Routine routine : user.getRoutines()) {
-            String routineJson = mapper.writeValueAsString(routine);
-            routineJsonList.add(routineJson);
-        }
 
-        List<String> strRoles = new ArrayList<>();
-        for (Role role : user.getRole()){
-            strRoles.add(role.getName().name());
-        }
+        List <RoutineResponseDto> routines = user.getRoutines().stream().map(
+                (e) -> routineMapper.EntityToDto(e)
+        ).toList();
 
-        UserDto dto = new UserDto();
-        dto.setEmail(user.getEmail());
-        dto.setAge(user.getAge());
-        dto.setRoles((Set<String>) strRoles);
-        dto.setHeight(user.getHeight());
-        dto.setProfileImg(user.getProfileImg());
-        dto.setWeight(user.getWeight());
-        dto.setRoutines((Set<String>) routineJsonList);
-        return dto;
+        List <String> strRoles = user.getRole().stream().map(
+                (r)-> r.getName().name()).toList();
+
+        return new UserDto(user.getEmail(),
+                user.getClientSince(),
+                strRoles,
+                user.getProfileImg(),
+                user.getWeight(),
+                user.getHeight(),
+                user.getSex(),
+                user.getAge(),
+                routines);
+    }
+
+    public SimpleUserDto entityToSimpleDto (User user) throws JsonProcessingException {
+        List <RoutineResponseDto> routines = user.getRoutines().stream().map(
+                (e) -> routineMapper.EntityToDto(e)
+        ).toList();
+
+        return new SimpleUserDto(user.getEmail(),
+                user.getClientSince(),
+                user.getProfileImg(),
+                routines);
     }
 
     public User dtoToEntity(UserDto dto) throws JsonProcessingException {
@@ -56,24 +65,25 @@ public class UserDtoMapper {
         user.setProfileImg(dto.getProfileImg());
         user.setWeight(dto.getWeight());
 
-        List<Role> roles = new ArrayList<>();
-        for (String roleName : dto.getRoles()) {
-            Role role = roleRepository.findByName(ERole.valueOf(roleName.toUpperCase()))
-                    .orElseThrow(() -> new NotFoundException("Error: Role not found: " + roleName));
-            roles.add(role);
-        }
-        user.setRole(roles);
+        user.setRole(dto.getRoles().stream().map(
+                (r) -> roleRepository.findByName(ERole.valueOf(r.toUpperCase()))
+                        .orElseThrow(() -> new NotFoundException("Error: Role not found: " + r))
+        ).toList());
 
-        Set<Routine> routines = new HashSet<>();
-        ObjectMapper mapper = new ObjectMapper();
-        for (String routineJson : dto.getRoutines()) {
-            Routine routine = mapper.readValue(routineJson, Routine.class);
-            routines.add(routine);
-        }
-        user.setRoutines(routines);
+        user.setRoutines(new HashSet<>());
 
         return user;
     }
+
+    public List<UserDto> usersToDtoList(List<User> users) throws JsonProcessingException {
+        List <UserDto> usersDto = new ArrayList<>();
+        for (User user : users) {
+            usersDto.add(entityToDto(user));
+        }
+        return usersDto;
+    }
+
+
 
 
 

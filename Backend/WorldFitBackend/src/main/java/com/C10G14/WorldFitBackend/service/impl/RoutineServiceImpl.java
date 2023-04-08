@@ -5,6 +5,7 @@ import com.C10G14.WorldFitBackend.dto.RoutineRequestDto;
 import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
 import com.C10G14.WorldFitBackend.entity.Routine;
+import com.C10G14.WorldFitBackend.exception.AlreadyExistException;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.mapper.RoutineDtoMapper;
 import com.C10G14.WorldFitBackend.repository.ExerciseRepository;
@@ -19,15 +20,21 @@ import java.util.stream.Collectors;
 @Service
 public class RoutineServiceImpl implements RoutineService {
 
+    @Autowired
     private RoutineRepository routineRepository;
+    @Autowired
     private ExerciseRepository exerciseRepository;
+    @Autowired
     private RoutineDtoMapper DtoMaper;
 
-    @Autowired
-    public RoutineServiceImpl(RoutineRepository routineRepository, ExerciseRepository exerciseRepository, RoutineDtoMapper dtoMaper) {
-        this.routineRepository = routineRepository;
-        this.exerciseRepository = exerciseRepository;
-        this.DtoMaper = dtoMaper;
+    @Override
+    public RoutineResponseDto createRoutine(RoutineRequestDto routineDto) {
+        if(routineRepository.existsByTitleAndUser_Id(routineDto.getTitle(), routineDto.getUserId())){
+            throw new AlreadyExistException("The User already has routine with that name: " + routineDto.getTitle());
+        };
+        Routine routine = DtoMaper.DtoToEntity(routineDto);
+        Routine newRoutine = routineRepository.save(routine);
+        return DtoMaper.EntityToDto(newRoutine);
     }
 
     @Override
@@ -43,19 +50,10 @@ public class RoutineServiceImpl implements RoutineService {
     }
 
     @Override
-    public RoutineResponseDto createRoutine(RoutineRequestDto routineDto) {
-        Routine routine = DtoMaper.DtoToEntity(routineDto);
-        Routine newRoutine = routineRepository.save(routine);
-        return DtoMaper.EntityToDto(newRoutine);
-    }
-
-    @Override
     public RoutineResponseDto updateRoutine(long id, RoutineRequestDto routineDto) {
         Routine routine = routineRepository.findById(id).orElseThrow(()-> new NotFoundException("Routine not found"));
-
         routine.setTitle(routineDto.getTitle());
         Routine updatedRoutine = routineRepository.save(routine);
-
         return DtoMaper.EntityToDto(updatedRoutine);
     }
 
@@ -91,13 +89,12 @@ public class RoutineServiceImpl implements RoutineService {
         Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new NotFoundException("Routine not found"));
         Exercise exercise = exerciseRepository.findById(exerciseId).orElseThrow(()-> new NotFoundException("Exercise not found"));
 
+        routineRepository.removeExercise(routineId,exerciseId);
+
         routine.removeExercise(exercise);
         Routine updatedRoutine = routineRepository.save(routine);
 
-        System.out.println(updatedRoutine);
-
         return DtoMaper.EntityToDto(updatedRoutine);
     }
-
 
 }
