@@ -60,6 +60,8 @@ public class Exercise {
         this.routines = new HashSet<>();
     }
 
+
+
     @Override
     public String toString() {
         return "Exercise{" +
@@ -68,5 +70,8 @@ public class Exercise {
                 ", media='" + media + '\'' +
                 ", unit=" + unit +
                 '}';
+    }
+
+    public void setName(String sentadillas) {
     }
 }
