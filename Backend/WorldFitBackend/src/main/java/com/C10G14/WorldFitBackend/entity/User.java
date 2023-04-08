@@ -1,5 +1,6 @@
 package com.C10G14.WorldFitBackend.entity;
 
+import com.C10G14.WorldFitBackend.enumeration.ESex;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -42,16 +43,17 @@ public class User  implements UserDetails{
     private String clientSince;
 
     @Column(name = "WEIGHT")
-    private String weight;
+    private Double weight;
 
     @Column(name = "HEIGHT")
-    private String height;
+    private Double height;
 
     @Column(name = "SEX")
-    private String sex;
+    @Enumerated(EnumType.STRING)
+    private ESex sex;
 
     @Column(name = "AGE")
-    private int age;
+    private Integer age;
 
     @JsonBackReference
     @OneToMany(mappedBy = "user",

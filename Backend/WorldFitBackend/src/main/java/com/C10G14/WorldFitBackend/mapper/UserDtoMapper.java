@@ -7,6 +7,7 @@ import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.Routine;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.enumeration.ERole;
+import com.C10G14.WorldFitBackend.enumeration.ESex;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
@@ -41,7 +42,7 @@ public class UserDtoMapper {
                 user.getProfileImg(),
                 user.getWeight(),
                 user.getHeight(),
-                user.getSex(),
+                user.getSex().name(),
                 user.getAge(),
                 routines);
     }
@@ -58,12 +59,17 @@ public class UserDtoMapper {
     }
 
     public User dtoToEntity(UserDto dto) throws JsonProcessingException {
+        ESex sex;
+        if (dto.getSex().equals("male"))
+            sex = ESex.MALE;
+        else sex = ESex.FEMALE;
         User user = new User();
         user.setEmail(dto.getEmail());
         user.setAge(dto.getAge());
         user.setHeight(dto.getHeight());
-        user.setProfileImg(dto.getProfileImg());
         user.setWeight(dto.getWeight());
+        user.setSex(sex);
+        user.setProfileImg(dto.getProfileImg());
 
         user.setRole(dto.getRoles().stream().map(
                 (r) -> roleRepository.findByName(ERole.valueOf(r.toUpperCase()))
