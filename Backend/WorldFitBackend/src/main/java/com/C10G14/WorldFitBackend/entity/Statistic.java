@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,6 +33,9 @@ public class Statistic {
     protected void onCreate() {
         this.date = ZonedDateTime.now(ZoneId.of("GMT-3")).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
-
+    public Statistic (String date, Double totalIncome, Double totalOutcome) {
+        this.date = date;
+        this.totalIncome = totalIncome;
+        this.totalOutcome = totalOutcome;
+    }
 }
-
