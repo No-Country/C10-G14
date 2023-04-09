@@ -81,9 +81,20 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "A new user",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserController.class)) }),
-            @ApiResponse(responseCode = "400", description = "Error: Email is required",
-                    content = @Content),
-            @ApiResponse(responseCode = "400", description = "Error: Password is required",
+            @ApiResponse(responseCode = "400", description = """
+                      Possible Responses:
+                     
+                    - Email is required
+                    - Email direction isn't valid
+                    - Password is required
+                    - Password must contain at least 8 characters including letters, numbers, spaces and commas
+                    - Weight must be greater than or equal to zero
+                    - Weight must have two or fewer decimal places
+                    - Height must be greater than or equal to zero
+                    - Height must have two or fewer decimal places
+                    - Sex must be either male or female (no case sensitive)
+                    - Maximum age is 110
+                    """,
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content),
@@ -101,6 +112,17 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "An updated user",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserController.class)) }),
+            @ApiResponse(responseCode = "400", description = """
+                      Possible Responses:
+                     
+                    - Weight must be greater than or equal to zero
+                    - Weight must have two or fewer decimal places
+                    - Height must be greater than or equal to zero
+                    - Height must have two or fewer decimal places
+                    - Sex must be either male or female (no case sensitive)
+                    - Maximum age is 110
+                    """,
+                    content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",

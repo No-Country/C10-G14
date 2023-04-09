@@ -17,7 +17,7 @@ public class ExerciseRequestDto {
     @NotBlank(message = "title is required")
     private String title;
     private String description;
-    @URL(message = "URL not valid")
+    @URL(message = "media URL not valid")
     private String media;
     private String unit;
 

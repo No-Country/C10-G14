@@ -32,9 +32,20 @@ public class AuthController {
             @ApiResponse(responseCode = "200", description = "JWT token returned",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = AuthController.class)) }),
-            @ApiResponse(responseCode = "400", description = "Error: Email is required",
-                    content = @Content),
-            @ApiResponse(responseCode = "400", description = "Error: Password is required",
+            @ApiResponse(responseCode = "400", description = """
+                      Possible Responses:
+                     
+                    - Email is required
+                    - Email direction isn't valid
+                    - Password is required
+                    - Password must contain at least 8 characters including letters, numbers, spaces and commas
+                    - Weight must be greater than or equal to zero
+                    - Weight must have two or fewer decimal places
+                    - Height must be greater than or equal to zero
+                    - Height must have two or fewer decimal places
+                    - Sex must be either male or female (no case sensitive)
+                    - Maximum age is 110
+                    """,
                     content = @Content)})
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody @Valid
@@ -48,9 +59,11 @@ public class AuthController {
             @ApiResponse(responseCode = "200", description = "JWT token returned",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = AuthController.class)) }),
-            @ApiResponse(responseCode = "400", description = "Error: Email is required",
-                    content = @Content),
-            @ApiResponse(responseCode = "400", description = "Error: Password is required",
+            @ApiResponse(responseCode = "400", description = """
+                      Possible Responses:
+                    - Email is required
+                    - Password is required
+                    """,
                     content = @Content)})
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponseDto> authenticateUser(@RequestBody

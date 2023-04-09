@@ -33,7 +33,7 @@ public class AuthDtoMapper {
         else sex = ESex.FEMALE;
 
         return User.builder()
-                .email(registerRequestDto.getEmail())
+                .email(registerRequestDto.getEmail().toLowerCase())
                 .password(passwordEncoder.encode(registerRequestDto.getPassword()))
                 .profileImg(registerRequestDto.getProfileImg())
                 .sex(sex)

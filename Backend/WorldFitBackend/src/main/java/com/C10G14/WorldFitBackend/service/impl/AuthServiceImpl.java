@@ -43,7 +43,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthenticationResponseDto register(RegisterRequestDto request) {
-        if (userRepository.existsByEmail(request.getEmail())){
+        if (userRepository.existsByEmail(request.getEmail().toLowerCase())){
             throw new AlreadyExistException("Error: Email already taken");
         }
         User newUser = authMapper.requestToEntity(request);

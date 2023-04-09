@@ -61,7 +61,12 @@ public class ExerciseController {
             @ApiResponse(responseCode = "200", description = "A new exercise",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ExerciseController.class)) }),
-            @ApiResponse(responseCode = "400", description = "Error: All attributes are required",
+            @ApiResponse(responseCode = "400", description = """
+                     Possible responses:
+                     
+                     - Title is required
+                     - Media URL is not valid
+                    """,
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content),
@@ -81,6 +86,13 @@ public class ExerciseController {
             @ApiResponse(responseCode = "200", description = "A updated exercise",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ExerciseController.class)) }),
+            @ApiResponse(responseCode = "400", description = """
+                     Possible responses:
+                     
+                     - Title is required
+                     - Media URL is not valid
+                    """,
+                    content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
