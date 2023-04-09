@@ -66,6 +66,7 @@ public class ExerciseControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = { "USER", "COACH" })
     public void getAllExercises_ReturnsExercises() throws Exception {
         given(exerciseService.getAllExercises()).willReturn(exercises);
 
@@ -82,6 +83,7 @@ public class ExerciseControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = { "USER", "COACH" })
     public void getExerciseById_ReturnsExercise() throws Exception {
         given(exerciseService.getExerciseById(1L)).willReturn(exercise1);
 
@@ -94,6 +96,7 @@ public class ExerciseControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = { "USER", "COACH" })
     public void createExercise_ReturnsCreatedExercise() throws Exception {
         ExerciseRequestDto requestDto = new ExerciseRequestDto();
         requestDto.setTitle("New Exercise");
@@ -113,7 +116,7 @@ public class ExerciseControllerTest {
 
 
     @Test
-    @WithMockUser(username = "testuser", roles = { "USER", "COACH" })
+    @WithMockUser(roles = { "USER", "COACH" })
     public void updateExercise_ReturnsOk() throws Exception {
         // Given
         ExerciseRequestDto requestDto = new ExerciseRequestDto();
@@ -130,7 +133,7 @@ public class ExerciseControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "testuser", roles = { "USER", "COACH" })
+    @WithMockUser(roles = { "USER", "COACH" })
     public void deleteExerciseAsCoachReturnsOk() throws Exception {
         // given
         Long exerciseId = 1L;
@@ -146,7 +149,7 @@ public class ExerciseControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "testuser", roles = { "USER", "ADMIN" })
+    @WithMockUser(roles = { "USER", "COACH" })
     public void deleteExerciseAsAdminReturnsOk() throws Exception {
         // given
         Long exerciseId = 1L;
