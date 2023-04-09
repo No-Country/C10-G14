@@ -21,5 +21,4 @@ public interface UserService {
     UserDto updateUser (Long id, UserDto userDto) throws JsonProcessingException;
     void deleteUser (Long id);
     List<UserDto> getByRole(String requestRole) throws JsonProcessingException;
-
 }

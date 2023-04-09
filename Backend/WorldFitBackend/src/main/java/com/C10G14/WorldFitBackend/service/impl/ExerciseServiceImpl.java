@@ -24,18 +24,18 @@ public class ExerciseServiceImpl implements ExerciseService {
     @Autowired
     private UnitRepository unitRepository;
     @Autowired
-    private ExerciseDtoMapper DtoMaper;
+    private ExerciseDtoMapper dtoMapper;
 
     @Override
     public List<ExerciseResponseDto> getAllExercises() {
         List<Exercise> exercises = exerciseRepository.findAll();
-        return exercises.stream().map(e -> DtoMaper.EntityToDto(e)).collect(Collectors.toList());
+        return exercises.stream().map(e -> dtoMapper.EntityToDto(e)).collect(Collectors.toList());
     }
 
     @Override
     public ExerciseResponseDto getExerciseById(Long id) {
         Exercise exercise = exerciseRepository.findById(id).orElseThrow(()-> new NotFoundException("Exercise not found"));
-        return DtoMaper.EntityToDto(exercise);
+        return dtoMapper.EntityToDto(exercise);
     }
 
     @Override
@@ -43,19 +43,19 @@ public class ExerciseServiceImpl implements ExerciseService {
         if(exerciseRepository.existsByTitle(exerciseDto.getTitle())){
             throw new AlreadyExistException("Error: An exercise with that title already exists: " + exerciseDto.getTitle());
         }
-        Exercise exercise = DtoMaper.DtoToEntity(exerciseDto);
+        Exercise exercise = dtoMapper.DtoToEntity(exerciseDto);
         Exercise newExercise = exerciseRepository.save(exercise);
-        return DtoMaper.EntityToDto(newExercise);
+        return dtoMapper.EntityToDto(newExercise);
     }
 
     @Override
     public ExerciseResponseDto updateExercise(Long id, ExerciseRequestDto exerciseDto) {
         Exercise exercise = exerciseRepository.findById(id).orElseThrow(() -> new NotFoundException("Exercise not found"));
-        Exercise updatedExercise = DtoMaper.DtoToEntity(exerciseDto);
+        Exercise updatedExercise = dtoMapper.DtoToEntity(exerciseDto);
         updatedExercise.setId(exercise.getId());
         try {
             exerciseRepository.save(updatedExercise);
-            return DtoMaper.EntityToDto(updatedExercise);
+            return dtoMapper.EntityToDto(updatedExercise);
         }catch (Exception e){
             throw new AlreadyExistException("An exercise with that title already exists: " + exerciseDto.getTitle());
         }

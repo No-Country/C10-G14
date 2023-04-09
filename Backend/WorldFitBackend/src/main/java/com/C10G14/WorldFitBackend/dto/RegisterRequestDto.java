@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.URL;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class RegisterRequestDto {
     @NotBlank(message = "Email can't be empty")
