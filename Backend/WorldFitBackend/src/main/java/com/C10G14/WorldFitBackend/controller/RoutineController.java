@@ -32,10 +32,21 @@ public class RoutineController {
             @ApiResponse(responseCode = "200", description = "A new routine",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = RoutineController.class)) }),
+            @ApiResponse(responseCode = "400", description = """
+                      Possible Responses:
+                     
+                    - Title is required
+                    - Media Url not valid
+                    """,
+                    content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
-                    content = @Content)})
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Error: User not found",
+                    content = @Content),
+            @ApiResponse(responseCode = "409", description = "Error: The User already has routine with that name",
+            content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PostMapping
     public ResponseEntity<RoutineResponseDto> createRoutine(@RequestBody @Valid RoutineRequestDto routine) {
@@ -64,6 +75,8 @@ public class RoutineController {
             @ApiResponse(responseCode = "200", description = "A routine",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = RoutineController.class)) }),
+            @ApiResponse(responseCode = "400", description = "Routine Id is required",
+                    content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
@@ -82,11 +95,20 @@ public class RoutineController {
             @ApiResponse(responseCode = "200", description = "A updated routine",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = RoutineController.class)) }),
+            @ApiResponse(responseCode = "400", description = """
+                      Possible Responses:
+                     
+                    - Title is required
+                    - Media Url not valid
+                    """,
+                    content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: Routine don't exist",
+                    content = @Content),
+            @ApiResponse(responseCode = "409", description = "Error: The User already has routine with that name",
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @PutMapping("/{id}")
@@ -119,7 +141,7 @@ public class RoutineController {
             @ApiResponse(responseCode = "200", description = "A routine with the new exercise added",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = RoutineController.class)) }),
-            @ApiResponse(responseCode = "400", description = "Error: Cannot add empty exercise",
+            @ApiResponse(responseCode = "400", description = "Error: Exercise is required",
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content),
@@ -138,7 +160,7 @@ public class RoutineController {
             @ApiResponse(responseCode = "200", description = "A routine with a updated exercise",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = RoutineController.class)) }),
-            @ApiResponse(responseCode = "400", description = "Error: Cannot add empty exercise",
+            @ApiResponse(responseCode = "400", description = "Error: Exercise is required",
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content),

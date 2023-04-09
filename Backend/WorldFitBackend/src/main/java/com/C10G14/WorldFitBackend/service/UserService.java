@@ -14,7 +14,6 @@ public interface UserService {
     UserDto getUserById (Long id) throws JsonProcessingException;
 
     SimpleUserDto getSimpleUserById (Long id) throws JsonProcessingException;
-
     UserDto createUser (UserDto userDto) throws JsonProcessingException;
 
     UserDto updateRole(Long id, String requestRole) throws JsonProcessingException;
