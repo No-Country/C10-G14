@@ -38,6 +38,7 @@ public class UserDtoMapper {
 
         return new UserDto(user.getEmail(),
                 user.getClientSince(),
+                user.getName(),
                 strRoles,
                 user.getProfileImg(),
                 user.getWeight(),
@@ -54,6 +55,7 @@ public class UserDtoMapper {
 
         return new SimpleUserDto(user.getEmail(),
                 user.getClientSince(),
+                user.getName(),
                 user.getProfileImg(),
                 routines);
     }
@@ -65,6 +67,7 @@ public class UserDtoMapper {
         else sex = ESex.FEMALE;
         User user = new User();
         user.setEmail(dto.getEmail());
+        user.setName(dto.getName());
         user.setAge(dto.getAge());
         user.setHeight(dto.getHeight());
         user.setWeight(dto.getWeight());
