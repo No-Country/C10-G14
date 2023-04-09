@@ -3,12 +3,14 @@ package com.C10G14.WorldFitBackend.dto;
 import com.C10G14.WorldFitBackend.entity.Exercise;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Exercise_RoutineResponseDto {
 
     private long id;

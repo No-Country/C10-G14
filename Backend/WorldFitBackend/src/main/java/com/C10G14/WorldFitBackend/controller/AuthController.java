@@ -71,5 +71,4 @@ public class AuthController {
         AuthenticationResponseDto authResponse = authService.authenticate(request);
         return new ResponseEntity<>(authResponse, HttpStatus.OK);
     }
-
 }

@@ -16,7 +16,6 @@ import com.C10G14.WorldFitBackend.repository.UserRepository;
 import com.C10G14.WorldFitBackend.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.InvalidPropertyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
