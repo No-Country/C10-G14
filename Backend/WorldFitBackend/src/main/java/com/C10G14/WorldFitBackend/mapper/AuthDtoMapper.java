@@ -35,6 +35,7 @@ public class AuthDtoMapper {
         return User.builder()
                 .email(registerRequestDto.getEmail().toLowerCase())
                 .password(passwordEncoder.encode(registerRequestDto.getPassword()))
+                .name(registerRequestDto.getName())
                 .profileImg(registerRequestDto.getProfileImg())
                 .sex(sex)
                 .age(registerRequestDto.getAge())

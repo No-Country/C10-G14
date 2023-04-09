@@ -36,6 +36,9 @@ public class User  implements UserDetails{
     @Column(name = "PASSWORD")
     private String password;
 
+    @Column(name = "NAME")
+    private String name;
+
     @Column(name = "PROFILE_IMAGE")
     private String profileImg;
 

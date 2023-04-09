@@ -17,6 +17,7 @@ public class UserDto {
 
     private String email;
     private String clientSince;
+    private String name;
     private List<String> roles;
     private String profileImg;
     private Double weight;

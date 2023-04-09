@@ -21,6 +21,12 @@ public class RegisterRequestDto {
             message = "Password must contain at least 8 characters including letters, numbers, spaces and commas")
     @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
     private String password;
+
+    @NotBlank(message = "Name is required")
+    @Pattern(regexp = "^([a-zA-Z]){1,20}$",
+            message = "Name must contain only letters and be maximum 12 characters")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
+    private String name;
     @URL(message = "image URL not valid")
     private String profileImg;
     @DecimalMin(value = "0.00", message = "Weight must be greater than or equal to zero")
