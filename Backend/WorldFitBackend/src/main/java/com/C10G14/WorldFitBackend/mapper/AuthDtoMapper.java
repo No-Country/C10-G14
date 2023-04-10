@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Component
@@ -27,10 +28,11 @@ public class AuthDtoMapper {
                 .orElseThrow(()-> new RuntimeException("Role USER not found"));
         roles.add(userRole);
 
-        ESex sex;
-        if (registerRequestDto.getSex().equals("male"))
-            sex = ESex.MALE;
-        else sex = ESex.FEMALE;
+        ESex sex = null;
+        if (!Objects.equals(registerRequestDto.getSex(),null)){
+            sex = (registerRequestDto.getSex().equalsIgnoreCase("male") ?
+                    ESex.MALE : ESex.FEMALE);
+        };
 
         return User.builder()
                 .email(registerRequestDto.getEmail().toLowerCase())
