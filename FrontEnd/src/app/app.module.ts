@@ -13,9 +13,12 @@ import { EditarRutinasComponent } from './Components/editar-rutinas/editar-rutin
 import { EditarEjercicioComponent } from './Components/editar-ejercicio/editar-ejercicio.component';
 import { RutinasComponent } from './Components/forms/rutinas/rutinas.component';
 import { MatDialogRef } from '@angular/material/dialog';
-
+import { NavbarComponent } from './Components/navbar/navbar.component';
+import { VerEjerciciosComponent } from './Components/ver-ejercicios/ver-ejercicios.component';
 @NgModule({
-  declarations: [AppComponent, RutinaComponent, InicioComponent, VerClientesComponent, EditarRutinasComponent, EditarEjercicioComponent, RutinasComponent],
+  declarations: [AppComponent, RutinaComponent, InicioComponent, VerClientesComponent, EditarRutinasComponent, EditarEjercicioComponent, RutinasComponent, NavbarComponent, VerEjerciciosComponent],
+
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

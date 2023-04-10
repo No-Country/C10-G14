@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild, Input, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,12 +10,13 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-editar-ejercicio',
   templateUrl: './editar-ejercicio.component.html',
-  styleUrls: ['./editar-ejercicio.component.css']
+  styleUrls: ['./editar-ejercicio.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class EditarEjercicioComponent {
   @Input() dataIdRutinas:number = 0;
-  displayedColumns: string[] = ['title', 'numeroSeries', 'repetition', 'quantity', 'unit','type' , 'acciones'];
+  displayedColumns: string[] = ['title', 'numeroSeries', 'repetition','type', 'quantity', 'unit', 'acciones'];
   dataSource = new MatTableDataSource<Rutina>();
   
   

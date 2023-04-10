@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Rutina } from 'src/app/Interface/rutina';
@@ -7,7 +7,8 @@ import { RutinaService } from 'src/app/Services/rutina.service';
 @Component({
   selector: 'app-editar-rutinas',
   templateUrl: './editar-rutinas.component.html',
-  styleUrls: ['./editar-rutinas.component.css']
+  styleUrls: ['./editar-rutinas.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class EditarRutinasComponent implements OnInit  {
   
@@ -19,9 +20,9 @@ export class EditarRutinasComponent implements OnInit  {
   constructor(private datosRutina: RutinaService) { }
   ngOnInit(): void {
     this.datosRutina.obtenerDatos().subscribe((data) => {
-     
+    
       this.rutinasLista = data.usuario1.routines;      
-     
+    
       
     });
     this.obtenerRutinas(1)
