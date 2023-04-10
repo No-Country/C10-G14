@@ -1,19 +1,17 @@
 package com.C10G14.WorldFitBackend.dto;
 
 import com.C10G14.WorldFitBackend.entity.Exercise;
-import com.C10G14.WorldFitBackend.entity.Exercise_Routine;
-import com.C10G14.WorldFitBackend.entity.Unit;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class Exercise_RoutineDto {
+@NoArgsConstructor
+public class Exercise_RoutineResponseDto {
 
     private long id;
     private String title;
@@ -28,7 +26,7 @@ public class Exercise_RoutineDto {
     //private int[][] series;
 
 
-    public Exercise_RoutineDto(Exercise exercise, int quantity, int repetitions, int seriesNumber) {
+    public Exercise_RoutineResponseDto(Exercise exercise, int quantity, int repetitions, int seriesNumber) {
 
         this.id = exercise.getId();
         this.title = exercise.getTitle();

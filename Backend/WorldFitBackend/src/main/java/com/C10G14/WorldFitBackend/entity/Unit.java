@@ -17,7 +17,8 @@ public class Unit {
     private Integer id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "NAME")
+    @Column(name = "NAME",
+            unique = true)
     private EUnit name;
 
     public Unit() {

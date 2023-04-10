@@ -9,12 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EstadisticaDto {
+public class StatisticDto {
 
     private Long id;
-    private String fecha;
-    private double totalIngresos;
-    private double totalEgresos;
-
-    //otros campos estadísticos
+    private String date;
+    private double totalIncome;
+    private double totalOutcome;
 }

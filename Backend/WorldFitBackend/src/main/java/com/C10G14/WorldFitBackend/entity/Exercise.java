@@ -2,6 +2,7 @@ package com.C10G14.WorldFitBackend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -60,6 +61,8 @@ public class Exercise {
         this.routines = new HashSet<>();
     }
 
+
+
     @Override
     public String toString() {
         return "Exercise{" +
@@ -68,5 +71,8 @@ public class Exercise {
                 ", media='" + media + '\'' +
                 ", unit=" + unit +
                 '}';
+    }
+
+    public void setName(String sentadillas) {
     }
 }

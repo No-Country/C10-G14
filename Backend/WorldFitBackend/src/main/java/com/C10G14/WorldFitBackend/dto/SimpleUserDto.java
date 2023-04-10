@@ -9,6 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SimpleUserDto {
     private String email;
+    private String name;
     private String clientSince;
     private String profileImg;
     private List<RoutineResponseDto> routines;

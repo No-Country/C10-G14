@@ -49,4 +49,7 @@ public class Exercise_Routine {
                 ", quantity=" + quantity +
                 '}';
     }
+
 }
+
+
