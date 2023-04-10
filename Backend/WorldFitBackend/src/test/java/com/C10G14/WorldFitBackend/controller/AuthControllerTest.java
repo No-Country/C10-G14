@@ -45,6 +45,7 @@ public class AuthControllerTest {
     public void init() {
         registerRequestDto = RegisterRequestDto.builder()
                 .email("test@test.com")
+                .name("TestUser")
                 .password("passwordTest")
                 .sex("male")
                 .age(15)
@@ -75,17 +76,13 @@ public class AuthControllerTest {
 
     @Test
     public void authenticateAExistingUserReturnsOk() throws Exception {
-        // given
-        AuthenticationResponseDto responseDto = new AuthenticationResponseDto();
-        responseDto.setToken("tokenTest");
-        given(authService.authenticate(authenticationRequestDto)).willReturn(responseDto);
 
-        // when
+        given(authService.authenticate(authenticationRequestDto)).willReturn(authenticationResponseDto);
+
         ResultActions result = mockMvc.perform(post("/api/v1/auth/authenticate")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(authenticationRequestDto)));
 
-        // then
         result.andExpect(status().isOk());
     }
 }
