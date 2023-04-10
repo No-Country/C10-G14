@@ -1,8 +1,7 @@
 package com.C10G14.WorldFitBackend.security.jwt;
 
 import com.C10G14.WorldFitBackend.security.oauth2.OAuthJwtAuthenticationConverter;
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.interfaces.DecodedJWT;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -56,7 +56,7 @@ public class UserController {
         return userService.getByRole(role);
     }
 
-    @Operation(summary = "Get one user by Id")
+    @Operation(summary = "Get user complete information by Id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "A user",
                     content = { @Content(mediaType = "application/json",
@@ -81,9 +81,20 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "A new user",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserController.class)) }),
-            @ApiResponse(responseCode = "400", description = "Error: Email is required",
-                    content = @Content),
-            @ApiResponse(responseCode = "400", description = "Error: Password is required",
+            @ApiResponse(responseCode = "400", description = """
+                      Possible Responses:
+                     
+                    - Email is required
+                    - Email direction isn't valid
+                    - Password is required
+                    - Password must contain at least 8 characters including letters, numbers, spaces and commas
+                    - Weight must be greater than or equal to zero
+                    - Weight must have two or fewer decimal places
+                    - Height must be greater than or equal to zero
+                    - Height must have two or fewer decimal places
+                    - Sex must be either male or female (no case sensitive)
+                    - Maximum age is 110
+                    """,
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content),
@@ -101,6 +112,17 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "An updated user",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserController.class)) }),
+            @ApiResponse(responseCode = "400", description = """
+                      Possible Responses:
+                     
+                    - Weight must be greater than or equal to zero
+                    - Weight must have two or fewer decimal places
+                    - Height must be greater than or equal to zero
+                    - Height must have two or fewer decimal places
+                    - Sex must be either male or female (no case sensitive)
+                    - Maximum age is 110
+                    """,
+                    content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
@@ -114,7 +136,7 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    @Operation(summary = "Update the role of a user")
+    @Operation(summary = "Update the role of an user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "A user with updated roles",
                     content = { @Content(mediaType = "application/json",
@@ -133,7 +155,7 @@ public class UserController {
     }
 
 
-    @Operation(summary = "Delete a user")
+    @Operation(summary = "Delete an user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     content = { @Content(mediaType = "application/json",
@@ -149,6 +171,24 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Get user and its routines")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = SimpleUserDto.class)) }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized",
+                    content = @Content),
+            @ApiResponse(responseCode = "403", description = "Forbidden",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Error: User not found",
+                    content = @Content),})
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @GetMapping("/routine/{userId}")
+    public ResponseEntity<SimpleUserDto> getUserRoutines(@PathVariable Long userId) throws JsonProcessingException{
+        SimpleUserDto user = userService.getSimpleUserById(userId);
+        return ResponseEntity.ok(user);
     }
 }
 

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ValidatorsFormService } from '../../services/validators-form.service';
 import { FormErrors } from '../../interfaces/form-errors.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -21,17 +21,13 @@ export class LoginComponent {
   // Formulario de inicio de sesión
   loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, this.validatorsService.emailValidator()]],
-    password: [
-      '',
-      [Validators.required, this.validatorsService.passwordStrengthValidator()],
-    ],
+    password: ['', [Validators.required]],
   });
 
   // Constructor
   constructor(
     public authService: AuthService,
     private fb: NonNullableFormBuilder,
-    private toast: HotToastService,
     private router: Router,
     private validatorsService: ValidatorsFormService
   ) {}
@@ -77,42 +73,16 @@ export class LoginComponent {
     return '';
   }
 
-  // Inicio de sesión
-  private login(email: string, password: string): void {
-    this.authService
-      .login(email, password)
-      .pipe(
-        this.toast.observe({
-          success: 'Inicio de sesión correcto',
-          loading: 'Entrando...',
-          error: ({ message }) => `Ha ocurrido un error: ${message} `,
-        }),
-        takeUntil(this.destroyed$)
-      )
-      .subscribe(() => {
-        this.loginForm.reset();
-        this.loading = true;
-        // this.router.navigate(['#']);
-      });
-  }
-
   // Envío del formulario
-  onSubmit(): void {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
+  onSubmit() {
+    const { email, password } = this.loginForm.value;
 
-    const email = this.loginForm.value.email;
-    const password = this.loginForm.value.password;
-    //TODO: Eliminar el console.log
-    console.log('Datos del formulario:', email, password);
-    this.login(email, password);
-  }
-
-  // Se ejecuta cuando se destruye el componente
-  ngOnDestroy() {
-    this.destroyed$.next();
-    this.destroyed$.complete();
+    this.authService.login(email, password).subscribe((ok) => {
+      if (ok === true) {
+        this.router.navigateByUrl('/inicio');
+      } else {
+        Swal.fire('Error', ok.toString(), 'error');
+      }
+    });
   }
 }

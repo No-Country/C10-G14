@@ -27,8 +27,9 @@ const routes: Routes = [
     component:VerEjerciciosComponent,
   },
   {
-    path: '**',
-    redirectTo: 'auth',
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'auth/login',
   },
 ];
 

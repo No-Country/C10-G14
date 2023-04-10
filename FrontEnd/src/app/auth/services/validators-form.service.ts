@@ -11,6 +11,15 @@ import {
 })
 export class ValidatorsFormService {
   constructor() {}
+
+  nameValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const namePattern = /^[a-zA-Z ]{2,30}$/;
+      const valid = namePattern.test(control.value);
+      return valid ? null : { invalidName: true };
+    };
+  }
+
   emailValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i;
@@ -25,21 +34,6 @@ export class ValidatorsFormService {
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
       const valid = passwordPattern.test(control.value);
       return valid ? null : { invalidPassword: true };
-    };
-  }
-
-  passwordMatchValidator(
-    controlName: string,
-    matchingControlName: string
-  ): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      const controlValue = control.get(controlName)?.value;
-      const matchingControlValue = control.get(matchingControlName)?.value;
-
-      if (controlValue !== matchingControlValue) {
-        return { passwordMismatch: true };
-      }
-      return null;
     };
   }
 }

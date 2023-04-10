@@ -1,7 +1,10 @@
 package com.C10G14.WorldFitBackend.entity;
 
+import com.C10G14.WorldFitBackend.enumeration.ESex;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,12 +30,14 @@ public class User  implements UserDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-
     @Column(name = "EMAIL")
     private String email;
 
     @Column(name = "PASSWORD")
     private String password;
+
+    @Column(name = "NAME")
+    private String name;
 
     @Column(name = "PROFILE_IMAGE")
     private String profileImg;
@@ -41,16 +46,17 @@ public class User  implements UserDetails{
     private String clientSince;
 
     @Column(name = "WEIGHT")
-    private String weight;
+    private Double weight;
 
     @Column(name = "HEIGHT")
-    private String height;
+    private Double height;
 
     @Column(name = "SEX")
-    private String sex;
+    @Enumerated(EnumType.STRING)
+    private ESex sex;
 
     @Column(name = "AGE")
-    private String age;
+    private Integer age;
 
     @JsonBackReference
     @OneToMany(mappedBy = "user",
