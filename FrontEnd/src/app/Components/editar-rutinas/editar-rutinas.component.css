@@ -1,17 +1,17 @@
-body {
-  background-color: black;
-}
-
 
 .example-input-label,
 .example-add-tab-button,
 .example-delete-tab-button {
   margin: 8px;
 }
+/* Altura de cabecera donde va el logo */
 
 .header-perfil{  
   height: 140px;
+  background-color: #ffd740;
 }
+
+/* imagen de perfil de cliente */
 
 .images-perfil {
   width: 175px;
@@ -25,11 +25,8 @@ body {
   z-index: 1900;  
 }
 
-.card-peso {  
-  border-left:solid 2px #fff;
-  
-  
-}
+/* Borde que separa la informacion de peso */
+
 
 @media (max-width: 768px) { 
   .images-perfil {   
@@ -54,10 +51,31 @@ body {
  
 }
 
-.mat-mdc-card{
-  box-shadow: none;
-}
+/* Quitar sombra de card */
 
 .mat-mdc-card{
   box-shadow: none;
+  
+}
+/* Quitar padding debajo de card*/
+.mdc-card {
+  margin-bottom: 0px !important;
+}
+/* Pestañas de Rutinas*/
+
+.mat-mdc-tab-labels{
+  background-color: #303030;
+}
+.mdc-tab__text-label{
+  font-size: 1em;
+  font-family: 'Comfortaa';
+  font-weight: 700;
+  color: #fff !important;
+  
+  
+}
+
+.mdc-tab-indicator__content {
+  height: 5px;  
+  background-color: #ffd740;
 }

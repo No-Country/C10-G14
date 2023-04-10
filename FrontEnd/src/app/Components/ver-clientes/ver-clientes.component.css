@@ -1,28 +1,34 @@
-table {
-    width: 100%;
+
+
+  th{
+    background-color: #303030 !important;
+    color: white;
   }
+
+  
   
   td,
   th {
     width: 15%;
   }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-
+ 
   
   .edit {
     cursor: pointer;
-    color: #1878B0
+    color: #303030;
   }
+
+  @media (min-width: 500px) { 
+    .mat-column-nombre {
+      word-break: break-word;
+      width: 25% !important;
+    } 
+    
   
-  .search {
-    cursor: pointer;
-  }
-  
-  .agregar {
-    font-size: 10px;
-    line-height: 28px;
-  }
+    /* .mat-column-acciones {
+      word-break: break-word;
+      width: 15% !important;
+    } */
+      
+    }
+

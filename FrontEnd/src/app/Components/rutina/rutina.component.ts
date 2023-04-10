@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { RutinaService } from 'src/app/Services/rutina.service';
 
 @Component({
   selector: 'app-rutina',
   templateUrl: './rutina.component.html',
   styleUrls: ['./rutina.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class RutinaComponent implements OnInit  {
   rutinasLista:any;
