@@ -17,7 +17,7 @@ public class RegisterRequestDto {
     @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
     private String email;
     @NotBlank(message = "Password is required")
-    @Pattern(regexp = "^([a-zA-Z0-9,]){8,20}$",
+    @Pattern(regexp = "^([a-zA-Z0-9,ñ]){8,20}$",
             message = "Password must contain at least 8 characters including letters, numbers, spaces and commas")
     @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
     private String password;
