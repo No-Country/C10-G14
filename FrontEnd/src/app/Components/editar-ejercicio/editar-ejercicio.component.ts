@@ -6,6 +6,7 @@ import { Rutina } from 'src/app/Interface/rutina';
 import { RutinaService } from 'src/app/Services/rutina.service';
 import { RutinasComponent } from '../forms/rutinas/rutinas.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Ejercicio } from 'src/app/Interface/ejercicio';
 
 @Component({
   selector: 'app-editar-ejercicio',
@@ -18,12 +19,12 @@ export class EditarEjercicioComponent {
   @Input() dataIdRutinas:number = 0;
   displayedColumns: string[] = ['title', 'numeroSeries', 'repetition','type', 'quantity', 'unit', 'acciones'];
   dataSource = new MatTableDataSource<Rutina>();
-  
+  ejercicio: any
   
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private datosRutina:RutinaService,
-    public dialog: MatDialog) { }
+  constructor(private datosRutina:RutinaService, public dialog: MatDialog
+    ) { }
 
   ngOnInit(): void {
     this.obtenerRutinas(this.dataIdRutinas);
@@ -40,12 +41,13 @@ export class EditarEjercicioComponent {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(RutinasComponent, {
-      
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       
+      this.ejercicio= result;
+      console.log(this.ejercicio);
     });
   }
 }
