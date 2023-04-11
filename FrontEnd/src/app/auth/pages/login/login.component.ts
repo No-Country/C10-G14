@@ -13,25 +13,21 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  // Variables
-  hide = true;
-  loading: boolean = false;
-  destroyed$ = new Subject<void>();
-
-  // Formulario de inicio de sesión
-  loginForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required, this.validatorsService.emailValidator()]],
-    password: ['', [Validators.required]],
-  });
-
-  // Constructor
+  loginForm!: FormGroup; // Declaración del FormGroup
+  error: string = '';
   constructor(
     public authService: AuthService,
-    private fb: NonNullableFormBuilder,
+    private formBuilder: NonNullableFormBuilder,
     private router: Router,
     private validatorsService: ValidatorsFormService
   ) {}
 
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]], // Campo de email con validadores
+      password: ['', [Validators.required, Validators.minLength(6)]], // Campo de password con validadores
+    });
+  }
   // Obtiene el campo de email
   get email() {
     return this.loginForm.get('email');
@@ -74,15 +70,18 @@ export class LoginComponent {
   }
 
   // Envío del formulario
-  onSubmit() {
-    const { email, password } = this.loginForm.value;
-
-    this.authService.login(email, password).subscribe((ok) => {
-      if (ok === true) {
+  login(): void {
+    this.authService.login(this.loginForm.value).subscribe(
+      (response) => {
+        // Manejar la respuesta del servidor en caso de éxito
+        this.authService.setAuthToken(response.token);
+        console.log('Inicio de sesión exitoso:', response);
         this.router.navigateByUrl('/inicio');
-      } else {
-        Swal.fire('Error', ok.toString(), 'error');
+      },
+      (error) => {
+        // Manejar errores en caso de fallo
+        this.error = 'Nombre de usuario o contraseña incorrectos';
       }
-    });
+    );
   }
 }
