@@ -15,7 +15,7 @@ export class EndpointsService {
   // apiUrlPersona: string;
 
   constructor(private http:HttpClient) { 
-    this.myAppUrl = 'http://api.worldfit.site:8080/api/v1/';
+    this.myAppUrl = 'http://api.worldfit.site/api/v1/';
     this.apiUrlUser = 'users';
     this.apiUrlRutine = 'routines';
     this.apiUrlUserRutine = 'users/routine'
@@ -25,11 +25,9 @@ export class EndpointsService {
   //--------------Endpoints-----------------------------------
 
   //Obtener usuarios por roles 
-  public UsersRoles(role:string, apiUrlItem :string): Observable <any> {
-    return this.http.get(this.myAppUrl + 'users/role/' + `${role}`  );  }
-
-  
-
+   public UsersRoles(role:string): Observable <any> {
+     return this.http.get(this.myAppUrl + 'users/role/' + `${role}`  );  }
+ 
   //Obtener datos 
   public obtenerDatos(apiUrlItem :string): Observable <any> {
     return this.http.get(this.myAppUrl + apiUrlItem  );

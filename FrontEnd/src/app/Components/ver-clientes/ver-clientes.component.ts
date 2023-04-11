@@ -4,6 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ClienteService } from 'src/app/Services/cliente.service';
+import { EndpointsService } from 'src/app/Services/endpoints.service';
 
 
 
@@ -18,12 +19,14 @@ import { ClienteService } from 'src/app/Services/cliente.service';
 export class VerClientesComponent {
   displayedColumns: string[] = ['nombre', 'edad', 'altura', 'sexo', 'peso', 'acciones'];
   dataSource = new MatTableDataSource<Cliente>();
+  role:string = 'user';
   
   
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
   
-  constructor(private _clienteService:ClienteService) { }
+  constructor(private _endPointsService:EndpointsService,
+    ) { }
 
   ngOnInit(): void {
     this.obtenerClientes();
@@ -43,10 +46,8 @@ export class VerClientesComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  obtenerClientes() {
-
-    
-    this._clienteService.getclientes().subscribe(data => {
+  obtenerClientes() {    
+    this._endPointsService.UsersRoles(this.role).subscribe(data => {
       this.dataSource.data = data;
       console.log(data);
     })
