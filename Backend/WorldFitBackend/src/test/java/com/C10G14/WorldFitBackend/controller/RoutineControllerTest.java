@@ -206,7 +206,7 @@ public class RoutineControllerTest {
         exerciseRequest.setQuantity(3);
         exerciseRequest.setRepetitions(4);
         when(routineService.addExercise(anyLong(), any(Exercise_RoutineRequestDto.class))).thenReturn(new RoutineResponseDto());
-        mockMvc.perform(post("/api/v1/routines/1/exercises")
+        mockMvc.perform(post("/api/v1/routines/exercises/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(exerciseRequest)))
                 .andExpect(status().isOk());
@@ -221,7 +221,7 @@ public class RoutineControllerTest {
         exerciseRequest.setQuantity(3);
         exerciseRequest.setRepetitions(4);
         when(routineService.updateExercise(anyLong(), any(Exercise_RoutineRequestDto.class))).thenReturn(new RoutineResponseDto());
-        mockMvc.perform(put("/api/v1/routines/1/exercises")
+        mockMvc.perform(put("/api/v1/routines/exercises/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(exerciseRequest)))
                 .andExpect(status().isOk());

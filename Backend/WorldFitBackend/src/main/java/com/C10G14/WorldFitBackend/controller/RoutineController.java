@@ -148,7 +148,7 @@ public class RoutineController {
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
-    @PostMapping("/{id}/exercises")
+    @PostMapping("/exercises/{id}")
     public ResponseEntity<RoutineResponseDto> addExercise(@PathVariable("id") long routineId,
                                                   @RequestBody @Valid Exercise_RoutineRequestDto exercise) {
         RoutineResponseDto updatedRoutine = routineService.addExercise(routineId,exercise);
@@ -167,7 +167,7 @@ public class RoutineController {
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
-    @PutMapping("/{id}/exercises")
+    @PutMapping("/exercises/{id}")
     public ResponseEntity<RoutineResponseDto> updateExercise(@PathVariable("id") long routineId,
                                                   @RequestBody @Valid Exercise_RoutineRequestDto exercise) {
         RoutineResponseDto updatedRoutine = routineService.updateExercise(routineId,exercise);
@@ -186,7 +186,7 @@ public class RoutineController {
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
-    @DeleteMapping("/{id}/exercises")
+    @DeleteMapping("/exercises/{id}")
     public ResponseEntity<RoutineResponseDto> removeExercise(@PathVariable("id") long routineId,
                                                   @RequestBody Map <String,Long> exerciseId) {
         RoutineResponseDto updatedRoutine = routineService.removeExercise(routineId,exerciseId.get("exerciseId"));
