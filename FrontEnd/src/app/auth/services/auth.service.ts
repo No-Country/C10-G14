@@ -37,6 +37,11 @@ export class AuthService {
     );
   }
 
+  registerUser(creds: Credentials): Observable<any> {
+    const body = creds;
+    return this.http.post(`${this.baseUrl}/auth/register`, body);
+  }
+
   login(creds: Credentials): Observable<any> {
     const body = creds;
     return this.http.post(`${this.baseUrl}/auth/authenticate`, body);

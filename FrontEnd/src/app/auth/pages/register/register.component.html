@@ -60,7 +60,7 @@
           Bienvenido!
         </h2>
       </div>
-      <form autocomplete="off" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <form autocomplete="off" [formGroup]="registerForm" (ngSubmit)="register()">
         <div class="relative p-2 rounded bg-wth">
           <input type="name" formControlName="name" placeholder=" "
             class="peer min-h-[auto] w-full rounded border-0 bg-transparent focus:outline-none focus:placeholder:opacity-100 placeholder-transparent pl-2" />
@@ -91,6 +91,13 @@
         <p *ngIf="isFieldInvalid('password')" class="pl-2 m-0 text-xs text-error-color font-thin">
           <span class=""> {{ getErrorMessage("password") }}</span>
         </p>
+        <div class="relative mt-3 p-2 rounded bg-wth">
+          <input type="text" formControlName="sex" placeholder=" "
+            class="peer min-h-[auto] w-full rounded border-0 bg-transparent focus:outline-none focus:placeholder:opacity-100 placeholder-transparent pl-2" />
+          <label for="exampleFormControlInput"
+            class="absolute pl-2 left-2 -top-3.5 text-blk text-xs md:text-xs xs:peer-placeholder-shown:text-xs md:peer-placeholder-shown:text-xs peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-1 peer-focus:-top-[1rem] peer-focus:text-wth peer-focus:text-xs peer-focus:font-thin transition-all duration-300 ease-in-out">Genero
+          </label>
+        </div>
         <div class="mb-12 mt-3 text-center">
           <button type="submit"
             class="bg-primary-color hover:text-primary-color hover:bg-opacity-10 custom-transition inline-block w-full rounded p-2 text-xs md:text-base font-medium uppercase leading-normal text-[var(--text-black)] shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] custom-transition"

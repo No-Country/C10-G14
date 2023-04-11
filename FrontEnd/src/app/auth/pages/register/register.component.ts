@@ -20,12 +20,10 @@ export class RegisterComponent {
 
   // Formulario de registro de usuario
   registerForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required, this.validatorsService.nameValidator()]],
-    email: ['', [Validators.required, this.validatorsService.emailValidator()]],
-    password: [
-      '',
-      [Validators.required, this.validatorsService.passwordStrengthValidator()],
-    ],
+    name: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    sex: ['MALE', [Validators.required]],
   });
 
   // Constructor
@@ -49,6 +47,10 @@ export class RegisterComponent {
   // Obtiene el campo de contraseña
   get password() {
     return this.registerForm.get('password');
+  }
+
+  get sex() {
+    return this.registerForm.get('sex');
   }
 
   // Comprueba si un campo del formulario es inválido
@@ -85,15 +87,32 @@ export class RegisterComponent {
   }
 
   // Envío del formulario
-  onSubmit() {
-    const { name, email, password } = this.registerForm.value;
-    this.authService.register(name, email, password).subscribe((ok) => {
-      if (ok === true) {
-        Swal.fire('Exito!', ok.toString(), 'success');
+  register() {
+    // Llama al método de registro en el servicio AuthService
+    this.authService.registerUser(this.registerForm.value).subscribe(
+      (response) => {
+        // Manejar la respuesta exitosa del servidor
+        this.authService.setAuthToken(response.token);
+        console.log('Usuario registrado con éxito:', response);
         this.router.navigateByUrl('/inicio');
-      } else {
-        Swal.fire('Error', ok.toString(), 'error');
+        // ... realizar acciones adicionales después del registro exitoso ...
+      },
+      (error) => {
+        // Manejar errores de registro
+        console.error('Error al registrar usuario:', error);
+        // ... realizar acciones adicionales en caso de error ...
       }
-    });
+    );
   }
+  // onSubmit() {
+  //   const { name, email, password } = this.registerForm.value;
+  //   this.authService.register(name, email, password).subscribe((ok) => {
+  //     if (ok === true) {
+  //       Swal.fire('Exito!', ok.toString(), 'success');
+  //       this.router.navigateByUrl('/inicio');
+  //     } else {
+  //       Swal.fire('Error', ok.toString(), 'error');
+  //     }
+  //   });
+  // }
 }
