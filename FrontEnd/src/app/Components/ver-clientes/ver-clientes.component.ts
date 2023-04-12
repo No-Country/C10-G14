@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ClienteService } from 'src/app/Services/cliente.service';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
+import { MetodosService } from 'src/app/Services/metodos.service';
 
 
 
@@ -26,6 +27,7 @@ export class VerClientesComponent {
   @ViewChild(MatSort) sort!: MatSort;
   
   constructor(private _endPointsService:EndpointsService,
+    private _metodosServices: MetodosService,
     ) { }
 
   ngOnInit(): void {
@@ -51,6 +53,11 @@ export class VerClientesComponent {
       this.dataSource.data = data;
       console.log(data);
     })
+  }
+
+  getIdClientes(idCliente:number){
+    this._metodosServices.obtenerIdClientes.emit(idCliente)
+    console.log('esto es ver clientes:',idCliente);
   }
   
 
