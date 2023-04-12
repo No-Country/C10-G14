@@ -3,8 +3,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Rutina } from 'src/app/Interface/rutina';
-import { ClienteService } from 'src/app/Services/cliente.service';
 import { RutinaService } from 'src/app/Services/rutina.service';
+import { RutinasComponent } from '../forms/rutinas/rutinas.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Ejercicio } from 'src/app/Interface/ejercicio';
 
 @Component({
   selector: 'app-editar-ejercicio',
@@ -14,26 +16,34 @@ import { RutinaService } from 'src/app/Services/rutina.service';
 })
 
 export class EditarEjercicioComponent {
-  @Input() dataIdRutinas:number = 0;
+  @Input() dataRutinas:any;
   displayedColumns: string[] = ['title', 'numeroSeries', 'repetition','type', 'quantity', 'unit', 'acciones'];
-  dataSource = new MatTableDataSource<Rutina>();
-  
+  dataEjercicios = new MatTableDataSource<Rutina>();
+  ejercicio: any
   
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private datosRutina:RutinaService) { }
+  constructor(private datosRutina:RutinaService, public dialog: MatDialog
+    ) { }
 
   ngOnInit(): void {
-    this.obtenerRutinas(this.dataIdRutinas);
-    console.log(this.dataIdRutinas);
+    console.log('esto traigo al componente ejercicios desde el componente rutina',this.dataRutinas);
+    this.dataEjercicios = this.dataRutinas.exercises;
+    console.log('Datasourse',this.dataEjercicios);  
     
   }
-  obtenerRutinas(idRutina: number) {
+  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(RutinasComponent, {
+      disableClose: true
+    });
 
-    
-    this.datosRutina.obtenerDatos().subscribe(data => {
-      this.dataSource = data.usuario1.routines[idRutina].exercises;
-      // console.log(this.dataSource);
-    })
+    dialogRef.afterClosed().subscribe(result => {
+      
+      this.ejercicio= result;
+      console.log(this.ejercicio);
+    });
   }
 }
+
+    

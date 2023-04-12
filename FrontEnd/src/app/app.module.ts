@@ -7,10 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './Shared/shared.module';
 import { InicioComponent } from './Components/inicio/inicio.component';
-import { LoginComponent } from './auth/pages/login/login.component';
 import { VerClientesComponent } from './Components/ver-clientes/ver-clientes.component';
 import { EditarRutinasComponent } from './Components/editar-rutinas/editar-rutinas.component';
 import { EditarEjercicioComponent } from './Components/editar-ejercicio/editar-ejercicio.component';
+import { RutinasComponent } from './Components/forms/rutinas/rutinas.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { VerEjerciciosComponent } from './Components/ver-ejercicios/ver-ejercicios.component';
 import { InterceptorService } from './auth/services/user.interceptor';
@@ -25,7 +25,11 @@ import { InterceptorService } from './auth/services/user.interceptor';
     EditarEjercicioComponent,
     NavbarComponent,
     VerEjerciciosComponent,
+    RutinasComponent
   ],
+  
+
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -5,12 +5,10 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class RutinaService {
-
+export class EjercicioService {
   constructor(private http:HttpClient) { }
 
   obtenerDatos():Observable<any>{
-    return this.http.get('./assets/Datos/Plan.Json');
+    return this.http.get('./assets/Datos/Ejercicios.Json');
   }
-  
 }

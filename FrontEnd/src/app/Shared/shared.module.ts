@@ -20,9 +20,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [],
+  
   imports: [
     CommonModule,
     MatCheckboxModule,
@@ -44,7 +46,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatProgressBarModule,
     MatGridListModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
+    MatSelectModule,
+    ReactiveFormsModule
+    
   ],
   exports:[
     MatCheckboxModule,
@@ -65,7 +71,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatProgressBarModule,
     MatGridListModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
