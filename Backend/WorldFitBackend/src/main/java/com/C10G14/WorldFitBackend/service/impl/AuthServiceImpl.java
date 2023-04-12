@@ -20,8 +20,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.C10G14.WorldFitBackend.security.jwt.JwtService;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -35,18 +39,30 @@ public class AuthServiceImpl implements AuthService {
     
     @Autowired
     private AuthenticationManager authenticationManager;
-    
     @Autowired
     private AuthDtoMapper authMapper;
     @Autowired
     private UserRepository userRepository;
+    //Sin docker
+    //private final String FOLDER_PATH=System.getProperty("user.dir")+"/src/main/resources/static/images/";
+    //Con docker
+    private  final String FOLDER_PATH= "/var/lib/images/";
+    //TODO
+    private final String URL_PATH="localhost:8080/content/images/";
 
     @Override
-    public AuthenticationResponseDto register(RegisterRequestDto request) {
+    public AuthenticationResponseDto register(RegisterRequestDto request) throws IOException {
         if (userRepository.existsByEmail(request.getEmail().toLowerCase())){
             throw new AlreadyExistException("Error: Email already taken");
         }
         User newUser = authMapper.requestToEntity(request);
+
+        if (!Objects.equals(request.getProfileImg(),null)){
+        String imgPath = FOLDER_PATH+request.getProfileImg().getOriginalFilename();
+        request.getProfileImg().transferTo(new File(imgPath));
+        newUser.setProfileImg(URL_PATH + request.getProfileImg().getOriginalFilename());
+        }
+
         userrepository.save(newUser);
         String jwtToken = jwtService.generateToken(newUser);
         AuthenticationResponseDto authResponse = new AuthenticationResponseDto();

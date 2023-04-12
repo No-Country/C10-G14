@@ -36,7 +36,7 @@ public class ExerciseDtoMapper {
                 exerciseDto.getDescription(),
                 exerciseDto.getMedia(),
                 unitRepository.findByName(exerciseDto.unitToEUnit())
-                        .orElseThrow(()-> new NotFoundException("Unit must be either: 'Km', 'Kg' or null"))
+                        .orElseThrow(()-> new NotFoundException("Unit must be either: 'Km', 'Kg', 'Minutos' or null"))
         );
     }
 

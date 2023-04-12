@@ -28,17 +28,14 @@ public class AuthDtoMapper {
                 .orElseThrow(()-> new RuntimeException("Role USER not found"));
         roles.add(userRole);
 
-        ESex sex = null;
-        if (!Objects.equals(registerRequestDto.getSex(),null)){
-            sex = (registerRequestDto.getSex().equalsIgnoreCase("male") ?
-                    ESex.MALE : ESex.FEMALE);
-        };
+        ESex sex = (Objects.equals(registerRequestDto.getSex(),null)) ? ESex.NOT_SPECIFIED :
+                (registerRequestDto.getSex().equalsIgnoreCase("male"))?  ESex.MALE : ESex.FEMALE ;
 
         return User.builder()
                 .email(registerRequestDto.getEmail().toLowerCase())
                 .password(passwordEncoder.encode(registerRequestDto.getPassword()))
                 .name(registerRequestDto.getName())
-                .profileImg(registerRequestDto.getProfileImg())
+                .profileImg(null)
                 .sex(sex)
                 .age(registerRequestDto.getAge())
                 .height(registerRequestDto.getHeight())
