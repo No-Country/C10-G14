@@ -25,8 +25,9 @@ import { InterceptorService } from './auth/services/user.interceptor';
     EditarEjercicioComponent,
     NavbarComponent,
     VerEjerciciosComponent,
+    RutinasComponent
   ],
-  declarations: [AppComponent, RutinaComponent, InicioComponent, VerClientesComponent, EditarRutinasComponent, EditarEjercicioComponent, RutinasComponent, NavbarComponent, VerEjerciciosComponent],
+  
 
 
   imports: [
