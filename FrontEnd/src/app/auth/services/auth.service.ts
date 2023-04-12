@@ -1,69 +1,55 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import jwtDecode from 'jwt-decode';
+import { Observable } from 'rxjs';
 
-import { map, of, catchError, Observable, tap } from 'rxjs';
-import { AuthResponse, Usuario } from '../interfaces/auth.interfaces';
+import { environment } from 'src/environments/environment';
+import { Credentials } from '../interfaces/auth.interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private baseUrl: string = environment.baseUrl;
-  private _usuario!: Usuario;
-
-  get usuario() {
-    return { ...this._usuario };
-  }
+  private authTokenKey = 'authToken';
 
   constructor(private http: HttpClient) {}
 
-  register(name: Usuario, email: Usuario, password: Usuario): Observable<any> {
-    const URL = `${this.baseUrl}/auth/new`;
-    const body = { name, email, password };
-    return this.http.post<AuthResponse>(URL, body).pipe(
-      tap(({ ok, token }) => {
-        if (ok) {
-          localStorage.setItem('token', token!);
-        }
-      }),
-      map(({ ok }) => ok),
-      catchError((err) => of(err.error.msg))
-    );
+  registerUser(creds: Credentials): Observable<any> {
+    const body = creds;
+    return this.http.post(`${this.baseUrl}/auth/register`, body);
   }
 
-  login(email: Usuario, password: Usuario): Observable<boolean> {
-    const URL = `${this.baseUrl}/auth`;
-    const body = { email, password };
-    return this.http.post<AuthResponse>(URL, body).pipe(
-      tap(({ ok, token }) => {
-        if (ok) {
-          localStorage.setItem('token', token!);
-        }
-      }),
-      map((resp) => resp.ok),
-      catchError((err) => of(err.error.msg))
-    );
+  login(creds: Credentials): Observable<any> {
+    const body = creds;
+    return this.http.post(`${this.baseUrl}/auth/authenticate`, body);
   }
 
-  validateToken(): Observable<boolean> {
-    const URL = `${this.baseUrl}/auth/renew`;
-    const headers = new HttpHeaders().set(
-      'x-token',
-      localStorage.getItem('token') || ''
-    );
-    return this.http.get<AuthResponse>(URL, { headers }).pipe(
-      map((resp) => {
-        localStorage.setItem('token', resp.token!);
-        this._usuario = {
-          name: resp.name!,
-          uid: resp.uid!,
-          email: resp.email!,
-        };
-        return resp.ok;
-      }),
-      catchError((err) => of(false))
-    );
+  getToken(creds: Credentials) {
+    return localStorage.getItem('token');
+  }
+
+  setAuthToken(token: string): void {
+    localStorage.setItem(this.authTokenKey, token);
+  }
+
+  getAuthToken(): string | null {
+    return localStorage.getItem(this.authTokenKey);
+  }
+
+  // Método para obtener la información del usuario a partir del token JWT
+  decodeAuthToken(authToken: string): any {
+    const decodedToken = jwtDecode(authToken);
+    return decodedToken;
+  }
+
+  removeAuthToken(): void {
+    localStorage.removeItem(this.authTokenKey);
+  }
+
+  getUsersByRole(role: string): Observable<any[]> {
+    // Realiza la petición HTTP para obtener los usuarios por rol
+    return this.http.get<any[]>(`${this.baseUrl}/users/role/${role}`);
   }
 
   logout() {

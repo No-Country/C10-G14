@@ -12,3 +12,10 @@ export interface Usuario {
   name: string;
   email: string;
 }
+
+export interface Credentials {
+  name: string;
+  email: string;
+  password: string;
+  sex: string;
+}

@@ -5,22 +5,22 @@ services:
     container_name: postgresql_container
     image: postgres
     environment:
-      - POSTGRES_DB=WF2
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_USER=postgres
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USERNAME}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     volumes:
       - C:\docker_composer:/var/lib/postgresql/data
     restart: always
   backend:
-    build: .
+    image: worldfit/backend:dev
     container_name: worldfit_container
     ports:
       - 8080:8080
     environment:
-      db_url: jdbc:postgresql://db:5432/WF2
-      db_username: postgres
-      db_password: admin
+      DB_URL: ${DB_URL}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     depends_on:
       - db
     restart: always
