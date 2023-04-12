@@ -12,35 +12,33 @@ import { EndpointsService } from 'src/app/Services/endpoints.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class EditarRutinasComponent implements OnInit  {  
-  rutinasLista:any;
+  infoCliente:any;
   idCliente: number = 0;
   api:string = this.datosRutina.apiUrlUser; 
   selected = new FormControl(0);
-  dataSource: any;
+  planCliente: any ;
+  
   
   constructor(private datosRutina: EndpointsService,
   private _metodosServices: MetodosService) { }
   ngOnInit(): void {
     this._metodosServices.obtenerIdClientes.subscribe(data => {
+      console.log('Recibiendo data..', data);
       this.idCliente = data;
       console.log('Recibiendo data..', this.idCliente);
     })
-      // this.datosRutina.obtenerDatos().subscribe((data) => {
-    
-      //   this.rutinasLista = data.usuario1.routines;      
-    
       
-      // });
-      this.obtenerRutinas(4)
-
-  
+    this.obtenerRutinas(4);  
 }
 
 obtenerRutinas(id:number) {  
   this.datosRutina.obtenerDatosId(id, this.api).subscribe(data => {
-    // this.dataSource = data.usuario1.routines[idRutina].exercises;
-     console.log('esto es lo que me devuelve Obtener rutinas: ', data);
-   })
- }
+    
+    this.infoCliente = data;
+    this.planCliente = data.routines;    
+    
+    
+  })
+}
 
 }

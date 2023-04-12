@@ -16,9 +16,9 @@ import { Ejercicio } from 'src/app/Interface/ejercicio';
 })
 
 export class EditarEjercicioComponent {
-  @Input() dataIdRutinas:number = 0;
+  @Input() dataRutinas:any;
   displayedColumns: string[] = ['title', 'numeroSeries', 'repetition','type', 'quantity', 'unit', 'acciones'];
-  dataSource = new MatTableDataSource<Rutina>();
+  dataEjercicios = new MatTableDataSource<Rutina>();
   ejercicio: any
   
   @ViewChild(MatPaginator) paginator!: MatPaginator
@@ -27,18 +27,12 @@ export class EditarEjercicioComponent {
     ) { }
 
   ngOnInit(): void {
-    this.obtenerRutinas(this.dataIdRutinas);
-    
+    console.log('esto traigo al componente ejercicios desde el componente rutina',this.dataRutinas);
+    this.dataEjercicios = this.dataRutinas.exercises;
+    console.log('Datasourse',this.dataEjercicios);  
     
   }
-  obtenerRutinas(idRutina: number) {
-
-    
-    this.datosRutina.obtenerDatos().subscribe(data => {
-      this.dataSource = data.usuario1.routines[idRutina].exercises;
-      // console.log(this.dataSource);
-    })
-  }
+  
   openDialog(): void {
     const dialogRef = this.dialog.open(RutinasComponent, {
       disableClose: true
