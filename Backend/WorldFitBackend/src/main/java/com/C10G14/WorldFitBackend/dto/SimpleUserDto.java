@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class SimpleUserDto {
+    private String id;
     private String email;
     private String name;
     private String clientSince;
