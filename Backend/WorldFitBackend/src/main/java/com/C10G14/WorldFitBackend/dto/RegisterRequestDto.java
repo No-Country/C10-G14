@@ -4,6 +4,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 @Getter
 @Setter
@@ -27,8 +30,11 @@ public class RegisterRequestDto {
             message = "Name must contain only letters and be maximum 12 characters")
     @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
-    @URL(message = "image URL not valid")
-    private String profileImg;
+
+    /*@URL(message = "image URL not valid")
+    private String profileImg;*/
+
+    private MultipartFile profileImg;
     @DecimalMin(value = "0.00", message = "Weight must be greater than or equal to zero")
     @DecimalMax(value = "999.99", message = "Weight must have two or fewer decimal places")
     private Double weight;

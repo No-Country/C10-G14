@@ -23,8 +23,6 @@ public class Exercise_RoutineResponseDto {
     private int repetitions;
     private int seriesNumber;
      private List series;
-    //private int[][] series;
-
 
     public Exercise_RoutineResponseDto(Exercise exercise, int quantity, int repetitions, int seriesNumber) {
 

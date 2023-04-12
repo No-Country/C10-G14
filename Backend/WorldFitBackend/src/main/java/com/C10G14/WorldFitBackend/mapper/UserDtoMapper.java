@@ -61,10 +61,8 @@ public class UserDtoMapper {
     }
 
     public User dtoToEntity(UserDto dto) throws JsonProcessingException {
-        ESex sex;
-        if (dto.getSex().equals("male"))
-            sex = ESex.MALE;
-        else sex = ESex.FEMALE;
+        ESex sex = (Objects.equals(dto.getSex(),null)) ? ESex.NOT_SPECIFIED :
+                (dto.getSex().equalsIgnoreCase("male"))?  ESex.MALE : ESex.FEMALE ;
         User user = new User();
         user.setEmail(dto.getEmail());
         user.setName(dto.getName());
