@@ -7,6 +7,7 @@ import { RutinaService } from 'src/app/Services/rutina.service';
 import { RutinasComponent } from '../forms/rutinas/rutinas.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Ejercicio } from 'src/app/Interface/ejercicio';
+import { EndpointsService } from 'src/app/Services/endpoints.service';
 
 @Component({
   selector: 'app-editar-ejercicio',
@@ -16,29 +17,22 @@ import { Ejercicio } from 'src/app/Interface/ejercicio';
 })
 
 export class EditarEjercicioComponent {
-  @Input() dataIdRutinas:number = 0;
+  @Input() dataIdRutinas:any
   displayedColumns: string[] = ['title', 'numeroSeries', 'repetition','type', 'quantity', 'unit', 'acciones'];
   dataSource = new MatTableDataSource<Rutina>();
   ejercicio: any
   
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private datosRutina:RutinaService, public dialog: MatDialog
-    ) { }
-
+  constructor(private datosRutina:RutinaService, public dialog: MatDialog,
+   private Api: EndpointsService ) { }
+    
   ngOnInit(): void {
-    this.obtenerRutinas(this.dataIdRutinas);
+    this.dataSource= this.dataIdRutinas.exercises
     
     
   }
-  obtenerRutinas(idRutina: number) {
-
-    
-    this.datosRutina.obtenerDatos().subscribe(data => {
-      this.dataSource = data.usuario1.routines[idRutina].exercises;
-      // console.log(this.dataSource);
-    })
-  }
+  
   openDialog(): void {
     const dialogRef = this.dialog.open(RutinasComponent, {
       disableClose: true
@@ -50,6 +44,13 @@ export class EditarEjercicioComponent {
       console.log(this.ejercicio);
     });
   }
+  eliminar(id: number): void {
+    this.Api.borrarItem(id, "users/routine").subscribe(() => {
+      
+      
+    });
+  }
+ 
 }
 
     

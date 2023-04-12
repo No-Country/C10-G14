@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { EjercicioR } from 'src/app/Interface/ejercicio';
 import { Rutina } from 'src/app/Interface/rutina';
 import { EjercicioService } from 'src/app/Services/ejercicio.service';
 @Component({
@@ -20,10 +21,10 @@ export class RutinasComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.form = fb.group({
-      title:[''],
-      quantity:[''],
-      repetitions:[''],
-      series:[''],
+      exerciseId:['',Validators.required],
+      quantity:['',Validators.required],
+      repetitions:['',Validators.required],
+      series:['',Validators.required],
       
     })
     
@@ -40,5 +41,14 @@ export class RutinasComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  
+  addEjercicio(){
+    
+    const ejercicio:EjercicioR= {
+      exerciseId:this.form.value.exerciseId,
+      quantity:this.form.value.quantity,
+      repetitions:this.form.value.repetitions,
+      series:this.form.value.series
+    }
+    console.log(ejercicio)
+  }
 }

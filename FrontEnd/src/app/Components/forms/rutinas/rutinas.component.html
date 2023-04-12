@@ -1,55 +1,79 @@
-<h2 mat-dialog-title>Agregar Ejercicio </h2>
-<mat-dialog-content class="mat-typography">
-  <form class="example-form">
-    
-        <mat-form-field appearance="fill">
-          <mat-label>Ejercicio </mat-label>
-          <mat-select>
-            <mat-option *ngFor="let ejercicio of Ejercicios" [value]="ejercicio.id">
-              {{ejercicio.title}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-   
-        <mat-form-field class="example-full-width">
-          <mat-label>Series</mat-label>
-          <input matInput type="number" placeholder="" >
-        </mat-form-field>
-    
-        <mat-form-field class="example-full-width" >
-          <mat-label>Repeticiones</mat-label>
-          <input matInput type="number" class="example-right-align" placeholder="">
-        </mat-form-field>
-     
-
-   
-<div class="row">
-  <div class="col-md-4">
-    <mat-form-field class="example-full-width">
-      <mat-label>Tipo</mat-label>
-      <input matInput placeholder="" value="">
+<h2 mat-dialog-title>Agregar Ejercicio</h2>
+<form [formGroup]="form" (ngSubmit)="addEjercicio()">
+  <mat-dialog-content class="mat-typography">
+    <mat-form-field appearance="fill">
+      <mat-label>Ejercicio </mat-label>
+      <mat-select formControlName="exerciseId">
+        <mat-option *ngFor="let ejercicio of Ejercicios" [value]="ejercicio.id">
+          {{ ejercicio.title }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
-
-  </div>
-  <div class="col-md-4">
+    <div class="error">
+      <span *ngIf="form.get('exerciseId')?.hasError('required') && form.get('exerciseId')?.touched">
+       <strong>Este campo es obligatorio</strong> 
+     </span>
+   </div>
     <mat-form-field class="example-full-width">
-      <mat-label>Cantidad</mat-label>
-      <input matInput type="number" placeholder="" value="">
+      <mat-label>Series</mat-label>
+      <input min="0" formControlName="series" matInput type="number" placeholder="" />
     </mat-form-field>
-  </div>
-  <div class="col-md-4">
+    <div class="error">
+      <span *ngIf="form.get('series')?.hasError('required') && form.get('series')?.touched">
+       <strong>Este campo es obligatorio</strong> 
+     </span>
+   </div>
     <mat-form-field class="example-full-width">
-      <mat-label>Unidad</mat-label>
-      <input matInput placeholder="" value="">
+      <mat-label>Repeticiones</mat-label>
+      <input
+      min="0"
+        formControlName="repetitions"
+        matInput
+        type="number"
+        class="example-right-align"
+        placeholder=""
+      />
     </mat-form-field>
-  </div>
+<div class="error">
+   <span *ngIf="form.get('repetitions')?.hasError('required') && form.get('repetitions')?.touched">
+    <strong>Este campo es obligatorio</strong> 
+  </span>
 </div>
-    
-   
-
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancelar</button>
-  <button mat-button [mat-dialog-close]="true" >Aceptar</button>
-</mat-dialog-actions>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <mat-label>Tipo</mat-label>
+          <input  matInput placeholder="" value="" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <mat-label>Cantidad</mat-label>
+          <input
+          min="0"
+            formControlName="quantity"
+            matInput
+            type="number"
+            class="example-right-align"
+            placeholder=""
+          />
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('quantity')?.hasError('required') && form.get('quantity')?.touched">
+           <strong>Este campo es obligatorio</strong> 
+         </span>
+       </div>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <mat-label>Unidad</mat-label>
+          <input matInput placeholder="" value="" />
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" mat-button mat-dialog-close>Cancelar</button>
+    <button [disabled]="form.invalid" type="submit" mat-button [mat-dialog-close]="true">Aceptar</button>
+  </mat-dialog-actions>
+</form>
