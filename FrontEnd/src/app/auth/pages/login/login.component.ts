@@ -75,12 +75,25 @@ export class LoginComponent {
       (response) => {
         // Manejar la respuesta del servidor en caso de éxito
         this.authService.setAuthToken(response.token);
-        console.log('Inicio de sesión exitoso:', response);
+        // console.log('Inicio de sesión exitoso:', response);
         this.router.navigateByUrl('/inicio');
       },
       (error) => {
         // Manejar errores en caso de fallo
-        this.error = 'Nombre de usuario o contraseña incorrectos';
+        // console.error('Error de inicio de sesión:', error);
+        if (error && error.error && error.error.message) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error desconocido',
+            text: error.error.message,
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Nombre de usuario o contraseña incorrectos',
+          });
+        }
       }
     );
   }

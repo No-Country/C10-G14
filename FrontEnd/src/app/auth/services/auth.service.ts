@@ -25,10 +25,6 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/auth/authenticate`, body);
   }
 
-  getToken(creds: Credentials) {
-    return localStorage.getItem('token');
-  }
-
   setAuthToken(token: string): void {
     localStorage.setItem(this.authTokenKey, token);
   }
@@ -45,11 +41,6 @@ export class AuthService {
 
   removeAuthToken(): void {
     localStorage.removeItem(this.authTokenKey);
-  }
-
-  getUsersByRole(role: string): Observable<any[]> {
-    // Realiza la petición HTTP para obtener los usuarios por rol
-    return this.http.get<any[]>(`${this.baseUrl}/users/role/${role}`);
   }
 
   logout() {

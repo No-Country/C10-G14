@@ -93,26 +93,25 @@ export class RegisterComponent {
       (response) => {
         // Manejar la respuesta exitosa del servidor
         this.authService.setAuthToken(response.token);
-        console.log('Usuario registrado con éxito:', response);
+        // console.log('Usuario registrado con éxito:', response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario registrado con éxito',
+          text: 'Bienvenido a la aplicación',
+        });
         this.router.navigateByUrl('/inicio');
-        // ... realizar acciones adicionales después del registro exitoso ...
       },
       (error) => {
-        // Manejar errores de registro
-        console.error('Error al registrar usuario:', error);
-        // ... realizar acciones adicionales en caso de error ...
+        // Manejar errores en caso de fallo
+        // console.error('Error de inicio de sesión:', error);
+        if (error && error.error && error.error.message) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al registrar usuario',
+            text: error.error.message,
+          });
+        }
       }
     );
   }
-  // onSubmit() {
-  //   const { name, email, password } = this.registerForm.value;
-  //   this.authService.register(name, email, password).subscribe((ok) => {
-  //     if (ok === true) {
-  //       Swal.fire('Exito!', ok.toString(), 'success');
-  //       this.router.navigateByUrl('/inicio');
-  //     } else {
-  //       Swal.fire('Error', ok.toString(), 'error');
-  //     }
-  //   });
-  // }
 }
