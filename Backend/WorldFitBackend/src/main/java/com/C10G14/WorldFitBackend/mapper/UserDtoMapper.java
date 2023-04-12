@@ -36,9 +36,10 @@ public class UserDtoMapper {
         List <String> strRoles = user.getRole().stream().map(
                 (r)-> r.getName().name()).toList();
 
-        return new UserDto(user.getEmail(),
-                user.getClientSince(),
+        return new UserDto(user.getId().toString(),
+                user.getEmail(),
                 user.getName(),
+                user.getClientSince(),
                 strRoles,
                 user.getProfileImg(),
                 user.getWeight(),
@@ -53,9 +54,10 @@ public class UserDtoMapper {
                 (e) -> routineMapper.EntityToDto(e)
         ).toList();
 
-        return new SimpleUserDto(user.getEmail(),
-                user.getClientSince(),
+        return new SimpleUserDto(user.getId().toString(),
+                user.getEmail(),
                 user.getName(),
+                user.getClientSince(),
                 user.getProfileImg(),
                 routines);
     }
