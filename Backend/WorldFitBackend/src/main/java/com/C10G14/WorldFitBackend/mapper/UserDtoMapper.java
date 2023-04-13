@@ -38,8 +38,8 @@ public class UserDtoMapper {
 
         return new UserDto(user.getId().toString(),
                 user.getEmail(),
-                user.getName(),
                 user.getClientSince(),
+                user.getName(),
                 strRoles,
                 user.getProfileImg(),
                 user.getWeight(),
@@ -56,8 +56,8 @@ public class UserDtoMapper {
 
         return new SimpleUserDto(user.getId().toString(),
                 user.getEmail(),
-                user.getName(),
                 user.getClientSince(),
+                user.getName(),
                 user.getProfileImg(),
                 routines);
     }
