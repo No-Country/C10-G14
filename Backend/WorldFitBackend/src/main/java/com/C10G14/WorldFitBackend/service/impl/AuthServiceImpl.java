@@ -47,8 +47,13 @@ public class AuthServiceImpl implements AuthService {
     //private final String FOLDER_PATH=System.getProperty("user.dir")+"/src/main/resources/static/images/";
     //Con docker
     private  final String FOLDER_PATH= "/var/lib/images/";
-    //TODO
+
+    //dev
     private final String URL_PATH="localhost:8080/content/images/";
+
+    //prod
+    //private final String URL_PATH="api.worldfit.site/content/images/";
+
 
     @Override
     public AuthenticationResponseDto register(RegisterRequestDto request) throws IOException {
