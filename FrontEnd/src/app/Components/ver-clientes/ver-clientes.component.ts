@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { ClienteService } from 'src/app/Services/cliente.service';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
 import { MetodosService } from 'src/app/Services/metodos.service';
+import { Router } from '@angular/router';
 
 
 
@@ -28,6 +29,7 @@ export class VerClientesComponent {
   
   constructor(private _endPointsService:EndpointsService,
     private _metodosServices: MetodosService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -55,9 +57,12 @@ export class VerClientesComponent {
     })
   }
 
-  getIdClientes(idCliente:number){
-    this._metodosServices.obtenerIdClientes.emit(idCliente)
+  getIdClientes(idCliente:AnimationPlaybackEventInit){
+    this._metodosServices.obtenerInfoCliente.emit(idCliente);
     console.log('esto es ver clientes:',idCliente);
+    this.router.navigateByUrl('/editar-rutinas');
+
+
   }
   
 

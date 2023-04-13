@@ -4,7 +4,10 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
   providedIn: 'root'
 })
 export class MetodosService {
-  @Output() obtenerIdClientes: EventEmitter<any> = new EventEmitter();
+  
+  @Output() obtenerInfoCliente: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
+
+  
 }
