@@ -19,7 +19,7 @@ const routes: Routes = [
     component:InicioComponent,
   },
   {
-    path: 'editar-rutinas',
+    path: 'editar-rutinas/:id',
     component:EditarRutinasComponent,
   },
   {
