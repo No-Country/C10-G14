@@ -3,9 +3,8 @@ import { Cliente } from 'src/app/Interface/cliente';
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ClienteService } from 'src/app/Services/cliente.service';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
-import { MetodosService } from 'src/app/Services/metodos.service';
+import { Router } from '@angular/router';
 
 
 
@@ -27,7 +26,8 @@ export class VerClientesComponent {
   @ViewChild(MatSort) sort!: MatSort;
   
   constructor(private _endPointsService:EndpointsService,
-    private _metodosServices: MetodosService,
+    
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -51,14 +51,9 @@ export class VerClientesComponent {
   obtenerClientes() {    
     this._endPointsService.UsersRoles(this.role).subscribe(data => {
       this.dataSource.data = data;
-      console.log(data);
+      
     })
-  }
-
-  getIdClientes(idCliente:number){
-    this._metodosServices.obtenerIdClientes.emit(idCliente)
-    console.log('esto es ver clientes:',idCliente);
-  }
+  } 
   
 
 }
