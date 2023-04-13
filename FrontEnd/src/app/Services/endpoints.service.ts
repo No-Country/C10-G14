@@ -10,7 +10,7 @@ export class EndpointsService {
   apiUrlUser: string;
   apiUrlRutine: string;
   apiUrlUserRutine: string;
-  // apiUrlHabilidades:string;
+  apiUrlEjercicio:string;
   // apiUrlProyectos:string;
   // apiUrlPersona: string;
 
@@ -19,6 +19,7 @@ export class EndpointsService {
     this.apiUrlUser = '/users';
     this.apiUrlRutine = '/routines';
     this.apiUrlUserRutine = '/users/routine';
+    this.apiUrlEjercicio = '/exercises';
   }
 
   //--------------Endpoints-----------------------------------
