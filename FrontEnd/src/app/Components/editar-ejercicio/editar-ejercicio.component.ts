@@ -17,9 +17,9 @@ import { EndpointsService } from 'src/app/Services/endpoints.service';
 })
 
 export class EditarEjercicioComponent {
-  @Input() dataIdRutinas:any
+  @Input() dataRutinas:any;
   displayedColumns: string[] = ['title', 'numeroSeries', 'repetition','type', 'quantity', 'unit', 'acciones'];
-  dataSource = new MatTableDataSource<Rutina>();
+  dataEjercicios = new MatTableDataSource<Rutina>();
   ejercicio: any
   
   @ViewChild(MatPaginator) paginator!: MatPaginator
@@ -28,8 +28,9 @@ export class EditarEjercicioComponent {
    private Api: EndpointsService ) { }
     
   ngOnInit(): void {
-    this.dataSource= this.dataIdRutinas.exercises
     
+    this.dataEjercicios = this.dataRutinas.exercises;
+   
     
   }
   
@@ -41,7 +42,7 @@ export class EditarEjercicioComponent {
     dialogRef.afterClosed().subscribe(result => {
       
       this.ejercicio= result;
-      console.log(this.ejercicio);
+      
     });
   }
   eliminar(id: number): void {

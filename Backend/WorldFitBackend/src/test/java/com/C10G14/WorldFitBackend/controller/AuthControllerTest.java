@@ -51,7 +51,7 @@ public class AuthControllerTest {
                 .age(15)
                 .height(80.0)
                 .weight(1.75)
-                .profileImg("https://avatars.githubusercontent.com/u/83373185?v=4")
+                //.profileImg("https://avatars.githubusercontent.com/u/83373185?v=4")
                 .build();
 
         authenticationRequestDto = AuthenticationRequestDto.builder()

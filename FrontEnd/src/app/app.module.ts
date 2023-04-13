@@ -25,8 +25,11 @@ import { InterceptorService } from './auth/services/user.interceptor';
     EditarEjercicioComponent,
     NavbarComponent,
     VerEjerciciosComponent,
-    RutinasComponent,
+    RutinasComponent
   ],
+  
+
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

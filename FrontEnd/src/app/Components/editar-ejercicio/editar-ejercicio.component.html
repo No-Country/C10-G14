@@ -1,6 +1,6 @@
 <div class="container pt-5 pb-5 ">
   
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  matSort>
+  <table mat-table [dataSource]="dataEjercicios" class="mat-elevation-z8"  matSort>
     
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
@@ -14,7 +14,7 @@
     
     <ng-container matColumnDef="numeroSeries">
       <th mat-header-cell *matHeaderCellDef> Series </th>
-      <td mat-cell *matCellDef="let element"> {{element.numeroSeries}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.seriesNumber}} </td>
     </ng-container>
 
     <ng-container matColumnDef="type">

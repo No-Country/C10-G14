@@ -13,7 +13,7 @@ services:
       - C:\docker_composer:/var/lib/postgresql/data
     restart: always
   backend:
-    image: worldfit/backend:dev
+    build: .
     container_name: worldfit_container
     ports:
       - 8080:8080
@@ -21,6 +21,10 @@ services:
       DB_URL: ${DB_URL}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - C:\images:/var/lib/images
     depends_on:
       - db
     restart: always
+
+
