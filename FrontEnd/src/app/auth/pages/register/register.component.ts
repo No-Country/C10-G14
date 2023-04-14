@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -20,10 +25,20 @@ export class RegisterComponent {
 
   // Formulario de registro de usuario
   registerForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    name: ['juan', [Validators.required]],
+    email: ['registro@mail.com', [Validators.required, Validators.email]],
+    password: ['123456789', [Validators.required, Validators.minLength(6)]],
     sex: ['MALE', [Validators.required]],
+    age: [38, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+    height: [
+      180,
+      [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],
+    ],
+    weight: [
+      80,
+      [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],
+    ],
+    image: [null], // Nuevo control de imagen
   });
 
   // Constructor
@@ -33,25 +48,6 @@ export class RegisterComponent {
     private router: Router,
     private validatorsService: ValidatorsFormService
   ) {}
-
-  // Obtiene el campo de nombre
-  get name() {
-    return this.registerForm.get('name');
-  }
-
-  // Obtiene el campo de email
-  get email() {
-    return this.registerForm.get('email');
-  }
-
-  // Obtiene el campo de contraseña
-  get password() {
-    return this.registerForm.get('password');
-  }
-
-  get sex() {
-    return this.registerForm.get('sex');
-  }
 
   // Comprueba si un campo del formulario es inválido
   isFieldInvalid(field: string): boolean {
@@ -86,24 +82,66 @@ export class RegisterComponent {
     return '';
   }
 
+  onFileSelected(event: any) {
+    // Obtener el archivo seleccionado del evento
+    const file = event.target.files[0];
+
+    // Validar el archivo antes de asignarlo al FormControl "image"
+    if (file) {
+      // Validar el tamaño del archivo (ejemplo: máximo 5 MB)
+      if (file.size > 5 * 1024 * 1024) {
+        // Mostrar un error o realizar alguna acción específica
+        console.error('El archivo es demasiado grande');
+        return;
+      }
+
+      // Validar el tipo del archivo (ejemplo: solo imágenes)
+      if (!file.type.startsWith('image/')) {
+        // Mostrar un error o realizar alguna acción específica
+        console.error('El archivo no es una imagen');
+        return;
+      }
+
+      // Asignar el archivo al FormControl "image"
+      this.registerForm.patchValue({ image: file });
+    }
+  }
+
   // Envío del formulario
   register() {
-    // Llama al método de registro en el servicio AuthService
-    this.authService.registerUser(this.registerForm.value).subscribe(
+    // Obtener los valores del formulario
+    const formData = new FormData();
+    formData.append('name', this.registerForm.get('name')!.value);
+    formData.append('email', this.registerForm.get('email')!.value);
+    formData.append('password', this.registerForm.get('password')!.value);
+    formData.append('sex', this.registerForm.get('sex')!.value);
+    formData.append('age', this.registerForm.get('age')!.value);
+    formData.append('height', this.registerForm.get('height')!.value);
+    formData.append('weight', this.registerForm.get('weight')!.value);
+
+    // Obtener el archivo seleccionado del formulario
+    const file = this.registerForm.get('image')!.value;
+
+    // Agregar el archivo seleccionado a formData
+    formData.append('image', file);
+
+    // Imprimir los datos de FormData por consola
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
+
+    // Llamar al método de registro con los datos del formulario y el archivo
+    this.authService.register(formData).subscribe(
       (response) => {
         // Manejar la respuesta exitosa del servidor
         this.authService.setAuthToken(response.token);
-        // console.log('Usuario registrado con éxito:', response);
-        Swal.fire({
-          icon: 'success',
-          title: 'Usuario registrado con éxito',
-          text: 'Bienvenido a la aplicación',
-        });
-        this.router.navigateByUrl('/inicio');
+        this.loading = true;
+        setTimeout(() => {
+          this.router.navigate(['/inicio']);
+        }, 2000);
       },
       (error) => {
         // Manejar errores en caso de fallo
-        // console.error('Error de inicio de sesión:', error);
         if (error && error.error && error.error.message) {
           Swal.fire({
             icon: 'error',

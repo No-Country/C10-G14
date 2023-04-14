@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 // Angular Material
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatCardModule} from '@angular/material/card'; 
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatTooltipModule} from '@angular/material/tooltip'; 
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -20,11 +20,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatSelectModule} from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { PageErrorComponent } from './page-error/page-error.component';
+import { PageUserComponent } from './page-user/page-user.component';
 @NgModule({
-  declarations: [],
-  
+  declarations: [SpinnerComponent, PageErrorComponent, PageUserComponent],
+
   imports: [
     CommonModule,
     MatCheckboxModule,
@@ -35,7 +38,6 @@ import {MatSelectModule} from '@angular/material/select';
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
-
     MatSliderModule,
     MatTableModule,
     MatPaginatorModule,
@@ -49,10 +51,9 @@ import {MatSelectModule} from '@angular/material/select';
     HttpClientModule,
     MatDialogModule,
     MatSelectModule,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule,
   ],
-  exports:[
+  exports: [
     MatCheckboxModule,
     MatCardModule,
     MatExpansionModule,
@@ -74,7 +75,10 @@ import {MatSelectModule} from '@angular/material/select';
     HttpClientModule,
     MatDialogModule,
     MatSelectModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    SpinnerComponent,
+    PageErrorComponent,
+    PageUserComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

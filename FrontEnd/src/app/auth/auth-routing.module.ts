@@ -4,7 +4,6 @@ import { MainComponent } from './pages/main/main.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -12,7 +11,7 @@ const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'registro', component: RegisterComponent },
-      { path: '**', redirectTo: 'login' },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },
 ];
