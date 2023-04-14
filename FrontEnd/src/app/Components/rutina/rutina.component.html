@@ -1,6 +1,6 @@
-<div class="fondo-rutinas pt-2">
+<div class="fondo-rutinas pt-4">
   <mat-accordion  > 
-    <mat-expansion-panel   *ngFor="let rutina of rutinasLista">
+    <mat-expansion-panel   *ngFor="let rutina of rutinasLista; first as isFirst" [expanded]="isFirst">
       <mat-expansion-panel-header class="acordion-cabecera">
         {{rutina.title}}      
       </mat-expansion-panel-header>  
