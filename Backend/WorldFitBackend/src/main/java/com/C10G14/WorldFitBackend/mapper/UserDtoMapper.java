@@ -11,6 +11,7 @@ import com.C10G14.WorldFitBackend.enumeration.ESex;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
+import com.C10G14.WorldFitBackend.util.DtoFormatter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class UserDtoMapper {
     RoleRepository roleRepository;
     @Autowired
     RoutineDtoMapper routineMapper;
+
+    @Autowired
+    DtoFormatter formatter;
 
     public UserDto entityToDto (User user) throws JsonProcessingException {
 
@@ -66,8 +70,8 @@ public class UserDtoMapper {
         ESex sex = (Objects.equals(dto.getSex(),null)) ? ESex.NOT_SPECIFIED :
                 (dto.getSex().equalsIgnoreCase("male"))?  ESex.MALE : ESex.FEMALE ;
         User user = new User();
-        user.setEmail(dto.getEmail());
-        user.setName(dto.getName());
+        user.setEmail(dto.getEmail().toLowerCase());
+        user.setName(formatter.formatName(dto.getName()));
         user.setAge(dto.getAge());
         user.setHeight(dto.getHeight());
         user.setWeight(dto.getWeight());
@@ -91,15 +95,4 @@ public class UserDtoMapper {
         }
         return usersDto;
     }
-
-
-
-
-
-
-
-
-
-
-
 }

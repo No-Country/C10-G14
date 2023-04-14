@@ -6,6 +6,7 @@ import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.enumeration.ERole;
 import com.C10G14.WorldFitBackend.enumeration.ESex;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
+import com.C10G14.WorldFitBackend.util.DtoFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,8 @@ public class AuthDtoMapper {
     RoleRepository roleRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    DtoFormatter formatter;
 
     public User requestToEntity(RegisterRequestDto registerRequestDto){
         List<Role> roles = new ArrayList<Role>();
@@ -29,12 +32,12 @@ public class AuthDtoMapper {
         roles.add(userRole);
 
         ESex sex = (Objects.equals(registerRequestDto.getSex(),null)) ? ESex.NOT_SPECIFIED :
-                (registerRequestDto.getSex().equalsIgnoreCase("male"))?  ESex.MALE : ESex.FEMALE ;
+                (registerRequestDto.getSex().equalsIgnoreCase("male"))?  ESex.MALE : ESex.FEMALE;
 
         return User.builder()
                 .email(registerRequestDto.getEmail().toLowerCase())
                 .password(passwordEncoder.encode(registerRequestDto.getPassword()))
-                .name(registerRequestDto.getName())
+                .name(formatter.formatName(registerRequestDto.getName()))
                 .profileImg(null)
                 .sex(sex)
                 .age(registerRequestDto.getAge())
@@ -43,4 +46,5 @@ public class AuthDtoMapper {
                 .role(roles)
                 .build();
     }
+
 }
