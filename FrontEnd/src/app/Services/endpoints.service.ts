@@ -15,7 +15,7 @@ export class EndpointsService {
   // apiUrlPersona: string;
 
   constructor(private http: HttpClient) {
-    this.myAppUrl = 'http://api.worldfit.site/api/v1/';
+    this.myAppUrl = 'https://api.worldfit.site/api/v1/';
     this.apiUrlUser = 'users';
     this.apiUrlRutine = 'routines';
     this.apiUrlUserRutine = 'users/routine';

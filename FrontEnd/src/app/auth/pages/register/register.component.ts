@@ -138,7 +138,7 @@ export class RegisterComponent {
         this.loading = true;
         setTimeout(() => {
           this.router.navigate(['/inicio']);
-        }, 2000);
+        }, 1500);
       },
       (error) => {
         // Manejar errores en caso de fallo

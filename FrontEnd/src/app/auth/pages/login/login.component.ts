@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   loginForm!: FormGroup; // Declaración del FormGroup
+  loading: boolean = false;
   error: string = '';
   constructor(
     public authService: AuthService,
@@ -24,8 +25,8 @@ export class LoginComponent {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]], // Campo de email con validadores
-      password: ['', [Validators.required, Validators.minLength(6)]], // Campo de password con validadores
+      email: ['juan@juan.com', [Validators.required, Validators.email]], // Campo de email con validadores
+      password: ['pruebas3', [Validators.required, Validators.minLength(6)]], // Campo de password con validadores
     });
   }
   // Obtiene el campo de email
@@ -75,8 +76,10 @@ export class LoginComponent {
       (response) => {
         // Manejar la respuesta del servidor en caso de éxito
         this.authService.setAuthToken(response.token);
-        // console.log('Inicio de sesión exitoso:', response);
-        this.router.navigateByUrl('/inicio');
+        this.loading = true;
+        setTimeout(() => {
+          this.router.navigateByUrl('/inicio');
+        }, 1500);
       },
       (error) => {
         // Manejar errores en caso de fallo
