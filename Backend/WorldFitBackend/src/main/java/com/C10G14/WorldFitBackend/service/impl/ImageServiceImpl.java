@@ -1,0 +1,59 @@
+package com.C10G14.WorldFitBackend.service.impl;
+
+import com.C10G14.WorldFitBackend.exception.InputNotValidException;
+import com.C10G14.WorldFitBackend.service.ImageService;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
+import java.util.Objects;
+
+@Service
+public class ImageServiceImpl implements ImageService {
+
+
+    //Sin docker
+    //private final String FOLDER_PATH=System.getProperty("user.dir")+"/src/main/resources/static/images/";
+    //Con docker
+    private  final String FOLDER_PATH= "/var/lib/images/";
+
+    //dev
+    private final String URL_PATH="localhost:8080/content/images/";
+    //prod
+    //private final String URL_PATH="api.worldfit.site/content/images/";
+
+    @Override
+    public boolean checkImage(MultipartFile image) {
+        if (Objects.equals(image,null)||Objects.equals(image.getContentType(),null)){
+            throw new InputNotValidException("Not a valid image");
+        }
+        String contentType = image.getContentType();
+        if (contentType.equals("image/jpg")||
+                contentType.equals("image/jpeg")||
+                contentType.equals("image/png")){
+
+            if(image.getSize()<2000000){
+                return true;
+            }
+            throw new InputNotValidException("Image must be 2mb at must");
+        }
+        throw new InputNotValidException("Image type must be either jpg, jpeg, or png");
+
+    }
+
+    @Override
+    public String uploadImage(MultipartFile image, String userEmail) throws IOException {
+        StringBuilder imgPath = new StringBuilder();
+        String encodedEmail = Base64.getEncoder().encodeToString(userEmail.getBytes());
+        String contentType = image.getContentType().replace("image/",".");
+        imgPath.append(FOLDER_PATH).
+                append(encodedEmail).
+                append(contentType);
+
+        image.transferTo(new File(imgPath.toString()));
+        return URL_PATH+encodedEmail+contentType;
+    }
+    }
+

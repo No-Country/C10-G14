@@ -1,5 +1,6 @@
 package com.C10G14.WorldFitBackend.controller;
 
+import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
 import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.enumeration.ESex;
@@ -144,7 +145,7 @@ public class UserControllerTests{
 
     @Test
     public void updateUser_ReturnsUpdatedUser() throws Exception {
-        when(userService.updateUser(eq(1L), any(UserDto.class))).thenReturn(userDto2);
+        when(userService.updateUser(eq(1L), any(RegisterRequestDto.class))).thenReturn(userDto2);
 
         mockMvc.perform(put("/api/v1/users/1")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -158,7 +159,7 @@ public class UserControllerTests{
                 .andExpect(jsonPath("$.height").value(userDto2.getHeight()))
                 .andExpect(jsonPath("$.profileImg").value(userDto2.getProfileImg()));
 
-        verify(userService).updateUser(eq(1L), any(UserDto.class));
+        verify(userService).updateUser(eq(1L), any(RegisterRequestDto.class));
     }
 
     @Test
