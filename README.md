@@ -63,8 +63,7 @@
 |:-:|:-:|:-:|
 | **Emiliano Escobedo**| **Gabriel Boaglio**|**Diego Haczek**|
 | <a href="https://github.com/EmilianoEscobedo"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/emiliano-escobedo/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/gabrielalfredoboaglio"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/gabriel-boaglio/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/DiegoHaczek"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/diego-haczek-5bbb28218/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
-
-<hr/>
+<br>
 
 ## ✔ FrontEnd
 
@@ -100,6 +99,13 @@
 ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
 ![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
 ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
+
+#### 👉🏻 Developers 👨🏻‍💻
+
+| <img src="https://avatars.githubusercontent.com/u/110241472?v=4" width=50>| <img src="https://avatars.githubusercontent.com/u/109294878?v=4" width=50>| <img src="https://ca.slack-edge.com/T02KS88FB0E-U04SG1MES0K-f93a351b4904-512" width=50>|
+|:-:|:-:|:-:|
+| **Soledad Carretero**| **Facundo Ibars**|**Juan Carlos Da Silva**|
+| <a href="https://github.com/solmicielo"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/emiliano-escobedo/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/FacuIbars"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/gabriel-boaglio/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/jcda23"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/diego-haczek-5bbb28218/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
 <hr>
 <br><br>
