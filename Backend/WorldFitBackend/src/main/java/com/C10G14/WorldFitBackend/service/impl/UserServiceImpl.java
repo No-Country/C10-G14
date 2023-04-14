@@ -106,7 +106,10 @@ public class UserServiceImpl implements UserService {
         }
         Role role = roleRepository.findByName(roleName)
                 .orElseThrow(() -> new RuntimeException("Error: Role not found."));
-        user.getRole().add(role);
+
+        if (!user.getRole().contains(role)) {
+            user.getRole().add(role);
+        }
 
         userRepository.save(user);
         return mapper.entityToDto(user);

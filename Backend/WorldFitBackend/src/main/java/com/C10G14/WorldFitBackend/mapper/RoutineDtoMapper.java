@@ -10,6 +10,7 @@ import com.C10G14.WorldFitBackend.exception.CantBeEmptyException;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.repository.RoutineRepository;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
+import com.C10G14.WorldFitBackend.util.DtoFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,8 @@ public class RoutineDtoMapper {
     UserRepository userRepository;
     @Autowired
     RoutineRepository routineRepository;
+    @Autowired
+    DtoFormatter formatter;
 
     public RoutineResponseDto EntityToDto (Routine routine) {
         Set<Exercise_RoutineResponseDto> exercises = routine.getExercises().stream().map(e ->
@@ -41,7 +44,7 @@ public class RoutineDtoMapper {
 
     public Routine DtoToEntity (RoutineRequestDto routineDto) {
         User user = userRepository.findById(routineDto.getUserId()).orElseThrow(()-> new NotFoundException("User not found"));
-        return new Routine(routineDto.getTitle(),user);
+        return new Routine(formatter.format(routineDto.getTitle()),user);
     }
 
 }
