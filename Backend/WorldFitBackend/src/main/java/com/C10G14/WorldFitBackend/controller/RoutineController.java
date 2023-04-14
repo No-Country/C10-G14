@@ -2,6 +2,7 @@ package com.C10G14.WorldFitBackend.controller;
 
 
 import com.C10G14.WorldFitBackend.dto.Exercise_RoutineRequestDto;
+import com.C10G14.WorldFitBackend.dto.RemoveExerciseRequestDto;
 import com.C10G14.WorldFitBackend.dto.RoutineRequestDto;
 import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
 import com.C10G14.WorldFitBackend.service.RoutineService;
@@ -83,7 +84,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: Routine don't exist",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH') or #userId == authentication.principal.id")
     @GetMapping("/{id}")
     public ResponseEntity<RoutineResponseDto> getRoutineById(@PathVariable Long id) {
         RoutineResponseDto routine = routineService.getRoutineById(id);
@@ -188,9 +189,8 @@ public class RoutineController {
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @DeleteMapping("/exercises/{id}")
     public ResponseEntity<RoutineResponseDto> removeExercise(@PathVariable("id") long routineId,
-                                                  @RequestBody Map <String,Long> exerciseId) {
-        RoutineResponseDto updatedRoutine = routineService.removeExercise(routineId,exerciseId.get("exerciseId"));
+                                                  @RequestBody RemoveExerciseRequestDto exercises) {
+        RoutineResponseDto updatedRoutine = routineService.removeExercise(routineId,exercises);
         return new ResponseEntity<>(updatedRoutine, HttpStatus.OK);
     }
-
 }
