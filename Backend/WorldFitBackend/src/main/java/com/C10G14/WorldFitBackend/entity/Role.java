@@ -29,7 +29,7 @@ public class Role {
 
     public static ERole RoletoERole (String role) {
         return (role.equals("user")? ERole.ROLE_USER :
-                (role.equals("couch")? ERole.ROLE_COUCH :
+                (role.equals("couch")? ERole.ROLE_COACH :
                         (role.equals("customer")? ERole.ROLE_CUSTOMER :
                                 (role.equals("admin")? ERole.ROLE_ADMIN :
                                         null)
