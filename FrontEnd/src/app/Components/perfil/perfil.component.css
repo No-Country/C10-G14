@@ -1,0 +1,33 @@
+.fondo-perfil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgb(184, 62, 62);
+}
+
+.contenedor-perfil {
+    position: relative;
+    width: 350px;
+    height: 190px;
+    background-color: aliceblue;
+    border-radius: 20px;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+}
+
+.contenedor-perfil:hover {
+    height: 450px;
+}
+
+.contenedor-img-perfil {
+  position: absolute;
+  left: 50%;
+  top: -50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 150px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 15px 50 ;
+
+}
