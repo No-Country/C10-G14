@@ -61,11 +61,28 @@
         </h2>
       </div>
       <form autocomplete="off" [formGroup]="registerForm" (ngSubmit)="register()">
-        <div class="relative p-2 rounded bg-wth">
+        <div class=" flex justify-center" enctype="multipart/form-data">
+          <div class="profile__image">
+            <img class="" src="../../../../assets/img/image-placeholder.png" />
+            <label for="fileInput"
+              class="absolute right-0 bottom-0 mr-2 mb-2 p-2 bg-primary-color rounded-full cursor-pointer">
+              <div class=" bg-transparent rounded-full p-1">
+                <svg class="w-6 h-6 text-gray-500 hover:text-gray-600" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </div>
+            </label>
+            <input type="file" id="fileInput" class="hidden" (change)="onFileSelected($event)" #image>
+          </div>
+        </div>
+        <div class="relative p-2 rounded bg-wth mt-3">
           <input type="name" formControlName="name" placeholder=" "
             class="peer min-h-[auto] w-full rounded border-0 bg-transparent focus:outline-none focus:placeholder:opacity-100 placeholder-transparent pl-2" />
           <label
             class="absolute pl-2 left-2 -top-3.5 text-blk text-xs md:text-xs xs:peer-placeholder-shown:text-xs md:peer-placeholder-shown:text-xs peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-1 peer-focus:-top-[1rem] peer-focus:text-wth peer-focus:text-xs peer-focus:font-thin transition-all duration-300 ease-in-out">Nombre
+            y Apellido
           </label>
         </div>
         <p *ngIf="isFieldInvalid('name')" class="pl-2 m-0 text-xs text-error-color font-thin">
@@ -91,34 +108,59 @@
         <p *ngIf="isFieldInvalid('password')" class="pl-2 m-0 text-xs text-error-color font-thin">
           <span class=""> {{ getErrorMessage("password") }}</span>
         </p>
-        <div class="relative mt-3 p-2 rounded bg-wth">
-          <input type="text" formControlName="sex" placeholder=" "
-            class="peer min-h-[auto] w-full rounded border-0 bg-transparent focus:outline-none focus:placeholder:opacity-100 placeholder-transparent pl-2" />
-          <label for="exampleFormControlInput"
-            class="absolute pl-2 left-2 -top-3.5 text-blk text-xs md:text-xs xs:peer-placeholder-shown:text-xs md:peer-placeholder-shown:text-xs peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-1 peer-focus:-top-[1rem] peer-focus:text-wth peer-focus:text-xs peer-focus:font-thin transition-all duration-300 ease-in-out">Genero
-          </label>
+
+        <div class="flex mt-3">
+          <div class="flex-grow mr-3">
+            <label class="block font-medium text-xs md:text-xs text-wth">Edad</label>
+            <input type="number" formControlName="age" min="10"
+              class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500"
+              placeholder="Ingresa tu edad">
+          </div>
+          <div class="flex-grow mr-3">
+            <label class="block text-xs md:text-xs text-wth">Altura (cm)</label>
+            <input type="number" formControlName="height" min="70"
+              class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500"
+              placeholder="Ingresa tu altura">
+          </div>
+          <div class="flex-grow">
+            <label class="block text-xs md:text-xs text-wth">Peso (kg)</label>
+            <input type="number" formControlName="weight" min="10"
+              class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500"
+              placeholder="Ingresa tu peso">
+          </div>
+        </div>
+
+        <div class="flex mt-3 justify-between">
+          <div class="flex-grow">
+            <label class="block font-medium text-xs md:text-xs text-wth">Sexo</label>
+            <div class="flex mt-2">
+              <label class="flex-grow">
+                <input type="radio" formControlName="sex" value="MALE"
+                  class="mr-1 focus:outline-none focus:border-indigo-500">
+                <span class="text-white">Masculino</span>
+              </label>
+              <label class="flex-grow">
+                <input type="radio" formControlName="sex" value="FEMALE"
+                  class="mr-1 focus:outline-none focus:border-indigo-500">
+                <span class="text-white">Femenino</span>
+              </label>
+              <label class="flex-grow">
+                <input type="radio" formControlName="sex" value="OTHERS"
+                  class="mr-1 focus:outline-none focus:border-indigo-500">
+                <span class="text-white">Otros</span>
+              </label>
+            </div>
+          </div>
         </div>
         <div class="mb-12 mt-3 text-center">
           <button type="submit"
-            class="bg-primary-color hover:text-primary-color hover:bg-opacity-10 custom-transition inline-block w-full rounded p-2 text-xs md:text-base font-medium uppercase leading-normal text-[var(--text-black)] shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] custom-transition"
+            class="bg-primary-color hover:text-primary-color hover:bg-opacity-10 custom-transition inline-block w-full rounded p-2 text-xs md:text-base font-extrabold uppercase leading-normal text-[var(--text-black)] shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] custom-transition"
             data-te-ripple-init data-te-ripple-color="light" [class.opacity-50]="registerForm.invalid"
             [class.pointer-events-none]="registerForm.invalid" [disabled]="registerForm.invalid">
             Registrarse
           </button>
         </div>
       </form>
-      <!--       <button
-        type="submit"
-        aria-label="Continua con Google"
-        role="button"
-        class="custom-transition focus:outline-none py-2.5 px-2 rounded flex items-center w-full text-wth bg-neutral-700 hover:bg-primary-color hover:text-blk"
-      >
-        <img
-          src="https://tuk-cdn.s3.amazonaws.com/can-uploader/sign_in-svg2.svg"
-          alt="google"
-        />
-        <p class="text-sm font-normal ml-4">Continua con Google</p>
-      </button> -->
       <div class="flex items-center justify-between px-3 mt-6 pb-2">
         <p class="mb-0 mr-2 text-xs text-wth">Ya tiene una cuenta?</p>
         <button type="button"
