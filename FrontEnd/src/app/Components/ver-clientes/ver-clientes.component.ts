@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 export class VerClientesComponent {
   displayedColumns: string[] = ['nombre', 'edad', 'altura', 'sexo', 'peso', 'acciones'];
   dataSource = new MatTableDataSource<Cliente>();
-  role:string = 'user';
+  role:string = 'admin';
   
   
   @ViewChild(MatPaginator) paginator!: MatPaginator
