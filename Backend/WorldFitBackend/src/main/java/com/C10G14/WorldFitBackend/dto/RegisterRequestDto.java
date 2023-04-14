@@ -26,8 +26,8 @@ public class RegisterRequestDto {
     private String password;
 
     @NotBlank(message = "Name is required")
-    @Pattern(regexp = "^([a-zA-Zñ ]){1,20}$",
-            message = "Name must contain only letters, spaces and be maximum 20 characters")
+    @Pattern(regexp = "^([a-zA-Zñ ]){1,22}$",
+            message = "Name must contain only letters, spaces and be maximum 22 characters")
     @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
 
