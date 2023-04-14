@@ -1,6 +1,7 @@
 package com.C10G14.WorldFitBackend.service;
 
 import com.C10G14.WorldFitBackend.dto.Exercise_RoutineRequestDto;
+import com.C10G14.WorldFitBackend.dto.RemoveExerciseRequestDto;
 import com.C10G14.WorldFitBackend.dto.RoutineRequestDto;
 import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
 
@@ -19,6 +20,5 @@ public interface RoutineService {
     RoutineResponseDto addExercise(long routineId, Exercise_RoutineRequestDto exerciseId);
 
     RoutineResponseDto updateExercise(long routineId, Exercise_RoutineRequestDto exercise);
-
-    RoutineResponseDto removeExercise(long routineId, long exerciseId);
+    RoutineResponseDto removeExercise(long routineId, RemoveExerciseRequestDto exerciseId);
 }

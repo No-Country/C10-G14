@@ -50,7 +50,6 @@ public class AuthServiceImpl implements AuthService {
 
     //dev
     private final String URL_PATH="localhost:8080/content/images/";
-
     //prod
     //private final String URL_PATH="api.worldfit.site/content/images/";
 

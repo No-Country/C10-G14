@@ -147,7 +147,7 @@ public class UserController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: Role not found",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or (hasRole('PROFESSOR') and (#role == 'customer' or #role == 'user'))")
     @PutMapping("/role/{userId}/{role}")
     public ResponseEntity<UserDto> updateRole(@PathVariable Long userId, @PathVariable String role) throws JsonProcessingException {
         UserDto updatedUser = userService.updateRole(userId, role);
@@ -184,7 +184,7 @@ public class UserController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: User not found",
                     content = @Content),})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH') or #userId == authentication.principal.id")
     @GetMapping("/routine/{userId}")
     public ResponseEntity<SimpleUserDto> getUserRoutines(@PathVariable Long userId) throws JsonProcessingException{
         SimpleUserDto user = userService.getSimpleUserById(userId);
