@@ -18,13 +18,27 @@
 
 </div>
 <div align="center">
-<h3 align="center"  ><b>You can check out our webpage here:</b></h3>
-<h3 align="center"><a href="https://petfinder-phi.vercel.app/" target="_blank" rel="noopener noreferrer"> :woman_cartwheeling: World Fit :weight_lifting:</a></h3>
+<h3 align="center"><b>You can check out our webpage here:</b></h3>
+<h3 align="center"><a href="" target="_blank" rel="noopener noreferrer"> :woman_cartwheeling: World Fit :weight_lifting:</a></h3>
 <p  align="center" ><a href="" target="_blank" rel="noopener noreferrer"> <img src="https://img.shields.io/badge/Video Preview%20-%23FF0000.svg?&style=for-the-badge&logo=YouTube&logoColor=white"/></a></p>
 </div>
 
 <hr>
 <br><br>
+
+## ✔ Run the proyect 📋
+
+1 - Install [Docker](https://https://docs.docker.com/get-docker/) and [Docker-Compose](https://docs.docker.com/compose/install/)
+
+2 - Download docker-compose.yml from this repository. 
+
+3 - Create a new folder and move the docker-compose file into.
+
+4 - Run the command  **`docker-compose up -d`** if you use a UNIX system, or run with docker desktop if you use a windows system.
+
+5 - Thats all! you can go to http://localhost in your browser and see the project running.
+
+<br>
 
 ## ✔ BackEnd
 
