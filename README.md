@@ -92,29 +92,20 @@
 
 #### 👉🏻 Task List ✅
 
-- Development of Rest Api for WorlFit with Java and Spring-Boot.
-- Postgre Database.
-- Creating filters with regular expressions and JPA/Hibernate rules.
-- Role based securize architecture. 
-- Users validation with JWT. 
-- Dockerize and orchestrate containers with automatic renewal of SSL certificates.
-- Deployed on EC2 instance of AWS through nginx reverse proxy.
+-
+-
+-
+-
+-
 
 #### 👉🏻 Code Standards 📜
-- Keep in mind rules from [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html).
-- Code must be in English.
-- The controllers should finish with suffix "Controller". Example: UserController.
-- The services should finish with suffix "Service". Example: UserService.
-- The repositories should finish with suffix "Repository". Example: UserRepository.
-- The implementations of interfaces should finish with suffix "Impl". Example: UserServiceImpl.
-- The DTOs should finish with suffix "Dto". Example: UserDto, UserRequestDto.
-- Usage of DTOs is a must. Can have DTOs for request and response.
-- Package names are in singular.
-- The names of attributes/fields from Java classes must be written using camel case. Example: firstName.
-- The name of columns in the entities must be written using underscore and uppercase. Example: FIRST_NAME. The name of the tables is always in plural, but the entity name should be in singular.
-- Exceptions should be handled by an implementation of ControllerAdvice. 
-- Messages to user can't be hardcoded them should be handled. Some refs [here](https://looksok.wordpress.com/2014/07/05/string-externalization-in-spring-3-1-with-messagesource-no-web-xml/) and [here](https://zetcode.com/spring/messagesource/). 
-- If you add a new endpoint, make sure to set the role access for it in the WebSecurity class.
+
+-
+-
+-
+-
+-
+-
 
 #### 👉🏻 Built with 🛠️
 
