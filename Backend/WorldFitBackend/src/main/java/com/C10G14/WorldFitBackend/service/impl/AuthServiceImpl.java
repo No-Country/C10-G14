@@ -4,6 +4,7 @@ import com.C10G14.WorldFitBackend.enumeration.ERole;
 import com.C10G14.WorldFitBackend.exception.AlreadyExistException;
 import com.C10G14.WorldFitBackend.mapper.AuthDtoMapper;
 import com.C10G14.WorldFitBackend.service.AuthService;
+import com.C10G14.WorldFitBackend.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,16 +44,9 @@ public class AuthServiceImpl implements AuthService {
     private AuthDtoMapper authMapper;
     @Autowired
     private UserRepository userRepository;
-    //Sin docker
-    //private final String FOLDER_PATH=System.getProperty("user.dir")+"/src/main/resources/static/images/";
-    //Con docker
-    private  final String FOLDER_PATH= "/var/lib/images/";
 
-    //dev
-    private final String URL_PATH="localhost:8080/content/images/";
-    //prod
-    //private final String URL_PATH="api.worldfit.site/content/images/";
-
+    @Autowired
+    private ImageService imageService;
 
     @Override
     public AuthenticationResponseDto register(RegisterRequestDto request) throws IOException {
@@ -61,10 +55,9 @@ public class AuthServiceImpl implements AuthService {
         }
         User newUser = authMapper.requestToEntity(request);
 
-        if (!Objects.equals(request.getProfileImg(),null)){
-        String imgPath = FOLDER_PATH+request.getProfileImg().getOriginalFilename();
-        request.getProfileImg().transferTo(new File(imgPath));
-        newUser.setProfileImg(URL_PATH + request.getProfileImg().getOriginalFilename());
+        if (imageService.checkImage(request.getProfileImg())){
+            newUser.setProfileImg(imageService.uploadImage(
+                    request.getProfileImg(),request.getEmail()));
         }
 
         userrepository.save(newUser);
