@@ -87,4 +87,7 @@ th{
 .pointer {
   cursor: pointer;
 }
-
+/* Botón para borrar  */
+.delete {
+  color: #f44336;
+}
