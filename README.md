@@ -106,8 +106,9 @@
 |:-:|:-:|:-:|
 | **Soledad Carretero**| **Facundo Ibars**|**Juan Carlos Da Silva**|
 | <a href="https://github.com/solmicielo"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/sol-carretero-developer-full-stack/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/FacuIbars"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/facundo-ibars/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/jcda23"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/jdasilvaa/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
+<br>
 
-## ✔ How we work 🤝
+## ✔ How we work 
 
 #### 👉🏻 Commits Format 📜
 - Always create the branch from develop 
@@ -123,7 +124,7 @@ In the current repository you will see three diferent branches
 - `develop` -> this branch serves as an integration branch for features. All features must start from this branch and after it's finished it gets merged back into develop.
 For understanding more about git and how to work with different branches, I recommend to read about Gitflow workflow. [Here](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) you have a little explanation that can serve as introduction.
 
-#### 👉🏻 Scrum 📜
+#### 👉🏻 Scrum 🤝
 - Sprints last one week.
 - Tasks without an epic are not allowed.
 - Epics have to be backed by user stories.
