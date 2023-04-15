@@ -107,41 +107,33 @@
 | **Soledad Carretero**| **Facundo Ibars**|**Juan Carlos Da Silva**|
 | <a href="https://github.com/solmicielo"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/sol-carretero-developer-full-stack/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/FacuIbars"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/facundo-ibars/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/jcda23"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/jdasilvaa/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
-<hr>
-<br><br>
+## ✔ How we work 🤝
 
-
-#  World Fit 
-## Meet the Team
-#### At the front end:
-  - <a href="https://github.com/solmicielo"> Soledad <a>
-  - <a href="https://github.com/FacuIbars"> Facundo <a>
-  - <a href="https://github.com/jcda23"> Juan <a>
-  
-
-#### At the back end:
-  - <a href="https://github.com/DiegoHaczek"> Diego <a>
-  - <a href="https://github.com/gabrielalfredoboaglio"> Gabriel <a>
-  - <a href="https://github.com/EmilianoEscobedo"> Emiliano <a>
-
-## GIT STANDARDS
-
-### FORMAT
-- Always create the branch from develop
+#### 👉🏻 Commits Format 📜
+- Always create the branch from develop 
 - The branch name format is: `feature/{jiraTicket#}`.
-  - I.e: `feature/SP2-WF70`<br><br>
 - The pull request title format is: `{jiraTicket#}: {jiraTitle}`. 
-  - I.e: `SP2-WF70: Agregar a entidad usuario PESO, ALTURA, SEXO y EDAD`.<br><br>
-- The commits format is: `{jiraTicket#}: {commitDescription}`, Small commits are a nice to have. <br>
-  - I.e: `SP2-WF70: Construido authDtoMapper`.<br><br>
+- The commits format is: `{jiraTicket#}: {commitDescription}`, Small commits are a nice to have.
 - The pull request has to contain only the changes related to the scope defined in the ticket.
 - Pull request should always be from your current branch to develop.
 
-
-### BRANCHES
+#### 👉🏻 Branches Format 📜
 In the current repository you will see three diferent branches
 - `main` -> this branch is only for productive versions, it has official release history.
 - `develop` -> this branch serves as an integration branch for features. All features must start from this branch and after it's finished it gets merged back into develop.
-
 For understanding more about git and how to work with different branches, I recommend to read about Gitflow workflow. [Here](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) you have a little explanation that can serve as introduction.
+
+#### 👉🏻 Scrum 📜
+- Sprints last one week.
+- Tasks without an epic are not allowed.
+- Epics have to be backed by user stories.
+- Tasks have to be assigned according to estimate.
+
+#### 👉🏻 Used software 🛠️
+![Jira](https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white)
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+<hr>
+<br><br>
+
 
