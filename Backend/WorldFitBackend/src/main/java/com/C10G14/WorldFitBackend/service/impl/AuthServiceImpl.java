@@ -4,6 +4,7 @@ import com.C10G14.WorldFitBackend.enumeration.ERole;
 import com.C10G14.WorldFitBackend.exception.AlreadyExistException;
 import com.C10G14.WorldFitBackend.mapper.AuthDtoMapper;
 import com.C10G14.WorldFitBackend.service.AuthService;
+import com.C10G14.WorldFitBackend.service.EmailService;
 import com.C10G14.WorldFitBackend.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,19 +35,18 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private UserRepository userrepository;
-
     @Autowired
     private JwtService jwtService;
-    
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
     private AuthDtoMapper authMapper;
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public AuthenticationResponseDto register(RegisterRequestDto request) throws IOException {
@@ -55,12 +55,15 @@ public class AuthServiceImpl implements AuthService {
         }
         User newUser = authMapper.requestToEntity(request);
 
+        if (!Objects.equals(request.getProfileImg(),null)){
         if (imageService.checkImage(request.getProfileImg())){
             newUser.setProfileImg(imageService.uploadImage(
                     request.getProfileImg(),request.getEmail()));
         }
+        }
 
         userrepository.save(newUser);
+        emailService.sendHtmlEmail(newUser,"Bienvenido");
         String jwtToken = jwtService.generateToken(newUser);
         AuthenticationResponseDto authResponse = new AuthenticationResponseDto();
         authResponse.setToken(jwtToken);
