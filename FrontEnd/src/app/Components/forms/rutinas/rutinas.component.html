@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Agregar Ejercicio</h2>
-<form [formGroup]="form" (ngSubmit)="addEjercicio()">
+<form [formGroup]="form" (ngSubmit)="Add()">
   <mat-dialog-content class="mat-typography">
     <mat-form-field appearance="fill">
       <mat-label>Ejercicio </mat-label>
@@ -16,13 +16,18 @@
    </div>
     <mat-form-field class="example-full-width">
       <mat-label>Series</mat-label>
-      <input min="0" formControlName="series" matInput type="number" placeholder="" />
+      <input min="0" max="8" formControlName="series" matInput type="number" placeholder="" />
     </mat-form-field>
     <div class="error">
       <span *ngIf="form.get('series')?.hasError('required') && form.get('series')?.touched">
        <strong>Este campo es obligatorio</strong> 
      </span>
    </div>
+   <div class="error">
+    <span *ngIf="form.get('series')?.hasError('max') && form.get('series')?.touched">
+     <strong>El numero maximo de series es 8</strong> 
+   </span>
+ </div>
     <mat-form-field class="example-full-width">
       <mat-label>Repeticiones</mat-label>
       <input

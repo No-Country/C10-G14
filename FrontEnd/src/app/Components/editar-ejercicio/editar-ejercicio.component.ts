@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, Input, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -6,7 +6,7 @@ import { Rutina } from 'src/app/Interface/rutina';
 import { RutinaService } from 'src/app/Services/rutina.service';
 import { RutinasComponent } from '../forms/rutinas/rutinas.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Ejercicio } from 'src/app/Interface/ejercicio';
+import { Ejercicio, EjercicioR } from 'src/app/Interface/ejercicio';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
 
 @Component({
@@ -25,30 +25,37 @@ export class EditarEjercicioComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
   constructor(private datosRutina:RutinaService, public dialog: MatDialog,
-   private Api: EndpointsService ) { }
+   private Api: EndpointsService, private cdr: ChangeDetectorRef ) { }
     
   ngOnInit(): void {
     
-    this.dataEjercicios = this.dataRutinas.exercises;
+    this.cargar()
    
     
   }
-  
-  openDialog(): void {
+  cargar(){
+    this.dataEjercicios = this.dataRutinas.exercises;
+  }
+  openDialog(id?: number): void {
     const dialogRef = this.dialog.open(RutinasComponent, {
-      disableClose: true
+      disableClose: true,
+      data: { idRutina:this.dataRutinas.id,
+      id:id }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       
       this.ejercicio= result;
-      
+      this.cargar()
     });
   }
   eliminar(id: number): void {
-    this.Api.borrarItem(id, "users/routine").subscribe(() => {
-      
-      
+    const idEjercicio: object = {
+      exerciseId: id
+    };
+  
+    this.Api.borrarEjercicioRutina(this.dataRutinas.id, { body: idEjercicio }).subscribe(() => {   
+      this.cargar()
     });
   }
  

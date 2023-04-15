@@ -7,7 +7,7 @@ export interface Ejercicio {
 }
 export interface EjercicioR {
   exerciseId:number,
-  quantity:number,
-  repetitions:number,
-  series:number
+  quantity?:number,
+  repetitions?:number,
+  series?:number
 }
