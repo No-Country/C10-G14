@@ -1,13 +1,10 @@
 package com.C10G14.WorldFitBackend.security.jwt;
 
-import com.C10G14.WorldFitBackend.entity.User;
-import com.C10G14.WorldFitBackend.repository.UserRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,8 +20,6 @@ import java.util.stream.Collectors;
 @Service
 public class JwtService {
 
-    @Autowired
-    UserRepository userRepository;
     private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
 
     private static final String SECRET_KEY = "5266556A586E3272357538782F413F4428472D4B6150645367566B5970337336763979244226452948404D6251655468576D5A7134743777217A25432A462D4A";
@@ -37,9 +32,6 @@ public class JwtService {
     }
     public String generateToken(UserDetails userDetails
                                 ) {
-        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(
-                ()-> new RuntimeException("Error retrieving user"));
-
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
         String authority = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
@@ -49,8 +41,7 @@ public class JwtService {
         Date expiryDate = new Date(now.getTime() + jwtExpirationMs);
 
         return Jwts.builder()
-                .claim("Roles", authority)
-                .claim("Id", user.getId())
+                .claim("roles", authority)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)

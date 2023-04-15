@@ -9,17 +9,16 @@ export class EndpointsService {
   private myAppUrl: string;
   apiUrlUser: string;
   apiUrlRutine: string;
-  apiUrlUserRutine: string;
   apiUrlEjercicio:string;
+  apiUrlUserRutine: string;
   apiUrlRutineEjercicio:string;
-  // apiUrlPersona: string;
 
   constructor(private http: HttpClient) {
     this.myAppUrl = 'https://api.worldfit.site/api/v1';
     this.apiUrlUser = '/users';
     this.apiUrlRutine = '/routines';
-    this.apiUrlUserRutine = '/users/routine';
     this.apiUrlEjercicio = '/exercises';
+    this.apiUrlUserRutine = '/users/routine';
     this.apiUrlRutineEjercicio = '/routines/exercises'
   }
 
@@ -29,11 +28,12 @@ export class EndpointsService {
   public UsersRoles(role: string): Observable<any> {
     return this.http.get(this.myAppUrl + '/users/role/' + `${role}`);
   }
+//Eliminar ejercicio de una rutina especifica
+public borrarEjercicioRutina(idRutina: number, idEjercicio: any ): Observable<any> {
+  
+  return this.http.delete<any>(this.myAppUrl + '/routines/exercises' + `/${idRutina}`, idEjercicio);
+}
 
-   //Eliminar ejercicio de una rutina especifica
-  public borrarEjercicioRutina(idRutina: number, idEjercicio: any ): Observable<any> {
-    return this.http.delete<any>(this.myAppUrl + this.apiUrlRutineEjercicio + `/${idRutina}`, idEjercicio);
-  }
 
   //Agregar ejercicio de una rutina especifica
   public agregarEjercicioRutina(objeto: any, idRutina: number, idEjercicio: any ): Observable<any> {
