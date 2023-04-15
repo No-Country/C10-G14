@@ -8,16 +8,12 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  loading:boolean = false;
   estaLogueadoProfesor: boolean = true;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   logout() {
-
-    this.loading = true;
-    setTimeout(() => {
-           this.router.navigate(['/auth/login']);
-        }, 1500);
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
   }
 }

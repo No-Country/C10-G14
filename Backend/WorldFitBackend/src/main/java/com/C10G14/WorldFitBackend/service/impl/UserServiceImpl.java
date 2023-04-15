@@ -118,7 +118,6 @@ public class UserServiceImpl implements UserService {
         if (roleName == null) {
             throw new NotFoundException("Error: Role not found");
         }
-
         Role role = roleRepository.findByName(roleName)
                 .orElseThrow(() -> new RuntimeException("Error: Role not found."));
 

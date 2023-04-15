@@ -72,10 +72,10 @@
   font-weight: 700;
   color: #fff !important;
   
-  
 }
 
 .mdc-tab-indicator__content {
   height: 5px;  
   background-color: #ffd740;
+  
 }

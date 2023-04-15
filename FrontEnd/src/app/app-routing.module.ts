@@ -4,14 +4,13 @@ import { VerClientesComponent } from './Components/ver-clientes/ver-clientes.com
 import { EditarRutinasComponent } from './Components/editar-rutinas/editar-rutinas.component';
 import { InicioComponent } from './Components/inicio/inicio.component';
 import { VerEjerciciosComponent } from './Components/ver-ejercicios/ver-ejercicios.component';
-import { PageUserComponent } from './Shared/page-user/page-user.component';
-import { PageErrorComponent } from './Shared/page-error/page-error.component';
+import { PerfilComponent } from './Components/perfil/perfil.component';
 
 const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-  },
+  }, 
   {
     path: 'clientes',
     component:VerClientesComponent,
@@ -29,17 +28,13 @@ const routes: Routes = [
     component:VerEjerciciosComponent,
   },
   {
+    path: 'perfil',
+    component:PerfilComponent,
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'auth/login',
-  },
-    {
-    path: 'user',
-    component: PageUserComponent,
-  },
-  {
-    path: '**',
-    component: PageErrorComponent,
   },
 ];
 
