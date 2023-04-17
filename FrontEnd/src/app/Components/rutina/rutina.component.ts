@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
-import { RutinaService } from 'src/app/Services/rutina.service';
+
 
 @Component({
   selector: 'app-rutina',

@@ -2,9 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { EjercicioR } from 'src/app/Interface/ejercicio';
-import { Rutina } from 'src/app/Interface/rutina';
-import { EjercicioService } from 'src/app/Services/ejercicio.service';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
+import { MetodosService } from 'src/app/Services/metodos.service';
 @Component({
   selector: 'app-rutinas',
   templateUrl: './rutinas.component.html',
@@ -56,10 +55,10 @@ EjerciciosUrl:string=this.Service.apiUrlEjercicio
         repetitions:this.form.value.repetitions,
         series:this.form.value.series
       }
-      console.log(ejercicio)
+      
       // Es agregar
       this.Service.AgregarItem(this.id!, ejercicio, this.rutinaEjercioService).subscribe(() => {
-        console.log("agregar")
+       
       })
   }
   

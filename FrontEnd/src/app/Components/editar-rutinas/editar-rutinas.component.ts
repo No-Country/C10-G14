@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
 import { ActivatedRoute } from '@angular/router';
 import { NuevaRutinaComponent } from '../forms/nueva-rutina/nueva-rutina.component';
+import { MetodosService } from 'src/app/Services/metodos.service';
+
 
 
 @Component({
@@ -21,8 +23,11 @@ export class EditarRutinasComponent implements OnInit  {
   planCliente: any ;
   rutina:any
   
-  constructor(private datosRutina: EndpointsService,
-  private aRoute: ActivatedRoute, public dialog: MatDialog,) { 
+  constructor(
+  private datosRutina: EndpointsService,
+  private aRoute: ActivatedRoute, 
+  public dialog: MatDialog,
+  private _metodoService: MetodosService) { 
     this.idCliente = Number(this.aRoute.snapshot.paramMap.get('id')) ; //obtenemos id de url
     
     
@@ -74,6 +79,7 @@ AgregarRutina(id?: number): void {
     window.location.reload();
   },1000);  
   });
+  this._metodoService.mensaje('Rutina Eliminada con Exito !', 5);
 }
 
 

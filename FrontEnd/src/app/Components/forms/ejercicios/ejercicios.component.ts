@@ -102,12 +102,12 @@ export class EjerciciosComponent implements OnInit{
       if(this.idEjercicio == undefined){      
         //Es agregar
         this._endpoints.NuevoItem(ejercicio, this.appi).subscribe(()=>{  
-          this._metodoService.mensaje('Nueva Ejercicio agregada con Exito !', 2);       
+          this._metodoService.mensaje('Nuevo Ejercicio agregado con Exito !', 2);       
         })
       }else {
         // es Editar
         this._endpoints.editarItem(this.idEjercicio, ejercicio, this.appi).subscribe(data => {        
-          this._metodoService.mensaje('Ejercicio editada con Exito !', 2);
+          this._metodoService.mensaje('Ejercicio editado con Exito !', 2);
         })
       }
       this.loading = false;

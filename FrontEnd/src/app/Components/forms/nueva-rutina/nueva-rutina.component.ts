@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Rutina } from 'src/app/Interface/rutina';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
+import { MetodosService } from 'src/app/Services/metodos.service';
 
 @Component({
   selector: 'app-nueva-rutina',
@@ -16,7 +17,8 @@ export class NuevaRutinaComponent {form: FormGroup
     public dialogRef: MatDialogRef<NuevaRutinaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public Service: EndpointsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private _metodoService: MetodosService
   ) {
     this.form = fb.group({
       title:['',Validators.required]
@@ -45,7 +47,7 @@ export class NuevaRutinaComponent {form: FormGroup
       }
       // Es agregar
       this. Service.NuevoItem( Rutina, this.api).subscribe(() => {
-        console.log("agregar")
+        
       })
   }
   

@@ -3,11 +3,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Rutina } from 'src/app/Interface/rutina';
-import { RutinaService } from 'src/app/Services/rutina.service';
 import { RutinasComponent } from '../forms/rutinas/rutinas.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Ejercicio, EjercicioR } from 'src/app/Interface/ejercicio';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
+import { MetodosService } from 'src/app/Services/metodos.service';
 
 @Component({
   selector: 'app-editar-ejercicio',
@@ -24,8 +24,11 @@ export class EditarEjercicioComponent {
   api:string = this.Api.apiUrlRutine
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private datosRutina:RutinaService, public dialog: MatDialog,
-   private Api: EndpointsService, private cdr: ChangeDetectorRef ) { }
+  constructor( 
+  public dialog: MatDialog,
+  private Api: EndpointsService, 
+  private cdr: ChangeDetectorRef,
+  private _metodoService: MetodosService ) { }
     
   ngOnInit(): void {
     
@@ -48,7 +51,8 @@ export class EditarEjercicioComponent {
       this.ejercicio= result;
       setTimeout(() => {
         window.location.reload();
-      },1000); 
+      },1000);
+      this._metodoService.mensaje('Ejercicio agregado con Exito !', 5); 
     });
   }
   eliminarEjercicio(id: number): void {
@@ -61,7 +65,7 @@ export class EditarEjercicioComponent {
         window.location.reload();
       },1000); 
     });
- 
+    this._metodoService.mensaje('Ejercicio Eliminado con Exito !', 5);
   }
   eliminarRutina(): void {
     
@@ -70,7 +74,7 @@ export class EditarEjercicioComponent {
         window.location.reload();
       },1000); 
     });
- 
+    this._metodoService.mensaje('Rutina Eliminada con Exito !', 5);
   }
  
 }
