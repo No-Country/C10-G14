@@ -1,10 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Ejercicio } from 'src/app/Interface/ejercicio';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
+import { EjerciciosComponent } from '../forms/ejercicios/ejercicios.component';
+import { MetodosService } from 'src/app/Services/metodos.service';
 
 @Component({
   selector: 'app-ver-ejercicios',
@@ -15,12 +18,15 @@ export class VerEjerciciosComponent {
   displayedColumns: string[] = ['nombre', 'tipo', 'unidad', 'acciones'];
   dataSource = new MatTableDataSource<Ejercicio>();
   api:string = this._endPointsService.apiUrlEjercicio;
+  loading:boolean = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
   
-  constructor(private _endPointsService:EndpointsService,    
-    private router: Router
+  constructor(private _endPointsService:EndpointsService,
+    private _metodos: MetodosService,    
+    private router: Router,
+    public dialog: MatDialog,
     ) { }
 
   ngOnInit(): void {
@@ -41,11 +47,35 @@ export class VerEjerciciosComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  obtenerEjercicios() {    
+  obtenerEjercicios() {  
+    this.loading = true;  
     this._endPointsService.obtenerDatos(this.api).subscribe(data => {
+      this.loading = false;
       this.dataSource.data = data;
       console.log(data);
     })
+  }
+
+  borrarEjercicio(id:number){
+    this._endPointsService.borrarItem(id, this.api).subscribe(()=> {
+      window.location.reload();
+      this._metodos.mensaje('Ejercicio eliminado con Exito!',2);
+    });
+  }
+
+  addEditEjercicio(id?:number){
+    const dialogRef = this.dialog.open(EjerciciosComponent, {
+      width:"550px",
+      disableClose: true,
+      data:{ id:id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        setTimeout(() => {this.obtenerEjercicios();}, 4000)
+        
+      }            
+    });
   }
 
 }

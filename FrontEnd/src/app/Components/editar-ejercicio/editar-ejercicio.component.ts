@@ -1,12 +1,13 @@
-import { Component, ViewChild, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, Input, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Rutina } from 'src/app/Interface/rutina';
-import { RutinaService } from 'src/app/Services/rutina.service';
 import { RutinasComponent } from '../forms/rutinas/rutinas.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Ejercicio } from 'src/app/Interface/ejercicio';
+import { Ejercicio, EjercicioR } from 'src/app/Interface/ejercicio';
+import { EndpointsService } from 'src/app/Services/endpoints.service';
+import { MetodosService } from 'src/app/Services/metodos.service';
 
 @Component({
   selector: 'app-editar-ejercicio',
@@ -20,30 +21,62 @@ export class EditarEjercicioComponent {
   displayedColumns: string[] = ['title', 'numeroSeries', 'repetition','type', 'quantity', 'unit', 'acciones'];
   dataEjercicios = new MatTableDataSource<Rutina>();
   ejercicio: any
-  
+  api:string = this.Api.apiUrlRutine
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private datosRutina:RutinaService, public dialog: MatDialog
-    ) { }
-
+  constructor( 
+  public dialog: MatDialog,
+  private Api: EndpointsService, 
+  private cdr: ChangeDetectorRef,
+  private _metodoService: MetodosService ) { }
+    
   ngOnInit(): void {
-    console.log('esto traigo al componente ejercicios desde el componente rutina',this.dataRutinas);
-    this.dataEjercicios = this.dataRutinas.exercises;
-    console.log('Datasourse',this.dataEjercicios);  
+    
+    this.cargar()
+   
     
   }
-  
-  openDialog(): void {
+  cargar(){
+    this.dataEjercicios = this.dataRutinas.exercises;
+  }
+  openDialog(id?: number): void {
     const dialogRef = this.dialog.open(RutinasComponent, {
-      disableClose: true
+      disableClose: true,
+      data: { idRutina:this.dataRutinas.id,
+      id:id }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       
       this.ejercicio= result;
-      console.log(this.ejercicio);
+      setTimeout(() => {
+        window.location.reload();
+      },1000);
+      this._metodoService.mensaje('Ejercicio agregado con Exito !', 5); 
     });
   }
+  eliminarEjercicio(id: number): void {
+    const idEjercicio: object = {"exercises": [
+      id
+    ] }
+  
+    this.Api.borrarEjercicioRutina(this.dataRutinas.id, { body: idEjercicio }).subscribe(() => {   
+      setTimeout(() => {
+        window.location.reload();
+      },1000); 
+    });
+    this._metodoService.mensaje('Ejercicio Eliminado con Exito !', 5);
+  }
+  eliminarRutina(): void {
+    
+    this.Api.borrarItem(this.dataRutinas.id, this.api ).subscribe(() => {   
+      setTimeout(() => {
+        window.location.reload();
+      },1000); 
+    });
+    this._metodoService.mensaje('Rutina Eliminada con Exito !', 5);
+  }
+ 
 }
 
     

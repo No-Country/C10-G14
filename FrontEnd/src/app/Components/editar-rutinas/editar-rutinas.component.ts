@@ -4,6 +4,10 @@ import { RutinasComponent } from '../forms/rutinas/rutinas.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
 import { ActivatedRoute } from '@angular/router';
+import { NuevaRutinaComponent } from '../forms/nueva-rutina/nueva-rutina.component';
+import { MetodosService } from 'src/app/Services/metodos.service';
+
+
 
 @Component({
   selector: 'app-editar-rutinas',
@@ -17,25 +21,68 @@ export class EditarRutinasComponent implements OnInit  {
   api:string = this.datosRutina.apiUrlUser; 
   selected = new FormControl(0);
   planCliente: any ;
+  rutina:any
   
-  
-  constructor(private datosRutina: EndpointsService,
-  private aRoute: ActivatedRoute) { 
+  constructor(
+  private datosRutina: EndpointsService,
+  private aRoute: ActivatedRoute, 
+  public dialog: MatDialog,
+  private _metodoService: MetodosService) { 
     this.idCliente = Number(this.aRoute.snapshot.paramMap.get('id')) ; //obtenemos id de url
     
     
   }
   ngOnInit(): void {
     this.obtenerRutinas();  
+
+    
 }
 //Metodo que hace un get al servidor para traer la info de un cliente por id
 obtenerRutinas() {  
   this.datosRutina.obtenerDatosId(this.idCliente, this.api).subscribe(data => {    
     this.infoCliente = data;
     this.planCliente = data.routines;   
-    
+    this.planCliente.sort((a: any, b: any) => {
+      if (a.title < b.title) {
+        return -1;
+      }
+      if (a.title > b.title) {
+        return 1;
+      }
+      return 0;
+    });
+    this.planCliente.forEach((rutina: any) => {
+      rutina.exercises.sort((a: any, b: any) => {
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title > b.title) {
+          return 1;
+        }
+        return 0;
+      });
+    });
   })
 }
+
+AgregarRutina(id?: number): void {
+  const dialogRef = this.dialog.open(NuevaRutinaComponent, {
+    width: '550px',
+    disableClose: true,
+    data: {id:id }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    
+    this.rutina= result;
+  setTimeout(() => {
+    window.location.reload();
+  },1000);  
+  });
+  this._metodoService.mensaje('Rutina Eliminada con Exito !', 5);
+}
+
+
 
 }
 
