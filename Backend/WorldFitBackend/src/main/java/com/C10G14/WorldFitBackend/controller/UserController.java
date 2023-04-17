@@ -1,5 +1,6 @@
 package com.C10G14.WorldFitBackend.controller;
 
+import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
 import com.C10G14.WorldFitBackend.dto.SimpleUserDto;
 import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.service.UserService;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -131,7 +133,8 @@ public class UserController {
                     content = @Content)})
     @PreAuthorize("#userId == authentication.principal.id")
     @PutMapping("/{userId}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable Long userId, @RequestBody UserDto user) throws JsonProcessingException {
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long userId,
+                                              @ModelAttribute RegisterRequestDto user) throws IOException {
         UserDto updatedUser = userService.updateUser(userId, user);
         return ResponseEntity.ok(updatedUser);
     }
@@ -147,7 +150,7 @@ public class UserController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: Role not found",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or (hasRole('PROFESSOR') and (#role == 'customer' or #role == 'user'))")
     @PutMapping("/role/{userId}/{role}")
     public ResponseEntity<UserDto> updateRole(@PathVariable Long userId, @PathVariable String role) throws JsonProcessingException {
         UserDto updatedUser = userService.updateRole(userId, role);
@@ -184,7 +187,7 @@ public class UserController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: User not found",
                     content = @Content),})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH') or #userId == authentication.principal.id")
     @GetMapping("/routine/{userId}")
     public ResponseEntity<SimpleUserDto> getUserRoutines(@PathVariable Long userId) throws JsonProcessingException{
         SimpleUserDto user = userService.getSimpleUserById(userId);

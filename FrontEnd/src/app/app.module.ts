@@ -14,6 +14,11 @@ import { RutinasComponent } from './Components/forms/rutinas/rutinas.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { VerEjerciciosComponent } from './Components/ver-ejercicios/ver-ejercicios.component';
 import { InterceptorService } from './auth/services/user.interceptor';
+import { PerfilComponent } from './Components/perfil/perfil.component';
+import { Location } from '@angular/common';
+import { TransformUnits } from './Components/forms/rutinas/TransformUnits';
+import { NuevaRutinaComponent } from './Components/forms/nueva-rutina/nueva-rutina.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +30,11 @@ import { InterceptorService } from './auth/services/user.interceptor';
     EditarEjercicioComponent,
     NavbarComponent,
     VerEjerciciosComponent,
-    RutinasComponent
+    RutinasComponent,
+    PerfilComponent,
+    TransformUnits,
+    NuevaRutinaComponent,
+   
   ],
   
 
@@ -38,7 +47,7 @@ import { InterceptorService } from './auth/services/user.interceptor';
     HttpClientModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },[Location],
   ],
   bootstrap: [AppComponent],
 })

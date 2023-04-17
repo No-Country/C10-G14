@@ -4,6 +4,8 @@ import { RutinasComponent } from '../forms/rutinas/rutinas.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
 import { ActivatedRoute } from '@angular/router';
+import { NuevaRutinaComponent } from '../forms/nueva-rutina/nueva-rutina.component';
+
 
 @Component({
   selector: 'app-editar-rutinas',
@@ -17,10 +19,10 @@ export class EditarRutinasComponent implements OnInit  {
   api:string = this.datosRutina.apiUrlUser; 
   selected = new FormControl(0);
   planCliente: any ;
-  
+  rutina:any
   
   constructor(private datosRutina: EndpointsService,
-  private aRoute: ActivatedRoute) { 
+  private aRoute: ActivatedRoute, public dialog: MatDialog,) { 
     this.idCliente = Number(this.aRoute.snapshot.paramMap.get('id')) ; //obtenemos id de url
     
     
@@ -36,6 +38,24 @@ obtenerRutinas() {
     
   })
 }
+
+AgregarRutina(id?: number): void {
+  const dialogRef = this.dialog.open(NuevaRutinaComponent, {
+    width: '550px',
+    disableClose: true,
+    data: {id:id }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    
+    this.rutina= result;
+  setTimeout(() => {
+    window.location.reload();
+  },1000);  
+  });
+}
+
+
 
 }
 

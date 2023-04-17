@@ -3,8 +3,12 @@
   }
 
   mat-toolbar img {
-    width: 150px;
+    width: 100px;
   }
+/* Estilos Tabs  */
+.mat-mdc-tab-labels{
+  border-bottom: #303030;
+}
 
 .mdc-tab__text-label{
   font-size: 1em;
@@ -13,7 +17,16 @@
   color: #212529 !important;
 } 
 
+.mdc-tab-indicator__content {
+  height: 4px;  
+  background-color: #303030;
+  border-top: #303030 !important;
+  
+}
+
 .fondo-rutina {
     height: 100vh;
     background-color: #ffd740 !important;
+    
+    
   }

@@ -1,5 +1,6 @@
 package com.C10G14.WorldFitBackend.service.impl;
 
+import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
 import com.C10G14.WorldFitBackend.dto.SimpleUserDto;
 import com.C10G14.WorldFitBackend.dto.UserDto;
 import com.C10G14.WorldFitBackend.entity.Role;
@@ -13,12 +14,15 @@ import com.C10G14.WorldFitBackend.mapper.UserDtoMapper;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
 import com.C10G14.WorldFitBackend.repository.RoutineRepository;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
+import com.C10G14.WorldFitBackend.service.ImageService;
 import com.C10G14.WorldFitBackend.service.UserService;
+import com.C10G14.WorldFitBackend.util.DtoFormatter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -33,6 +37,10 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
     @Autowired
     private RoutineRepository routineRepository;
+    @Autowired
+    private ImageService imageService;
+    @Autowired
+    private DtoFormatter formatter;
 
     @Transactional
     @Override
@@ -62,18 +70,24 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserDto updateUser(Long id, UserDto userDto) throws JsonProcessingException {
+    public UserDto updateUser(Long id, RegisterRequestDto userDto) throws IOException {
         User user = userRepository.findById(id).orElseThrow(()-> new NotFoundException("Error: user not found"));
+
         if (userDto.getEmail() != null && !userDto.getEmail().isEmpty()) {
             user.setEmail(userDto.getEmail());
         }
-        if (userDto.getProfileImg() != null && !userDto.getProfileImg().isEmpty()) {
-            user.setProfileImg(user.getProfileImg());
+
+        if(imageService.checkImage(userDto.getProfileImg())){
+            user.setProfileImg(imageService.uploadImage(
+                    userDto.getProfileImg(),
+                    user.getEmail()
+                    ));
         }
+
         if (userDto.getName() != null && !userDto.getName().isEmpty()) {
-            user.setName(user.getName());
+            user.setName(formatter.formatName(userDto.getName()));
         }
-        if (userDto.getAge() != null) {
+        if (userDto.getAge()>0&&userDto.getAge()<110) {
            user.setAge(userDto.getAge());
         }
         if (userDto.getSex() != null && !userDto.getSex().isEmpty()) {
@@ -106,7 +120,10 @@ public class UserServiceImpl implements UserService {
         }
         Role role = roleRepository.findByName(roleName)
                 .orElseThrow(() -> new RuntimeException("Error: Role not found."));
-        user.getRole().add(role);
+
+        if (!user.getRole().contains(role)) {
+            user.getRole().add(role);
+        }
 
         userRepository.save(user);
         return mapper.entityToDto(user);

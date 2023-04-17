@@ -4,6 +4,7 @@ import { VerClientesComponent } from './Components/ver-clientes/ver-clientes.com
 import { EditarRutinasComponent } from './Components/editar-rutinas/editar-rutinas.component';
 import { InicioComponent } from './Components/inicio/inicio.component';
 import { VerEjerciciosComponent } from './Components/ver-ejercicios/ver-ejercicios.component';
+import { PerfilComponent } from './Components/perfil/perfil.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'ejercicios',
     component:VerEjerciciosComponent,
+  },
+  {
+    path: 'perfil',
+    component:PerfilComponent,
   },
   {
     path: '',

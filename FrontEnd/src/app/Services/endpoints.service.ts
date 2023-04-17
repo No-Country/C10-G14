@@ -19,10 +19,11 @@ export class EndpointsService {
     this.apiUrlRutine = '/routines';
     this.apiUrlEjercicio = '/exercises';
     this.apiUrlUserRutine = '/users/routine';
+    this.apiUrlEjercicio = '/exercises';
     this.apiUrlRutineEjercicio = '/routines/exercises'
   }
 
-  //--------------Endpoints-----------------------------------
+  //--------------Endpoints------especificos------------------
 
   //Obtener usuarios por roles
   public UsersRoles(role: string): Observable<any> {
@@ -51,17 +52,14 @@ public borrarEjercicioRutina(idRutina: number, idEjercicio: any ): Observable<an
   public borrarItem(id: number, apiUrlItem: string): Observable<void> {
     return this.http.delete<void>(this.myAppUrl + apiUrlItem + `/${id}`);
   }
+ 
   //Crear
   public NuevoItem(objeto: any, apiUrlItem: string): Observable<any> {
     return this.http.post<any>(this.myAppUrl + apiUrlItem, objeto);
   }
 
   //Editar
-  public editarItem(
-    id: number,
-    objeto: any,
-    apiUrlItem: string
-  ): Observable<void> {
+  public editarItem( id: number,objeto: any, apiUrlItem: string ): Observable<void> {
     return this.http.put<void>(this.myAppUrl + apiUrlItem + `/${id}`, objeto);
   }
 }
