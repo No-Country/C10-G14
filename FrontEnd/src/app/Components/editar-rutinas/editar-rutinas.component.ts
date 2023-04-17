@@ -29,13 +29,34 @@ export class EditarRutinasComponent implements OnInit  {
   }
   ngOnInit(): void {
     this.obtenerRutinas();  
+
+    
 }
 //Metodo que hace un get al servidor para traer la info de un cliente por id
 obtenerRutinas() {  
   this.datosRutina.obtenerDatosId(this.idCliente, this.api).subscribe(data => {    
     this.infoCliente = data;
     this.planCliente = data.routines;   
-    
+    this.planCliente.sort((a: any, b: any) => {
+      if (a.title < b.title) {
+        return -1;
+      }
+      if (a.title > b.title) {
+        return 1;
+      }
+      return 0;
+    });
+    this.planCliente.forEach((rutina: any) => {
+      rutina.exercises.sort((a: any, b: any) => {
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title > b.title) {
+          return 1;
+        }
+        return 0;
+      });
+    });
   })
 }
 
