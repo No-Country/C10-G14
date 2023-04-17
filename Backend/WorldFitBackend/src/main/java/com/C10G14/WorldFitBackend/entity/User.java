@@ -55,6 +55,9 @@ public class User  implements UserDetails{
     @Column(name = "AGE")
     private Integer age;
 
+    @Column(name = "EMAIL_CONFIRMED")
+    private Boolean emailConfirmed;
+
     @JsonBackReference
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
