@@ -4,15 +4,23 @@ import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.service.EmailService;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StreamUtils;
+
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class EmailServiceImpl implements EmailService {
 
     @Autowired
     private JavaMailSender emailSender;
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @Override
     public void sendHtmlEmail(User user, String subject) {
@@ -21,10 +29,10 @@ public class EmailServiceImpl implements EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
             helper.setSubject(subject + " " + user.getName());
             helper.setTo(user.getEmail());
-            String htmlBody = String.format("""
-                   <h1>Bienvenido, %s</h1>
-                    """,user.getName());
-            helper.setText(htmlBody, true);
+            Resource resource = resourceLoader.getResource("classpath:templates/emailTemplate.html");
+            String html = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+            html = html.replace("[[Name]]",user.getName());
+            helper.setText(html, true);
             emailSender.send(message);
         } catch (Exception e) {
             System.out.println(e.getMessage());
