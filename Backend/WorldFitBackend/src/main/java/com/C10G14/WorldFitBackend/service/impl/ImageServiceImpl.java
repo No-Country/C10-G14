@@ -26,7 +26,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public boolean checkImage(MultipartFile image) {
-        if (Objects.equals(image,null)||Objects.equals(image.getContentType(),null)){
+        if (Objects.equals(image.getContentType(),null)){
             throw new InputNotValidException("Not a valid image");
         }
         String contentType = image.getContentType();
