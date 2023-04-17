@@ -57,7 +57,7 @@ EjerciciosUrl:string=this.Service.apiUrlEjercicio
         series:this.form.value.series
       }
       // Es agregar
-      this. Service.AgregarItem(this.id!, ejercicio, this.rutinaEjercioService).subscribe(() => {
+      this.Service.AgregarItem(this.id!, ejercicio, this.rutinaEjercioService).subscribe(() => {
         console.log("agregar")
       })
   }

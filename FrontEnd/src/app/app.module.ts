@@ -15,6 +15,7 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { VerEjerciciosComponent } from './Components/ver-ejercicios/ver-ejercicios.component';
 import { InterceptorService } from './auth/services/user.interceptor';
 import { PerfilComponent } from './Components/perfil/perfil.component';
+import { EjerciciosComponent } from './Components/forms/ejercicios/ejercicios.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PerfilComponent } from './Components/perfil/perfil.component';
     NavbarComponent,
     VerEjerciciosComponent,
     RutinasComponent,
-    PerfilComponent
+    PerfilComponent,
+    EjerciciosComponent
   ],
   
 
