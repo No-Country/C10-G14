@@ -16,6 +16,10 @@ import { VerEjerciciosComponent } from './Components/ver-ejercicios/ver-ejercici
 import { InterceptorService } from './auth/services/user.interceptor';
 import { PerfilComponent } from './Components/perfil/perfil.component';
 import { EjerciciosComponent } from './Components/forms/ejercicios/ejercicios.component';
+import { Location } from '@angular/common';
+import { TransformUnits } from './Components/forms/rutinas/TransformUnits';
+import { NuevaRutinaComponent } from './Components/forms/nueva-rutina/nueva-rutina.component';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +33,10 @@ import { EjerciciosComponent } from './Components/forms/ejercicios/ejercicios.co
     VerEjerciciosComponent,
     RutinasComponent,
     PerfilComponent,
-    EjerciciosComponent
+    EjerciciosComponent,
+    TransformUnits,
+    NuevaRutinaComponent,
+   
   ],
   
 
@@ -42,7 +49,7 @@ import { EjerciciosComponent } from './Components/forms/ejercicios/ejercicios.co
     HttpClientModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },[Location],
   ],
   bootstrap: [AppComponent],
 })

@@ -5,7 +5,7 @@
       <mat-label>Ejercicio </mat-label>
       <mat-select formControlName="exerciseId">
         <mat-option *ngFor="let ejercicio of Ejercicios" [value]="ejercicio.id">
-          {{ ejercicio.title }}
+          {{ ejercicio.title }} | {{ejercicio.unit|UnidadATipo }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -14,42 +14,24 @@
        <strong>Este campo es obligatorio</strong> 
      </span>
    </div>
-    <mat-form-field class="example-full-width">
-      <mat-label>Series</mat-label>
-      <input min="0" max="8" formControlName="series" matInput type="number" placeholder="" />
-    </mat-form-field>
-    <div class="error">
-      <span *ngIf="form.get('series')?.hasError('required') && form.get('series')?.touched">
-       <strong>Este campo es obligatorio</strong> 
-     </span>
-   </div>
-   <div class="error">
-    <span *ngIf="form.get('series')?.hasError('max') && form.get('series')?.touched">
-     <strong>El numero maximo de series es 8</strong> 
-   </span>
- </div>
-    <mat-form-field class="example-full-width">
-      <mat-label>Repeticiones</mat-label>
-      <input
-      min="0"
-        formControlName="repetitions"
-        matInput
-        type="number"
-        class="example-right-align"
-        placeholder=""
-      />
-    </mat-form-field>
-<div class="error">
-   <span *ngIf="form.get('repetitions')?.hasError('required') && form.get('repetitions')?.touched">
-    <strong>Este campo es obligatorio</strong> 
-  </span>
-</div>
+   
+   
     <div class="row">
       <div class="col-md-4">
         <mat-form-field class="example-full-width">
-          <mat-label>Tipo</mat-label>
-          <input  matInput placeholder="" value="" />
+          <mat-label>Series</mat-label>
+          <input min="0" max="8" formControlName="series" matInput type="number" placeholder="" />
         </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('series')?.hasError('required') && form.get('series')?.touched">
+           <strong>Este campo es obligatorio</strong> 
+         </span>
+       </div>
+       <div class="error">
+        <span *ngIf="form.get('series')?.hasError('max') && form.get('series')?.touched">
+         <strong>El numero maximo de series es 8</strong> 
+       </span>
+     </div>
       </div>
       <div class="col-md-4">
         <mat-form-field class="example-full-width">
@@ -71,9 +53,21 @@
       </div>
       <div class="col-md-4">
         <mat-form-field class="example-full-width">
-          <mat-label>Unidad</mat-label>
-          <input matInput placeholder="" value="" />
+          <mat-label>Repeticiones</mat-label>
+          <input
+          min="0"
+            formControlName="repetitions"
+            matInput
+            type="number"
+            class="example-right-align"
+            placeholder=""
+          />
         </mat-form-field>
+    <div class="error">
+       <span *ngIf="form.get('repetitions')?.hasError('required') && form.get('repetitions')?.touched">
+        <strong>Este campo es obligatorio</strong> 
+      </span>
+    </div>
       </div>
     </div>
   </mat-dialog-content>

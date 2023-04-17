@@ -21,7 +21,7 @@ export class EditarEjercicioComponent {
   displayedColumns: string[] = ['title', 'numeroSeries', 'repetition','type', 'quantity', 'unit', 'acciones'];
   dataEjercicios = new MatTableDataSource<Rutina>();
   ejercicio: any
-  
+  api:string = this.Api.apiUrlRutine
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
   constructor(private datosRutina:RutinaService, public dialog: MatDialog,
@@ -46,17 +46,31 @@ export class EditarEjercicioComponent {
     dialogRef.afterClosed().subscribe(result => {
       
       this.ejercicio= result;
-      this.cargar()
+      setTimeout(() => {
+        window.location.reload();
+      },1000); 
     });
   }
-  eliminar(id: number): void {
-    const idEjercicio: object = {
-      exerciseId: id
-    };
+  eliminarEjercicio(id: number): void {
+    const idEjercicio: object = {"exercises": [
+      id
+    ] }
   
     this.Api.borrarEjercicioRutina(this.dataRutinas.id, { body: idEjercicio }).subscribe(() => {   
-      this.cargar()
+      setTimeout(() => {
+        window.location.reload();
+      },1000); 
     });
+ 
+  }
+  eliminarRutina(): void {
+    
+    this.Api.borrarItem(this.dataRutinas.id, this.api ).subscribe(() => {   
+      setTimeout(() => {
+        window.location.reload();
+      },1000); 
+    });
+ 
   }
  
 }
