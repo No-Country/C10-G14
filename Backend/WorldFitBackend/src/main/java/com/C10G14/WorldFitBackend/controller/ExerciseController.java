@@ -2,6 +2,7 @@ package com.C10G14.WorldFitBackend.controller;
 
 import com.C10G14.WorldFitBackend.dto.ExerciseRequestDto;
 import com.C10G14.WorldFitBackend.dto.ExerciseResponseDto;
+import com.C10G14.WorldFitBackend.dto.MessageResponse;
 import com.C10G14.WorldFitBackend.service.ExerciseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -119,8 +120,9 @@ public class ExerciseController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteExercise(@PathVariable Long id) {
+    public ResponseEntity<MessageResponse> deleteExercise(@PathVariable Long id) {
         exerciseService.deleteExercise(id);
-        return new ResponseEntity<>("Exercise successfully deleted", HttpStatus.OK);
+        return new ResponseEntity<>(new MessageResponse(200,"Exercise deleted"),
+                HttpStatus.OK);
     }
 }

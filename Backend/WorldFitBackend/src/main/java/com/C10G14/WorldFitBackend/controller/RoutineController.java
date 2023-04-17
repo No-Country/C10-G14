@@ -1,10 +1,7 @@
 package com.C10G14.WorldFitBackend.controller;
 
 
-import com.C10G14.WorldFitBackend.dto.Exercise_RoutineRequestDto;
-import com.C10G14.WorldFitBackend.dto.RemoveExerciseRequestDto;
-import com.C10G14.WorldFitBackend.dto.RoutineRequestDto;
-import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
+import com.C10G14.WorldFitBackend.dto.*;
 import com.C10G14.WorldFitBackend.service.RoutineService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -188,9 +185,10 @@ public class RoutineController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @DeleteMapping("/exercises/{id}")
-    public ResponseEntity<RoutineResponseDto> removeExercise(@PathVariable("id") long routineId,
-                                                  @RequestBody RemoveExerciseRequestDto exercises) {
+    public ResponseEntity<MessageResponse> removeExercise(@PathVariable("id") long routineId,
+                                                          @RequestBody RemoveExerciseRequestDto exercises) {
         RoutineResponseDto updatedRoutine = routineService.removeExercise(routineId,exercises);
-        return new ResponseEntity<>(updatedRoutine, HttpStatus.OK);
+        return new ResponseEntity<>(new MessageResponse(200,"Routine deleted"),
+                HttpStatus.OK);
     }
 }
