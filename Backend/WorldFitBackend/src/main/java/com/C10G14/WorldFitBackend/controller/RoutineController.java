@@ -129,9 +129,10 @@ public class RoutineController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRoutine(@PathVariable Long id) {
+    public ResponseEntity<MessageResponse> deleteRoutine(@PathVariable Long id) {
         routineService.deleteRoutine(id);
-        return new ResponseEntity<>("Routine successfully deleted",HttpStatus.OK);
+        return new ResponseEntity<>(new MessageResponse(200,"Routine deleted"),
+                HttpStatus.OK);
     }
 
     @Operation(summary = "Add a exercise to a routine")
@@ -185,10 +186,9 @@ public class RoutineController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
     @DeleteMapping("/exercises/{id}")
-    public ResponseEntity<MessageResponse> removeExercise(@PathVariable("id") long routineId,
-                                                          @RequestBody RemoveExerciseRequestDto exercises) {
+    public ResponseEntity<RoutineResponseDto> removeExercise(@PathVariable("id") long routineId,
+                                                  @RequestBody RemoveExerciseRequestDto exercises) {
         RoutineResponseDto updatedRoutine = routineService.removeExercise(routineId,exercises);
-        return new ResponseEntity<>(new MessageResponse(200,"Routine deleted"),
-                HttpStatus.OK);
+        return new ResponseEntity<>(updatedRoutine, HttpStatus.OK);
     }
 }
