@@ -47,7 +47,7 @@ export class NuevaRutinaComponent {form: FormGroup
       }
       // Es agregar
       this. Service.NuevoItem( Rutina, this.api).subscribe(() => {
-        
+        this._metodoService.mensaje('Rutina Eliminada con Exito !', 5);
       })
   }
   

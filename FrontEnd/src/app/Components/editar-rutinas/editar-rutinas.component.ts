@@ -79,7 +79,7 @@ AgregarRutina(id?: number): void {
     window.location.reload();
   },1000);  
   });
-  this._metodoService.mensaje('Rutina Eliminada con Exito !', 5);
+ 
 }
 
 

@@ -20,7 +20,8 @@ EjerciciosUrl:string=this.Service.apiUrlEjercicio
     public dialogRef: MatDialogRef<RutinasComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public Service: EndpointsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private _metodoService: MetodosService
   ) {
     this.form = fb.group({
       exerciseId:['',Validators.required],
@@ -58,7 +59,7 @@ EjerciciosUrl:string=this.Service.apiUrlEjercicio
       
       // Es agregar
       this.Service.AgregarItem(this.id!, ejercicio, this.rutinaEjercioService).subscribe(() => {
-       
+        this._metodoService.mensaje('Rutina Eliminada con Exito !', 5);
       })
   }
   

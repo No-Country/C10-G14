@@ -52,7 +52,7 @@ export class EditarEjercicioComponent {
       setTimeout(() => {
         window.location.reload();
       },1000);
-      this._metodoService.mensaje('Ejercicio agregado con Exito !', 5); 
+       
     });
   }
   eliminarEjercicio(id: number): void {
