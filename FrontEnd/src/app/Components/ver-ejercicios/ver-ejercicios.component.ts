@@ -59,7 +59,7 @@ export class VerEjerciciosComponent {
 
   borrarEjercicio(id:number){
     this._endPointsService.borrarItem(id, this.api).subscribe(()=>
-     {
+    {
       window.location.reload();
       this._metodos.mensaje('Ejercicio eliminado con Exito!',2);
     }, error => {
