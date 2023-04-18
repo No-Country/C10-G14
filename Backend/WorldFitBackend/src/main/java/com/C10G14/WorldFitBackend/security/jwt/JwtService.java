@@ -1,10 +1,13 @@
 package com.C10G14.WorldFitBackend.security.jwt;
 
+import com.C10G14.WorldFitBackend.entity.User;
+import com.C10G14.WorldFitBackend.repository.UserRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,12 +29,17 @@ public class JwtService {
 
     private static final Long jwtExpirationMs = 28800000L;
 
+    @Autowired
+    UserRepository userRepository;
+
     private Key getSignInKey(){
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
     public String generateToken(UserDetails userDetails
                                 ) {
+        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(
+                ()-> new RuntimeException("Error fetching user details in JWT service"));
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
         String authority = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
@@ -41,6 +49,7 @@ public class JwtService {
         Date expiryDate = new Date(now.getTime() + jwtExpirationMs);
 
         return Jwts.builder()
+                .claim("id", user.getId())
                 .claim("roles", authority)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(now)

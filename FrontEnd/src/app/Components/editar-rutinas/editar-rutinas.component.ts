@@ -41,6 +41,7 @@ export class EditarRutinasComponent implements OnInit  {
 obtenerRutinas() {  
   this.datosRutina.obtenerDatosId(this.idCliente, this.api).subscribe(data => {    
     this.infoCliente = data;
+    console.log(this.infoCliente)
     this.planCliente = data.routines;   
     this.planCliente.sort((a: any, b: any) => {
       if (a.title < b.title) {

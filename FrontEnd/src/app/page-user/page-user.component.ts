@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styles: [
     `
       .header-bg {
-        background-image: url('../../../assets/img/gym3.jpg');
+        background-image: url('../../assets/img/gym3.jpg');
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
