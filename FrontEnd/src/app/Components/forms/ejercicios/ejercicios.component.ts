@@ -16,26 +16,9 @@ export class EjerciciosComponent implements OnInit{
   loading:boolean = false;  
   operacion:string = 'Agregar ';
   appi:string = this._endpoints.apiUrlEjercicio;
-  grupoMuscular: any[] = [
-    'ABS - Abdominales', 
-    'ABS - Oblicuos', 
-    'BRAZOS - Bíceps', 
-    'BRAZOS - Bíceps', 
-    'BRAZOS - Bíceps', 
-    'ABS- Abdominales',
-  ];
-  unidad: any[] = [
-    'Kg', 
-    'Minutos',  
-    'Km',     
-  ];
-
-  img: any[] = [
-    'https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?fit=960%2C720', 
-    'imagen 2', 
-    'imagen 3', 
-    'imagen 4',     
-  ];
+  musculos:string[] = this._metodoService.grupoMuscular;
+  imagenes:any[] = this._metodoService.img;
+  unity: string[] = this._metodoService.unidad;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
