@@ -16,7 +16,7 @@ export class RutinaComponent implements OnInit {
 api:string = this.datosRutina.apiUrlUser
   constructor(private datosRutina: EndpointsService) {}
   ngOnInit(): void {
-    this.datosRutina.obtenerDatosId(1, this.api ).subscribe((data) => {
+    this.datosRutina.obtenerDatosId(1, this.api ).subscribe((data) => {      
       this.rutinasLista = data.routines;
       this.rutinasLista.sort((a: any, b: any) => {
         if (a.title < b.title) {

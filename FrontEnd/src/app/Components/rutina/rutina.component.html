@@ -5,16 +5,23 @@
         {{rutina.title}}      
       </mat-expansion-panel-header>  
       <div class="tarjetas-ejercicios">
-        <div class="card  mb-4 mt-3" *ngFor="let ejercicio of rutina.exercises">
+        <div class="card  mb-4 mt-3" *ngFor="let ejercicio of rutina.exercises">          
           <div class="card-header ps-3 p-1">
-          <h3 class="mt-1">{{ejercicio.title}}</h3> 
-          <div class="d-flex justify-content">
-            <h4 class="mt-1 me-3 " > 
-              Series: {{ejercicio.numeroSeries}} X {{ejercicio.repetitions}}           
-            </h4>
-            <h4 class="mt-1">|</h4> 
-            <h4 class="mb-0 ms-3 mt-1">{{ejercicio.type}} {{ejercicio.quantity}} {{ejercicio.unit}}</h4>   
-          </div>
+            <div class="row align-items-center ">
+              <img class="p-1 ps-2 " src="{{ ejercicio.media}}">
+              <div class="col align-middle">
+                <h3 >{{ejercicio.title}}</h3> 
+              <div class="d-flex justify-content">
+              <h4 class="mt-1 me-3 " > 
+                Series: {{ejercicio.numeroSeries}} X {{ejercicio.repetitions}}           
+              </h4>
+              <h4 class="mt-1">|</h4> 
+              <h4 class="mb-0 ms-3 mt-1">{{ejercicio.type}} {{ejercicio.quantity}} {{ejercicio.unit}}</h4>   
+              </div>
+              </div>
+            </div>
+            
+            
           
           </div>
           <div class="card-body p-0 ">
