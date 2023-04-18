@@ -34,12 +34,19 @@ public class ExerciseDtoMapper {
 
     public Exercise DtoToEntity (ExerciseRequestDto exerciseDto) {
 
+        String description = exerciseDto.getDescription();
+        if (description == null || description.isEmpty()) {
+            description = null;
+        } else {
+            description = description.substring(0, 1).toUpperCase() + description.substring(1).toLowerCase();
+        }
+
         return new Exercise(
                 formatter.format(exerciseDto.getTitle()),
-                exerciseDto.getDescription() != null ? exerciseDto.getDescription().substring(1).toLowerCase() : null,
+                description,
                 exerciseDto.getMedia(),
                 unitRepository.findByName(exerciseDto.unitToEUnit())
-                        .orElseThrow(()-> new NotFoundException("Unit must be either: 'Km', 'Kg', 'Minutos' or 'null'"))
+                        .orElseThrow(() -> new NotFoundException("Unit must be either: 'Km', 'Kg', 'Minutos' or 'null'"))
         );
     }
 }
