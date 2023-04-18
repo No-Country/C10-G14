@@ -9,29 +9,16 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <div class="error">
-      <span *ngIf="form.get('exerciseId')?.hasError('required') && form.get('exerciseId')?.touched">
-       <strong>Este campo es obligatorio</strong> 
-     </span>
-   </div>
-   
-   
+    <mat-error *ngIf="form.get('exerciseId')?.touched && form.get('exerciseId')?.errors?.['required']">Este campo es obligatorio</mat-error>
     <div class="row">
       <div class="col-md-4">
         <mat-form-field class="example-full-width">
           <mat-label>Series</mat-label>
           <input min="0" max="8" formControlName="series" matInput type="number" placeholder="" />
         </mat-form-field>
-        <div class="error">
-          <span *ngIf="form.get('series')?.hasError('required') && form.get('series')?.touched">
-           <strong>Este campo es obligatorio</strong> 
-         </span>
-       </div>
-       <div class="error">
-        <span *ngIf="form.get('series')?.hasError('max') && form.get('series')?.touched">
-         <strong>El numero maximo de series es 8</strong> 
-       </span>
-     </div>
+        <mat-error *ngIf="form.get('series')?.touched && form.get('series')?.errors?.['required']">Este campo es obligatorio</mat-error>
+        
+       <mat-error *ngIf="form.get('series')?.touched && form.get('series')?.errors?.['max']">El numero maximo permitido de series es 8</mat-error>
       </div>
       <div class="col-md-4">
         <mat-form-field class="example-full-width">
@@ -45,11 +32,8 @@
             placeholder=""
           />
         </mat-form-field>
-        <div class="error">
-          <span *ngIf="form.get('quantity')?.hasError('required') && form.get('quantity')?.touched">
-           <strong>Este campo es obligatorio</strong> 
-         </span>
-       </div>
+        <mat-error *ngIf="form.get('quantity')?.touched && form.get('quantity')?.errors?.['required']">Este campo es obligatorio</mat-error>
+        
       </div>
       <div class="col-md-4">
         <mat-form-field class="example-full-width">
@@ -63,11 +47,7 @@
             placeholder=""
           />
         </mat-form-field>
-    <div class="error">
-       <span *ngIf="form.get('repetitions')?.hasError('required') && form.get('repetitions')?.touched">
-        <strong>Este campo es obligatorio</strong> 
-      </span>
-    </div>
+        <mat-error *ngIf="form.get('repetitions')?.touched && form.get('repetitions')?.errors?.['required']">Este campo es obligatorio</mat-error>
       </div>
     </div>
   </mat-dialog-content>

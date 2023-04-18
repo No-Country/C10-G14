@@ -6,11 +6,7 @@
       <mat-label>Nombre</mat-label>
       <input  formControlName="title" matInput type="string" placeholder="" />
     </mat-form-field>
-    <div class="error">
-      <span *ngIf="form.get('title')?.hasError('required') && form.get('title')?.touched">
-       <strong>Este campo es obligatorio</strong> 
-     </span>
-   </div>
+    <mat-error *ngIf="form.get('title')?.touched && form.get('title')?.errors?.['required']">Este campo es obligatorio</mat-error>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button type="button" mat-button mat-dialog-close>Cancelar</button>
