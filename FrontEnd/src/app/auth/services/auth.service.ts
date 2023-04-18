@@ -1,28 +1,54 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import jwtDecode from 'jwt-decode';
-import { Observable } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Credentials } from '../interfaces/auth.interfaces';
+
+import { User } from '../interfaces/user';
+import { Credentials } from '../interfaces/credentials';
+import { Router } from '@angular/router';
+import { Role } from '../interfaces/role';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private userSubject: BehaviorSubject<User | null>;
+  public user$: Observable<User | null>;
   private baseUrl: string = environment.baseUrl;
+  private jwtHelper = new JwtHelperService();
   private authTokenKey = 'authToken';
 
-  constructor(private http: HttpClient) {}
-
-  registerUser(creds: Credentials): Observable<any> {
-    const body = creds;
-    return this.http.post(`${this.baseUrl}/auth/register`, body);
+  constructor(private router: Router, private http: HttpClient) {
+    this.userSubject = new BehaviorSubject(
+      JSON.parse(localStorage.getItem('user')!)
+    );
+    this.user$ = this.userSubject.asObservable();
   }
 
-  login(creds: Credentials): Observable<any> {
+  public get userValue() {
+    return this.userSubject.value;
+  }
+
+  register(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/auth/register`, formData);
+  }
+
+  login(creds: Credentials) {
     const body = creds;
-    return this.http.post(`${this.baseUrl}/auth/authenticate`, body);
+    return this.http.post<any>(`${this.baseUrl}/auth/authenticate`, body).pipe(
+      map((user) => {
+        this.setAuthToken(user.token);
+        const decodedToken = this.jwtHelper.decodeToken(user.token);
+        localStorage.setItem('user', JSON.stringify(decodedToken));
+        // Almacenar la propiedad "rol" en el localStorage
+        localStorage.setItem('roles', JSON.stringify(decodedToken.roles));
+        this.userSubject.next(decodedToken);
+        return user;
+      })
+    );
   }
 
   setAuthToken(token: string): void {
@@ -35,7 +61,7 @@ export class AuthService {
 
   // Método para obtener la información del usuario a partir del token JWT
   decodeAuthToken(authToken: string): any {
-    const decodedToken = jwtDecode(authToken);
+    const decodedToken = this.jwtHelper.decodeToken(authToken);
     return decodedToken;
   }
 
@@ -43,7 +69,28 @@ export class AuthService {
     localStorage.removeItem(this.authTokenKey);
   }
 
+  // Metodo verificar si el usuario esta loqueado
+  isAuthenticated(): Observable<boolean> {
+    const authToken = this.getAuthToken();
+    if (authToken) {
+      return of(!this.jwtHelper.isTokenExpired(authToken));
+    }
+    return of(false);
+  }
+
+  getRoles(): Role[] {
+    const storedRoles = localStorage.getItem('roles');
+    if (storedRoles) {
+      return storedRoles.split(',') as Role[];
+    }
+    return [];
+  }
+
   logout() {
+    // remove user from local storage to log user out
+    // localStorage.removeItem('user');
     localStorage.clear();
+    this.userSubject.next(null);
+    this.router.navigate(['/auth/login']);
   }
 }
