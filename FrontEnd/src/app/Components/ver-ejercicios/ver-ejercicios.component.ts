@@ -65,7 +65,7 @@ export class VerEjerciciosComponent {
     }, error => {
       Swal.fire({
         icon: 'warning',        
-        text: 'No se puede eliminar el ejercicio actualmente.Ya que se encuentra en uso por una rutina.!'        
+        text: 'No se puede eliminar el ejercicio actualmente.Se encuentra en uso por una rutina.!'        
       })
     });
   }
