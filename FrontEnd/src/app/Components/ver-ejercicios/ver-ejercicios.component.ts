@@ -8,6 +8,7 @@ import { Ejercicio } from 'src/app/Interface/ejercicio';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
 import { EjerciciosComponent } from '../forms/ejercicios/ejercicios.component';
 import { MetodosService } from 'src/app/Services/metodos.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-ver-ejercicios',
@@ -57,9 +58,15 @@ export class VerEjerciciosComponent {
   }
 
   borrarEjercicio(id:number){
-    this._endPointsService.borrarItem(id, this.api).subscribe(()=> {
+    this._endPointsService.borrarItem(id, this.api).subscribe(()=>
+     {
       window.location.reload();
       this._metodos.mensaje('Ejercicio eliminado con Exito!',2);
+    }, error => {
+      Swal.fire({
+        icon: 'warning',        
+        text: 'No se puede eliminar el ejercicio actualmente.Ya que se encuentra en uso por una rutina.!'        
+      })
     });
   }
 

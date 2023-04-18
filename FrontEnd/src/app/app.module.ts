@@ -54,6 +54,7 @@ import { PageUserComponent } from './page-user/page-user.component';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
+    
 
     JwtModule.forRoot({
       config: {
