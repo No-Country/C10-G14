@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -120,11 +121,8 @@ public class UserServiceImpl implements UserService {
         }
         Role role = roleRepository.findByName(roleName)
                 .orElseThrow(() -> new RuntimeException("Error: Role not found."));
-
-        if (!user.getRole().contains(role)) {
-            user.getRole().add(role);
-        }
-
+        user.getRole().clear();
+        user.getRole().add(role);
         userRepository.save(user);
         return mapper.entityToDto(user);
     }
