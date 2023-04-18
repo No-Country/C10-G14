@@ -41,6 +41,7 @@ export class EditarEjercicioComponent {
   }
   openDialog(id?: number): void {
     const dialogRef = this.dialog.open(RutinasComponent, {
+      width: '550px',
       disableClose: true,
       data: { idRutina:this.dataRutinas.id,
       id:id }
