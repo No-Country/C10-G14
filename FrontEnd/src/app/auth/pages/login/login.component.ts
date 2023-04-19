@@ -92,7 +92,6 @@ export class LoginComponent {
         error: (error) => {
           this.error = error;
           this.loading = false;
-
           const Toast = Swal.mixin({
             toast: true,
             position: 'center',
@@ -138,8 +137,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['juan@juan.com', [Validators.required, Validators.email]], // Campo de email con validadores
-      password: ['pruebas3', [Validators.required, Validators.minLength(8)]], // Campo de password con validadores
+      email: ['', [Validators.required, Validators.email]], // Campo de email con validadores
+      password: ['', [Validators.required, Validators.minLength(8)]], // Campo de password con validadores
     });
   }
 

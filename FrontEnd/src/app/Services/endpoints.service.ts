@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment.prod';
   
 
 @Injectable({
@@ -16,7 +17,7 @@ export class EndpointsService {
   apiUrlRutineEjercicio:string;
 
   constructor(private http: HttpClient) {
-    this.myAppUrl = 'https://apis.worldfit.site/api/v1';
+    this.myAppUrl = environment.baseUrl;
     this.apiUrlUser = '/users';
     this.apiUrlRutine = '/routines';
     this.apiUrlEjercicio = '/exercises';

@@ -13,14 +13,14 @@ export class RutinaComponent implements OnInit {
   series: any;
   ejerciciosLista: any;
   panelOpenState = false;
-api:string = this.datosRutina.apiUrlUser
+  api:string = this.datosRutina.apiUrlUser
   constructor(private datosRutina: EndpointsService) {}
   ngOnInit(): void {
     this.datosRutina.obtenerDatosId(1, this.api ).subscribe((data) => {      
       this.rutinasLista = data.routines;
       this.rutinasLista.sort((a: any, b: any) => {
         if (a.title < b.title) {
-          return -1;
+          return -1; 
         }
         if (a.title > b.title) {
           return 1;

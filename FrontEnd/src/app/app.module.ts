@@ -27,6 +27,7 @@ import { TransformUnits } from './Components/forms/rutinas/TransformUnits';
 import { NuevaRutinaComponent } from './Components/forms/nueva-rutina/nueva-rutina.component';
 import { PageErrorComponent } from './page-error/page-error.component';
 import { PageUserComponent } from './page-user/page-user.component';
+import { InfoUsuarioComponent } from './Components/forms/info-usuario/info-usuario.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PageUserComponent } from './page-user/page-user.component';
     VistaRolesDirective,
     PageErrorComponent,
     PageUserComponent,
+    InfoUsuarioComponent,
   ],
 
   imports: [

@@ -1,8 +1,11 @@
-export interface Cliente {
+export interface Cliente {   
     id?: number,
-    nombre: string,
-    edad: number,
-    altura: number,
-    sexo: string,
-    peso: number
+    email?: string,
+    password?: string,
+    name: string,
+    profileImg?: string,
+    weight: number,
+    height: number,
+    sex: string,
+    age: number,
 }

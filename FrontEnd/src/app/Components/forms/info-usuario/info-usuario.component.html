@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>Editar </h2>
+<form [formGroup]="form" (ngSubmit)="EditInfoCliente()">
+  <mat-dialog-content >
+    <mat-form-field  >
+      <mat-label>Nombre y Apellido</mat-label>
+      <input formControlName="nombre" matInput placeholder="Ingrese nombre" autocomplete="off">            
+      <mat-error *ngIf="form.get('nombre')?.touched && form.get('nombre')?.errors?.['required']">El campo Nombre y Apellido es requerido</mat-error>
+      <mat-error *ngIf="form.get('nombre')?.touched && form.get('nombre')?.errors?.['minlength']">El campo Nombre y Apellido debe tener 1 caracteres o mas </mat-error>
+      <mat-error *ngIf="form.get('nombre')?.touched && form.get('nombre')?.errors?.['maxlength']">El campo Nombre y Apellido debe tener 20 caracteres o menos </mat-error>
+        
+    </mat-form-field>
+
+    <mat-form-field class="ms-0" >
+      <mat-label>Objetivo de Entrenamiento</mat-label>
+      <input formControlName="meta" matInput placeholder="Ingrese nombre" autocomplete="off">            
+      <mat-error *ngIf="form.get('meta')?.touched && form.get('meta')?.errors?.['required']">El campo Nombre y Apellido es requerido</mat-error>
+      <mat-error *ngIf="form.get('meta')?.touched && form.get('meta')?.errors?.['minlength']">El campo Nombre y Apellido debe tener 1 caracteres o mas </mat-error>
+      <mat-error *ngIf="form.get('meta')?.touched && form.get('meta')?.errors?.['maxlength']">El campo Nombre y Apellido debe tener 20 caracteres o menos </mat-error>
+      
+    </mat-form-field>
+
+    <mat-form-field class="ms-0" >
+      <mat-label>Indicación Medica</mat-label>
+      <input formControlName="indicacionMedica" matInput placeholder="Ingrese nombre" autocomplete="off">            
+      <mat-error *ngIf="form.get('indicacionMedica')?.touched && form.get('indicacionMedica')?.errors?.['required']">El campo Nombre y Apellido es requerido</mat-error>
+      <mat-error *ngIf="form.get('indicacionMedica')?.touched && form.get('indicacionMedica')?.errors?.['minlength']">El campo Nombre y Apellido debe tener 1 caracteres o mas </mat-error>
+      <mat-error *ngIf="form.get('indicacionMedica')?.touched && form.get('indicacionMedica')?.errors?.['maxlength']">El campo Nombre y Apellido debe tener 20 caracteres o menos </mat-error>
+    
+    </mat-form-field>
+    
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <mat-label>Edad</mat-label>
+          <input min="8" max="150"   matInput  type="number"  class="example-right-align" placeholder="23"formControlName="edad">
+          <mat-error *ngIf="form.get('edad')?.touched && form.get('edad')?.errors?.['required']">El campo Edad es requerido</mat-error>
+          <mat-error *ngIf="form.get('edad')?.touched && form.get('edad')?.errors?.['min']">El numero minimo permitido es 8</mat-error>
+          <mat-error *ngIf="form.get('edad')?.touched && form.get('edad')?.errors?.['max']">El numero maximo permitido es 150</mat-error>
+        </mat-form-field>
+          
+      </div>
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <mat-label>Altura</mat-label>
+          <input min="1" max="3"  formControlName="altura"   matInput   type="number"  class="example-right-align"  placeholder="1.73" />
+          <mat-error *ngIf="form.get('altura')?.touched && form.get('altura')?.errors?.['required']">El campo Altura es requerido</mat-error>
+          <mat-error *ngIf="form.get('altura')?.touched && form.get('altura')?.errors?.['min']">El numero minimo permitido es 1</mat-error>
+          <mat-error *ngIf="form.get('altura')?.touched && form.get('altura')?.errors?.['max']">El numero maximo permitido es 3</mat-error>
+        </mat-form-field>       
+
+      </div>
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <mat-label>Peso</mat-label>
+          <input min="20" max="400"  formControlName="peso"  matInput  type="number" class="example-right-align" placeholder="82" />
+          <mat-error *ngIf="form.get('peso')?.touched && form.get('peso')?.errors?.['required']">El campo Peso es requerido</mat-error>
+          <mat-error *ngIf="form.get('peso')?.touched && form.get('peso')?.errors?.['min']">El numero minimo permitido es 20</mat-error>
+          <mat-error *ngIf="form.get('peso')?.touched && form.get('peso')?.errors?.['max']">El numero maximo permitido es 400</mat-error>
+        </mat-form-field>
+        
+
+      </div>
+  </div>
+  
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="button" (click)="cancelar()" mat-button >Cancelar</button>
+        <button [disabled]="form.invalid" type="submit" mat-button  >Aceptar</button>
+  </mat-dialog-actions>
+</form>

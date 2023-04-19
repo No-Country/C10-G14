@@ -16,8 +16,7 @@
           <mat-label>Series</mat-label>
           <input min="0" max="8" formControlName="series" matInput type="number" placeholder="" />
         </mat-form-field>
-        <mat-error *ngIf="form.get('series')?.touched && form.get('series')?.errors?.['required']">Este campo es obligatorio</mat-error>
-        
+        <mat-error *ngIf="form.get('series')?.touched && form.get('series')?.errors?.['required']">Este campo es obligatorio</mat-error>        
        <mat-error *ngIf="form.get('series')?.touched && form.get('series')?.errors?.['max']">El numero maximo permitido de series es 8</mat-error>
       </div>
       <div class="col-md-4">

@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  baseUrl: 'https://apis.worldfit.site/api/v1',
+  baseUrl: 'https://api.worldfit.site/v1',
 };
