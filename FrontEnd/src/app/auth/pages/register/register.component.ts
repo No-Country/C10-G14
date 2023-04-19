@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   NonNullableFormBuilder,
@@ -38,7 +39,18 @@ export class RegisterComponent {
       80,
       [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],
     ],
-    image: [null], // Nuevo control de imagen
+    profileImg: new FormControl(null, {
+      validators: [
+        (control: AbstractControl): { [key: string]: any } | null => {
+          const file = control.value as File;
+          const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+          if (file && !allowedTypes.includes(file.type)) {
+            return { invalidImageType: true };
+          }
+          return null;
+        },
+      ],
+    }),
   });
 
   // Constructor
@@ -68,6 +80,8 @@ export class RegisterComponent {
     invalidEmail: 'El email no es válido',
     invalidPassword:
       'La contraseña debe tener al menos 6 caracteres y contener mayúsculas, minúsculas, números y caracteres especiales.',
+    invalidImageType:
+      'El tipo de archivo no es válido. Los formatos permitidos son: jpeg, png y gif.',
   };
 
   // Obtiene el mensaje de error para un campo del formulario
@@ -83,28 +97,8 @@ export class RegisterComponent {
   }
 
   onFileSelected(event: any) {
-    // Obtener el archivo seleccionado del evento
     const file = event.target.files[0];
-
-    // Validar el archivo antes de asignarlo al FormControl "image"
-    if (file) {
-      // Validar el tamaño del archivo (ejemplo: máximo 5 MB)
-      if (file.size > 5 * 1024 * 1024) {
-        // Mostrar un error o realizar alguna acción específica
-        console.error('El archivo es demasiado grande');
-        return;
-      }
-
-      // Validar el tipo del archivo (ejemplo: solo imágenes)
-      if (!file.type.startsWith('image/')) {
-        // Mostrar un error o realizar alguna acción específica
-        console.error('El archivo no es una imagen');
-        return;
-      }
-
-      // Asignar el archivo al FormControl "image"
-      this.registerForm.patchValue({ image: file });
-    }
+    this.registerForm.get('profileImg')!.setValue(file);
   }
 
   // Envío del formulario
@@ -120,10 +114,12 @@ export class RegisterComponent {
     formData.append('weight', this.registerForm.get('weight')!.value);
 
     // Obtener el archivo seleccionado del formulario
-    const file = this.registerForm.get('image')!.value;
+    const file = this.registerForm.get('profileImg')!.value;
 
     // Agregar el archivo seleccionado a formData
-    formData.append('image', file);
+    if (file) {
+      formData.append('profileImg', file);
+    }
 
     // Imprimir los datos de FormData por consola
     formData.forEach((value, key) => {

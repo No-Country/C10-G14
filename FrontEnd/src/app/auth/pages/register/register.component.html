@@ -75,9 +75,13 @@
                   </svg>
                 </div>
               </label>
-              <input type="file" id="fileInput" class="hidden" (change)="onFileSelected($event)" #image>
+              <input type="file" id="fileInput" class="hidden" (change)="onFileSelected($event)" #fileInput type="file"
+                accept="image/*" #image>
             </div>
           </div>
+          <mat-error *ngIf="isFieldInvalid('profileImg')">
+            {{ getErrorMessage('profileImg') }}
+          </mat-error>
           <div class="relative p-2 rounded bg-wth mt-3">
             <input type="name" formControlName="name" placeholder=" "
               class="peer min-h-[auto] w-full rounded border-0 bg-transparent focus:outline-none focus:placeholder:opacity-100 placeholder-transparent pl-2" />
