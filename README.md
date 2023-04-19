@@ -7,7 +7,14 @@
 <br>
 <img align="center" src="https://i.ibb.co/yV7xfLH/index.jpg">
 <br>
-<h3>A lot of gyms, whether they're big or small, all seem to have the same problem: they can't give their trainers and clients a system to help them create workout routines and track their progress. But that's where WorldFit comes in! It's a complete solution that can help any gym improve their service to their clients in an easy and convenient way.</h3>
+<h3>A lot of gyms, whether they're big or small, all seem to have the same problem: they can't give their trainers and clients a system to help them create workout routines and track their progress. But that's where WorldFit comes in! <br><br> A complete solution that can help any gym improve their service to their clients in an easy and convenient way.</h3>
+
+<p>WorldFit is an innovative software platform designed specifically for gyms and fitness centers. Its primary function is to provide a comprehensive system for creating and tracking workout routines for gym members, but it does much more than that. With WorldFit, you can keep track of all your clients' biometric data, including their weight, height, body mass index, and other essential information. This information is used to create personalized workout routines that are tailored to each individual's needs and fitness level.
+<br><br>
+With WorldFit, gym trainers can easily create and manage workout routines for their clients, ensuring that they are doing the right exercises in the correct order, and tracking their progress along the way. This helps clients stay motivated, as they can see their progress and celebrate their successes. Additionally, WorldFit makes it easy to communicate with clients, sending them reminders about their workouts, and providing them with the tools they need to stay on track.
+<br><br>
+In conclusion, WorldFit is a must-have solution for any gym looking to improve its service and provide its clients with a personalized, high-quality fitness experience. With its advanced features and intuitive interface, WorldFit can help you create a workout routine that is tailored to your clients' unique needs, track their progress, and ultimately help them achieve their fitness goals.
+</p
 <br>
 <p align="center" ><img width="100px" align="center"src="https://media.tenor.com/xAiM7ejIt3wAAAAC/gym-workout.gif"> <img width="100px" align="center"src="https://media.tenor.com/nm8TTgQyVFwAAAAM/workout-pull.gif"></p> 
 <p align="center" ></p> 
@@ -44,7 +51,7 @@
 
 #### 👉🏻 Task List ✅
 
-- Development of Rest Api for WorlFit with Java and Spring-Boot.
+- Development of REST API for WorlFit with Java and Spring-Boot.
 - Postgre Database.
 - Creating filters with regular expressions and JPA/Hibernate rules.
 - Role based securize architecture. 
@@ -92,20 +99,28 @@
 
 #### 👉🏻 Task List ✅
 
--
--
--
--
--
+- Development of front-end reactive Angular app.
+- Implementation of security architecture with JWT interceptors.
+- Connection with REST API.
+- Role based views and actions.
+- Deployed in Firebase hosting.
 
 #### 👉🏻 Code Standards 📜
 
--
--
--
--
--
--
+- Keep in mind rules from [Angular Style Guide](https://angular.io/guide/styleguide) and [TypeScript Style Guide](https://github.com/basarat/typescript-book/blob/master/docs/styleguide/styleguide.md).
+- Code must be in english or spanish.
+- The components should finish with suffix "Component". Example: UserComponent.
+- The services should finish with suffix "Service". Example: UserService.
+- The interfaces should finish with suffix "Interface". Example: UserServiceInterface.
+- The models should finish with suffix "Model". Example: UserModel.
+- Usage of interfaces is a must. Can have interfaces for request and response.
+- The names of attributes/fields from TypeScript classes must be written using camel case. Example: firstName.
+- The name of variables should be descriptive and meaningful.
+- Use let and const instead of var.
+- Use async/await instead of Promise.then().
+- Exceptions should be handled by the ErrorHandler class or a custom implementation of it.
+- Messages to user can't be hardcoded, they should be handled by using an implementation of the TranslateService.
+- If you add a new route, make sure to set the role access for it in the RouteGuard class.
 
 #### 👉🏻 Built with 🛠️
 
@@ -140,6 +155,8 @@ For understanding more about git and how to work with different branches, I reco
 
 #### 👉🏻 Scrum 🤝
 - Sprints last one week.
+- Two mandatory meetings with team leader per sprint.
+- The maximum duration of the daily meeting is 15 min.
 - Tasks without an epic are not allowed.
 - Epics have to be backed by user stories.
 - Tasks have to be assigned according to estimate.
@@ -148,7 +165,18 @@ For understanding more about git and how to work with different branches, I reco
 ![Jira](https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white)
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+
+#### 👉🏻 Team Leader 👨🏻‍💻
+| <img src="https://avatars.githubusercontent.com/u/105449572?v=4" width=50>|
+|:-:|
+| **Jorge Chavez**|
+| <a href="https://github.com/jorgechdea"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/jorgechdea/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
+<br>
 <hr>
 <br><br>
+
+
+
+
 
 

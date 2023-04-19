@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -48,4 +49,11 @@ public class RegisterRequestDto {
     @Max(value = 110,
     message = "Maximum age is 110")
     private int age;
+
+    @Pattern(regexp = "^([a-zA-Z0-9ñ ]){4,20}$",
+            message = "Objective must be only letters and numbers and 20 characters at must")
+    private String objective;
+    @Pattern(regexp = "^([a-zA-Z0-9ñ ]){4,25}$",
+            message = "Medical indication must be only letters and numbers and 25 characters at must")
+    private String medical_indication;
 }

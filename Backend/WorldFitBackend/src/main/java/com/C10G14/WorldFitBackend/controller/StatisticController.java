@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/statistics")
+@RequestMapping("/v1/statistics")
 public class StatisticController {
 
     @Autowired

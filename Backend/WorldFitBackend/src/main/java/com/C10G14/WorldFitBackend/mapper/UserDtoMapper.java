@@ -50,6 +50,8 @@ public class UserDtoMapper {
                 user.getHeight(),
                 user.getSex().name(),
                 user.getAge(),
+                user.getObjective(),
+                user.getMedical_indication(),
                 routines);
     }
 
@@ -77,6 +79,8 @@ public class UserDtoMapper {
         user.setWeight(dto.getWeight());
         user.setSex(sex);
         user.setProfileImg(dto.getProfileImg());
+        user.setObjective(dto.getObjective());
+        user.setMedical_indication(dto.getMedical_indication());
 
         user.setRole(dto.getRoles().stream().map(
                 (r) -> roleRepository.findByName(ERole.valueOf(r.toUpperCase()))

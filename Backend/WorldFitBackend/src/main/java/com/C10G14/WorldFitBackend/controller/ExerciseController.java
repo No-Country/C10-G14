@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/exercises")
+@RequestMapping("/v1/exercises")
 public class ExerciseController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class ExerciseController {
                             schema = @Schema(implementation = ExerciseController.class)) }),
             @ApiResponse(responseCode = "401", description = "Unauthorized",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @GetMapping("")
     public ResponseEntity<List<ExerciseResponseDto>> getAllExercises() {
         List<ExerciseResponseDto> exercises = exerciseService.getAllExercises();
@@ -50,7 +50,7 @@ public class ExerciseController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @GetMapping("/{id}")
     public ResponseEntity<ExerciseResponseDto> getExerciseById(@PathVariable Long id) {
         ExerciseResponseDto exercise = exerciseService.getExerciseById(id);
@@ -75,7 +75,7 @@ public class ExerciseController {
                     content = @Content),
             @ApiResponse(responseCode = "409", description = "Error: An exercise with that title already exists",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @PostMapping("")
     public ResponseEntity<ExerciseResponseDto> createExercise(@RequestBody @Valid ExerciseRequestDto exercise) {
         ExerciseResponseDto createdExercise = exerciseService.createExercise(exercise);
@@ -100,7 +100,7 @@ public class ExerciseController {
                     content = @Content),
             @ApiResponse(responseCode = "409", description = "Error: An exercise with that title already exists",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @PutMapping("/{id}")
     public ResponseEntity<ExerciseResponseDto> updateExercise(@PathVariable Long id, @RequestBody @Valid ExerciseRequestDto exercise) {
         ExerciseResponseDto updatedExercise = exerciseService.updateExercise(id, exercise);
@@ -118,7 +118,7 @@ public class ExerciseController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteExercise(@PathVariable Long id) {
         exerciseService.deleteExercise(id);
