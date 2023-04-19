@@ -1,11 +1,12 @@
 import { MatTableDataSource } from '@angular/material/table';
 import { Cliente } from 'src/app/Interface/cliente';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
 import { Router } from '@angular/router';
-
+import { RolComponent } from '../forms/rol/rol.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 
@@ -16,19 +17,21 @@ import { Router } from '@angular/router';
   templateUrl: './ver-clientes.component.html',
   styleUrls: ['./ver-clientes.component.css']
 })
-export class VerClientesComponent {
-  displayedColumns: string[] = ['nombre', 'edad', 'altura', 'sexo', 'peso', 'acciones'];
+export class VerClientesComponent implements OnInit  {
+  displayedColumns: string[] = ['nombre', 'edad', 'altura', 'sexo', 'peso','rol',  'acciones'];
   dataSource = new MatTableDataSource<Cliente>();
-  role:string = 'user';
+  role:string = 'customer'
   
   
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
   
   constructor(private _endPointsService:EndpointsService,
+    public dialog: MatDialog,
     
     private router: Router
     ) { }
+  
 
   ngOnInit(): void {
     this.obtenerClientes();
@@ -51,9 +54,26 @@ export class VerClientesComponent {
   obtenerClientes() {    
     this._endPointsService.UsersRoles(this.role).subscribe(data => {
       this.dataSource.data = data;
-      
+      console.log(this.dataSource)
     })
   } 
+  filtroRol() {
+    this.obtenerClientes();
+    
+  }
   
-
+  
+editRol(id: number): void {
+  const dialogRef = this.dialog.open(RolComponent, {
+    width: '550px',
+    disableClose: true,
+    data: {id:id }
+  });dialogRef.afterClosed().subscribe(result => {
+      
+    
+  setTimeout(() => {
+    window.location.reload();
+  },1000);  
+  });
+}
 }

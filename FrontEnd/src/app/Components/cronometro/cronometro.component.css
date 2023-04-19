@@ -1,0 +1,38 @@
+.cronometro-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto;
+    max-width: 500px;
+  }
+  
+  .cronometro-time {
+    font-size: 6rem;
+    margin: 0;
+  }
+  
+  .cronometro-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+  
+  .cronometro-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 1rem;
+    margin: 0 1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  .cronometro-button:hover {
+    background-color: #ff6659;
+  }
+  
+  .cronometro-button:active {
+    background-color: #ba000d;
+  }
+ 

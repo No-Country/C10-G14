@@ -24,10 +24,10 @@ export class VistaRolesDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    /*  this.sub = this.authService.user$
+      this.sub = this.authService.user$
       .pipe(
         map((user) =>
-          Boolean(user && user.Roles && this.roles?.includes(user.Roles))
+          Boolean(user && user.roles && this.roles?.includes(user.roles))
         ),
         distinctUntilChanged(),
         tap((hasRole) =>
@@ -36,12 +36,12 @@ export class VistaRolesDirective implements OnInit, OnDestroy {
             : this.viewContainerRef.clear()
         )
       )
-      .subscribe(); */
+      .subscribe(); 
   }
 
   ngOnDestroy(): void {
-    /*   if (this.sub) {
+       if (this.sub) {
       this.sub.unsubscribe();
-    } */
+    } 
   }
 }

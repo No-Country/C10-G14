@@ -18,7 +18,7 @@ export class EjerciciosComponent implements OnInit{
   appi:string = this._endpoints.apiUrlEjercicio;
   musculos:string[] = this._metodoService.grupoMuscular;
   imagenes:any[] = this._metodoService.img;
-  unity: string[] = this._metodoService.unidad;
+  unity: any[] = this._metodoService.unidad;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -30,7 +30,7 @@ export class EjerciciosComponent implements OnInit{
         nombre:['',Validators.required],
         grupoMuscular:['',Validators.required],        
         imagen:[null,Validators.required],
-        unidad:['',Validators.required]        
+        unidad:['',]        
       })
       this.idEjercicio = this.data.id;
 

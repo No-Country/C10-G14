@@ -24,5 +24,7 @@ public class UserDto {
     private Double height;
     private String sex;
     private Integer age;
+    private String objective;
+    private String medical_indication;
     private List<RoutineResponseDto> routines;
 }

@@ -27,7 +27,10 @@ import { TransformUnits } from './Components/forms/rutinas/TransformUnits';
 import { NuevaRutinaComponent } from './Components/forms/nueva-rutina/nueva-rutina.component';
 import { PageErrorComponent } from './page-error/page-error.component';
 import { PageUserComponent } from './page-user/page-user.component';
-import { InfoUsuarioComponent } from './Components/forms/info-usuario/info-usuario.component';
+import { FormsModule } from '@angular/forms';
+import { TransformRoles } from './Components/ver-clientes/pipeRoles';
+import { RolComponent } from './Components/forms/rol/rol.component';
+import { CronometroComponent } from './Components/cronometro/cronometro.component';import { InfoUsuarioComponent } from './Components/forms/info-usuario/info-usuario.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { InfoUsuarioComponent } from './Components/forms/info-usuario/info-usuar
     PageErrorComponent,
     PageUserComponent,
     InfoUsuarioComponent,
+    TransformRoles,
+    RolComponent,
+    CronometroComponent,
   ],
 
   imports: [
@@ -56,7 +62,7 @@ import { InfoUsuarioComponent } from './Components/forms/info-usuario/info-usuar
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    
+    FormsModule,
 
     JwtModule.forRoot({
       config: {
@@ -72,7 +78,7 @@ import { InfoUsuarioComponent } from './Components/forms/info-usuario/info-usuar
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     [Location],
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

@@ -55,6 +55,12 @@ public class User  implements UserDetails{
     @Column(name = "AGE")
     private Integer age;
 
+    @Column(name = "OBJECTIVE")
+    private String objective;
+
+    @Column(name = "MEDICAL_INDICATION")
+    private String medical_indication;
+
     @JsonBackReference
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,

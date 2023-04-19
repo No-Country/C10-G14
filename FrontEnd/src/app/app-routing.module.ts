@@ -40,6 +40,10 @@ const routes: Routes = [
     path: 'ejercicios',
     component: VerEjerciciosComponent,
   },
+  {
+    path: '**',
+    component: PageErrorComponent,
+  },
 ];
 
 @NgModule({

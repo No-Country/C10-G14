@@ -20,9 +20,9 @@ public class ImageServiceImpl implements ImageService {
     private  final String FOLDER_PATH= "/var/lib/images/";
 
     //dev
-    private final String URL_PATH="localhost:8080/content/images/";
+//    private final String URL_PATH="localhost:8080/content/images/";
     //prod
-    //private final String URL_PATH="api.worldfit.site/content/images/";
+    private final String URL_PATH="api.worldfit.site/content/images/";
 
     @Override
     public boolean checkImage(MultipartFile image) {
@@ -40,7 +40,6 @@ public class ImageServiceImpl implements ImageService {
             throw new InputNotValidException("Image must be 2mb at must");
         }
         throw new InputNotValidException("Image type must be either jpg, jpeg, or png");
-
     }
 
     @Override

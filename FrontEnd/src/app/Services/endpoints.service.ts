@@ -24,7 +24,10 @@ export class EndpointsService {
     this.apiUrlUserRutine = '/users/routine';
     this.apiUrlRutineEjercicio = '/routines/exercises'
   }
-
+     //Modificar roles
+     public cambiarRol(id: number, rol:string): Observable<void> {
+      return this.http.put<void>(`${this.myAppUrl}/users/role/${id}/${rol}`, {} );
+    }
     //Obtener usuarios por roles
     public UsersRoles(role: string): Observable<any> {
       return this.http.get(this.myAppUrl + '/users/role/' + `${role}`);
