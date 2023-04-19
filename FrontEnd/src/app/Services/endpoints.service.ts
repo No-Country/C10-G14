@@ -16,7 +16,7 @@ export class EndpointsService {
   apiUrlRutineEjercicio:string;
 
   constructor(private http: HttpClient) {
-    this.myAppUrl = 'https://api.worldfit.site/api/v1';
+    this.myAppUrl = 'https://apis.worldfit.site/api/v1';
     this.apiUrlUser = '/users';
     this.apiUrlRutine = '/routines';
     this.apiUrlEjercicio = '/exercises';
