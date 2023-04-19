@@ -49,7 +49,7 @@ public class WebSecurityConfig {
                 })
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/*").permitAll()
+                .requestMatchers("/v1/auth/*").permitAll()
                 .requestMatchers("/v3/api-docs/**").permitAll()
                 .requestMatchers("/swagger-ui/**").permitAll().
                 requestMatchers("/content/**").permitAll()

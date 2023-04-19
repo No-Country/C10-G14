@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/routines")
+@RequestMapping("/v1/routines")
 @RequiredArgsConstructor
 public class RoutineController {
 
@@ -45,7 +45,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "409", description = "Error: The User already has routine with that name",
             content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @PostMapping
     public ResponseEntity<RoutineResponseDto> createRoutine(@RequestBody @Valid RoutineRequestDto routine) {
         RoutineResponseDto createdRoutine = routineService.createRoutine(routine);
@@ -61,7 +61,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @GetMapping
     public ResponseEntity<List<RoutineResponseDto>> getAllRoutines() {
         List<RoutineResponseDto> routines = routineService.getAllRoutines();
@@ -81,7 +81,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: Routine don't exist",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH') or #userId == authentication.principal.id")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH') or #userId == authentication.principal.id")
     @GetMapping("/{id}")
     public ResponseEntity<RoutineResponseDto> getRoutineById(@PathVariable Long id) {
         RoutineResponseDto routine = routineService.getRoutineById(id);
@@ -108,7 +108,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "409", description = "Error: The User already has routine with that name",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @PutMapping("/{id}")
     public ResponseEntity<RoutineResponseDto> updateRoutine(@PathVariable Long id,
                                                             @RequestBody @Valid RoutineRequestDto routine) {
@@ -127,7 +127,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: Routine don't exist",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteRoutine(@PathVariable Long id) {
         routineService.deleteRoutine(id);
@@ -146,7 +146,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @PostMapping("/exercises/{id}")
     public ResponseEntity<RoutineResponseDto> addExercise(@PathVariable("id") long routineId,
                                                   @RequestBody @Valid Exercise_RoutineRequestDto exercise) {
@@ -165,7 +165,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @PutMapping("/exercises/{id}")
     public ResponseEntity<RoutineResponseDto> updateExercise(@PathVariable("id") long routineId,
                                                   @RequestBody @Valid Exercise_RoutineRequestDto exercise) {
@@ -184,7 +184,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @DeleteMapping("/exercises/{id}")
     public ResponseEntity<RoutineResponseDto> removeExercise(@PathVariable("id") long routineId,
                                                   @RequestBody RemoveExerciseRequestDto exercises) {
