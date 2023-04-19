@@ -155,6 +155,8 @@ For understanding more about git and how to work with different branches, I reco
 
 #### 👉🏻 Scrum 🤝
 - Sprints last one week.
+- Two mandatory meetings with team leader per sprint.
+- The maximum duration of the daily meeting is 15 min.
 - Tasks without an epic are not allowed.
 - Epics have to be backed by user stories.
 - Tasks have to be assigned according to estimate.
