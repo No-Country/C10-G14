@@ -10,9 +10,9 @@
 <h3>A lot of gyms, whether they're big or small, all seem to have the same problem: they can't give their trainers and clients a system to help them create workout routines and track their progress. But that's where WorldFit comes in! It's a complete solution that can help any gym improve their service to their clients in an easy and convenient way.</h3>
 
 <p>WorldFit is an innovative software platform designed specifically for gyms and fitness centers. Its primary function is to provide a comprehensive system for creating and tracking workout routines for gym members, but it does much more than that. With WorldFit, you can keep track of all your clients' biometric data, including their weight, height, body mass index, and other essential information. This information is used to create personalized workout routines that are tailored to each individual's needs and fitness level.
-<br>
+<br><br>
 With WorldFit, gym trainers can easily create and manage workout routines for their clients, ensuring that they are doing the right exercises in the correct order, and tracking their progress along the way. This helps clients stay motivated, as they can see their progress and celebrate their successes. Additionally, WorldFit makes it easy to communicate with clients, sending them reminders about their workouts, and providing them with the tools they need to stay on track.
-<br> 
+<br><br>
 In conclusion, WorldFit is a must-have solution for any gym looking to improve its service and provide its clients with a personalized, high-quality fitness experience. With its advanced features and intuitive interface, WorldFit can help you create a workout routine that is tailored to your clients' unique needs, track their progress, and ultimately help them achieve their fitness goals.
 </p
 <br>
