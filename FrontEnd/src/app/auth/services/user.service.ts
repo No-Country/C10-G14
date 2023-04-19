@@ -21,27 +21,6 @@ export class UserService {
     return this.http.get<User[]>(`${this.baseUrl}/users`);
   }
 
-  /*   getAll(): Observable<User[]> {
-    // Obtén el token de autorización del usuario. Supongamos que está almacenado en el servicio authService
-    const user = this.authService.userValue;
-
-    // Verifica si el usuario está autenticado y tiene un token válido
-    if (user && user.token) {
-      // Crea una cabecera HTTP con el token de autorización
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${user.token}`,
-      });
-
-      // Realiza la solicitud HTTP con la cabecera de autorización
-      return this.http.get<User[]>(`${this.baseUrl}/users`, { headers });
-    } else {
-      // Si el usuario no está autenticado o no tiene un token válido, devuelve un error o realiza alguna otra acción
-      // en consecuencia, por ejemplo, redirigir a la página de inicio de sesión.
-      // Aquí puedes personalizar el comportamiento según tus necesidades.
-      return throwError('Usuario no autenticado');
-    }
-  } */
-
   getById(id: string) {
     return this.http.get<User>(`${this.baseUrl}/users/${id}`);
   }
