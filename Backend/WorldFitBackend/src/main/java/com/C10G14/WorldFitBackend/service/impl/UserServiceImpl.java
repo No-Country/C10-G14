@@ -78,11 +78,13 @@ public class UserServiceImpl implements UserService {
             user.setEmail(userDto.getEmail());
         }
 
+        if (userDto.getProfileImg() != null){
         if(imageService.checkImage(userDto.getProfileImg())){
             user.setProfileImg(imageService.uploadImage(
                     userDto.getProfileImg(),
                     user.getEmail()
                     ));
+        }
         }
 
         if (userDto.getName() != null && !userDto.getName().isEmpty()) {
@@ -103,6 +105,14 @@ public class UserServiceImpl implements UserService {
         }
         if (userDto.getHeight() != null) {
             user.setHeight(userDto.getHeight());
+        }
+
+        if (userDto.getObjective() != null && !userDto.getObjective().isEmpty()) {
+            user.setObjective(userDto.getObjective());
+        }
+
+        if (userDto.getMedical_indication() != null && !userDto.getMedical_indication().isEmpty()) {
+            user.setMedical_indication(userDto.getMedical_indication());
         }
         userRepository.save(user);
         return mapper.entityToDto(user);
