@@ -35,7 +35,7 @@ public class UserController {
                     content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @GetMapping
     public List<UserDto> getAllUsers() throws JsonProcessingException {
         return userService.getAllUsers();
@@ -52,7 +52,7 @@ public class UserController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: Role does not exist",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @GetMapping("/role/{role}")
     public List<UserDto> getByRole(@PathVariable String role) throws JsonProcessingException {
         return userService.getByRole(role);
@@ -71,7 +71,7 @@ public class UserController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: User does not exist",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @GetMapping("/{userId}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) throws JsonProcessingException {
         UserDto user = userService.getUserById(userId);
@@ -187,7 +187,7 @@ public class UserController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: User not found",
                     content = @Content),})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COUCH') or #userId == authentication.principal.id")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH') or #userId == authentication.principal.id")
     @GetMapping("/routine/{userId}")
     public ResponseEntity<SimpleUserDto> getUserRoutines(@PathVariable Long userId) throws JsonProcessingException{
         SimpleUserDto user = userService.getSimpleUserById(userId);
