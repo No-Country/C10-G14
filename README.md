@@ -148,7 +148,18 @@ For understanding more about git and how to work with different branches, I reco
 ![Jira](https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white)
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+
+#### 👉🏻 Team Leader 👨🏻‍💻
+| <img src="https://avatars.githubusercontent.com/u/105449572?v=4" width=50>|
+|:-:|
+| **Jorge Chavez**|
+| <a href="https://github.com/jorgechdea"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/jorgechdea/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
+<br>
 <hr>
 <br><br>
+
+
+
+
 
 
