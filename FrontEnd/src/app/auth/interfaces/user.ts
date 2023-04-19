@@ -8,7 +8,7 @@ export interface User {
   password: string;
   clientSince?: Date;
   roles?: Role;
-  profileImg?: null | string;
+  profileImg?: null | File;
   weight?: number | null;
   height?: number | null;
   sex?: Sex;

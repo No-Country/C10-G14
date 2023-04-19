@@ -11,10 +11,10 @@ import { Role } from './auth/interfaces/role';
 import { PageUserComponent } from './page-user/page-user.component';
 
 const routes: Routes = [
-  // {
-  //   // path: '',
-  //   // component: PageUserComponent,
-  // },
+  {
+    path: '',
+    component: PageUserComponent,
+  },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
@@ -24,37 +24,26 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: 'auth/login',
   },
-  // {
-  //   path: 'clientes',
-  //   component: VerClientesComponent,
-  //   canActivate:[AuthGuard], 
-  //  data: {roles:[Role.Customer]}
-  // },
+  {
+    path: 'clientes',
+    component: VerClientesComponent,
+  },
   {
     path: 'inicio',
     component: InicioComponent,
-    canActivate:[AuthGuard], 
-    canLoad: [AuthGuard]
   },
   {
     path: 'editar-rutinas/:id',
     component: EditarRutinasComponent,
-    canActivate:[AuthGuard], 
-    data: {roles:[ Role.Admin, Role.Coach]},
-    canLoad: [AuthGuard]
   },
   {
     path: 'ejercicios',
     component: VerEjerciciosComponent,
-    canActivate:[AuthGuard], 
-    data: {roles:[ Role.Admin, Role.Coach]},
-    canLoad: [AuthGuard]
   },
-   {
-     path:'**',
-     component: PageErrorComponent
-   }
-  
+  {
+    path: '**',
+    component: PageErrorComponent,
+  },
 ];
 
 @NgModule({
