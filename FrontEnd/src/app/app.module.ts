@@ -30,6 +30,7 @@ import { PageUserComponent } from './page-user/page-user.component';
 import { FormsModule } from '@angular/forms';
 import { TransformRoles } from './Components/ver-clientes/pipeRoles';
 import { RolComponent } from './Components/forms/rol/rol.component';
+import { CronometroComponent } from './Components/cronometro/cronometro.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +51,7 @@ import { RolComponent } from './Components/forms/rol/rol.component';
     PageUserComponent,
     TransformRoles,
     RolComponent,
+    CronometroComponent,
   ],
 
   imports: [

@@ -1,15 +1,18 @@
 <app-navbar></app-navbar>
 
 <!-- Usuarios sin rol -->
-<app-page-user></app-page-user>
+<app-page-user *appVistaRoles="['ROLE_USER']" ></app-page-user>
 
 <!-- Clientes -->
-<mat-tab-group color="accent">
+<mat-tab-group *appVistaRoles="['ROLE_CUSTOMER']" color="accent">
   <mat-tab label="MIS RUTINAS">
     <div class="fondo-rutina"><app-rutina></app-rutina></div>
   </mat-tab>
+  <mat-tab label="TIEMPO"> <app-cronometro></app-cronometro> </mat-tab>
   <mat-tab label="MI PERFIL"> <app-perfil></app-perfil> </mat-tab>
+  
+  
 </mat-tab-group>
 
 <!-- Profesores -->
-<app-ver-clientes></app-ver-clientes>
+<app-ver-clientes  ></app-ver-clientes>

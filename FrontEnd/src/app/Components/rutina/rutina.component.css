@@ -1,4 +1,6 @@
-
+.mat-accordion {
+  min-width: 500px;
+}
 
 .mat-mdc-form-field + .mat-mdc-form-field {
   margin-left: 8px;
@@ -27,6 +29,10 @@
 .card-header{
   background-color: #303030;
   color: #fff;
+}
+
+.card-header img {
+  width: 50px;
 }
 
 .card {

@@ -7,7 +7,7 @@ export interface User {
   email: string;
   password: string;
   clientSince?: Date;
-  Roles?: Role;
+  roles?: Role;
   profileImg?: null | string;
   weight?: number | null;
   height?: number | null;

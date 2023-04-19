@@ -8,6 +8,7 @@ import { Ejercicio } from 'src/app/Interface/ejercicio';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
 import { EjerciciosComponent } from '../forms/ejercicios/ejercicios.component';
 import { MetodosService } from 'src/app/Services/metodos.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-ver-ejercicios',
@@ -15,7 +16,7 @@ import { MetodosService } from 'src/app/Services/metodos.service';
   styleUrls: ['./ver-ejercicios.component.css']
 })
 export class VerEjerciciosComponent {
-  displayedColumns: string[] = ['nombre', 'tipo', 'unidad', 'acciones'];
+  displayedColumns: string[] = ['nombre','musculos', 'tipo', 'unidad', 'acciones'];
   dataSource = new MatTableDataSource<Ejercicio>();
   api:string = this._endPointsService.apiUrlEjercicio;
   loading:boolean = false;
@@ -57,9 +58,15 @@ export class VerEjerciciosComponent {
   }
 
   borrarEjercicio(id:number){
-    this._endPointsService.borrarItem(id, this.api).subscribe(()=> {
+    this._endPointsService.borrarItem(id, this.api).subscribe(()=>
+    {
       window.location.reload();
       this._metodos.mensaje('Ejercicio eliminado con Exito!',2);
+    }, error => {
+      Swal.fire({
+        icon: 'warning',        
+        text: 'No se puede eliminar el ejercicio actualmente.Se encuentra en uso por una rutina.!'        
+      })
     });
   }
 

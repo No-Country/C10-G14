@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+  
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +16,7 @@ export class EndpointsService {
   apiUrlRutineEjercicio:string;
 
   constructor(private http: HttpClient) {
-    this.myAppUrl = 'https://apis.worldfit.site/api/v1';
+    this.myAppUrl = 'https://api.worldfit.site/v1';
     this.apiUrlUser = '/users';
     this.apiUrlRutine = '/routines';
     this.apiUrlEjercicio = '/exercises';
@@ -50,7 +52,7 @@ export class EndpointsService {
     }
     //Eliminar
     public borrarItem(id: number, apiUrlItem: string): Observable<void> {
-      return this.http.delete<void>(this.myAppUrl + apiUrlItem + `/${id}`);
+      return this.http.delete<void>(this.myAppUrl + apiUrlItem + `/${id}`).pipe(catchError(this.errorHandler));
     }
     //Crear
     public NuevoItem(objeto: any, apiUrlItem: string): Observable<any> {
@@ -64,6 +66,14 @@ export class EndpointsService {
       apiUrlItem: string
     ): Observable<void> {
       return this.http.put<void>(this.myAppUrl + apiUrlItem + `/${id}`, objeto);
+    }
+
+    // Metodo Maejo de Error
+
+    errorHandler(error: HttpErrorResponse) {
+      console.log(error);      
+      return throwError(error.message);
+
     }
 
 }

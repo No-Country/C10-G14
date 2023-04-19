@@ -40,7 +40,7 @@ public class UserDtoMapper {
         List <String> strRoles = user.getRole().stream().map(
                 (r)-> r.getName().name()).toList();
 
-        return new UserDto(user.getId().toString(),
+        return new UserDto(user.getId(),
                 user.getEmail(),
                 user.getClientSince(),
                 user.getName(),
