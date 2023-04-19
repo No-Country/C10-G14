@@ -150,7 +150,7 @@ public class UserController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: Role not found",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or (hasRole('PROFESSOR') and (#role == 'customer' or #role == 'user'))")
+    @PreAuthorize("hasRole('ADMIN') or (hasRole('COACH') and (#role == 'customer' or #role == 'user'))")
     @PutMapping("/role/{userId}/{role}")
     public ResponseEntity<UserDto> updateRole(@PathVariable Long userId, @PathVariable String role) throws JsonProcessingException {
         UserDto updatedUser = userService.updateRole(userId, role);
