@@ -16,7 +16,7 @@ import Swal from 'sweetalert2'
   styleUrls: ['./ver-ejercicios.component.css']
 })
 export class VerEjerciciosComponent {
-  displayedColumns: string[] = ['nombre', 'tipo', 'unidad', 'acciones'];
+  displayedColumns: string[] = ['nombre','musculos', 'tipo', 'unidad', 'acciones'];
   dataSource = new MatTableDataSource<Ejercicio>();
   api:string = this._endPointsService.apiUrlEjercicio;
   loading:boolean = false;

@@ -12,7 +12,7 @@
     <mat-form-field  >
       <mat-label>Seleccione Grupo Muscular</mat-label>
       <mat-select formControlName="grupoMuscular">
-        <mat-option *ngFor="let musculo of grupoMuscular" [value]="musculo">
+        <mat-option *ngFor="let musculo of musculos" [value]="musculo">
           {{musculo}}
         </mat-option>
       </mat-select>
@@ -24,8 +24,12 @@
           <mat-form-field  >
             <mat-label>Seleccione Imagen</mat-label>
             <mat-select formControlName="imagen">
-              <mat-option *ngFor="let item of img" [value]="item">
-                {{item}}
+              <mat-option *ngFor="let imagen of imagenes" [value]="imagen.url">
+                <div class="d-flex align-items-center">
+                  <img class="me-2" src="{{imagen.url}}" width="75px" >
+                  {{imagen.name}}
+                </div>
+                
               </mat-option>
             </mat-select>
             <mat-error *ngIf="form.get('imagen')?.touched && form.get('imagen')?.errors?.['required']">El campo Imagen es requerido</mat-error>
@@ -36,7 +40,7 @@
           <mat-form-field >
             <mat-label>Unidad de Medida</mat-label>
             <mat-select formControlName="unidad">
-              <mat-option *ngFor="let item of unidad" [value]="item">
+              <mat-option *ngFor="let item of unity" [value]="item">
                 {{item}}
               </mat-option>
             </mat-select>
