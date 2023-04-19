@@ -20,11 +20,17 @@ import com.C10G14.WorldFitBackend.util.DtoFormatter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -46,7 +52,19 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public List<UserDto> getAllUsers() throws JsonProcessingException {
-        return mapper.usersToDtoList(userRepository.findAll());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<String> roles = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .toList();
+
+        List<UserDto> users = new ArrayList<>();
+        if (roles.contains("ROLE_ADMIN")) {
+            users.addAll(mapper.usersToDtoList(userRepository.findAll()));
+        } else if (roles.contains("ROLE_COACH")) {
+            users.addAll(this.getByRole("user"));
+            users.addAll(this.getByRole("customer"));
+        }
+        return users;
     }
 
     @Transactional

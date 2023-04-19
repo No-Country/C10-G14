@@ -71,7 +71,7 @@ public class UserController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: User does not exist",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH') or #userId == authentication.principal.id")
     @GetMapping("/{userId}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) throws JsonProcessingException {
         UserDto user = userService.getUserById(userId);
