@@ -79,7 +79,7 @@ public class UserDtoMapper {
         user.setWeight(dto.getWeight());
         user.setSex(sex);
         user.setProfileImg(dto.getProfileImg());
-        user.setObjective(dto.getObjectives());
+        user.setObjective(dto.getObjective());
         user.setMedical_indication(dto.getMedical_indication());
 
         user.setRole(dto.getRoles().stream().map(
