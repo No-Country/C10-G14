@@ -19,16 +19,12 @@
   }
 
   @media (min-width: 500px) { 
-    .mat-column-nombre {
+     .mat-column-nombre {
       word-break: break-word;
       width: 25% !important;
     } 
     
   
-    /* .mat-column-acciones {
-      word-break: break-word;
-      width: 15% !important;
-    } */
-      
+     
     }
 

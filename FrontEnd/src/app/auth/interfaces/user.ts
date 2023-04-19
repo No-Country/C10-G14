@@ -2,12 +2,12 @@
 import { Sex } from './sex';
 
 export interface User {
-  id: string;
+  id: number;
   name: string;
   email: string;
   password: string;
   clientSince?: Date;
-  Roles?: Role;
+  roles?: Role;
   profileImg?: null | string;
   weight?: number | null;
   height?: number | null;

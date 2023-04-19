@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
       if (roles) {
         // Comprobar si algún rol del usuario coincide con los roles definidos en la ruta
         const authorized = roles.some(
-          (role: Role) => user.Roles && user.Roles.includes(role)
+          (role: Role) => user.roles && user.roles.includes(role)
         );
 
         if (!authorized) {
@@ -45,7 +45,7 @@ export class AuthGuard implements CanActivate {
             icon: 'error',
             title: 'No estas Autorizado',
           });
-          this.router.navigate(['/']);
+          this.router.navigate(['inicio']);
           return false;
         }
       }
@@ -71,7 +71,7 @@ export class AuthGuard implements CanActivate {
   }
 
   canLoad(): Observable<boolean> | boolean {
-    /*  return this.authService.isAuthenticated().pipe(
+      return this.authService.isAuthenticated().pipe(
       tap((valid) => {
         if (!valid) {
           const Toast = Swal.mixin({
@@ -88,7 +88,7 @@ export class AuthGuard implements CanActivate {
           this.router.navigateByUrl('/auth/login');
         }
       })
-    ); */
+    ); 
     return true;
   }
 }

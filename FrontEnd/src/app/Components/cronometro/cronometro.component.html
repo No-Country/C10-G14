@@ -1,0 +1,8 @@
+<div class="cronometro-container">
+    <h1 class="cronometro-time">{{contador | number:'2.0-0'}}:{{milisegundos | number:'2.0-0'}}</h1>
+    <div class="cronometro-buttons">
+      <button class="cronometro-button" (click)="empezar()" [disabled]="intervalo">Empezar</button>
+      <button class="cronometro-button" (click)="parar()" [disabled]="!intervalo">Parar</button>
+      <button class="cronometro-button" (click)="reiniciar()">Reiniciar</button>
+    </div>
+  </div>

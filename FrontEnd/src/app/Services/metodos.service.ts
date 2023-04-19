@@ -16,11 +16,12 @@ export class MetodosService {
     'Brazos',
     'Aeróbic'
   ];
-  unidad: string[] = [
-    'Kg', 
-    'Minutos',  
-    'Km',
-    ' '     
+  unidad:any[] = [
+    { name: 'Kilogramo', value:'Kg'},
+    { name: 'Minutos', value:'Minutos'},
+    { name: 'Kilometro', value:'Km'},
+    { name: 'Sin unidad de medida', value: null},
+       
   ];
 
   img: any[] = [
