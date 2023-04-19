@@ -31,6 +31,8 @@ const routes: Routes = [
   {
     path: 'inicio',
     component: InicioComponent,
+    // canActivate:[AuthGuard], 
+    // data: {roles:[Role.Customer]}
   },
   {
     path: 'editar-rutinas/:id',

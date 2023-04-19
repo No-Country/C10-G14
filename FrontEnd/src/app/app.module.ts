@@ -27,7 +27,9 @@ import { TransformUnits } from './Components/forms/rutinas/TransformUnits';
 import { NuevaRutinaComponent } from './Components/forms/nueva-rutina/nueva-rutina.component';
 import { PageErrorComponent } from './page-error/page-error.component';
 import { PageUserComponent } from './page-user/page-user.component';
-
+import { FormsModule } from '@angular/forms';
+import { TransformRoles } from './Components/ver-clientes/pipeRoles';
+import { RolComponent } from './Components/forms/rol/rol.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +48,8 @@ import { PageUserComponent } from './page-user/page-user.component';
     VistaRolesDirective,
     PageErrorComponent,
     PageUserComponent,
+    TransformRoles,
+    RolComponent,
   ],
 
   imports: [
@@ -54,6 +58,7 @@ import { PageUserComponent } from './page-user/page-user.component';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
+    FormsModule,
 
     JwtModule.forRoot({
       config: {
@@ -69,7 +74,7 @@ import { PageUserComponent } from './page-user/page-user.component';
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     [Location],
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

@@ -24,7 +24,7 @@ export class VistaRolesDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    /*  this.sub = this.authService.user$
+      this.sub = this.authService.user$
       .pipe(
         map((user) =>
           Boolean(user && user.Roles && this.roles?.includes(user.Roles))
@@ -36,12 +36,12 @@ export class VistaRolesDirective implements OnInit, OnDestroy {
             : this.viewContainerRef.clear()
         )
       )
-      .subscribe(); */
+      .subscribe(); 
   }
 
   ngOnDestroy(): void {
-    /*   if (this.sub) {
+       if (this.sub) {
       this.sub.unsubscribe();
-    } */
+    } 
   }
 }

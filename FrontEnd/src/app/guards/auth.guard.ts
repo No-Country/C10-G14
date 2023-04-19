@@ -45,7 +45,7 @@ export class AuthGuard implements CanActivate {
             icon: 'error',
             title: 'No estas Autorizado',
           });
-          this.router.navigate(['/']);
+          this.router.navigate(['/inicio']);
           return false;
         }
       }
