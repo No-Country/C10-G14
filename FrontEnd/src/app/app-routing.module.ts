@@ -44,6 +44,13 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'editar-rutinas',
+    component: EditarRutinasComponent,
+    canActivate:[AuthGuard], 
+    data: {roles:[ Role.Admin, Role.Coach]},
+    canLoad: [AuthGuard]
+  },
+  {
     path: 'ejercicios',
     component: VerEjerciciosComponent,
     canActivate:[AuthGuard], 
