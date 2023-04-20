@@ -133,7 +133,7 @@ export class RegisterComponent {
         this.authService.setAuthToken(response.token);
         this.loading = true;
         setTimeout(() => {
-          this.router.navigate(['/inicio']);
+          this.router.navigate(['inicio']);
         }, 1500);
       },
       (error) => {
