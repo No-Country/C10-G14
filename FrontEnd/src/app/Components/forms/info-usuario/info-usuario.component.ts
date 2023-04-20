@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PerfilComponent } from '../../perfil/perfil.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
 import { MetodosService } from 'src/app/Services/metodos.service';
 
@@ -15,11 +15,11 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./info-usuario.component.css']
 })
 export class InfoUsuarioComponent {
-  form: FormGroup;
-  idCliente:number;  
+  form: FormGroup;   
   loading:boolean = false;    
   api:string = this._endpoints.apiUrlUser;
   user:User;
+  img:string;
   
 
   constructor(
@@ -32,14 +32,33 @@ export class InfoUsuarioComponent {
       this.user = <User>this.authService.userValue;
       console.log('Esto es el user',this.user);      
       this.form= this.fb.group({
-        nombre:['',[Validators.required,Validators.minLength(1),Validators.maxLength(20)]],
-        edad:['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],      
-        altura:['',[Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-        peso:['',[Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-        sexo:['',Validators.required]        
+        nombre: ['', [Validators.required,Validators.minLength(1),Validators.maxLength(20)]],   
+        // sex: ['', [Validators.required]],
+        edad: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+        altura:[ '', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],],
+        peso: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],],
+        profileImg: new FormControl(null, {
+        validators: [
+        (control: AbstractControl): { [key: string]: any } | null => {
+          const file = control.value as File;
+          const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+          if (file && !allowedTypes.includes(file.type)) {
+            return { invalidImageType: true };
+          }
+          return null;
+        },
+      ],
+    }),
+        
+        // nombre:['',[Validators.required,Validators.minLength(1),Validators.maxLength(20)]],
+        // edad:['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],      
+        // altura:['',[Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+        // peso:['',[Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+        
+        // // sexo:['',Validators.required]        
       })
-      console.log(data);
-      this.idCliente = this.data.id;
+      this.img = data.profileImg
+      console.log('esto es la url de la img',this.img);
 
     }
 
@@ -48,44 +67,64 @@ export class InfoUsuarioComponent {
     }
 
     buscarCliente(){
-      this._endpoints.obtenerDatosId(this.idCliente, this.api).subscribe(data =>{
+      // this._endpoints.obtenerDatosId(this.idCliente, this.api).subscribe(data =>{
         this.form.patchValue({   
           
-          id:data.id,
-          nombre:data.name,
-          peso:data.weight,
-          altura:data.height,
-          sex:data.sex,
-          edad:data.age,
-          profileImg:data.profileImg,
-          indicacionMedica:data.medical_indication,
-          meta: data.objective,
+          id:this.data.id,
+          nombre:this.data.name,
+          peso:this.data.weight,
+          altura:this.data.height,
+          sex:this.data.sex,
+          edad:this.data.age,
+          profileImg:this.data.profileImg,
+          indicacionMedica:this.data?.medical_indication,
+          meta:this.data?.objective,
           
         });
         
   
-      });
+      // });
     }
 
     cancelar() {
       this.dialogRef.close();
     }
 
+    onFileSelected(event: any) {
+      const file = event.target.files[0];
+      this.form.get('profileImg')!.setValue(file);
+    }
+
 
     EditInfoCliente() {
-      const cliente: Cliente = {                
-        name:this.form.get('nombre')?.value,
-        profileImg:this.form.get('profesion')?.value,
-        weight:this.form.get('sobre_mi')?.value,
-        height:this.form.get('sobre_mi')?.value,
-        sex:this.form.get('linkedin')?.value,
-        age:this.form.get('linkedin')?.value,
-        
-      };     
+      const formData = new FormData();
+      formData.append('name', this.form.get('nombre')?.value);
+      formData.append('medical_indication', this.form.get('indicacionMedica')?.value);
+      formData.append('objective', this.form.get('meta')?.value);
+      // formData.append('sex', this.form.get('sexo')?.value);
+      formData.append('age', this.form.get('edad')?.value);
+      formData.append('height', this.form.get('altura')?.value);
+      formData.append('weight', this.form.get('peso')?.value); 
       
+      
+      // Obtener el archivo seleccionado del formulario
+      const file = this.form.get('profileImg')?.value;
+
+    // Agregar el archivo seleccionado a formData
+      if (file) {
+      formData.append('profileImg', file);
+      }
+
+    // Imprimir los datos de FormData por consola
+      formData.forEach((value, key) => {
+      console.log(key, value);
+      });
+
       this.loading = true;
-  
-      this._endpoints.editarItem(this.user.id, cliente, this.api).subscribe(data => {        
+
+      // Llamar al método de editar usuario
+      
+      this._endpoints.editarItem(this.user.id, formData, this.api).subscribe(data => {        
         this._metodoService.mensaje('Información de Perfil editada con Exito !', 2);
       })
       this.loading = false;

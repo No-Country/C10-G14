@@ -6,6 +6,8 @@ export interface Cliente {
     profileImg?: string,
     weight: number,
     height: number,
-    sex: string,
+    sex?: string,
     age: number,
+    medical_indication?:string,
+    objective?: string,
 }

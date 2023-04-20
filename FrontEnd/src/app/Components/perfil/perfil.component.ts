@@ -39,21 +39,21 @@ export class PerfilComponent {
     this._endPointsService.obtenerDatosId(this.user.id, this.api).subscribe(data => {
       this.loading = false;
       this.infoUsuario = data;
-      console.log(data);
+      console.log('aca asigno la informacion que tengo que pasar',data);
     })
   }
 
-  EditUsuario(id?:number){        
+  EditUsuario(data:any){        
     const dialogRef = this.dialog.open(InfoUsuarioComponent, {      
       width:"650px",
       disableClose: true,
-      data:{ id:id}
+      data
       
     });
 
     dialogRef.afterClosed().subscribe(result => {      
       if(result){
-        setTimeout(() => {this.obtenerUsuario();}, 4000)
+        setTimeout(() => {this.obtenerUsuario();}, 5000)
       }           
     });
   }

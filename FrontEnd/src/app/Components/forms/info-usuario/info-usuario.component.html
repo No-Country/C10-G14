@@ -1,6 +1,23 @@
 <h2 mat-dialog-title>Editar </h2>
 <form [formGroup]="form" (ngSubmit)="EditInfoCliente()">
   <mat-dialog-content >
+    <div class=" flex justify-center" enctype="multipart/form-data">
+      <div class="profile__image">
+        <img class="" src="https://{{data.profileImg}}" />
+        <label for="fileInput" class="absolute right-0 bottom-0 mr-2 mb-2 p-2 bg-primary-color rounded-full cursor-pointer">
+          <div class=" bg-transparent rounded-full p-1">
+            <mat-icon     matTooltip="cambiar Imagen" class="pointer me-3  " >edit</mat-icon>
+            <!-- <svg class="w-6 h-6 text-gray-500 hover:text-gray-600" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg> -->
+          </div>
+        </label>
+        <input type="file" id="fileInput" class="hidden" (change)="onFileSelected($event)" #fileInput type="file"
+          accept="image/*" #image>
+      </div>
+    </div>
     <mat-form-field  >
       <mat-label>Nombre y Apellido</mat-label>
       <input formControlName="nombre" matInput placeholder="Ingrese nombre" autocomplete="off">            
@@ -61,6 +78,7 @@
 
       </div>
   </div>
+  
   
     </mat-dialog-content>
     <mat-dialog-actions align="end">
