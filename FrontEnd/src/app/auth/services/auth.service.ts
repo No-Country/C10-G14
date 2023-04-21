@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import jwtDecode from 'jwt-decode';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
 
@@ -87,8 +86,6 @@ export class AuthService {
   }
 
   logout() {
-    // remove user from local storage to log user out
-    // localStorage.removeItem('user');
     localStorage.clear();
     this.userSubject.next(null);
     this.router.navigate(['/auth/login']);
