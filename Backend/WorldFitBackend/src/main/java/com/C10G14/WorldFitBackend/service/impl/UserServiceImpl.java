@@ -95,7 +95,6 @@ public class UserServiceImpl implements UserService {
         if (userDto.getEmail() != null && !userDto.getEmail().isEmpty()) {
             user.setEmail(userDto.getEmail());
         }
-
         if (userDto.getProfileImg() != null){
         if(imageService.checkImage(userDto.getProfileImg())){
             user.setProfileImg(imageService.uploadImage(
@@ -104,7 +103,6 @@ public class UserServiceImpl implements UserService {
                     ));
         }
         }
-
         if (userDto.getName() != null && !userDto.getName().isEmpty()) {
             user.setName(formatter.formatName(userDto.getName()));
         }
@@ -112,9 +110,9 @@ public class UserServiceImpl implements UserService {
            user.setAge(userDto.getAge());
         }
         if (userDto.getSex() != null && !userDto.getSex().isEmpty()) {
-            if (userDto.getSex().equals("male"))
+            if (userDto.getSex().equalsIgnoreCase("male"))
                 user.setSex(ESex.MALE);
-            else if (userDto.getSex().equals("female"))
+            else if (userDto.getSex().equalsIgnoreCase("female"))
                 user.setSex(ESex.FEMALE);
             else throw new InputNotValidException("Invalid gender, must be male or female");
         }
@@ -124,11 +122,9 @@ public class UserServiceImpl implements UserService {
         if (userDto.getHeight() != null) {
             user.setHeight(userDto.getHeight());
         }
-
         if (userDto.getObjective() != null && !userDto.getObjective().isEmpty()) {
             user.setObjective(userDto.getObjective());
         }
-
         if (userDto.getMedical_indication() != null && !userDto.getMedical_indication().isEmpty()) {
             user.setMedical_indication(userDto.getMedical_indication());
         }

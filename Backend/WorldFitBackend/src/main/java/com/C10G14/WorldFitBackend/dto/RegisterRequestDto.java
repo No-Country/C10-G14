@@ -32,9 +32,6 @@ public class RegisterRequestDto {
     @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
 
-    /*@URL(message = "image URL not valid")
-    private String profileImg;*/
-
     private MultipartFile profileImg;
     @DecimalMin(value = "0.00", message = "Weight must be greater than or equal to zero")
     @DecimalMax(value = "999.99", message = "Weight must have two or fewer decimal places")
@@ -50,10 +47,10 @@ public class RegisterRequestDto {
     message = "Maximum age is 110")
     private int age;
 
-    @Pattern(regexp = "^([a-zA-Z0-9ñ ]){4,20}$",
+    @Pattern(regexp = "^([a-zA-Z0-9ñ ]){10,120}$",
             message = "Objective must be only letters and numbers and 20 characters at must")
     private String objective;
-    @Pattern(regexp = "^([a-zA-Z0-9ñ ]){4,25}$",
+    @Pattern(regexp = "^([a-zA-Z0-9ñ ]){4,120}$",
             message = "Medical indication must be only letters and numbers and 25 characters at must")
     private String medical_indication;
 }

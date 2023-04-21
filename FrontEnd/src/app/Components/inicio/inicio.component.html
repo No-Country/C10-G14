@@ -5,6 +5,7 @@
 
 <!-- Clientes -->
 <mat-tab-group *appVistaRoles="['ROLE_CUSTOMER']" color="accent">
+  
   <mat-tab label="MIS RUTINAS">
     <div class="fondo-rutina"><app-rutina></app-rutina></div>
   </mat-tab>
@@ -15,4 +16,4 @@
 </mat-tab-group>
 
 <!-- Profesores -->
-<app-ver-clientes  ></app-ver-clientes>
+<app-ver-clientes *appVistaRoles="['ROLE_ADMIN','ROLE_COACH']" ></app-ver-clientes>
