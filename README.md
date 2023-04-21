@@ -29,7 +29,6 @@ In conclusion, WorldFit is a must-have solution for any gym looking to improve i
 <img style="width:700px;"  src="https://i.ibb.co/kc8bDRv/Screen-Shot-2023-04-21-at-03-41-10.png">
 <br><br>
 <img src="https://i.ibb.co/V21knYK/Screen-Shot-2023-04-21-at-03-34-22.png">
-<img src="https://i.ibb.co/mcwTX4f/Screen-Shot-2023-04-21-at-03-35-36.png">
 <img src="https://i.ibb.co/VxhN0Z2/Screen-Shot-2023-04-21-at-03-38-00.png">
 
 <h3 align="center"><b>You can check out our webpage here:</b></h3>
