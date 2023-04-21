@@ -30,7 +30,8 @@ import { PageUserComponent } from './page-user/page-user.component';
 import { FormsModule } from '@angular/forms';
 import { TransformRoles } from './Components/ver-clientes/pipeRoles';
 import { RolComponent } from './Components/forms/rol/rol.component';
-import { CronometroComponent } from './Components/cronometro/cronometro.component';
+import { CronometroComponent } from './Components/cronometro/cronometro.component';import { InfoUsuarioComponent } from './Components/forms/info-usuario/info-usuario.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { CronometroComponent } from './Components/cronometro/cronometro.componen
     VistaRolesDirective,
     PageErrorComponent,
     PageUserComponent,
+    InfoUsuarioComponent,
     TransformRoles,
     RolComponent,
     CronometroComponent,

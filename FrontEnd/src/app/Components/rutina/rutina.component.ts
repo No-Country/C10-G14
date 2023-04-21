@@ -27,7 +27,7 @@ api:string = this.datosRutina.apiUrlUser
       this.rutinasLista = data.routines;
       this.rutinasLista.sort((a: any, b: any) => {
         if (a.title < b.title) {
-          return -1;
+          return -1; 
         }
         if (a.title > b.title) {
           return 1;

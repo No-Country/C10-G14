@@ -53,7 +53,7 @@ export class VerEjerciciosComponent {
     this._endPointsService.obtenerDatos(this.api).subscribe(data => {
       this.loading = false;
       this.dataSource.data = data;
-      console.log(data);
+      
     })
   }
 
