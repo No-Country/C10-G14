@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(private http: HttpClient, private authService: AuthService) {
     const user = this.authService.userValue;
-    console.log('SOY EL USUARIO DESDE EL ADMIN', user);
+    
   }
 
   getAll() {

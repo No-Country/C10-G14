@@ -33,7 +33,7 @@ export class InfoUsuarioComponent {
     private _metodoService: MetodosService,
     private authService: AuthService) { 
       this.user = <User>this.authService.userValue;
-      console.log('Esto es el user',this.user);      
+           
       this.form= this.fb.group({
         nombre: ['', [Validators.required,Validators.minLength(1),Validators.maxLength(20)]],
         meta: ['', [Validators.minLength(1),Validators.maxLength(20)]],
@@ -42,7 +42,7 @@ export class InfoUsuarioComponent {
         edad: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
         altura:[ '', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],],
         peso: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],],
-        profileImg:[null] 
+        
            
       })
     
@@ -73,7 +73,7 @@ export class InfoUsuarioComponent {
           
         });
         
-  
+  console.log(this.data)
       
     }
 

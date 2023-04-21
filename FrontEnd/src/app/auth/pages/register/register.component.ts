@@ -123,7 +123,7 @@ export class RegisterComponent {
 
     // Imprimir los datos de FormData por consola
     formData.forEach((value, key) => {
-      console.log(key, value);
+     
     });
 
     // Llamar al método de registro con los datos del formulario y el archivo

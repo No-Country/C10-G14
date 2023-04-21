@@ -49,7 +49,7 @@ export class EjerciciosComponent implements OnInit{
     }
   
     buscarEjercicio(id:number){
-      console.log("Esto es lo que pasa por id ", id);
+      
       this._endpoints.obtenerDatosId(id, this.appi).subscribe(data =>{
         this.form.patchValue({
           id:data.id,
@@ -79,7 +79,7 @@ export class EjerciciosComponent implements OnInit{
         unit: this.form.get('unidad')?.value,
        
       }
-      console.log(ejercicio);
+     
       this.loading = true;
   
       if(this.idEjercicio == undefined){      

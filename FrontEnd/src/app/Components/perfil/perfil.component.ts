@@ -27,7 +27,7 @@ export class PerfilComponent {
     
     ) {
       this.user = <User>this.authService.userValue;
-      console.log('Esto es el user',this.user);
+     
      }
 
   ngOnInit(): void {
@@ -41,7 +41,7 @@ export class PerfilComponent {
     this._endPointsService.obtenerDatosId(this.user.id, this.api).subscribe(data => {
       this.loading = false;
       this.infoUsuario = data;
-      console.log('aca asigno la informacion que tengo que pasar',this.infoUsuario);
+     
       this.cargaImagen();
     })
   }

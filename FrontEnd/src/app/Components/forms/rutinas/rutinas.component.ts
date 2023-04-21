@@ -38,7 +38,7 @@ EjerciciosUrl:string=this.Service.apiUrlEjercicio
      
       this.Ejercicios = data      
      
-      console.log(this.Ejercicios)
+      
     });
     
   }
