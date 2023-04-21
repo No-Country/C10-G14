@@ -59,7 +59,7 @@ EjerciciosUrl:string=this.Service.apiUrlEjercicio
       
       // Es agregar
       this.Service.AgregarItem(this.id!, ejercicio, this.rutinaEjercioService).subscribe(() => {
-        this._metodoService.mensaje('Rutina Eliminada con Exito !', 5);
+        this._metodoService.mensaje('Rutina agregada con Exito !', 5);
       })
   }
   
