@@ -24,6 +24,7 @@ export class InfoUsuarioComponent {
   previewImageUrl = '../../../../assets/img/image-placeholder.png';
   user$!: User;
   userProfile!: User;
+  img!:any
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -33,7 +34,7 @@ export class InfoUsuarioComponent {
     private _metodoService: MetodosService,    
     private userService: UserService,
     private authService: AuthService) { 
-      this.user$ = <User>this.authService.userValue;
+    this.user$ = <User>this.authService.userValue;
            
       this.form= this.fb.group({
         nombre: ['', [Validators.required,Validators.minLength(1),Validators.maxLength(20)]],
@@ -43,7 +44,7 @@ export class InfoUsuarioComponent {
         edad: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
         altura:[ '', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],],
         peso: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],],
-         
+         profileImg:[null],
            
       })
     
@@ -55,11 +56,10 @@ export class InfoUsuarioComponent {
   ngOnInit(): void {
     this.objetivo = this.notNull(this.data.objective );
       this.medico = this.notNull(this.data.medical_indication);
-      // this.cargaImagen()
       
-      this.buscarCliente();
-
-    this.userService
+      
+      
+      this.userService
       .getById(this.user$.id)
       .pipe(first())
       .subscribe((user) => {
@@ -68,6 +68,9 @@ export class InfoUsuarioComponent {
           this.previewImageUrl = `https://${this.userProfile.profileImg}`;
         }
       });
+      this.buscarCliente();
+      this.cargaImagen()
+
   }
 
   buscarCliente() {
@@ -111,15 +114,15 @@ export class InfoUsuarioComponent {
     }
   }
 
-  // cargaImagen(){
-  //   if(this.data.profileImg === null ){
-  //     this.img = './assets/img/image-placeholder.png';
-  //   }
-  //   else {
-  //     this.img = 'https://' + this.data.profileImg;
-  //   }
+   cargaImagen(){
+     if(this.data.profileImg === null ){
+       this.img = './assets/img/image-placeholder.png';
+     }
+     else {
+       this.img = 'https://' + this.data.profileImg;
+     }
     
-  // }
+   }
 
   EditInfoCliente() {
     const formData = new FormData();
