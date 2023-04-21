@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['juan@juan.com', [Validators.required, Validators.email]], // Campo de email con validadores
-      password: ['pruebas3', [Validators.required, Validators.minLength(8)]], // Campo de password con validadores
+      email: ['@mail.com', [Validators.required, Validators.email]], // Campo de email con validadores
+      password: ['12345678', [Validators.required, Validators.minLength(8)]], // Campo de password con validadores
     });
   }
 

@@ -36,13 +36,13 @@ export class InfoUsuarioComponent {
       console.log('Esto es el user',this.user);      
       this.form= this.fb.group({
         nombre: ['', [Validators.required,Validators.minLength(1),Validators.maxLength(20)]],
-        meta: ['', [Validators.minLength(1),Validators.maxLength(20)]],
-        indicacionMedica: ['', [Validators.minLength(1),Validators.maxLength(20)]],   
+        meta: ['', [Validators.minLength(1),Validators.maxLength(50)]],
+        indicacionMedica: ['', [Validators.minLength(1),Validators.maxLength(50)]],   
         sexo: ['', ],
         edad: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
         altura:[ '', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],],
         peso: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],],
-        profileImg:[null] 
+         
            
       })
     
@@ -51,10 +51,12 @@ export class InfoUsuarioComponent {
     }
 
     ngOnInit(): void {      
-      this.buscarCliente();
-      this.notNull(this.data.objective, this.objetivo)
-      this.notNull(this.data.medical_indication, this.medico)
+      
+      this.objetivo = this.notNull(this.data.objective );
+      this.medico = this.notNull(this.data.medical_indication);
       this.cargaImagen()
+      
+      this.buscarCliente();
     }
 
     buscarCliente(){
@@ -72,7 +74,7 @@ export class InfoUsuarioComponent {
           meta:this.objetivo,
           
         });
-        
+        console.log('despues de asignarlo al formulario',this.objetivo)
   
       
     }
@@ -96,11 +98,15 @@ export class InfoUsuarioComponent {
       
     }
 
-    notNull(data: string, variable:string){
-      if(data !== null ){
-        variable = data;
-      }
-    }
+      notNull(data: string){
+        if(data !== null  ){
+         return  data;        
+        }
+        else {
+          return ''
+        }
+
+     }
 
 
     EditInfoCliente() {
@@ -123,7 +129,7 @@ export class InfoUsuarioComponent {
 
     // Imprimir los datos de FormData por consola
       formData.forEach((value, key) => {
-      
+      console.log(value, key);
       });
 
       this.loading = true;
