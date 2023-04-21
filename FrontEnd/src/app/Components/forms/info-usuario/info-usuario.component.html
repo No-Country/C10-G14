@@ -4,7 +4,7 @@
 
     <div class=" flex justify-center pb-4" enctype="multipart/form-data">
       <div class="profile__image">
-        <!-- <img class="" src={{img}} /> -->
+        
         <img class="" [src]="previewImageUrl" #profileImage />
 
         <label for="fileInput" class="absolute bg-warning right-0 bottom-0 mr-2 mb-2 p-2 rounded-full cursor-pointer">
@@ -13,9 +13,10 @@
 
           </div>
         </label>
+        
         <!-- <input type="file" id="fileInput" class="hidden" (change)="onFileSelected($event)" #fileInput type="file"
-          accept="image/*" #image> -->
-        <input type="file" id="fileInput" class="hidden" (change)="onFileSelected($event)" #fileInput type="file"
+          accept="image/*"> -->
+          <input type="file" id="fileInput" class="hidden" (change)="onFileSelected($event)" #fileInput type="file"
           accept="image/*">
       </div>
     </div>
@@ -24,14 +25,11 @@
       <div class="col-md-6">
         <mat-form-field>
           <mat-label>Nombre y Apellido</mat-label>
-          <input formControlName="nombre" matInput placeholder="Ingrese nombre" autocomplete="off">
-          <mat-error *ngIf="form.get('nombre')?.touched && form.get('nombre')?.errors?.['required']">El campo Nombre y
-            Apellido es requerido</mat-error>
-          <mat-error *ngIf="form.get('nombre')?.touched && form.get('nombre')?.errors?.['minlength']">El campo Nombre y
-            Apellido debe tener 1 caracteres o mas </mat-error>
-          <mat-error *ngIf="form.get('nombre')?.touched && form.get('nombre')?.errors?.['maxlength']">El campo Nombre y
-            Apellido debe tener 20 caracteres o menos </mat-error>
-
+          <input formControlName="nombre" matInput placeholder="Ingrese nombre" autocomplete="off">            
+          <mat-error *ngIf="form.get('nombre')?.touched && form.get('nombre')?.errors?.['required']">El campo Nombre y Apellido es requerido</mat-error>
+          <mat-error *ngIf="form.get('nombre')?.touched && form.get('nombre')?.errors?.['minlength']">El campo Nombre y Apellido debe tener 1 caracteres o mas </mat-error>
+          <mat-error *ngIf="form.get('nombre')?.touched && form.get('nombre')?.errors?.['maxlength']">El campo Nombre y Apellido debe tener 20 caracteres o menos </mat-error>
+            
         </mat-form-field>
       </div>
       <div class="col-md-6">
@@ -53,27 +51,21 @@
       <div class="col-md-6">
         <mat-form-field class="ms-0">
           <mat-label>Objetivo de Entrenamiento</mat-label>
-          <input formControlName="meta" matInput placeholder="Ingrese nombre" autocomplete="off">
-
-          <mat-error *ngIf="form.get('meta')?.touched && form.get('meta')?.errors?.['minlength']">Caracteres minimos
-            1</mat-error>
-          <mat-error *ngIf="form.get('meta')?.touched && form.get('meta')?.errors?.['maxlength']">Caracteres maximos 20
-          </mat-error>
-
+          <input formControlName="meta" matInput placeholder="Bajar de Peso" autocomplete="off">            
+          
+          <mat-error *ngIf="form.get('meta')?.touched && form.get('meta')?.errors?.['minlength']">Caracteres minimos 1</mat-error>
+          <mat-error *ngIf="form.get('meta')?.touched && form.get('meta')?.errors?.['maxlength']">Caracteres maximos 50 </mat-error>
+          
         </mat-form-field>
       </div>
       <div class="col-md-6">
         <mat-form-field class="ms-0">
           <mat-label>Indicación Medica</mat-label>
-          <input formControlName="indicacionMedica" matInput placeholder="Ingrese nombre" autocomplete="off">
-
-          <mat-error
-            *ngIf="form.get('indicacionMedica')?.touched && form.get('indicacionMedica')?.errors?.['minlength']">Caracteres
-            minimos 1 </mat-error>
-          <mat-error
-            *ngIf="form.get('indicacionMedica')?.touched && form.get('indicacionMedica')?.errors?.['maxlength']">Caracteres
-            maximos 20 </mat-error>
-
+          <input formControlName="indicacionMedica" matInput placeholder="Dolor de Rodilla" autocomplete="off">            
+          
+          <mat-error *ngIf="form.get('indicacionMedica')?.touched && form.get('indicacionMedica')?.errors?.['minlength']">Caracteres minimos 1  </mat-error>
+          <mat-error *ngIf="form.get('indicacionMedica')?.touched && form.get('indicacionMedica')?.errors?.['maxlength']">Caracteres maximos 50  </mat-error>
+        
         </mat-form-field>
       </div>
 

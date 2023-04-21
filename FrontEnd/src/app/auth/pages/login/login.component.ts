@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['marcelo@mail.com', [Validators.required, Validators.email]], // Campo de email con validadores
-      password: ['12345678', [Validators.required, Validators.minLength(8)]], // Campo de password con validadores
+      email: ['', [Validators.required, Validators.email]], // Campo de email con validadores
+      password: ['', [Validators.required, Validators.minLength(8)]], // Campo de password con validadores
     });
   }
 
@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
           });
           Toast.fire({
             icon: 'error',
-            title: this.error,
+            title: 'Usuario y/o contraseña incorrectos',
           });
         },
       });

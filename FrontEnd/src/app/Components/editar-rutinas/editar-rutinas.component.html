@@ -18,11 +18,13 @@
             <h2 class="card-title fs-5 ">{{infoCliente.name}}</h2>
             <p class="card-text fs-5">Sexo: {{infoCliente.sex==='MALE'?'Masculino':'Femenino'}}</p>
             <p class="card-text fs-5"><small class="">Edad: {{infoCliente.age}} años</small></p>
+            <p class="card-text fs-5"> {{infoCliente.objective ==='undefined'? '': infoCliente.objective}}</p>
+            <p class="card-text fs-5"><small class=""> {{infoCliente.medical_indication==='undefined'?'':infoCliente.medical_indication}} </small></p>
           </div>
         </div>
         <div class="card-peso mt-4 mt-md-0 col-md-3 text-center fs-4 ">
           <div class="h-50 bg-white text-dark align-middle p-2">PESO: {{infoCliente.weight}} Kg</div>
-          <div class="h-50 bg-dark  align-middle p-2 border-bottom">IMC: 22</div>
+          <div class="h-50 bg-dark  align-middle p-2 border-bottom">ALTURA: {{infoCliente.height}} Cm</div>
         </div>
       </div>
     

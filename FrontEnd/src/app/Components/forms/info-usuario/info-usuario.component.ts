@@ -24,53 +24,42 @@ export class InfoUsuarioComponent {
   previewImageUrl = '../../../../assets/img/image-placeholder.png';
   user$!: User;
   userProfile!: User;
+  img!:any
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<PerfilComponent>,
     private fb: FormBuilder,
     private _endpoints: EndpointsService,
-    private _metodoService: MetodosService,
-    private authService: AuthService,
-    private userService: UserService
-  ) {
+    private _metodoService: MetodosService,    
+    private userService: UserService,
+    private authService: AuthService) { 
     this.user$ = <User>this.authService.userValue;
-    this.form = this.fb.group({
-      nombre: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(20),
-        ],
-      ],
-      meta: ['', [Validators.minLength(1), Validators.maxLength(20)]],
-      indicacionMedica: [
-        '',
-        [Validators.minLength(1), Validators.maxLength(20)],
-      ],
-      sexo: [''],
-      edad: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
-      altura: [
-        '',
-        [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],
-      ],
-      peso: [
-        '',
-        [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],
-      ],
-      profileImg: [null],
-    });
+           
+      this.form= this.fb.group({
+        nombre: ['', [Validators.required,Validators.minLength(1),Validators.maxLength(20)]],
+        meta: ['', [Validators.minLength(1),Validators.maxLength(50)]],
+        indicacionMedica: ['', [Validators.minLength(1),Validators.maxLength(50)]],   
+        sexo: ['', ],
+        edad: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+        altura:[ '', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],],
+        peso: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],],
+         profileImg:[null],
+           
+      })
+    
+   
 
     this.user$ = <User>this.authService.userValue;
   }
 
   ngOnInit(): void {
-    this.buscarCliente();
-    this.notNull(this.data.objective, this.objetivo);
-    this.notNull(this.data.medical_indication, this.medico);
-
-    this.userService
+    this.objetivo = this.notNull(this.data.objective );
+      this.medico = this.notNull(this.data.medical_indication);
+      
+      
+      
+      this.userService
       .getById(this.user$.id)
       .pipe(first())
       .subscribe((user) => {
@@ -79,6 +68,9 @@ export class InfoUsuarioComponent {
           this.previewImageUrl = `https://${this.userProfile.profileImg}`;
         }
       });
+      this.buscarCliente();
+      this.cargaImagen()
+
   }
 
   buscarCliente() {
@@ -113,11 +105,24 @@ export class InfoUsuarioComponent {
     reader.readAsDataURL(file);
   }
 
-  notNull(data: string, variable: string) {
-    if (data !== null) {
-      variable = data;
+  notNull(data: string){
+    if(data !== null  ){
+      return  data;        
+    }
+      else {
+      return ''
     }
   }
+
+   cargaImagen(){
+     if(this.data.profileImg === null ){
+       this.img = './assets/img/image-placeholder.png';
+     }
+     else {
+       this.img = 'https://' + this.data.profileImg;
+     }
+    
+   }
 
   EditInfoCliente() {
     const formData = new FormData();
