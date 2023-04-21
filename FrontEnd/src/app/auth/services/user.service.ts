@@ -9,8 +9,6 @@ import { Role } from '../interfaces/role';
 @Injectable({ providedIn: 'root' })
 export class UserService {
   private baseUrl: string = environment.baseUrl;
-  private _user!: User;
-  private userRolesSubject = new BehaviorSubject<Role[]>([]);
 
   constructor(private http: HttpClient, private authService: AuthService) {
     const user = this.authService.userValue;
@@ -21,27 +19,7 @@ export class UserService {
     return this.http.get<User[]>(`${this.baseUrl}/users`);
   }
 
-  getById(id: string) {
+  getById(id: number) {
     return this.http.get<User>(`${this.baseUrl}/users/${id}`);
-  }
-
-  getUser(): Observable<User> {
-    return new Observable<User>((observer) => {
-      const authToken = this.authService.getAuthToken();
-
-      if (authToken) {
-        const decodedToken = this.authService.decodeAuthToken(authToken);
-
-        if (typeof decodedToken === 'object' && decodedToken !== null) {
-          this._user = decodedToken as User;
-          observer.next(this._user);
-          observer.complete();
-        } else {
-          observer.error('El token decodificado no es del tipo esperado');
-        }
-      } else {
-        observer.error('No se encontró un token de autenticación');
-      }
-    }).pipe(tap((user: User) => {}));
   }
 }

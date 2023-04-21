@@ -1,4 +1,10 @@
-import { Component, ViewChild, Input, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  Input,
+  ViewEncapsulation,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,69 +21,67 @@ import { MetodosService } from 'src/app/Services/metodos.service';
   styleUrls: ['./editar-ejercicio.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-
 export class EditarEjercicioComponent {
-  @Input() dataRutinas:any;
-  displayedColumns: string[] = ['title', 'numeroSeries', 'repetition','type', 'quantity', 'unit', 'acciones'];
+  @Input() dataRutinas: any;
+  displayedColumns: string[] = [
+    'title',
+    'numeroSeries',
+    'repetition',
+    'type',
+    'quantity',
+    'unit',
+    'acciones',
+  ];
   dataEjercicios = new MatTableDataSource<Rutina>();
-  ejercicio: any
-  api:string = this.Api.apiUrlRutine
-  @ViewChild(MatPaginator) paginator!: MatPaginator
+  ejercicio: any;
+  api: string = this.Api.apiUrlRutine;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor( 
-  public dialog: MatDialog,
-  private Api: EndpointsService, 
-  private cdr: ChangeDetectorRef,
-  private _metodoService: MetodosService ) { }
-    
+  constructor(
+    public dialog: MatDialog,
+    private Api: EndpointsService,
+    private cdr: ChangeDetectorRef,
+    private _metodoService: MetodosService
+  ) {}
+
   ngOnInit(): void {
-    
-    this.cargar()
-   
-    
+    this.cargar();
   }
-  cargar(){
+  cargar() {
     this.dataEjercicios = this.dataRutinas.exercises;
   }
   openDialog(id?: number): void {
     const dialogRef = this.dialog.open(RutinasComponent, {
       width: '550px',
       disableClose: true,
-      data: { idRutina:this.dataRutinas.id,
-      id:id }
+      data: { idRutina: this.dataRutinas.id, id: id },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      
-      this.ejercicio= result;
+    dialogRef.afterClosed().subscribe((result) => {
+      this.ejercicio = result;
       setTimeout(() => {
         window.location.reload();
-      },1000);
-       
+      }, 1000);
     });
   }
   eliminarEjercicio(id: number): void {
-    const idEjercicio: object = {"exercises": [
-      id
-    ] }
-  
-    this.Api.borrarEjercicioRutina(this.dataRutinas.id, { body: idEjercicio }).subscribe(() => {   
+    const idEjercicio: object = { exercises: [id] };
+
+    this.Api.borrarEjercicioRutina(this.dataRutinas.id, {
+      body: idEjercicio,
+    }).subscribe(() => {
       setTimeout(() => {
         window.location.reload();
-      },1000); 
+      }, 1000);
     });
     this._metodoService.mensaje('Ejercicio Eliminado con Exito !', 5);
   }
   eliminarRutina(): void {
-    
-    this.Api.borrarItem(this.dataRutinas.id, this.api ).subscribe(() => {   
+    this.Api.borrarItem(this.dataRutinas.id, this.api).subscribe(() => {
       setTimeout(() => {
         window.location.reload();
-      },1000); 
+      }, 1000);
     });
     this._metodoService.mensaje('Rutina Eliminada con Exito !', 5);
   }
- 
 }
-
-    
