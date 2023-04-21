@@ -72,7 +72,7 @@ export class EndpointsService {
     // Metodo Maejo de Error
 
     errorHandler(error: HttpErrorResponse) {
-      console.log(error);      
+      
       return throwError(error.message);
 
     }

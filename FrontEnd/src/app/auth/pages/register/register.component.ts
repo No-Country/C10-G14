@@ -6,10 +6,8 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
-import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { ValidatorsFormService } from '../../services/validators-form.service';
 import { FormErrors } from '../../interfaces/form-errors.interface';
 import Swal from 'sweetalert2';
 
@@ -22,23 +20,17 @@ export class RegisterComponent {
   // Variables
   hide = true;
   loading: boolean = false;
-  destroyed$ = new Subject<void>();
+  previewImageUrl: string | undefined;
 
   // Formulario de registro de usuario
   registerForm: FormGroup = this.fb.group({
-    name: ['juan', [Validators.required]],
-    email: ['registro@mail.com', [Validators.required, Validators.email]],
-    password: ['123456789', [Validators.required, Validators.minLength(6)]],
-    sex: ['MALE', [Validators.required]],
-    age: [38, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
-    height: [
-      180,
-      [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],
-    ],
-    weight: [
-      80,
-      [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],
-    ],
+    name: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    sex: ['', [Validators.required]],
+    age: [0, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+    height: [0, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+    weight: [0, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
     profileImg: new FormControl(null, {
       validators: [
         (control: AbstractControl): { [key: string]: any } | null => {
@@ -57,8 +49,7 @@ export class RegisterComponent {
   constructor(
     public authService: AuthService,
     private fb: NonNullableFormBuilder,
-    private router: Router,
-    private validatorsService: ValidatorsFormService
+    private router: Router
   ) {}
 
   // Comprueba si un campo del formulario es inválido
@@ -99,6 +90,17 @@ export class RegisterComponent {
   onFileSelected(event: any) {
     const file = event.target.files[0];
     this.registerForm.get('profileImg')!.setValue(file);
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.previewImageUrl = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  resetImage() {
+    // Borrar imagen cargada previamente
+    this.registerForm.get('profileImg')!.setValue(null);
+    this.previewImageUrl = undefined;
   }
 
   // Envío del formulario
@@ -123,7 +125,7 @@ export class RegisterComponent {
 
     // Imprimir los datos de FormData por consola
     formData.forEach((value, key) => {
-      console.log(key, value);
+     
     });
 
     // Llamar al método de registro con los datos del formulario y el archivo

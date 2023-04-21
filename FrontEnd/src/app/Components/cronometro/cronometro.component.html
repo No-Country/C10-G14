@@ -5,7 +5,7 @@
       <button mat-raised-button color="primary"(click)="cambiar('Temporizador')">Temporizador</button>
      
     </div>
-      <h1 class="cronometro-time">{{contador | number:'2.0-0'}}:{{milisegundos | number:'2.0-0'}}</h1>
+      <h1 class="cronometro-time">{{minutos | number:'2.0-0'}}:{{segundos  | number:'2.0-0'}}</h1>
       <div class="cronometro-buttons">
       
           <mat-icon *ngIf="!intervaloCronometro" (click)="empezarCronometro()"color="accent" >play_arrow</mat-icon>

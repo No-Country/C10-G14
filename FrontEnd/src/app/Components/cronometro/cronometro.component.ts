@@ -11,7 +11,8 @@ export interface Rutina {
 })
 export class CronometroComponent implements OnInit  {
   Ejercicio:boolean=true;
-  contador: number = 0;
+  minutos:number=0;
+  segundos: number = 0;
   milisegundos: number = 0;
   intervaloCronometro: any = null;
   tipo:string = "Cronometro"
@@ -32,7 +33,10 @@ ngOnInit() {
         this.milisegundos++;
         if (this.milisegundos == 100) {
           this.milisegundos = 0;
-          this.contador++;
+          this.segundos++;
+        }if (this.segundos == 60) {
+          this.segundos = 0;
+          this.minutos++;
         }
       }, 10);
     }
@@ -44,7 +48,8 @@ ngOnInit() {
   }
 
   reiniciarCronometro() {
-    this.contador = 0;
+    this.minutos= 0;
+    this.segundos = 0;
     this.milisegundos = 0;
     clearInterval(this.intervaloCronometro);
     this.intervaloCronometro = null;

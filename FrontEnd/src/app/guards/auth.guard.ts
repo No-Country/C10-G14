@@ -2,7 +2,6 @@
 import {
   Router,
   CanActivate,
-  CanActivateChild,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   CanLoad,
@@ -15,7 +14,7 @@ import { Observable, tap } from 'rxjs';
 import { Role } from '../auth/interfaces/role';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanLoad {
   constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(
@@ -25,7 +24,6 @@ export class AuthGuard implements CanActivate {
     const user = this.authService.userValue;
     if (user) {
       // Comprobar si la ruta está restringida por roles
-      // const data = route.data?.['roles'];
       const { roles } = route.data;
       if (roles) {
         // Comprobar si algún rol del usuario coincide con los roles definidos en la ruta
@@ -71,7 +69,7 @@ export class AuthGuard implements CanActivate {
   }
 
   canLoad(): Observable<boolean> | boolean {
-      return this.authService.isAuthenticated().pipe(
+    return this.authService.isAuthenticated().pipe(
       tap((valid) => {
         if (!valid) {
           const Toast = Swal.mixin({
@@ -88,7 +86,6 @@ export class AuthGuard implements CanActivate {
           this.router.navigateByUrl('/auth/login');
         }
       })
-    ); 
-    return true;
+    );
   }
 }
