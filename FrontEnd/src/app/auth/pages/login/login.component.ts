@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
           });
           Toast.fire({
             icon: 'error',
-            title: this.error,
+            title: 'Usuario y/o contraseña incorrectos',
           });
         },
       });
