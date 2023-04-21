@@ -11,6 +11,7 @@ import { Role } from './auth/interfaces/role';
 import { PageUserComponent } from './page-user/page-user.component';
 
 const routes: Routes = [
+  
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
@@ -29,20 +30,6 @@ const routes: Routes = [
   },
   {
     path: 'editar-rutinas/:id',
-    component: EditarRutinasComponent,
-    canActivate:[AuthGuard], 
-    data: {roles:[ Role.Admin, Role.Coach]},
-    canLoad: [AuthGuard]
-  },
-  {
-    path: 'editar-rutinas',
-    component: EditarRutinasComponent,
-    canActivate:[AuthGuard], 
-    data: {roles:[ Role.Admin, Role.Coach]},
-    canLoad: [AuthGuard]
-  },
-  {
-    path: 'editar-rutinas',
     component: EditarRutinasComponent,
     canActivate:[AuthGuard], 
     data: {roles:[ Role.Admin, Role.Coach]},

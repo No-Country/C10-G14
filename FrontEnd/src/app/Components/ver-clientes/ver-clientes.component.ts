@@ -54,7 +54,7 @@ export class VerClientesComponent implements OnInit  {
   obtenerClientes() {    
     this._endPointsService.UsersRoles(this.role).subscribe(data => {
       this.dataSource.data = data;
-      console.log(this.dataSource)
+      
     })
   } 
   filtroRol() {
