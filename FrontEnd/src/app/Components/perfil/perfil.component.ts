@@ -10,65 +10,61 @@ import { User } from 'src/app/auth/interfaces/user';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  styleUrls: ['./perfil.component.css'],
 })
 export class PerfilComponent {
-  api:string = this._endPointsService.apiUrlUser;
+  api: string = this._endPointsService.apiUrlUser;
   infoUsuario: any;
-  loading:boolean = false;
-  user:User;
-  img!:string;
+  loading: boolean = false;
+  user: User;
+  img!: string;
 
-  constructor(private _endPointsService:EndpointsService,
-    private _metodos: MetodosService,    
+  constructor(
+    private _endPointsService: EndpointsService,
+    private _metodos: MetodosService,
     private router: Router,
     public dialog: MatDialog,
     private authService: AuthService
-    
-    ) {
-      this.user = <User>this.authService.userValue;
-      console.log('Esto es el user',this.user);
-     }
+  ) {
+    this.user = <User>this.authService.userValue;
+  }
 
   ngOnInit(): void {
     this.obtenerUsuario();
-    
-    
   }
 
-  obtenerUsuario() {  
-    this.loading = true;  
-    this._endPointsService.obtenerDatosId(this.user.id, this.api).subscribe(data => {
-      this.loading = false;
-      this.infoUsuario = data;
-      console.log('aca asigno la informacion que tengo que pasar',this.infoUsuario);
-      this.cargaImagen();
-    })
+  obtenerUsuario() {
+    this.loading = true;
+    this._endPointsService
+      .obtenerDatosId(this.user.id, this.api)
+      .subscribe((data) => {
+        this.loading = false;
+        this.infoUsuario = data;
+        this.cargaImagen();
+      });
   }
 
-  EditUsuario(data:any){        
-    const dialogRef = this.dialog.open(InfoUsuarioComponent, {      
-      width:"650px",
+  EditUsuario(data: any) {
+    const dialogRef = this.dialog.open(InfoUsuarioComponent, {
+      width: '650px',
       disableClose: true,
-      data
-      
+      data,
     });
 
-    dialogRef.afterClosed().subscribe(result => {      
-      if(result){
-        setTimeout(() => {this.obtenerUsuario();}, 5000)
-      }           
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        setTimeout(() => {
+          this.obtenerUsuario();
+        }, 5000);
+      }
     });
   }
 
-  cargaImagen(){
-    if(this.infoUsuario.profileImg === null ){
-      this.img ='./assets/img/image-placeholder.png';
-    }
-    else {
+  cargaImagen() {
+    if (this.infoUsuario.profileImg === null) {
+      this.img = './assets/img/image-placeholder.png';
+    } else {
       this.img = 'https://' + this.infoUsuario.profileImg;
     }
-    
   }
-
 }

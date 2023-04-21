@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['juan@juan.com', [Validators.required, Validators.email]], // Campo de email con validadores
-      password: ['pruebas3', [Validators.required, Validators.minLength(8)]], // Campo de password con validadores
+      email: ['marcelo@mail.com', [Validators.required, Validators.email]], // Campo de email con validadores
+      password: ['12345678', [Validators.required, Validators.minLength(8)]], // Campo de password con validadores
     });
   }
 
@@ -79,7 +79,8 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: () => {
           // get return url from query parameters or default to home page
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'inicio';
+          const returnUrl =
+            this.route.snapshot.queryParams['returnUrl'] || 'inicio';
           this.router.navigateByUrl(returnUrl);
         },
         error: (error) => {
