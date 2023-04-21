@@ -1,13 +1,14 @@
-.profile__image {
+.profile__image {  
   position: relative;
-  width: 6rem;
-  height: auto;
+  width: 150px;  
+  height: 150px;
   margin: auto;
+  
 }
 
 @media (width >=1024px) {
   .profile__image {
-    width: 6rem;
+    width: 150px;
   }
 }
 
@@ -22,6 +23,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  border:7px solid #303030;
   object-fit: cover;
   object-position: center;
 }

@@ -17,6 +17,7 @@ export class PerfilComponent {
   infoUsuario: any;
   loading:boolean = false;
   user:User;
+  img!:string;
 
   constructor(private _endPointsService:EndpointsService,
     private _metodos: MetodosService,    
@@ -32,6 +33,7 @@ export class PerfilComponent {
   ngOnInit(): void {
     this.obtenerUsuario();
     
+    
   }
 
   obtenerUsuario() {  
@@ -39,7 +41,8 @@ export class PerfilComponent {
     this._endPointsService.obtenerDatosId(this.user.id, this.api).subscribe(data => {
       this.loading = false;
       this.infoUsuario = data;
-      console.log('aca asigno la informacion que tengo que pasar',data);
+      console.log('aca asigno la informacion que tengo que pasar',this.infoUsuario);
+      this.cargaImagen();
     })
   }
 
@@ -56,6 +59,16 @@ export class PerfilComponent {
         setTimeout(() => {this.obtenerUsuario();}, 5000)
       }           
     });
+  }
+
+  cargaImagen(){
+    if(this.infoUsuario.profileImg === null ){
+      this.img ='./assets/img/image-placeholder.png';
+    }
+    else {
+      this.img = 'https://' + this.infoUsuario.profileImg;
+    }
+    
   }
 
 }

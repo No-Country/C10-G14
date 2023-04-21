@@ -22,6 +22,7 @@ export class EditarRutinasComponent implements OnInit  {
   selected = new FormControl(0);
   planCliente: any ;
   rutina:any
+  img!:string;
   
   constructor(
   private datosRutina: EndpointsService,
@@ -34,6 +35,7 @@ export class EditarRutinasComponent implements OnInit  {
   }
   ngOnInit(): void {
     this.obtenerRutinas();  
+    this.cargaImagen();
 
     
 }
@@ -41,7 +43,7 @@ export class EditarRutinasComponent implements OnInit  {
 obtenerRutinas() {  
   this.datosRutina.obtenerDatosId(this.idCliente, this.api).subscribe(data => {    
     this.infoCliente = data;
-    console.log(this.infoCliente)
+    this.cargaImagen();    
     this.planCliente = data.routines;   
     this.planCliente.sort((a: any, b: any) => {
       if (a.title < b.title) {
@@ -81,6 +83,15 @@ AgregarRutina(id?: number): void {
   },1000);  
   });
  
+}
+cargaImagen(){
+  if(this.infoCliente.profileImg === null ){
+    this.img = './assets/img/image-placeholder.png';
+  }
+  else {
+    this.img = 'https://' + this.infoCliente.profileImg;
+  }
+  
 }
 
 

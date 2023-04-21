@@ -19,7 +19,10 @@ export class InfoUsuarioComponent {
   loading:boolean = false;    
   api:string = this._endpoints.apiUrlUser;
   user:User;
-  img:string;
+  opcionesSexo: string[] = ['male', 'female'];
+  objetivo!:string;
+  medico!:string;
+  img!:string;
   
 
   constructor(
@@ -32,58 +35,46 @@ export class InfoUsuarioComponent {
       this.user = <User>this.authService.userValue;
       console.log('Esto es el user',this.user);      
       this.form= this.fb.group({
-        nombre: ['', [Validators.required,Validators.minLength(1),Validators.maxLength(20)]],   
-        // sex: ['', [Validators.required]],
+        nombre: ['', [Validators.required,Validators.minLength(1),Validators.maxLength(20)]],
+        meta: ['', [Validators.minLength(1),Validators.maxLength(20)]],
+        indicacionMedica: ['', [Validators.minLength(1),Validators.maxLength(20)]],   
+        sexo: ['', ],
         edad: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
         altura:[ '', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],],
         peso: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)],],
-        profileImg: new FormControl(null, {
-        validators: [
-        (control: AbstractControl): { [key: string]: any } | null => {
-          const file = control.value as File;
-          const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-          if (file && !allowedTypes.includes(file.type)) {
-            return { invalidImageType: true };
-          }
-          return null;
-        },
-      ],
-    }),
-        
-        // nombre:['',[Validators.required,Validators.minLength(1),Validators.maxLength(20)]],
-        // edad:['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],      
-        // altura:['',[Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-        // peso:['',[Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-        
-        // // sexo:['',Validators.required]        
+        profileImg:[null] 
+           
       })
-      this.img = data.profileImg
-      console.log('esto es la url de la img',this.img);
+    
+   
 
     }
 
     ngOnInit(): void {      
       this.buscarCliente();
+      this.notNull(this.data.objective, this.objetivo)
+      this.notNull(this.data.medical_indication, this.medico)
+      this.cargaImagen()
     }
 
     buscarCliente(){
-      // this._endpoints.obtenerDatosId(this.idCliente, this.api).subscribe(data =>{
+      
         this.form.patchValue({   
           
           id:this.data.id,
           nombre:this.data.name,
           peso:this.data.weight,
           altura:this.data.height,
-          sex:this.data.sex,
+          sexo:this.data.sex,
           edad:this.data.age,
           profileImg:this.data.profileImg,
-          indicacionMedica:this.data?.medical_indication,
-          meta:this.data?.objective,
+          indicacionMedica:this.medico ,
+          meta:this.objetivo,
           
         });
         
   
-      // });
+      
     }
 
     cancelar() {
@@ -95,17 +86,32 @@ export class InfoUsuarioComponent {
       this.form.get('profileImg')!.setValue(file);
     }
 
+    cargaImagen(){
+      if(this.data.profileImg === null ){
+        this.img = './assets/img/image-placeholder.png';
+      }
+      else {
+        this.img = 'https://' + this.data.profileImg;
+      }
+      
+    }
+
+    notNull(data: string, variable:string){
+      if(data !== null ){
+        variable = data;
+      }
+    }
+
 
     EditInfoCliente() {
       const formData = new FormData();
       formData.append('name', this.form.get('nombre')?.value);
       formData.append('medical_indication', this.form.get('indicacionMedica')?.value);
       formData.append('objective', this.form.get('meta')?.value);
-      // formData.append('sex', this.form.get('sexo')?.value);
+      formData.append('sex', this.form.get('sexo')?.value);
       formData.append('age', this.form.get('edad')?.value);
       formData.append('height', this.form.get('altura')?.value);
-      formData.append('weight', this.form.get('peso')?.value); 
-      
+      formData.append('weight', this.form.get('peso')?.value);       
       
       // Obtener el archivo seleccionado del formulario
       const file = this.form.get('profileImg')?.value;
@@ -117,16 +123,16 @@ export class InfoUsuarioComponent {
 
     // Imprimir los datos de FormData por consola
       formData.forEach((value, key) => {
-      console.log(key, value);
+      
       });
 
       this.loading = true;
 
       // Llamar al método de editar usuario
       
-      this._endpoints.editarItem(this.user.id, formData, this.api).subscribe(data => {        
-        this._metodoService.mensaje('Información de Perfil editada con Exito !', 2);
-      })
+       this._endpoints.editarItem(this.user.id, formData, this.api).subscribe(data => {        
+         this._metodoService.mensaje('Información de Perfil editada con Exito !', 3);
+       })
       this.loading = false;
       this.dialogRef.close(true);
     }
