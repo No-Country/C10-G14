@@ -12,7 +12,6 @@ export class UserService {
 
   constructor(private http: HttpClient, private authService: AuthService) {
     const user = this.authService.userValue;
-    
   }
 
   getAll() {
@@ -21,5 +20,9 @@ export class UserService {
 
   getById(id: number) {
     return this.http.get<User>(`${this.baseUrl}/users/${id}`);
+  }
+
+  editProfile(id: number, formData: FormData) {
+    return this.http.put<User>(`${this.baseUrl}/users/${id}`, formData);
   }
 }

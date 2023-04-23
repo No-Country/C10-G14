@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { EndpointsService } from 'src/app/Services/endpoints.service';
-import { MetodosService } from 'src/app/Services/metodos.service';
 import { InfoUsuarioComponent } from '../forms/info-usuario/info-usuario.component';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { User } from 'src/app/auth/interfaces/user';
+import { first } from 'rxjs';
+import { UserService } from 'src/app/auth/services/user.service';
+import { Sex } from 'src/app/auth/interfaces/sex';
 
 @Component({
   selector: 'app-perfil',
@@ -14,57 +15,38 @@ import { User } from 'src/app/auth/interfaces/user';
 })
 export class PerfilComponent {
   api: string = this._endPointsService.apiUrlUser;
-  infoUsuario: any;
   loading: boolean = false;
-  user: User;
-  img!: string;
+  previewImageUrl = '../../../../assets/img/image-placeholder.png';
+  _User!: User;
+  user$!: User;
 
   constructor(
     private _endPointsService: EndpointsService,
-    private _metodos: MetodosService,
-    private router: Router,
     public dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {
-    this.user = <User>this.authService.userValue;
+    this._User = <User>this.authService.userValue;
   }
 
   ngOnInit(): void {
-    this.obtenerUsuario();
-  }
-
-  obtenerUsuario() {
-    this.loading = true;
-    this._endPointsService
-      .obtenerDatosId(this.user.id, this.api)
-      .subscribe((data) => {
-        this.loading = false;
-        this.infoUsuario = data;
-        this.cargaImagen();
+    this.userService
+      .getById(this._User.id)
+      .pipe(first())
+      .subscribe((user) => {
+        this.user$ = user;
+        if (this.user$ && this.user$.profileImg) {
+          this.previewImageUrl = `https://${this.user$.profileImg}`;
+        }
       });
   }
 
   EditUsuario(data: any) {
     const dialogRef = this.dialog.open(InfoUsuarioComponent, {
-      width: '650px',
-      disableClose: true,
+      width: '500px',
+      height: '600px',
+      disableClose: false,
       data,
     });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        setTimeout(() => {
-          this.obtenerUsuario();
-        }, 5000);
-      }
-    });
-  }
-
-  cargaImagen() {
-    if (this.infoUsuario.profileImg === null) {
-      this.img = './assets/img/image-placeholder.png';
-    } else {
-      this.img = 'https://' + this.infoUsuario.profileImg;
-    }
   }
 }
