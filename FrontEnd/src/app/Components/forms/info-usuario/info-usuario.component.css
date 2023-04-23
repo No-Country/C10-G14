@@ -1,9 +1,18 @@
-.profile__image {  
+.container__profile {
+  min-width: 100vw;
+}
+
+.profile{
+width: 100%;
+}
+
+
+.profile__image {
   position: relative;
-  width: 150px;  
+  width: 150px;
   height: 150px;
   margin: auto;
-  
+
 }
 
 @media (width >=1024px) {

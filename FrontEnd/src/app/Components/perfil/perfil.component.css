@@ -1,13 +1,13 @@
 .fondo-perfil{
   display: flex;
-  justify-content: center;  
+  justify-content: center;
   min-height: 100vh;
   background-color: #ffd740;
     ;
 }
 
 .contenedor-perfil {
-  
+
   position: relative;
   width: 350px;
   height: 450px;
@@ -34,9 +34,9 @@
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35) ;
   overflow: hidden;
   transition: 0.5s;
-
 }
-.contenedor-perfil:hover .contenedor-img-perfil {  
+
+.contenedor-perfil:hover .contenedor-img-perfil {
   top:-10%;
   width: 200px;
   height: 200px;
@@ -44,14 +44,14 @@
 
 .contenedor-img-perfil img {
   position: absolute;
-  
+
   top:0%;
   left: 0%;
   width: 100%;
   height: 100%;
   object-fit: cover;
 
-} 
+}
 
 .contenedor-perfil .contenido-perfil {
   position: absolute;
@@ -67,16 +67,16 @@
   padding: 2em;
   width:100% ;
   text-align: center;
-  
+
 
 }
 
-@media (max-width: 500px) { 
-  .contenedor-perfil {  
-    
+@media (max-width: 500px) {
+  .contenedor-perfil {
+
     width: 90%;
-    
+
   }
-  
-  
+
+
 }
