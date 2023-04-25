@@ -42,9 +42,9 @@ In conclusion, WorldFit is a must-have solution for any gym looking to improve i
 
 1 - Install [Docker](https://https://docs.docker.com/get-docker/) and [Docker-Compose](https://docs.docker.com/compose/install/)
 
-2 - Clone this repo and move in to the downloaded folder. 
+2 - Clone this repo and move into the downloaded folder.
 
-3 - In the same path of the project folder, Run the command  **`docker-compose up -d`** if you use a UNIX system, or run with docker desktop if you use a windows system.
+3 - In the same path, run the command  **`docker-compose up -d`**.
 
 4 - Thats all! you can go to http://localhost:4200 in your browser and see the project running, with your own db.
 
