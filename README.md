@@ -78,6 +78,9 @@ In conclusion, WorldFit is a must-have solution for any gym looking to improve i
 - Messages to user can't be hardcoded them should be handled. Some refs [here](https://looksok.wordpress.com/2014/07/05/string-externalization-in-spring-3-1-with-messagesource-no-web-xml/) and [here](https://zetcode.com/spring/messagesource/). 
 - If you add a new endpoint, make sure to set the role access for it in the WebSecurity class.
 
+#### 👉🏻 Documentation 📜
+- You can read API docs <a href="https://api.worldfit.site/swagger-ui/index.html#/" target="_blank">here</a>.
+
 #### 👉🏻 Built with 🛠️
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white) 
