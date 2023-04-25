@@ -11,7 +11,7 @@ services:
       - POSTGRES_USER=postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - .docker-run/data:/var/lib/postgresql/data
     restart: always
 
   backend:
@@ -24,7 +24,7 @@ services:
       DB_USERNAME: postgres
       DB_PASSWORD: admin
     volumes:
-      - ./statics/images:/var/lib/images
+      - .docker-run/statics/images:/var/lib/images
     depends_on:
       - db
     restart: always
@@ -39,5 +39,6 @@ services:
       - backend
 
 volumes:
-  statics:
-  data:
+  docker-run:
+  docker-run/statics:
+  docker-run/data:
