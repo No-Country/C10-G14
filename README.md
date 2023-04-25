@@ -32,8 +32,8 @@ In conclusion, WorldFit is a must-have solution for any gym looking to improve i
 <img src="https://i.ibb.co/VxhN0Z2/Screen-Shot-2023-04-21-at-03-38-00.png">
 
 <h3 align="center"><b>You can check out our webpage here:</b></h3>
-<h3 align="center"><a href="www.worldfit.site" target="_blank" rel="noopener noreferrer"> :woman_cartwheeling: World Fit :weight_lifting:</a></h3>
-<p  align="center" ><a href="https://drive.google.com/file/d/1ZkK3e7O97BbAfoZLvHUCO_4H1VGIrdq2/view" target="_blank" rel="noopener noreferrer"> <img src="https://img.shields.io/badge/Video Preview%20-%23FF0000.svg?&style=for-the-badge&logo=YouTube&logoColor=white"/></a></p>
+<h3 align="center"><a href="https://worldfit.site" target="_blank" rel="noopener noreferrer"> :woman_cartwheeling: World Fit :weight_lifting:</a></h3>
+<p  align="center"><a href="https://drive.google.com/file/d/1ZkK3e7O97BbAfoZLvHUCO_4H1VGIrdq2/view" target="_blank" rel="noopener noreferrer"> <img src="https://img.shields.io/badge/Video Preview%20-%23FF0000.svg?&style=for-the-badge&logo=YouTube&logoColor=white"/></a></p>
 </div>
 <hr>
 <br><br>
