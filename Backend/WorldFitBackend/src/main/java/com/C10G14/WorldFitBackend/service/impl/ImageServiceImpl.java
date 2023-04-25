@@ -19,10 +19,7 @@ public class ImageServiceImpl implements ImageService {
     //Con docker
     private  final String FOLDER_PATH= "/var/lib/images/";
 
-    //dev
-//    private final String URL_PATH="localhost:8080/content/images/";
-    //prod
-    private final String URL_PATH="api.worldfit.site/content/images/";
+    private final String URL_PATH = System.getenv("URL_PATH");
 
     @Override
     public boolean checkImage(MultipartFile image) {
