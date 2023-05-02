@@ -8,7 +8,7 @@ public class DtoFormatter {
         if (string != null && !string.isEmpty()){
             return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
         }
-        else return string;
+        return string;
     }
     public String formatName(String string) {
         if (string != null && !string.isEmpty()) {
@@ -25,8 +25,8 @@ public class DtoFormatter {
                 }
             }
             return result.toString();
-        } else {
-            return string;
         }
+            return string;
+
     }
 }

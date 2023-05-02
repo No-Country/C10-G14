@@ -4,7 +4,6 @@ import com.C10G14.WorldFitBackend.enumeration.EUnit;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.context.annotation.Bean;
 
 @Getter
 @Setter
@@ -27,6 +26,15 @@ public class Unit {
         this.name = name;
     }
 
+    public static EUnit UnitToEUnit (String unit){
+        unit = unit.toLowerCase();
+        return switch (unit){
+          case "km" -> EUnit.Km;
+          case "kg" -> EUnit.Kg;
+          case "minutos" -> EUnit.Minutos;
+            default -> EUnit.None;
+        };
+    }
 
     @Override
     public String toString() {

@@ -22,7 +22,6 @@ import java.util.List;
 public class StatisticServiceImpl implements StatisticService {
 
     private final StatisticRepository statisticRepository;
-
     private final StatisticDtoMapper mapper;
 
 

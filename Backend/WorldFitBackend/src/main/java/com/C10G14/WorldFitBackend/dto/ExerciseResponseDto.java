@@ -1,6 +1,5 @@
 package com.C10G14.WorldFitBackend.dto;
 
-import com.C10G14.WorldFitBackend.enumeration.EUnit;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

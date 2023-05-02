@@ -18,7 +18,6 @@ public class ImageServiceImpl implements ImageService {
     //private final String FOLDER_PATH=System.getProperty("user.dir")+"/src/main/resources/static/images/";
     //Con docker
     private  final String FOLDER_PATH= "/var/lib/images/";
-
     private final String URL_PATH = System.getenv("URL_PATH");
 
     @Override

@@ -12,7 +12,6 @@ import com.C10G14.WorldFitBackend.exception.InputNotValidException;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.mapper.UserDtoMapper;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
-import com.C10G14.WorldFitBackend.repository.RoutineRepository;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
 import com.C10G14.WorldFitBackend.service.ImageService;
 import com.C10G14.WorldFitBackend.service.UserService;
@@ -20,7 +19,6 @@ import com.C10G14.WorldFitBackend.util.DtoFormatter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,10 +26,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -46,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public List<UserDto> getAllUsers() throws JsonProcessingException {
+    public List<UserDto> getAllUsers() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<String> roles = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -64,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserDto getUserById(Long id) throws JsonProcessingException {
+    public UserDto getUserById(Long id) {
         return mapper.entityToDto(userRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Error: user not found")));
     }
@@ -88,6 +83,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserDto updateUser(Long id, RegisterRequestDto userDto) throws IOException {
+        //todo refactor funcion
         User user = userRepository.findById(id).orElseThrow(()-> new NotFoundException("Error: user not found"));
 
         if (userDto.getEmail() != null && !userDto.getEmail().isEmpty()) {
@@ -131,17 +127,13 @@ public class UserServiceImpl implements UserService {
     }
     @Transactional
     @Override
-    public UserDto updateRole(Long id, String requestRole) throws JsonProcessingException {
+    public UserDto updateRole(Long id, String requestRole) {
         User user = userRepository.findById(id).
                 orElseThrow(()-> new NotFoundException("Error: User not found"));
         if (user.getRole().contains(roleRepository.findByName(ERole.ROLE_ADMIN).get()))
             throw new ForbiddenException("Error: Cant change admin role");
 
-        ERole roleName = Role.RoletoERole(requestRole);
-        if (roleName == null) {
-            throw new NotFoundException("Error: Role not found");
-        }
-        Role role = roleRepository.findByName(roleName)
+        Role role = roleRepository.findByName(Role.RoletoERole(requestRole))
                 .orElseThrow(() -> new RuntimeException("Error: Role not found."));
         user.getRole().clear();
         user.getRole().add(role);
@@ -151,13 +143,9 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public List<UserDto> getByRole(String requestRole) throws JsonProcessingException {
-        ERole roleName = Role.RoletoERole(requestRole);
-        if (roleName == null) {
-            throw new NotFoundException("Error: Role not found");
-        }
-        Role role = roleRepository.findByName(roleName)
-                .orElseThrow(() -> new RuntimeException("Error: Role not found."));
+    public List<UserDto> getByRole(String requestRole) {
+        Role role = roleRepository.findByName(Role.RoletoERole(requestRole))
+                .orElseThrow(() -> new NotFoundException("Error: Role not found."));
         return mapper.usersToDtoList(userRepository.findByRole(role).orElseThrow(() ->
                 new RuntimeException("Error retrieving role " + requestRole)));
     }
