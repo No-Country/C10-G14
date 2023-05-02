@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/v1/routines")
 @RequiredArgsConstructor
+@RequestMapping("/v1/routines")
 public class RoutineController {
 
     private final RoutineService routineService;

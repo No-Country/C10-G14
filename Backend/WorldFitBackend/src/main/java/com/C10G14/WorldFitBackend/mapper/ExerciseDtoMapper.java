@@ -9,18 +9,18 @@ import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.repository.ExerciseRepository;
 import com.C10G14.WorldFitBackend.repository.UnitRepository;
 import com.C10G14.WorldFitBackend.util.DtoFormatter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class ExerciseDtoMapper {
 
-     @Autowired
-     UnitRepository unitRepository;
-     @Autowired
-     DtoFormatter formatter;
+     private final UnitRepository unitRepository;
+     private final DtoFormatter formatter;
 
     public ExerciseResponseDto EntityToDto (Exercise exercise) {
         return new ExerciseResponseDto(

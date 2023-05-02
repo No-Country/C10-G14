@@ -23,8 +23,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private AuthServiceImpl authService;
+    private final AuthServiceImpl authService;
 
     @Operation(summary = "Register a new user")
     @ApiResponses(value = {

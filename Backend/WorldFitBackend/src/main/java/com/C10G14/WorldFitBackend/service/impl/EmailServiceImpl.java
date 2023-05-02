@@ -3,6 +3,7 @@ package com.C10G14.WorldFitBackend.service.impl;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.service.EmailService;
 import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.core.io.Resource;
@@ -15,12 +16,11 @@ import org.springframework.util.StreamUtils;
 import java.nio.charset.StandardCharsets;
 
 @Service
+@RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
-    @Autowired
-    private JavaMailSender emailSender;
-    @Autowired
-    private ResourceLoader resourceLoader;
+    private final JavaMailSender emailSender;
+    private final ResourceLoader resourceLoader;
 
     @Override
     public void sendHtmlEmail(User user, String subject) {

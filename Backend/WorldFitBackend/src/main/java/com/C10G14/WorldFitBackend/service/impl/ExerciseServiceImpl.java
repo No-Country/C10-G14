@@ -10,6 +10,7 @@ import com.C10G14.WorldFitBackend.mapper.ExerciseDtoMapper;
 import com.C10G14.WorldFitBackend.repository.ExerciseRepository;
 import com.C10G14.WorldFitBackend.repository.UnitRepository;
 import com.C10G14.WorldFitBackend.service.ExerciseService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,24 +18,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ExerciseServiceImpl implements ExerciseService {
 
-    @Autowired
-    private ExerciseRepository exerciseRepository;
-    @Autowired
-    private UnitRepository unitRepository;
-    @Autowired
-    private ExerciseDtoMapper dtoMapper;
+    private final ExerciseRepository exerciseRepository;
+    private final ExerciseDtoMapper dtoMapper;
 
     @Override
     public List<ExerciseResponseDto> getAllExercises() {
         List<Exercise> exercises = exerciseRepository.findAll();
-        return exercises.stream().map(e -> dtoMapper.EntityToDto(e)).collect(Collectors.toList());
+        return exercises.stream().map(dtoMapper::EntityToDto).toList();
     }
 
     @Override
     public ExerciseResponseDto getExerciseById(Long id) {
-        Exercise exercise = exerciseRepository.findById(id).orElseThrow(()-> new NotFoundException("Exercise not found"));
+        Exercise exercise = exerciseRepository.findById(id).orElseThrow(()->
+                new NotFoundException("Exercise not found"));
         return dtoMapper.EntityToDto(exercise);
     }
 
@@ -50,7 +49,8 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public ExerciseResponseDto updateExercise(Long id, ExerciseRequestDto exerciseDto) {
-        Exercise exercise = exerciseRepository.findById(id).orElseThrow(() -> new NotFoundException("Exercise not found"));
+        Exercise exercise = exerciseRepository.findById(id).orElseThrow(() ->
+                new NotFoundException("Exercise not found"));
         Exercise updatedExercise = dtoMapper.DtoToEntity(exerciseDto);
         updatedExercise.setId(exercise.getId());
         try {
@@ -63,7 +63,8 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public void deleteExercise(Long id) {
-        Exercise exercise = exerciseRepository.findById(id).orElseThrow(()-> new NotFoundException("Exercise not found"));
+        Exercise exercise = exerciseRepository.findById(id).orElseThrow(()->
+                new NotFoundException("Exercise not found"));
         try {
             exerciseRepository.delete(exercise);
         }catch(Exception e){

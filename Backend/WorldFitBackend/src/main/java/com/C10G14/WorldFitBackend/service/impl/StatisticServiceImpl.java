@@ -8,6 +8,7 @@ import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.mapper.StatisticDtoMapper;
 import com.C10G14.WorldFitBackend.repository.StatisticRepository;
 import com.C10G14.WorldFitBackend.service.StatisticService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +18,12 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class StatisticServiceImpl implements StatisticService {
 
-    @Autowired
-    StatisticRepository statisticRepository;
+    private final StatisticRepository statisticRepository;
 
-    @Autowired
-    StatisticDtoMapper mapper;
+    private final StatisticDtoMapper mapper;
 
 
     @Override

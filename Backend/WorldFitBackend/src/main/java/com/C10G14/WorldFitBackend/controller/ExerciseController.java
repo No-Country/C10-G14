@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +20,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/v1/exercises")
 public class ExerciseController {
 
-    @Autowired
-    private ExerciseService exerciseService;
+    private final ExerciseService exerciseService;
 
     @Operation(summary = "Get all exercises")
     @ApiResponses(value = {
@@ -102,7 +103,8 @@ public class ExerciseController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @PutMapping("/{id}")
-    public ResponseEntity<ExerciseResponseDto> updateExercise(@PathVariable Long id, @RequestBody @Valid ExerciseRequestDto exercise) {
+    public ResponseEntity<ExerciseResponseDto> updateExercise(@PathVariable Long id,
+                                                              @RequestBody @Valid ExerciseRequestDto exercise) {
         ExerciseResponseDto updatedExercise = exerciseService.updateExercise(id, exercise);
         return new ResponseEntity<>(updatedExercise, HttpStatus.OK);
     }

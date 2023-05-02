@@ -11,6 +11,7 @@ import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.repository.RoutineRepository;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
 import com.C10G14.WorldFitBackend.util.DtoFormatter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -20,14 +21,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class RoutineDtoMapper {
 
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    RoutineRepository routineRepository;
-    @Autowired
-    DtoFormatter formatter;
+    private final UserRepository userRepository;
+    private final DtoFormatter formatter;
 
     public RoutineResponseDto EntityToDto (Routine routine) {
         Set<Exercise_RoutineResponseDto> exercises = routine.getExercises().stream().map(e ->
