@@ -32,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
     private final EmailService emailService;
 
     @Override
-    public AuthenticationResponseDto register(RegisterRequestDto request) throws IOException {
+    public AuthenticationResponseDto register(RegisterRequestDto request) {
         if (userRepository.existsByEmail(request.getEmail().toLowerCase())){
             throw new AlreadyExistException("Error: Email already taken");
         }

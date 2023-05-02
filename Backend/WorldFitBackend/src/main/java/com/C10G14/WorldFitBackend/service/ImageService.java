@@ -6,5 +6,5 @@ import java.io.IOException;
 
 public interface ImageService {
     boolean checkImage (MultipartFile image);
-    String uploadImage (MultipartFile image, String userEmail) throws IOException;
+    String uploadImage (MultipartFile image, String userEmail);
 }

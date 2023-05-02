@@ -46,7 +46,7 @@ public class AuthController {
                     content = @Content)})
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@ModelAttribute @Valid
-                                                                  RegisterRequestDto request) throws IOException {
+                                              RegisterRequestDto request) {
         AuthenticationResponseDto registerResponse = authService.register(request);
         return new ResponseEntity<>(registerResponse, HttpStatus.OK);
     }
@@ -63,8 +63,8 @@ public class AuthController {
                     """,
                     content = @Content)})
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponseDto> authenticateUser(@RequestBody
-                                                                      AuthenticationRequestDto request) {
+    public ResponseEntity<AuthenticationResponseDto> authenticateUser(
+                                            @RequestBody AuthenticationRequestDto request) {
         AuthenticationResponseDto authResponse = authService.authenticate(request);
         return new ResponseEntity<>(authResponse, HttpStatus.OK);
     }

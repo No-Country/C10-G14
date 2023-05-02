@@ -37,7 +37,7 @@ public class UserController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @GetMapping
-    public List<UserDto> getAllUsers() throws JsonProcessingException{
+    public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
     }
 
@@ -54,7 +54,7 @@ public class UserController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @GetMapping("/role/{role}")
-    public List<UserDto> getByRole(@PathVariable String role) throws JsonProcessingException {
+    public List<UserDto> getByRole(@PathVariable String role) {
         return userService.getByRole(role);
     }
 
@@ -73,7 +73,7 @@ public class UserController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COACH') or #userId == authentication.principal.id")
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) throws JsonProcessingException {
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
         UserDto user = userService.getUserById(userId);
         return ResponseEntity.ok(user);
     }
@@ -104,7 +104,7 @@ public class UserController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user) throws JsonProcessingException {
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user) {
         UserDto newUser = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
@@ -134,7 +134,7 @@ public class UserController {
     @PreAuthorize("#userId == authentication.principal.id")
     @PutMapping("/{userId}")
     public ResponseEntity<UserDto> updateUser(@PathVariable Long userId,
-                                              @ModelAttribute RegisterRequestDto user) throws IOException {
+                                              @ModelAttribute RegisterRequestDto user) {
         UserDto updatedUser = userService.updateUser(userId, user);
         return ResponseEntity.ok(updatedUser);
     }
@@ -152,7 +152,7 @@ public class UserController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or (hasRole('COACH') and (#role == 'customer' or #role == 'user'))")
     @PutMapping("/role/{userId}/{role}")
-    public ResponseEntity<UserDto> updateRole(@PathVariable Long userId, @PathVariable String role) throws JsonProcessingException {
+    public ResponseEntity<UserDto> updateRole(@PathVariable Long userId, @PathVariable String role) {
         UserDto updatedUser = userService.updateRole(userId, role);
         return ResponseEntity.ok(updatedUser);
     }
@@ -189,7 +189,7 @@ public class UserController {
                     content = @Content),})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COACH') or #userId == authentication.principal.id")
     @GetMapping("/routine/{userId}")
-    public ResponseEntity<SimpleUserDto> getUserRoutines(@PathVariable Long userId) throws JsonProcessingException{
+    public ResponseEntity<SimpleUserDto> getUserRoutines(@PathVariable Long userId) {
         SimpleUserDto user = userService.getSimpleUserById(userId);
         return ResponseEntity.ok(user);
     }
