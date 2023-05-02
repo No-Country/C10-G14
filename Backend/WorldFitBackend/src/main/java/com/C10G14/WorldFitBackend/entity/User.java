@@ -3,8 +3,6 @@ package com.C10G14.WorldFitBackend.entity;
 import com.C10G14.WorldFitBackend.enumeration.ESex;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

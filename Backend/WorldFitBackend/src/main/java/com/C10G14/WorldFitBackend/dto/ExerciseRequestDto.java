@@ -2,14 +2,11 @@ package com.C10G14.WorldFitBackend.dto;
 
 import com.C10G14.WorldFitBackend.enumeration.EUnit;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
-
-import java.util.Optional;
 
 
 @Data
@@ -25,15 +22,4 @@ public class ExerciseRequestDto {
 
     private String unit;
 
-    public EUnit unitToEUnit (){
-        if (this.unit == null || this.unit.equals("")){
-            return EUnit.None;
-        }
-        return switch (this.unit) {
-            case "Kg" -> EUnit.Kg;
-            case "Km" -> EUnit.Km;
-            case "Minutos" -> EUnit.Minutos;
-            default -> EUnit.None;
-        };
-    }
 }

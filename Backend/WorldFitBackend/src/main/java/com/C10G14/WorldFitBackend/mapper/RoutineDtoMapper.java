@@ -5,18 +5,12 @@ import com.C10G14.WorldFitBackend.dto.RoutineRequestDto;
 import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
 import com.C10G14.WorldFitBackend.entity.Routine;
 import com.C10G14.WorldFitBackend.entity.User;
-import com.C10G14.WorldFitBackend.exception.AlreadyExistException;
-import com.C10G14.WorldFitBackend.exception.CantBeEmptyException;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
-import com.C10G14.WorldFitBackend.repository.RoutineRepository;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
 import com.C10G14.WorldFitBackend.util.DtoFormatter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 

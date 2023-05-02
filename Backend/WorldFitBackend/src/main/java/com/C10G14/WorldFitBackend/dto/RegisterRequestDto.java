@@ -3,11 +3,8 @@ package com.C10G14.WorldFitBackend.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import org.hibernate.validator.constraints.URL;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 
 @Getter
 @Setter

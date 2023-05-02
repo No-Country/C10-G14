@@ -28,13 +28,14 @@ public class Role {
     }
 
     public static ERole RoletoERole (String role) {
-        return (role.equals("user")? ERole.ROLE_USER :
-                (role.equals("coach")? ERole.ROLE_COACH :
-                        (role.equals("customer")? ERole.ROLE_CUSTOMER :
-                                (role.equals("admin")? ERole.ROLE_ADMIN :
-                                        null)
-                        )
-                )
-        );
+        role = role.toLowerCase();
+        return switch (role){
+            case "user" -> ERole.ROLE_USER;
+            case "coach" -> ERole.ROLE_COACH;
+            case "customer" -> ERole.ROLE_CUSTOMER;
+            case "admin" -> ERole.ROLE_ADMIN;
+            default -> null;
+        };
+
     }
 }

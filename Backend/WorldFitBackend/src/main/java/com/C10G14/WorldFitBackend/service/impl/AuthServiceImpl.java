@@ -1,6 +1,5 @@
 package com.C10G14.WorldFitBackend.service.impl;
 
-import com.C10G14.WorldFitBackend.enumeration.ERole;
 import com.C10G14.WorldFitBackend.exception.AlreadyExistException;
 import com.C10G14.WorldFitBackend.mapper.AuthDtoMapper;
 import com.C10G14.WorldFitBackend.service.AuthService;
@@ -10,23 +9,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import com.C10G14.WorldFitBackend.dto.AuthenticationRequestDto;
 import com.C10G14.WorldFitBackend.dto.AuthenticationResponseDto;
 import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
-import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.User;
-import com.C10G14.WorldFitBackend.repository.RoleRepository;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.C10G14.WorldFitBackend.security.jwt.JwtService;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -36,7 +27,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final AuthDtoMapper authMapper;
+    private final AuthDtoMapper mapper;
     private final ImageService imageService;
     private final EmailService emailService;
 
@@ -45,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
         if (userRepository.existsByEmail(request.getEmail().toLowerCase())){
             throw new AlreadyExistException("Error: Email already taken");
         }
-        User newUser = authMapper.requestToEntity(request);
+        User newUser = mapper.requestToEntity(request);
 
         if (!Objects.equals(request.getProfileImg(),null)){
         if (imageService.checkImage(request.getProfileImg())){
