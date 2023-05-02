@@ -14,6 +14,7 @@ import com.C10G14.WorldFitBackend.repository.UserRepository;
 import com.C10G14.WorldFitBackend.util.DtoFormatter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,19 +23,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class UserDtoMapper {
-    @Autowired
-    RoleRepository roleRepository;
-    @Autowired
-    RoutineDtoMapper routineMapper;
+    private final RoleRepository roleRepository;
+    private final RoutineDtoMapper routineMapper;
+    private final DtoFormatter formatter;
 
-    @Autowired
-    DtoFormatter formatter;
-
-    public UserDto entityToDto (User user) throws JsonProcessingException {
+    public UserDto entityToDto (User user)  {
 
         List <RoutineResponseDto> routines = user.getRoutines().stream().map(
-                (e) -> routineMapper.EntityToDto(e)
+                routineMapper::EntityToDto
         ).toList();
 
         List <String> strRoles = user.getRole().stream().map(
@@ -57,7 +55,7 @@ public class UserDtoMapper {
 
     public SimpleUserDto entityToSimpleDto (User user) throws JsonProcessingException {
         List <RoutineResponseDto> routines = user.getRoutines().stream().map(
-                (e) -> routineMapper.EntityToDto(e)
+                routineMapper::EntityToDto
         ).toList();
 
         return new SimpleUserDto(user.getId().toString(),
@@ -87,12 +85,12 @@ public class UserDtoMapper {
                         .orElseThrow(() -> new NotFoundException("Error: Role not found: " + r))
         ).toList());
 
-        user.setRoutines(new HashSet<>());
+        user.setRoutines(new LinkedHashSet<>());
 
         return user;
     }
 
-    public List<UserDto> usersToDtoList(List<User> users) throws JsonProcessingException {
+    public List<UserDto> usersToDtoList(List<User> users)  {
         List <UserDto> usersDto = new ArrayList<>();
         for (User user : users) {
             usersDto.add(entityToDto(user));

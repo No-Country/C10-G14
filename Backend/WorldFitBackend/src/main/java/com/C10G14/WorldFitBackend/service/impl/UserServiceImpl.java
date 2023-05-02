@@ -19,6 +19,7 @@ import com.C10G14.WorldFitBackend.service.UserService;
 import com.C10G14.WorldFitBackend.util.DtoFormatter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -34,20 +35,14 @@ import java.util.stream.Collectors;
 
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserDtoMapper mapper;
-    @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private RoutineRepository routineRepository;
-    @Autowired
-    private ImageService imageService;
-    @Autowired
-    private DtoFormatter formatter;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final ImageService imageService;
+    private final UserDtoMapper mapper;
+    private final DtoFormatter formatter;
 
     @Transactional
     @Override
@@ -70,13 +65,15 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserDto getUserById(Long id) throws JsonProcessingException {
-        return mapper.entityToDto(userRepository.findById(id).orElseThrow(() -> new NotFoundException("Error: user not found")));
+        return mapper.entityToDto(userRepository.findById(id).orElseThrow(() ->
+                new NotFoundException("Error: user not found")));
     }
 
     @Transactional
     @Override
     public SimpleUserDto getSimpleUserById(Long id) throws JsonProcessingException {
-        return mapper.entityToSimpleDto(userRepository.findById(id).orElseThrow(() -> new NotFoundException("Error: user not found")));
+        return mapper.entityToSimpleDto(userRepository.findById(id).orElseThrow(() ->
+                new NotFoundException("Error: user not found")));
     }
 
     @Transactional
@@ -84,7 +81,8 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(UserDto userDto) throws JsonProcessingException {
         User user = mapper.dtoToEntity(userDto);
         userRepository.save(user);
-        return mapper.entityToDto(userRepository.findByEmail(userDto.getEmail()).orElseThrow( () -> new RuntimeException("There is a problem creating the user")));
+        return mapper.entityToDto(userRepository.findByEmail(userDto.getEmail()).orElseThrow( () ->
+                new RuntimeException("There is a problem creating the user")));
     }
 
     @Transactional
@@ -160,7 +158,8 @@ public class UserServiceImpl implements UserService {
         }
         Role role = roleRepository.findByName(roleName)
                 .orElseThrow(() -> new RuntimeException("Error: Role not found."));
-        return mapper.usersToDtoList(userRepository.findByRole(role).orElseThrow(() -> new RuntimeException("Error retrieving role " + requestRole)));
+        return mapper.usersToDtoList(userRepository.findByRole(role).orElseThrow(() ->
+                new RuntimeException("Error retrieving role " + requestRole)));
     }
 
     @Transactional

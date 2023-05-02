@@ -20,8 +20,8 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/users")
 @RequiredArgsConstructor
+@RequestMapping("/v1/users")
 public class UserController {
 
     private final UserService userService;
@@ -37,7 +37,7 @@ public class UserController {
                     content = @Content)})
     @PreAuthorize("hasRole('ADMIN') or hasRole('COACH')")
     @GetMapping
-    public List<UserDto> getAllUsers() throws JsonProcessingException {
+    public List<UserDto> getAllUsers() throws JsonProcessingException{
         return userService.getAllUsers();
     }
 

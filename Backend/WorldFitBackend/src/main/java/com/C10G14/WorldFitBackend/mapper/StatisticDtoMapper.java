@@ -3,14 +3,16 @@ package com.C10G14.WorldFitBackend.mapper;
 import com.C10G14.WorldFitBackend.dto.StatisticDto;
 import com.C10G14.WorldFitBackend.entity.Statistic;
 import com.C10G14.WorldFitBackend.repository.StatisticRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class StatisticDtoMapper {
-    StatisticRepository statisticRepository;
+    private final StatisticRepository statisticRepository;
     public StatisticDto entityToDto (Statistic statistic) {
         return new StatisticDto(
                 statistic.getId(),

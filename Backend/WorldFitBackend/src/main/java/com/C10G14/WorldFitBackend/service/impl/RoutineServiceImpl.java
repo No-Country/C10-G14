@@ -12,6 +12,7 @@ import com.C10G14.WorldFitBackend.mapper.RoutineDtoMapper;
 import com.C10G14.WorldFitBackend.repository.ExerciseRepository;
 import com.C10G14.WorldFitBackend.repository.RoutineRepository;
 import com.C10G14.WorldFitBackend.service.RoutineService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +21,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class RoutineServiceImpl implements RoutineService {
 
-    @Autowired
-    private RoutineRepository routineRepository;
-    @Autowired
-    private ExerciseRepository exerciseRepository;
-    @Autowired
-    private RoutineDtoMapper dtoMapper;
+    private final RoutineRepository routineRepository;
+    private final ExerciseRepository exerciseRepository;
+    private final RoutineDtoMapper dtoMapper;
 
     @Override
     public RoutineResponseDto createRoutine(RoutineRequestDto routineDto) {
@@ -42,18 +41,20 @@ public class RoutineServiceImpl implements RoutineService {
     @Override
     public List<RoutineResponseDto> getAllRoutines() {
         List<Routine> routines = routineRepository.findAll();
-        return routines.stream().map(e -> dtoMapper.EntityToDto(e)).collect(Collectors.toList());
+        return routines.stream().map(dtoMapper::EntityToDto).collect(Collectors.toList());
     }
 
     @Override
     public RoutineResponseDto getRoutineById(long id) {
-        Routine routine = routineRepository.findById(id).orElseThrow(()-> new NotFoundException("Routine not found"));
+        Routine routine = routineRepository.findById(id).orElseThrow(()->
+                new NotFoundException("Routine not found"));
         return dtoMapper.EntityToDto(routine);
     }
 
     @Override
     public RoutineResponseDto updateRoutine(long id, RoutineRequestDto routineDto) {
-        Routine routine = routineRepository.findById(id).orElseThrow(()-> new NotFoundException("Routine not found"));
+        Routine routine = routineRepository.findById(id).orElseThrow(()->
+                new NotFoundException("Routine not found"));
         routine.setTitle(routineDto.getTitle());
         Routine updatedRoutine = routineRepository.save(routine);
         return dtoMapper.EntityToDto(updatedRoutine);
@@ -61,13 +62,16 @@ public class RoutineServiceImpl implements RoutineService {
 
     @Override
     public void deleteRoutine(long id) {
-        Routine routine = routineRepository.findById(id).orElseThrow(()-> new NotFoundException("Routine not found"));
+        Routine routine = routineRepository.findById(id).orElseThrow(()->
+                new NotFoundException("Routine not found"));
         routineRepository.delete(routine);
     }
 
     public RoutineResponseDto addExercise(long routineId, Exercise_RoutineRequestDto e) {
-        Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new NotFoundException("Routine not found"));
-        Exercise exercise = exerciseRepository.findById(e.getExerciseId()).orElseThrow(()-> new NotFoundException("Exercise not found"));
+        Routine routine = routineRepository.findById(routineId).orElseThrow(()->
+                new NotFoundException("Routine not found"));
+        Exercise exercise = exerciseRepository.findById(e.getExerciseId()).orElseThrow(()->
+                new NotFoundException("Exercise not found"));
 
         routine.addExercise(exercise,e.getQuantity(),e.getSeries(),e.getRepetitions());
         Routine updatedRoutine = routineRepository.save(routine);
@@ -77,8 +81,10 @@ public class RoutineServiceImpl implements RoutineService {
 
     @Override
     public RoutineResponseDto updateExercise(long routineId, Exercise_RoutineRequestDto e) {
-        Routine routine = routineRepository.findById(routineId).orElseThrow(()-> new NotFoundException("Routine not found"));
-        Exercise exercise = exerciseRepository.findById(e.getExerciseId()).orElseThrow(()-> new NotFoundException("Exercise not found"));
+        Routine routine = routineRepository.findById(routineId).orElseThrow(()->
+                new NotFoundException("Routine not found"));
+        Exercise exercise = exerciseRepository.findById(e.getExerciseId()).orElseThrow(()->
+                new NotFoundException("Exercise not found"));
 
         routine.updateExercise(exercise,e.getQuantity(),e.getSeries(),e.getRepetitions());
         Routine updatedRoutine = routineRepository.save(routine);

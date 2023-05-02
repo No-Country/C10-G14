@@ -7,6 +7,7 @@ import com.C10G14.WorldFitBackend.enumeration.ERole;
 import com.C10G14.WorldFitBackend.enumeration.ESex;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
 import com.C10G14.WorldFitBackend.util.DtoFormatter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -17,13 +18,12 @@ import java.util.Objects;
 
 
 @Component
+@RequiredArgsConstructor
 public class AuthDtoMapper {
-    @Autowired
-    RoleRepository roleRepository;
-    @Autowired
-    PasswordEncoder passwordEncoder;
-    @Autowired
-    DtoFormatter formatter;
+
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final DtoFormatter formatter;
 
     public User requestToEntity(RegisterRequestDto registerRequestDto){
         List<Role> roles = new ArrayList<Role>();

@@ -24,14 +24,11 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private JwtService jwtService;
+    private final JwtService jwtService;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
-    @Autowired
-    OAuthJwtAuthenticationConverter jwtToUserConverter;
+    private final OAuthJwtAuthenticationConverter jwtToUserConverter;
 
 //    private static final Logger logger = LoggerFactory.getLogger(JwtAuthorizationFilter.class);
 

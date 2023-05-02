@@ -30,6 +30,7 @@ public class Exercise_RoutineResponseDto {
         this.title = exercise.getTitle();
         this.description = exercise.getDescription();
         this.media = exercise.getMedia();
+        //todo corregir desde el front
         String unitName = exercise.getUnit().getName().toString();
         if (unitName.equals("None")){unitName = "";};
         this.unit = unitName;

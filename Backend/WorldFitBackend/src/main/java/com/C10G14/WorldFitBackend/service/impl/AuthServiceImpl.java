@@ -33,20 +33,12 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-    @Autowired
-    private UserRepository userrepository;
-    @Autowired
-    private JwtService jwtService;
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private AuthDtoMapper authMapper;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private ImageService imageService;
-    @Autowired
-    private EmailService emailService;
+    private final UserRepository userRepository;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
+    private final AuthDtoMapper authMapper;
+    private final ImageService imageService;
+    private final EmailService emailService;
 
     @Override
     public AuthenticationResponseDto register(RegisterRequestDto request) throws IOException {
@@ -62,7 +54,7 @@ public class AuthServiceImpl implements AuthService {
         }
         }
 
-        userrepository.save(newUser);
+        userRepository.save(newUser);
         emailService.sendHtmlEmail(newUser,"Bienvenido");
         String jwtToken = jwtService.generateToken(newUser);
         AuthenticationResponseDto authResponse = new AuthenticationResponseDto();
@@ -78,7 +70,7 @@ public class AuthServiceImpl implements AuthService {
                         request.getPassword()
                 )
         );
-        User user = userrepository.findByEmail(request.getEmail())
+        User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("Error: Username not found"));
         String jwtToken = jwtService.generateToken(user);
         AuthenticationResponseDto authResponse = new AuthenticationResponseDto();
