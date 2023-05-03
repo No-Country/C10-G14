@@ -5,6 +5,7 @@ import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.enumeration.ERole;
 import com.C10G14.WorldFitBackend.enumeration.ESex;
+import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
 import com.C10G14.WorldFitBackend.util.DtoFormatter;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class AuthDtoMapper {
     public User requestToEntity(RegisterRequestDto registerRequestDto){
         List<Role> roles = new ArrayList<Role>();
         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                .orElseThrow(()-> new RuntimeException("Role USER not found"));
+                .orElseThrow(()-> new NotFoundException("Role USER not found"));
         roles.add(userRole);
 
         ESex sex = (Objects.equals(registerRequestDto.getSex(),null)) ? ESex.NOT_SPECIFIED :

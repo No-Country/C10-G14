@@ -1,6 +1,7 @@
 package com.C10G14.WorldFitBackend.security.jwt;
 
 import com.C10G14.WorldFitBackend.entity.User;
+import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.repository.UserRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -39,7 +40,7 @@ public class JwtService {
     public String generateToken(UserDetails userDetails
                                 ) {
         User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(
-                ()-> new RuntimeException("Error fetching user details in JWT service"));
+                ()-> new NotFoundException("Error fetching user details in JWT service"));
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
         String authority = authorities.stream()
                 .map(GrantedAuthority::getAuthority)

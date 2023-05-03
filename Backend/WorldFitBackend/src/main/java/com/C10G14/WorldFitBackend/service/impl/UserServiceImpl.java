@@ -66,23 +66,23 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public SimpleUserDto getSimpleUserById(Long id) throws JsonProcessingException {
+    public SimpleUserDto getSimpleUserById(Long id) {
         return mapper.entityToSimpleDto(userRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Error: user not found")));
     }
 
     @Transactional
     @Override
-    public UserDto createUser(UserDto userDto) throws JsonProcessingException {
+    public UserDto createUser(UserDto userDto) {
         User user = mapper.dtoToEntity(userDto);
         userRepository.save(user);
         return mapper.entityToDto(userRepository.findByEmail(userDto.getEmail()).orElseThrow( () ->
-                new RuntimeException("There is a problem creating the user")));
+                new NotFoundException("There is a problem creating the user")));
     }
 
     @Transactional
     @Override
-    public UserDto updateUser(Long id, RegisterRequestDto userDto) throws IOException {
+    public UserDto updateUser(Long id, RegisterRequestDto userDto){
         //todo refactor funcion
         User user = userRepository.findById(id).orElseThrow(()-> new NotFoundException("Error: user not found"));
 
@@ -134,7 +134,7 @@ public class UserServiceImpl implements UserService {
             throw new ForbiddenException("Error: Cant change admin role");
 
         Role role = roleRepository.findByName(Role.RoletoERole(requestRole))
-                .orElseThrow(() -> new RuntimeException("Error: Role not found."));
+                .orElseThrow(() -> new NotFoundException("Error: Role not found."));
         user.getRole().clear();
         user.getRole().add(role);
         userRepository.save(user);
@@ -147,7 +147,7 @@ public class UserServiceImpl implements UserService {
         Role role = roleRepository.findByName(Role.RoletoERole(requestRole))
                 .orElseThrow(() -> new NotFoundException("Error: Role not found."));
         return mapper.usersToDtoList(userRepository.findByRole(role).orElseThrow(() ->
-                new RuntimeException("Error retrieving role " + requestRole)));
+                new NotFoundException("Error retrieving role " + requestRole)));
     }
 
     @Transactional

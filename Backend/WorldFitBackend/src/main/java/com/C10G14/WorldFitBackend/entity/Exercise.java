@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Getter
@@ -50,17 +50,15 @@ public class Exercise {
         this.description = description;
         this.media = media;
         this.unit = unit;
-        this.routines = new HashSet<>();
+        this.routines = new LinkedHashSet<>();
     }
     public Exercise(Long id, String title, String media, Unit unit) {
         this.id = id;
         this.title = title;
         this.media = media;
         this.unit = unit;
-        this.routines = new HashSet<>();
+        this.routines = new LinkedHashSet<>();
     }
-
-
 
     @Override
     public String toString() {
@@ -72,6 +70,4 @@ public class Exercise {
                 '}';
     }
 
-    public void setName(String sentadillas) {
-    }
 }

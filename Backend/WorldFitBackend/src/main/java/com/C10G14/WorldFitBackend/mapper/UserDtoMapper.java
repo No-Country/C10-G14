@@ -9,7 +9,6 @@ import com.C10G14.WorldFitBackend.enumeration.ESex;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.repository.RoleRepository;
 import com.C10G14.WorldFitBackend.util.DtoFormatter;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +21,7 @@ public class UserDtoMapper {
     private final RoutineDtoMapper routineMapper;
     private final DtoFormatter formatter;
 
-    public UserDto entityToDto (User user)  {
+    public UserDto entityToDto (User user){
 
         List <RoutineResponseDto> routines = user.getRoutines().stream().map(
                 routineMapper::EntityToDto
@@ -46,7 +45,7 @@ public class UserDtoMapper {
                 routines);
     }
 
-    public SimpleUserDto entityToSimpleDto (User user) throws JsonProcessingException {
+    public SimpleUserDto entityToSimpleDto (User user){
         List <RoutineResponseDto> routines = user.getRoutines().stream().map(
                 routineMapper::EntityToDto
         ).toList();
@@ -59,7 +58,7 @@ public class UserDtoMapper {
                 routines);
     }
 
-    public User dtoToEntity(UserDto dto) throws JsonProcessingException {
+    public User dtoToEntity (UserDto dto){
         ESex sex = (Objects.equals(dto.getSex(),null)) ? ESex.NOT_SPECIFIED :
                 (dto.getSex().equalsIgnoreCase("male"))?  ESex.MALE : ESex.FEMALE ;
         User user = new User();
@@ -83,7 +82,7 @@ public class UserDtoMapper {
         return user;
     }
 
-    public List<UserDto> usersToDtoList(List<User> users)  {
+    public List<UserDto> usersToDtoList (List<User> users){
         List <UserDto> usersDto = new ArrayList<>();
         for (User user : users) {
             usersDto.add(entityToDto(user));

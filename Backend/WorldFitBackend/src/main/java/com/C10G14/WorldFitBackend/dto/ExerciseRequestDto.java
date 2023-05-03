@@ -1,6 +1,5 @@
 package com.C10G14.WorldFitBackend.dto;
 
-import com.C10G14.WorldFitBackend.enumeration.EUnit;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

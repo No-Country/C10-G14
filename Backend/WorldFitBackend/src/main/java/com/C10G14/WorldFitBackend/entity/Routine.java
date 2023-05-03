@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 
@@ -36,26 +37,14 @@ public class Routine {
     @JoinColumn(name = "user_id", referencedColumnName = "ID", nullable = false)
     private User user;
 
-    public Routine(Long id, String title, User user) {
-        this.id = id;
-        this.title = title;
-        this.user = user;
-        this.exercises = new HashSet<>();
-    }
-
     public Routine(String title, User user) {
         this.title = title;
         this.user = user;
-        this.exercises = new HashSet<>();
+        this.exercises = new LinkedHashSet<>();
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Routine(String title) {
-        this.title = title;
-        this.exercises= new HashSet<>();
     }
 
     public void addExercise(Exercise exercise, int quantity, int repetitions, int series){

@@ -39,7 +39,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public String uploadImage(MultipartFile image, String userEmail) throws IOException {
+    public String uploadImage(MultipartFile image, String userEmail) {
         StringBuilder imgPath = new StringBuilder();
         String encodedEmail = Base64.getEncoder().encodeToString(userEmail.getBytes());
         String contentType = image.getContentType().replace("image/",".");
@@ -47,7 +47,11 @@ public class ImageServiceImpl implements ImageService {
                 append(encodedEmail).
                 append(contentType);
 
-        image.transferTo(new File(imgPath.toString()));
+        try {
+            image.transferTo(new File(imgPath.toString()));
+        }catch(IOException e){
+            return e.getMessage();
+        }
         return URL_PATH+encodedEmail+contentType;
     }
     }
