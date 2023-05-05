@@ -1,8 +1,7 @@
 package com.C10G14.WorldFitBackend.service;
 
-import com.C10G14.WorldFitBackend.dto.StatisticDateDto;
-import com.C10G14.WorldFitBackend.dto.StatisticDto;
-import com.C10G14.WorldFitBackend.entity.Statistic;
+import com.C10G14.WorldFitBackend.dto.statistic.StatisticDateDto;
+import com.C10G14.WorldFitBackend.dto.statistic.StatisticDto;
 
 import java.util.List;
 

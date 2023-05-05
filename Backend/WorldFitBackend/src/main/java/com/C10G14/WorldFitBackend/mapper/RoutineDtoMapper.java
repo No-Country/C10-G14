@@ -1,8 +1,8 @@
 package com.C10G14.WorldFitBackend.mapper;
 
-import com.C10G14.WorldFitBackend.dto.Exercise_RoutineResponseDto;
-import com.C10G14.WorldFitBackend.dto.RoutineRequestDto;
-import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
+import com.C10G14.WorldFitBackend.dto.exercise.Exercise_RoutineResponseDto;
+import com.C10G14.WorldFitBackend.dto.routine.RoutineRequestDto;
+import com.C10G14.WorldFitBackend.dto.routine.RoutineResponseDto;
 import com.C10G14.WorldFitBackend.entity.Routine;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;

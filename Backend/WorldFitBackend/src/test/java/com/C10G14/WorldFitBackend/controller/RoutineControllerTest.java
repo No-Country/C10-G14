@@ -2,10 +2,10 @@ package com.C10G14.WorldFitBackend.controller;
 
 import java.util.*;
 
-import com.C10G14.WorldFitBackend.dto.Exercise_RoutineRequestDto;
-import com.C10G14.WorldFitBackend.dto.Exercise_RoutineResponseDto;
-import com.C10G14.WorldFitBackend.dto.RoutineRequestDto;
-import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
+import com.C10G14.WorldFitBackend.dto.exercise.Exercise_RoutineRequestDto;
+import com.C10G14.WorldFitBackend.dto.exercise.Exercise_RoutineResponseDto;
+import com.C10G14.WorldFitBackend.dto.routine.RoutineRequestDto;
+import com.C10G14.WorldFitBackend.dto.routine.RoutineResponseDto;
 import com.C10G14.WorldFitBackend.entity.*;
 import com.C10G14.WorldFitBackend.enumeration.ESex;
 import com.C10G14.WorldFitBackend.security.jwt.JwtService;

@@ -1,6 +1,6 @@
 package com.C10G14.WorldFitBackend.controller;
 
-import com.C10G14.WorldFitBackend.dto.PaymentDto;
+import com.C10G14.WorldFitBackend.dto.payment.PaymentDto;
 import com.C10G14.WorldFitBackend.security.jwt.JwtService;
 import com.C10G14.WorldFitBackend.service.PaymentService;
 import com.fasterxml.jackson.databind.ObjectMapper;

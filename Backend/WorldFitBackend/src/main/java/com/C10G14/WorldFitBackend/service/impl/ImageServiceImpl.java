@@ -21,7 +21,7 @@ public class ImageServiceImpl implements ImageService {
     private final String URL_PATH = System.getenv("URL_PATH");
 
     @Override
-    public boolean checkImage(MultipartFile image) {
+    public boolean isImageValid(MultipartFile image) {
         if (Objects.equals(image.getContentType(),null)){
             throw new InputNotValidException("Not a valid image");
         }
@@ -39,7 +39,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public String uploadImage(MultipartFile image, String userEmail) {
+    public String upload(MultipartFile image, String userEmail) {
         StringBuilder imgPath = new StringBuilder();
         String encodedEmail = Base64.getEncoder().encodeToString(userEmail.getBytes());
         String contentType = image.getContentType().replace("image/",".");

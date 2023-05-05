@@ -1,7 +1,7 @@
 package com.C10G14.WorldFitBackend.controller;
 
-import com.C10G14.WorldFitBackend.dto.ExerciseRequestDto;
-import com.C10G14.WorldFitBackend.dto.ExerciseResponseDto;
+import com.C10G14.WorldFitBackend.dto.exercise.ExerciseRequestDto;
+import com.C10G14.WorldFitBackend.dto.exercise.ExerciseResponseDto;
 import com.C10G14.WorldFitBackend.dto.MessageResponse;
 import com.C10G14.WorldFitBackend.service.ExerciseService;
 import io.swagger.v3.oas.annotations.Operation;

@@ -10,12 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.C10G14.WorldFitBackend.dto.AuthenticationRequestDto;
-import com.C10G14.WorldFitBackend.dto.AuthenticationResponseDto;
-import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
+import com.C10G14.WorldFitBackend.dto.user.AuthenticationRequestDto;
+import com.C10G14.WorldFitBackend.dto.user.AuthenticationResponseDto;
+import com.C10G14.WorldFitBackend.dto.user.RegisterRequestDto;
 import com.C10G14.WorldFitBackend.service.impl.AuthServiceImpl;
-
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/v1/auth")

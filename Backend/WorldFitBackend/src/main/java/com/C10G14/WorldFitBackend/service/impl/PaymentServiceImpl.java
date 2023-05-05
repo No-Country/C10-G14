@@ -1,6 +1,6 @@
 package com.C10G14.WorldFitBackend.service.impl;
 
-import com.C10G14.WorldFitBackend.dto.PaymentDto;
+import com.C10G14.WorldFitBackend.dto.payment.PaymentDto;
 import com.C10G14.WorldFitBackend.service.PaymentService;
 import org.springframework.stereotype.Service;
 

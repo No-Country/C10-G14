@@ -2,6 +2,10 @@ package com.C10G14.WorldFitBackend.controller;
 
 
 import com.C10G14.WorldFitBackend.dto.*;
+import com.C10G14.WorldFitBackend.dto.exercise.Exercise_RoutineRequestDto;
+import com.C10G14.WorldFitBackend.dto.exercise.RemoveExerciseRequestDto;
+import com.C10G14.WorldFitBackend.dto.routine.RoutineRequestDto;
+import com.C10G14.WorldFitBackend.dto.routine.RoutineResponseDto;
 import com.C10G14.WorldFitBackend.service.RoutineService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -16,7 +20,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -81,7 +84,7 @@ public class RoutineController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Error: Routine don't exist",
                     content = @Content)})
-    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH') or #userId == authentication.principal.id")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('COACH') or #id == authentication.principal.id")
     @GetMapping("/{id}")
     public ResponseEntity<RoutineResponseDto> getRoutineById(@PathVariable Long id) {
         RoutineResponseDto routine = routineService.getRoutineById(id);

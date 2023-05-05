@@ -1,15 +1,13 @@
 package com.C10G14.WorldFitBackend.service.impl;
 
-import com.C10G14.WorldFitBackend.dto.StatisticDateDto;
-import com.C10G14.WorldFitBackend.dto.StatisticDto;
-import com.C10G14.WorldFitBackend.entity.Statistic;
+import com.C10G14.WorldFitBackend.dto.statistic.StatisticDateDto;
+import com.C10G14.WorldFitBackend.dto.statistic.StatisticDto;
 import com.C10G14.WorldFitBackend.exception.InputNotValidException;
 import com.C10G14.WorldFitBackend.exception.NotFoundException;
 import com.C10G14.WorldFitBackend.mapper.StatisticDtoMapper;
 import com.C10G14.WorldFitBackend.repository.StatisticRepository;
 import com.C10G14.WorldFitBackend.service.StatisticService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;

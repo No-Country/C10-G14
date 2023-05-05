@@ -1,9 +1,6 @@
 package com.C10G14.WorldFitBackend.service;
 
-import com.C10G14.WorldFitBackend.dto.PaymentDto;
-import com.C10G14.WorldFitBackend.entity.Payment;
-
-import java.util.List;
+import com.C10G14.WorldFitBackend.dto.payment.PaymentDto;
 
 public interface PaymentService {
 

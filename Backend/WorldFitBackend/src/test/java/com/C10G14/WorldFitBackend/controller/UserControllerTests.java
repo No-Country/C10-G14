@@ -1,7 +1,7 @@
 package com.C10G14.WorldFitBackend.controller;
 
-import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
-import com.C10G14.WorldFitBackend.dto.UserDto;
+import com.C10G14.WorldFitBackend.dto.user.RegisterRequestDto;
+import com.C10G14.WorldFitBackend.dto.user.UserDto;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.enumeration.ESex;
 import com.C10G14.WorldFitBackend.security.jwt.JwtService;

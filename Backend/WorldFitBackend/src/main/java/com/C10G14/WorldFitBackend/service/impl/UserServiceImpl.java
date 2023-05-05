@@ -1,8 +1,8 @@
 package com.C10G14.WorldFitBackend.service.impl;
 
-import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
-import com.C10G14.WorldFitBackend.dto.SimpleUserDto;
-import com.C10G14.WorldFitBackend.dto.UserDto;
+import com.C10G14.WorldFitBackend.dto.user.EditUserDto;
+import com.C10G14.WorldFitBackend.dto.user.SimpleUserDto;
+import com.C10G14.WorldFitBackend.dto.user.UserDto;
 import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.enumeration.ERole;
@@ -16,7 +16,6 @@ import com.C10G14.WorldFitBackend.repository.UserRepository;
 import com.C10G14.WorldFitBackend.service.ImageService;
 import com.C10G14.WorldFitBackend.service.UserService;
 import com.C10G14.WorldFitBackend.util.DtoFormatter;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -24,7 +23,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,46 +80,34 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserDto updateUser(Long id, RegisterRequestDto userDto){
-        //todo refactor funcion
-        User user = userRepository.findById(id).orElseThrow(()-> new NotFoundException("Error: user not found"));
+    public UserDto updateUser(Long id, EditUserDto userDto){
+        User user = userRepository.findById(id).orElseThrow(()->
+                new NotFoundException("Error: user not found"));
 
-        if (userDto.getEmail() != null && !userDto.getEmail().isEmpty()) {
-            user.setEmail(userDto.getEmail());
-        }
-        if (userDto.getProfileImg() != null){
-        if(imageService.checkImage(userDto.getProfileImg())){
-            user.setProfileImg(imageService.uploadImage(
-                    userDto.getProfileImg(),
-                    user.getEmail()
-                    ));
-        }
-        }
-        if (userDto.getName() != null && !userDto.getName().isEmpty()) {
-            user.setName(formatter.formatName(userDto.getName()));
-        }
-        if (userDto.getAge()>0&&userDto.getAge()<110) {
-           user.setAge(userDto.getAge());
-        }
-        if (userDto.getSex() != null && !userDto.getSex().isEmpty()) {
-            if (userDto.getSex().equalsIgnoreCase("male"))
-                user.setSex(ESex.MALE);
-            else if (userDto.getSex().equalsIgnoreCase("female"))
-                user.setSex(ESex.FEMALE);
-            else throw new InputNotValidException("Invalid gender, must be male or female");
-        }
-        if (userDto.getWeight() != null) {
-            user.setWeight(userDto.getWeight());
-        }
-        if (userDto.getHeight() != null) {
-            user.setHeight(userDto.getHeight());
-        }
-        if (userDto.getObjective() != null && !userDto.getObjective().isEmpty()) {
-            user.setObjective(userDto.getObjective());
-        }
-        if (userDto.getMedical_indication() != null && !userDto.getMedical_indication().isEmpty()) {
-            user.setMedical_indication(userDto.getMedical_indication());
-        }
+        userDto.getName().ifPresent( e ->
+                user.setName(formatter.formatName(e)));
+
+        userDto.getProfileImg().ifPresent( e ->{
+            if (imageService.isImageValid(e)){
+                imageService.upload(e,user.getEmail());}
+        });
+
+        userDto.getSex().ifPresent( e -> {
+            switch (e.toLowerCase()) {
+                case "male" -> user.setSex(ESex.MALE);
+                case "female" -> user.setSex(ESex.FEMALE);
+                default -> throw new InputNotValidException(
+                        "Invalid gender, must be male or female");
+            }
+        });
+
+        userDto.getEmail().ifPresent(user::setEmail);
+        userDto.getAge().ifPresent(user::setAge);
+        userDto.getWeight().ifPresent(user::setWeight);
+        userDto.getHeight().ifPresent(user::setHeight);
+        userDto.getObjective().ifPresent(user::setObjective);
+        userDto.getMedicalIndication().ifPresent(user::setMedical_indication);
+
         userRepository.save(user);
         return mapper.entityToDto(user);
     }

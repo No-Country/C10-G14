@@ -1,4 +1,4 @@
-package com.C10G14.WorldFitBackend.dto;
+package com.C10G14.WorldFitBackend.dto.statistic;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

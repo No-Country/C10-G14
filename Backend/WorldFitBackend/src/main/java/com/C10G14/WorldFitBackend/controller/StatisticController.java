@@ -1,7 +1,7 @@
 package com.C10G14.WorldFitBackend.controller;
 
-import com.C10G14.WorldFitBackend.dto.StatisticDateDto;
-import com.C10G14.WorldFitBackend.dto.StatisticDto;
+import com.C10G14.WorldFitBackend.dto.statistic.StatisticDateDto;
+import com.C10G14.WorldFitBackend.dto.statistic.StatisticDto;
 import com.C10G14.WorldFitBackend.service.StatisticService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

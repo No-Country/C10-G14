@@ -1,9 +1,9 @@
 package com.C10G14.WorldFitBackend.service;
 
-import com.C10G14.WorldFitBackend.dto.Exercise_RoutineRequestDto;
-import com.C10G14.WorldFitBackend.dto.RemoveExerciseRequestDto;
-import com.C10G14.WorldFitBackend.dto.RoutineRequestDto;
-import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
+import com.C10G14.WorldFitBackend.dto.exercise.Exercise_RoutineRequestDto;
+import com.C10G14.WorldFitBackend.dto.exercise.RemoveExerciseRequestDto;
+import com.C10G14.WorldFitBackend.dto.routine.RoutineRequestDto;
+import com.C10G14.WorldFitBackend.dto.routine.RoutineResponseDto;
 
 import java.util.List;
 
