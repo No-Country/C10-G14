@@ -26,7 +26,7 @@ public class AuthDtoMapper {
     private final DtoFormatter formatter;
 
     public User requestToEntity(RegisterRequestDto registerRequestDto){
-        List<Role> roles = new ArrayList<Role>();
+        List<Role> roles = new ArrayList<>();
         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                 .orElseThrow(()-> new NotFoundException("Role USER not found"));
         roles.add(userRole);

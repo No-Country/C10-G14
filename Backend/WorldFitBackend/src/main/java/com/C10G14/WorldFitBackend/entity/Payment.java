@@ -28,6 +28,7 @@ public class Payment {
 
     @PrePersist
     protected void onCreate() {
-        this.paymentDate = ZonedDateTime.now(ZoneId.of("GMT-3")).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        this.paymentDate = ZonedDateTime.now(
+                ZoneId.of("GMT-3")).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 }

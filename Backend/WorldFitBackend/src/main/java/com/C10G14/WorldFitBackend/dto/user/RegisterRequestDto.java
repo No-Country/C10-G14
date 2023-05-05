@@ -3,10 +3,7 @@ package com.C10G14.WorldFitBackend.dto.user;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Optional;
 
 
 @Getter

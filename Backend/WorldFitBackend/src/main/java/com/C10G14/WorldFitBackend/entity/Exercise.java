@@ -40,8 +40,6 @@ public class Exercise {
     @JsonBackReference
     @OneToMany(
             mappedBy = "exercise"
-            //,cascade = CascadeType.MERGE,
-           // orphanRemoval = true
     )
     private Set<Exercise_Routine> routines;
 
@@ -58,16 +56,6 @@ public class Exercise {
         this.media = media;
         this.unit = unit;
         this.routines = new LinkedHashSet<>();
-    }
-
-    @Override
-    public String toString() {
-        return "Exercise{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", media='" + media + '\'' +
-                ", unit=" + unit +
-                '}';
     }
 
 }
