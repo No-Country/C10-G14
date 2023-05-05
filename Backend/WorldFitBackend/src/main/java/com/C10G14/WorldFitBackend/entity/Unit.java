@@ -27,8 +27,7 @@ public class Unit {
     }
 
     public static EUnit UnitToEUnit (String unit){
-        unit = unit.toLowerCase();
-        return switch (unit){
+        return switch (unit.toLowerCase()){
           case "km" -> EUnit.Km;
           case "kg" -> EUnit.Kg;
           case "minutos" -> EUnit.Minutos;

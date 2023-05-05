@@ -1,22 +1,21 @@
 package com.C10G14.WorldFitBackend.controller;
 
-import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
-import com.C10G14.WorldFitBackend.dto.SimpleUserDto;
-import com.C10G14.WorldFitBackend.dto.UserDto;
+import com.C10G14.WorldFitBackend.dto.user.EditUserDto;
+import com.C10G14.WorldFitBackend.dto.user.SimpleUserDto;
+import com.C10G14.WorldFitBackend.dto.user.UserDto;
 import com.C10G14.WorldFitBackend.service.UserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -134,7 +133,7 @@ public class UserController {
     @PreAuthorize("#userId == authentication.principal.id")
     @PutMapping("/{userId}")
     public ResponseEntity<UserDto> updateUser(@PathVariable Long userId,
-                                              @ModelAttribute RegisterRequestDto user) {
+                                              @ModelAttribute @Valid EditUserDto user) {
         UserDto updatedUser = userService.updateUser(userId, user);
         return ResponseEntity.ok(updatedUser);
     }

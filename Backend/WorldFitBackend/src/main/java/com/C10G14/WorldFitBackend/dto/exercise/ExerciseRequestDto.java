@@ -1,4 +1,4 @@
-package com.C10G14.WorldFitBackend.dto;
+package com.C10G14.WorldFitBackend.dto.exercise;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -18,7 +18,6 @@ public class ExerciseRequestDto {
     private String description;
     @URL(message = "media URL not valid")
     private String media;
-
     private String unit;
 
 }

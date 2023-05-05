@@ -1,7 +1,7 @@
 package com.C10G14.WorldFitBackend.service;
 
-import com.C10G14.WorldFitBackend.dto.ExerciseRequestDto;
-import com.C10G14.WorldFitBackend.dto.ExerciseResponseDto;
+import com.C10G14.WorldFitBackend.dto.exercise.ExerciseRequestDto;
+import com.C10G14.WorldFitBackend.dto.exercise.ExerciseResponseDto;
 
 import java.util.List;
 

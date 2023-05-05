@@ -1,7 +1,6 @@
-package com.C10G14.WorldFitBackend.dto;
+package com.C10G14.WorldFitBackend.dto.user;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Pattern;
+import com.C10G14.WorldFitBackend.dto.routine.RoutineResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

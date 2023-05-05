@@ -1,7 +1,7 @@
 package com.C10G14.WorldFitBackend.controller;
 
-import com.C10G14.WorldFitBackend.dto.ExerciseRequestDto;
-import com.C10G14.WorldFitBackend.dto.ExerciseResponseDto;
+import com.C10G14.WorldFitBackend.dto.exercise.ExerciseRequestDto;
+import com.C10G14.WorldFitBackend.dto.exercise.ExerciseResponseDto;
 import com.C10G14.WorldFitBackend.security.jwt.JwtService;
 import com.C10G14.WorldFitBackend.service.impl.ExerciseServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package com.C10G14.WorldFitBackend.dto;
+package com.C10G14.WorldFitBackend.dto.user;
 
 import lombok.*;
 

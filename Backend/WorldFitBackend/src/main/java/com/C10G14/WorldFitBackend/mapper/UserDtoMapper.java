@@ -1,8 +1,8 @@
 package com.C10G14.WorldFitBackend.mapper;
 
-import com.C10G14.WorldFitBackend.dto.RoutineResponseDto;
-import com.C10G14.WorldFitBackend.dto.SimpleUserDto;
-import com.C10G14.WorldFitBackend.dto.UserDto;
+import com.C10G14.WorldFitBackend.dto.routine.RoutineResponseDto;
+import com.C10G14.WorldFitBackend.dto.user.SimpleUserDto;
+import com.C10G14.WorldFitBackend.dto.user.UserDto;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.enumeration.ERole;
 import com.C10G14.WorldFitBackend.enumeration.ESex;

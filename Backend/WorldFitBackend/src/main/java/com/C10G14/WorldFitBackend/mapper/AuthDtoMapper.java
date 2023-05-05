@@ -1,6 +1,6 @@
 package com.C10G14.WorldFitBackend.mapper;
 
-import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
+import com.C10G14.WorldFitBackend.dto.user.RegisterRequestDto;
 import com.C10G14.WorldFitBackend.entity.Role;
 import com.C10G14.WorldFitBackend.entity.User;
 import com.C10G14.WorldFitBackend.enumeration.ERole;
@@ -26,7 +26,7 @@ public class AuthDtoMapper {
     private final DtoFormatter formatter;
 
     public User requestToEntity(RegisterRequestDto registerRequestDto){
-        List<Role> roles = new ArrayList<Role>();
+        List<Role> roles = new ArrayList<>();
         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                 .orElseThrow(()-> new NotFoundException("Role USER not found"));
         roles.add(userRole);

@@ -82,7 +82,8 @@ public class User  implements UserDetails{
 
     @PrePersist
     protected void onCreate() {
-        this.clientSince = ZonedDateTime.now(ZoneId.of("GMT-3")).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        this.clientSince = ZonedDateTime.now(
+                ZoneId.of("GMT-3")).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     @Override

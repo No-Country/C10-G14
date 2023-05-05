@@ -1,5 +1,6 @@
 package com.C10G14.WorldFitBackend.entity;
 
+import com.C10G14.WorldFitBackend.dto.exercise.Exercise_RoutineRequestDto;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -47,24 +48,31 @@ public class Routine {
         this.user = user;
     }
 
-    public void addExercise(Exercise exercise, int quantity, int repetitions, int series){
-        Exercise_Routine exercise_routine = new Exercise_Routine(exercise,this,quantity,series,repetitions);
+    public void addExercise(Exercise exercise, Exercise_RoutineRequestDto dto){
+        Exercise_Routine exercise_routine = new Exercise_Routine(
+                exercise,this,
+                dto.getQuantity(),
+                dto.getSeries(),
+                dto.getRepetitions());
         exercises.add(exercise_routine);
         exercise.getRoutines().add(exercise_routine);
     }
 
     public void removeExercise(Exercise exercise) {
-        exercises.removeIf(e -> e.getRoutine().equals(this) && e.getExercise().equals(exercise));
+        exercises.removeIf(e ->
+                e.getRoutine().equals(this) && e.getExercise().equals(exercise));
     }
 
-    public void updateExercise(Exercise exercise, int quantity,int repetitions, int series) {
+    public void updateExercise(Exercise exercise, Exercise_RoutineRequestDto dto) {
         exercises.stream()
                 .filter(e -> e.getRoutine().equals(this)
                         && e.getExercise().equals(exercise))
                 .findFirst()
-                .ifPresent(e -> {e.setRepetitions(repetitions);
-                e.setSeries(series);
-                e.setQuantity(quantity);});
+                .ifPresent(e -> {
+                    e.setRepetitions(dto.getRepetitions());
+                    e.setSeries(dto.getSeries());
+                    e.setQuantity(dto.getQuantity());
+                });
     }
 }
 

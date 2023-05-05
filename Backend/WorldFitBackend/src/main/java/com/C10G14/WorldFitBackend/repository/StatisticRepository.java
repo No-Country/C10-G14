@@ -1,13 +1,11 @@
 package com.C10G14.WorldFitBackend.repository;
 
-import com.C10G14.WorldFitBackend.dto.StatisticDto;
 import com.C10G14.WorldFitBackend.entity.Statistic;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface StatisticRepository extends JpaRepository<Statistic, Long> {

@@ -1,6 +1,6 @@
 package com.C10G14.WorldFitBackend.controller;
 
-import com.C10G14.WorldFitBackend.dto.PaymentDto;
+import com.C10G14.WorldFitBackend.dto.payment.PaymentDto;
 import com.C10G14.WorldFitBackend.service.PaymentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

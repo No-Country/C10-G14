@@ -40,16 +40,6 @@ public class Exercise_Routine {
         this.id = new Exercise_RoutineId(exercise.getId(), routine.getId());
     }
 
-    @Override
-    public String toString() {
-        return "\n{" +
-                "" + exercise +
-                ", series= " + series +
-                ", repetitions= " + repetitions +
-                ", quantity=" + quantity +
-                '}';
-    }
-
 }
 
 

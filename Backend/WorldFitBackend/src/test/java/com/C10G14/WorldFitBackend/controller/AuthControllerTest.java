@@ -1,8 +1,8 @@
 package com.C10G14.WorldFitBackend.controller;
 
-import com.C10G14.WorldFitBackend.dto.AuthenticationRequestDto;
-import com.C10G14.WorldFitBackend.dto.AuthenticationResponseDto;
-import com.C10G14.WorldFitBackend.dto.RegisterRequestDto;
+import com.C10G14.WorldFitBackend.dto.user.AuthenticationRequestDto;
+import com.C10G14.WorldFitBackend.dto.user.AuthenticationResponseDto;
+import com.C10G14.WorldFitBackend.dto.user.RegisterRequestDto;
 import com.C10G14.WorldFitBackend.security.jwt.JwtAuthenticationFilter;
 import com.C10G14.WorldFitBackend.security.jwt.JwtService;
 import com.C10G14.WorldFitBackend.service.impl.AuthServiceImpl;

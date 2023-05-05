@@ -1,6 +1,6 @@
 package com.C10G14.WorldFitBackend.controller;
 
-import com.C10G14.WorldFitBackend.dto.StatisticDto;
+import com.C10G14.WorldFitBackend.dto.statistic.StatisticDto;
 import com.C10G14.WorldFitBackend.entity.Statistic;
 import com.C10G14.WorldFitBackend.service.StatisticService;
 import org.junit.jupiter.api.Test;
